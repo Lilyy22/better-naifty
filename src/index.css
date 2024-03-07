@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @layer components {
+  * {
+    box-sizing: border-box;
+  }
+
+  .passInput:focus > button > svg {
+    fill: #e937bd;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    position: relative;
+  }
+  /* scrollbar */
+/* html::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  /* Track */
+/* html::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #2b2b2b;
+    width: 5px;
+  } */
+
+/* Handle */
+/*  html::-webkit-scrollbar-thumb {
+    background: #a259ff;
+    border-radius: 10px;
+    width: 5px;
+  } 
+} */
