@@ -1,0 +1,37 @@
+import { gql } from "@apollo/client";
+
+export const CREATECOURSE = gql`
+  mutation CREATECOURSE(
+    $name: String
+    $description: String
+    $categoryId: String
+    $publishDate: String
+    $price: Float
+    $thumbnail: String
+    $instructorId: String
+  ) {
+    create_course(
+      inputs: {
+        name: $name
+        description: $description
+        category_id: $categoryId
+        publish_date: $publishDate
+        price: $price
+        thumbnail: $thumbnail
+        instructor_id: $instructorId
+      }
+    ) {
+      data {
+        name
+      }
+    }
+  }
+`;
+
+export const DELETECOURSE = gql`
+  mutation DELETECOURSE($courseId: String) {
+    delete_course(where: { id: { exact: $courseId } }) {
+      affected_rows
+    }
+  }
+`;

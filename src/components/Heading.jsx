@@ -49,3 +49,15 @@ export const H5 = ({ text }) => {
     </>
   );
 };
+
+export const DashH5 = ({ text }) => {
+  return (
+    <h5 className="font-semibold my-0 mx-auto border-l-[3px] pl-1.5 py-0 border-purple-600 leading-none tracking-normal font-mont text-sm">
+      {text}
+    </h5>
+  );
+};
+
+export const DashH4 = ({ text }) => {
+  return <h4 className="font-bold mb-4 text-base font-mont">{text}</h4>;
+};

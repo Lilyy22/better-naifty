@@ -14,11 +14,10 @@ export const PrimaryButton = ({
         whileTap={{ scale: 0.9 }}
         type={type}
         onClick={handleClick}
-        className={`bg-custom-purple-700 rounded-2xl text-white font-medium 
-        py-1.5 transition-all border-2 border-custom-purple-700
-        hover:bg-custom-black-600 hover:text-gray-200 px-4 md:px-6 ${customStyle}`}
+        className={`bg-purple-700/80 rounded text-white font-medium 
+        py-2 transition-all hover:bg-custom-black-600 px-4 md:px-6 ${customStyle}`}
       >
-        <div className="flex gap-2 justify-center">
+        <div className="flex gap-2 justify-cente text-xs">
           <p>{text}</p>
           <p className="my-auto">
             {children} {/* SVG icon */}
