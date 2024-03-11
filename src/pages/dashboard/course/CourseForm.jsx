@@ -9,9 +9,12 @@ import { AuthContext } from "../../../context/AuthContext";
 import { fileUpload } from "../../../axios/mutation";
 import { CREATECOURSE } from "./data/mutation";
 import { Toast } from "../../../components/Toast";
+import { useLocation } from "react-router-dom";
 
 export const CourseForm = () => {
   const { userId } = useContext(AuthContext);
+  const { state } = useLocation();
+
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -19,6 +22,8 @@ export const CourseForm = () => {
     useQuery(GETCOURSECATEGORY);
   const [createCourse, {}] = useMutation(CREATECOURSE);
 
+
+  
   const [thumbnail, setThumbnail] = useState();
   const [course, setCourse] = useState({
     name: "",

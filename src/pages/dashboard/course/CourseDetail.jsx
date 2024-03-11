@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { GETCOURSESECTION } from "./data/query";
 import { CourseDetailLoader } from "./components/loader/DetailLoader";
 import { formattedDate } from "../../../utils/formattedDate";
@@ -10,10 +10,10 @@ import { SectionDropDown } from "../section/component/List";
 import { Rating } from "../../../components/Rating";
 
 export const CourseDetail = () => {
-  const { course_url } = useParams();
+  const { state } = useLocation();
   const { data, loading } = useQuery(GETCOURSESECTION, {
     variables: {
-      courseId: course_url,
+      courseId: state?.courseId,
     },
   });
   return (

@@ -34,7 +34,7 @@ function App() {
             <Route path="course-list" element={<CourseTable />} />
             <Route path="courses" element={<CourseGrid />} />
             <Route path="create-course" element={<CourseForm />} />
-            <Route path="courses/:course_url" element={<CourseDetail />} />
+            <Route path="courses-detail" element={<CourseDetail />} />
 
             <Route path="section-list" element={<SectionTable />} />
             <Route path="create-section" element={<SectionForm />} />
@@ -43,8 +43,9 @@ function App() {
               element={<SectionDetail />}
             />
             <Route
-              path="courses/section/:episode_url"
+              path="courses/section/episode"
               element={<EpisodeDetail />}
+              preventScrollReset={false}
             />
 
             <Route path="profile" element={<Profile />} />

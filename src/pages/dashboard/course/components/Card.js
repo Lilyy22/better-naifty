@@ -14,7 +14,8 @@ export const CourseCard = ({
   return (
     <>
       <Link
-        to={`/dashboard/courses/${id}`}
+        to="/dashboard/courses-detail"
+        state={{ courseId: id }}
         className="bg-white shadow w-full md:w-80 rounded-lg flex-shrink-0 flex-grow-0 relative"
       >
         <div className="rounded-t-lg w-full h-40">

@@ -42,7 +42,11 @@ export const SectionDropDown = ({ section, episodes }) => {
               <ul className="list-outside rounded-b-md mt-4 mx-2">
                 {episodes.map(({ title, id }) => {
                   return (
-                    <Link to={`/dashboard/courses/section/${id}`} key={id}>
+                    <Link
+                      to="/dashboard/courses/section/episode"
+                      state={{ episodeId: id }}
+                      key={id}
+                    >
                       <li className="flex gap-2 mt-2 text-xs rounded-md hover:text-purple-500 hover:font-medium">
                         <svg
                           className="w-3 h-3 fill-current my-auto"

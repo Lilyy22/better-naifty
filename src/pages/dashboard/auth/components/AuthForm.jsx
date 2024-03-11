@@ -70,10 +70,10 @@ export const AuthForm = ({
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   onFocus={(e) => {
-                    setPassFocus(true);
+                    isSignUp ?? setPassFocus(true);
                   }}
                   onBlur={(e) => {
-                    setPassFocus(false);
+                    isSignUp ?? setPassFocus(false);
                   }}
                 />
                 <button

@@ -1,17 +1,17 @@
 import { useQuery } from "@apollo/client";
 import React from "react";
-import { useParams } from "react-router-dom";
 import { GETEPISODE } from "./data/query";
 import ReactPlayer from "react-player";
 import { DashH4 } from "../../../components/Heading";
 import { CommentForm } from "../comment/CommentForm";
 import { Loader } from "./component/Loader";
+import { useLocation } from "react-router-dom";
 
 export const EpisodeDetail = () => {
-  const { episode_url } = useParams();
+  const { state } = useLocation();
   const { data, loading } = useQuery(GETEPISODE, {
     variables: {
-      episodeId: episode_url,
+      episodeId: state?.episodeId,
     },
   });
   return (
