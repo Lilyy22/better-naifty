@@ -10,6 +10,7 @@ import { fileUpload } from "../../../axios/mutation";
 import { CREATECOURSE } from "./data/mutation";
 import { Toast } from "../../../components/Toast";
 import { useLocation } from "react-router-dom";
+import { GETCOURSE } from "./data/query";
 
 export const CourseForm = () => {
   const { userId } = useContext(AuthContext);
@@ -22,8 +23,12 @@ export const CourseForm = () => {
     useQuery(GETCOURSECATEGORY);
   const [createCourse, {}] = useMutation(CREATECOURSE);
 
+  // const { data: courseUpdate } = useQuery(GETCOURSE, {
+  //   variables: {
+  //     courseId: state?.courseId,
+  //   },
+  // });
 
-  
   const [thumbnail, setThumbnail] = useState();
   const [course, setCourse] = useState({
     name: "",

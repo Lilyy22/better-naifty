@@ -70,7 +70,7 @@ export const Action = ({ handleDeleteClick, children, id }) => {
         <td className="text-start flex gap-1">
           <button
             type="button"
-            className="bg-green-100/50 p-2 inline rounded relative group hover:bg-green-600 "
+            className="bg-green-100/50 p-2 inline rounded relative group hover:bg-green-600"
           >
             <span class="invisible absolute -left-1 -top-1 text-xs rounded shadow-lg py-2 px-3 bg-gray-900 text-white -mt-8 group-hover:visible">
               Edit
