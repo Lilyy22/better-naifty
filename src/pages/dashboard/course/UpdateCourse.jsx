@@ -66,7 +66,7 @@ export const UpdateCourse = () => {
       setLoading(false);
       if (!error) {
         setSuccess(true);
-        navigate("/dashboard/course-list");
+        // navigate("/dashboard/course-list");
       }
     } catch (error) {}
   };

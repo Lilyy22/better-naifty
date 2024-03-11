@@ -29,7 +29,7 @@ function App() {
       <Routes>
         {/* landing */}
         <Route path="/" element={<Home />} />
-        <Route path="courses" element={<Course />} />
+        <Route path="course" element={<Course />} />
         <Route path="about" element={<About />} />
         <Route path="blog" element={<Blog />} />
 

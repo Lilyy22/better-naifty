@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Action, TD, Table } from "../../../components/table/Table";
 import { useMutation, useQuery } from "@apollo/client";
 import { GETINSTRUCTORSECTION } from "./data/query";
@@ -17,7 +17,7 @@ export const SectionTable = () => {
   const [sectionId, setSectionId] = useState();
 
   const [del] = useMutation(DELETESECTION);
-  const { data, loading } = useQuery(GETINSTRUCTORSECTION);
+  const { data, loading, refetch } = useQuery(GETINSTRUCTORSECTION);
 
   const thead = [
     { head: "Title" },
@@ -35,6 +35,11 @@ export const SectionTable = () => {
     navigate(`/dashboard/update-section/${sectionId}`);
   };
 
+  const handleEpisodeModal = (sectionId) => {
+    setOpenEpisodeModal(!openEpisodeModal);
+    setSectionId(sectionId);
+  };
+
   const handleDelete = async (id) => {
     const { data } = await del({
       variables: {
@@ -44,6 +49,10 @@ export const SectionTable = () => {
     });
     if (data) setOpenDeleteModal(false);
   };
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   return (
     <>
@@ -75,7 +84,7 @@ export const SectionTable = () => {
                     >
                       <button
                         className="bg-gray-200/60 rounded px-2 py-1.5 my-auto flex gap-1 relative group"
-                        onClick={() => setOpenEpisodeModal(!openEpisodeModal)}
+                        onClick={() => handleEpisodeModal(id)}
                       >
                         <span class="invisible absolute -left-1 -top-1 text-xs whitespace-nowrap rounded shadow-lg py-2 px-3 bg-gray-900 text-white -mt-8 group-hover:visible">
                           Add Episode
@@ -101,7 +110,7 @@ export const SectionTable = () => {
                     {openEpisodeModal && (
                       <div className="overflow-y-auto overflow-x-hidden fixed top-0 flex left-0 z-50 justify-center items-center w-full min-h-full bg-gray-700/10 ">
                         <EpisodeForm
-                          sectionId={id}
+                          sectionId={sectionId}
                           handleOpen={() =>
                             setOpenEpisodeModal(!openEpisodeModal)
                           }

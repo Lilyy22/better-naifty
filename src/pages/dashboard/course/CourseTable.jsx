@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Action, TD, Table } from "../../../components/table/Table";
 import { useMutation, useQuery } from "@apollo/client";
 import { GETINSTRUCTORCOURSE } from "./data/query";
@@ -16,7 +16,7 @@ export const CourseTable = () => {
   const [courseId, setCourseId] = useState();
 
   const [del] = useMutation(DELETECOURSE);
-  const { data, loading } = useQuery(GETINSTRUCTORCOURSE, {
+  const { data, loading, refetch } = useQuery(GETINSTRUCTORCOURSE, {
     variables: {
       userId: userId,
     },
@@ -48,6 +48,9 @@ export const CourseTable = () => {
     navigate(`/dashboard/update-course/${courseId}`);
   };
 
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
   return (
     <>
       {loading ? (

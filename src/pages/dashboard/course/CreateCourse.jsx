@@ -66,7 +66,7 @@ export const CreateCourse = () => {
         });
         setThumbnail("");
         setSelectedFile("");
-        navigate("/dashboard/course-list");
+        // navigate("/dashboard/course-list");
       }
     } catch (error) {}
   };

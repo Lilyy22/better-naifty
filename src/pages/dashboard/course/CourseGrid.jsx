@@ -22,13 +22,11 @@ export const CourseGrid = () => {
           {loading && array.map((item) => <CourseCardLoader key={item} />)}
           {data?.course.map(
             ({ id, name, description, thumbnail, instructor, updated_at }) => {
-              const { first_name, last_name } = instructor?.studentprofile;
-              const fullName = `${first_name} ${last_name}`;
               return (
                 <CourseCard
                   thumbnail={thumbnail}
                   updated_at={updated_at}
-                  instructorName={fullName}
+                  instructorName={`${instructor?.studentprofile?.first_name} ${instructor?.studentprofile?.last_name}`}
                   instructorPhoto={instructor?.studentprofile?.profile_picture}
                   title={name}
                   description={description}

@@ -56,7 +56,7 @@ export const UpdateSection = () => {
           title: "",
           description: "",
         });
-        navigate("/dashboard/section-list");
+        // navigate("/dashboard/section-list");
       }
     } catch (error) {}
   };
