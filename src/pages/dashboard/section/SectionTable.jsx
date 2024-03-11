@@ -6,10 +6,11 @@ import { DeleteModal } from "../../../components/modal/Delete";
 import { TableLoader } from "../../../components/Loader";
 import { formattedDate } from "../../../utils/formattedDate";
 import { EpisodeForm } from "../episode/EpisodeForm";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { DELETESECTION } from "./data/mutation";
 
 export const SectionTable = () => {
+  const navigate = useNavigate();
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openEpisodeModal, setOpenEpisodeModal] = useState(false);
 
@@ -28,6 +29,10 @@ export const SectionTable = () => {
   const handleDeleteClick = (sectionId) => {
     setOpenDeleteModal(!openDeleteModal);
     setSectionId(sectionId);
+  };
+
+  const handleEditClick = (sectionId) => {
+    navigate(`/dashboard/update-section/${sectionId}`);
   };
 
   const handleDelete = async (id) => {
@@ -63,7 +68,11 @@ export const SectionTable = () => {
                     <TD text={course.name} />
                     <TD text={formattedDate(updated_at)} />
 
-                    <Action handleDeleteClick={handleDeleteClick} id={id}>
+                    <Action
+                      id={id}
+                      handleDeleteClick={handleDeleteClick}
+                      handleEditClick={handleEditClick}
+                    >
                       <button
                         className="bg-gray-200/60 rounded px-2 py-1.5 my-auto flex gap-1 relative group"
                         onClick={() => setOpenEpisodeModal(!openEpisodeModal)}

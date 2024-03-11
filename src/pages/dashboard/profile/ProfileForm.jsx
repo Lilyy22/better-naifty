@@ -93,6 +93,13 @@ export const ProfileForm = ({
             }}
             isRequired={true}
           />
+          <label
+            htmlFor="profilePicture"
+            className="inline-block mb-2 text-xs font-semibold tracking-wide"
+          >
+            Profile Picture
+          </label>
+          <span className="text-red-500 pl-1 text-sm">*</span>
           <div className="mb-6 relative border w-36 h-36 rounded-full cursor-pointer mx-auto md:mx-0">
             {profilePicture && !selectedFile ? (
               <img
@@ -111,9 +118,11 @@ export const ProfileForm = ({
                 alt="male avatar"
               />
             )}
+
             <input
               type="file"
               name="profilePicture"
+              id="profilePicture"
               className="z-10 absolute w-full h-full rounded-full border p-6 top-0 left-0 opacity-0 cursor-pointer"
               onChange={handleProfileImage}
               required={profilePicture ? false : true}

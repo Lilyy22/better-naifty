@@ -78,7 +78,7 @@ export const AuthForm = ({
                 />
                 <button
                   type="button"
-                  className="absolute right-3 top-9"
+                  className="absolute right-3 top-11"
                   aria-label="toggle password"
                   onClick={() => setPasswordToggle(!passwordToggle)}
                 >

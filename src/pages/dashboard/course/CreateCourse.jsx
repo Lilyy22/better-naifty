@@ -1,18 +1,16 @@
 import React, { useContext, useState } from "react";
-import { FileUpload, Input, Textarea } from "../../../components/form/Input";
 import { useMutation, useQuery } from "@apollo/client";
 import { GETCOURSECATEGORY } from "../courseCategory/data/query";
-import DropDown from "../../../components/form/DropDown";
-import { DashForm } from "../../../components/form/Form";
-import { PrimaryButton } from "../../../components/Button";
 import { AuthContext } from "../../../context/AuthContext";
 import { fileUpload } from "../../../axios/mutation";
 import { CREATECOURSE } from "./data/mutation";
 import { Toast } from "../../../components/Toast";
+import { Crud } from "./components/Crud";
+import { useNavigate } from "react-router-dom";
 
-export const CourseForm = () => {
+export const CreateCourse = () => {
+  const navigate = useNavigate();
   const { userId } = useContext(AuthContext);
-
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -20,9 +18,10 @@ export const CourseForm = () => {
     useQuery(GETCOURSECATEGORY);
   const [createCourse, {}] = useMutation(CREATECOURSE);
 
+  const [selectedFile, setSelectedFile] = useState();
   const [thumbnail, setThumbnail] = useState();
   const [course, setCourse] = useState({
-    name: " ",
+    name: "",
     description: "",
     categoryId: "",
     publishDate: "",
@@ -35,6 +34,7 @@ export const CourseForm = () => {
 
   const handleThumbnail = (e) => {
     setThumbnail(e.target.files[0]);
+    setSelectedFile(URL.createObjectURL(e.target.files[0]));
   };
 
   const handleSubmit = async (e) => {
@@ -65,6 +65,8 @@ export const CourseForm = () => {
           price: "",
         });
         setThumbnail("");
+        setSelectedFile("");
+        navigate("/dashboard/course-list");
       }
     } catch (error) {}
   };
@@ -73,7 +75,7 @@ export const CourseForm = () => {
       {success && (
         <Toast text="Course Successfully created!" isSuccess={true} />
       )}
-      <DashForm title="Course Form">
+      {/* <DashForm title="Course Form">
         <form className="p-6" onSubmit={handleSubmit}>
           <div className="flex flex-wrap md:space-x-4">
             <div className="w-full md:w-[47%]">
@@ -155,7 +157,19 @@ export const CourseForm = () => {
             isDisabled={loading ? true : false}
           />
         </form>
-      </DashForm>
+      </DashForm> */}
+      <Crud
+        handleSubmit={handleSubmit}
+        handleThumbnail={handleThumbnail}
+        thumbnail={thumbnail}
+        course={course}
+        setCourse={setCourse}
+        loading={loading}
+        categoryData={categoryData}
+        categoryLoading={categoryLoading}
+        handleCategory={handleCategory}
+        selectedFile={selectedFile}
+      />
     </>
   );
 };

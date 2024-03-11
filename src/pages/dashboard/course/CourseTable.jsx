@@ -6,9 +6,11 @@ import { AuthContext } from "../../../context/AuthContext";
 import { DELETECOURSE } from "./data/mutation";
 import { DeleteModal } from "../../../components/modal/Delete";
 import { TableLoader } from "../../../components/Loader";
+import { useNavigate } from "react-router-dom";
 
 export const CourseTable = () => {
   const { userId } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [courseId, setCourseId] = useState();
@@ -42,6 +44,10 @@ export const CourseTable = () => {
     if (data) setOpenDeleteModal(false);
   };
 
+  const handleEditClick = (courseId) => {
+    navigate(`/dashboard/update-course/${courseId}`);
+  };
+
   return (
     <>
       {loading ? (
@@ -60,7 +66,11 @@ export const CourseTable = () => {
                       {status}
                     </span>
                   </TD>
-                  <Action handleDeleteClick={handleDeleteClick} id={id} />
+                  <Action
+                    id={id}
+                    handleDeleteClick={handleDeleteClick}
+                    handleEditClick={handleEditClick}
+                  />
                   {openDeleteModal && (
                     <DeleteModal
                       isOpen={openDeleteModal}

@@ -1,5 +1,5 @@
 import React from "react";
-import { FileUpload, Input, Textarea } from "../../../../components/form/Input";
+import { Input, Textarea } from "../../../../components/form/Input";
 import { DashForm } from "../../../../components/form/Form";
 import DropDown from "../../../../components/form/DropDown";
 import { PrimaryButton } from "../../../../components/Button";
@@ -14,6 +14,7 @@ export const Crud = ({
   categoryData,
   categoryLoading,
   handleCategory,
+  selectedFile,
 }) => {
   return (
     <DashForm title="Course Form">
@@ -27,7 +28,10 @@ export const Crud = ({
               placeholder="eg: Python"
               value={course.name}
               onChange={(e) => {
-                setCourse({ ...course, name: e.target.value });
+                setCourse({
+                  ...course,
+                  name: e.target.value,
+                });
               }}
               isRequired={true}
             />
@@ -86,13 +90,48 @@ export const Crud = ({
           }}
           isRequired={true}
         />
-        <FileUpload
+        <label
+          htmlFor="thumbnail"
+          className="inline-block mb-2 text-xs font-semibold tracking-wide"
+        >
+          Thumbnail
+        </label>
+        <span className="text-red-500 pl-1 text-sm">*</span>
+        <div className="mb-6 relative border-2 w-96 h-52 cursor-pointer mx-auto md:mx-0 rounded-lg border-dashed">
+          {thumbnail && !selectedFile ? (
+            <img
+              src={`https://naifty.abelayalew.dev/media/${thumbnail}`}
+              className="cursor-pointer w-full h-full object-cover object-center rounded-lg"
+              alt="thumbnail"
+            />
+          ) : (
+            <img
+              src={
+                selectedFile
+                  ? selectedFile
+                  : "https://lms.qualtec.ie/wp-content/plugins/learndash-course-grid/assets/img/thumbnail.jpg"
+              }
+              className="cursor-pointer object-cover object-center w-full h-full rounded-lg"
+              alt="thumbnail place holder"
+            />
+          )}
+
+          <input
+            type="file"
+            name="thumbnail"
+            id="thumbnail"
+            className="z-10 absolute w-full h-full rounded-full border p-6 top-0 left-0 opacity-0 cursor-pointer"
+            onChange={handleThumbnail}
+            required={thumbnail ? false : true}
+          />
+        </div>
+        {/* <FileUpload
           id="thumbnail"
           label="Thumbnail"
           onChange={handleThumbnail}
           isRequired={true}
           thumbnail={thumbnail}
-        />
+        /> */}
         <PrimaryButton
           text={loading ? "•••" : "Submit"}
           isDisabled={loading ? true : false}

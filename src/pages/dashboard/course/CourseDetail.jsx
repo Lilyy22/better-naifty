@@ -27,11 +27,15 @@ export const CourseDetail = () => {
             <div className="w-full lg:w-[45%] p-6 order-last flex-grow bg-white/60 rounded-lg mb-auto">
               <div className="flex flex-wrap justify-between">
                 <div>
+                  <span className="bg-purple-100/80 rounded-xl px-4 py-1 text-sm mb-4 inline-block">
+                    {data?.course[0]?.category?.name}
+                  </span>
                   <div className="text-gray-500 leading-3 text-xs tracking-tight">
                     <span>46 Videos •</span> <span>80 hours •</span>{" "}
                     <span>{formattedDate(data?.course[0]?.updated_at)}</span>
                   </div>
                   <Rating />
+                  <h2 className="font-bold">${data?.course[0]?.price}</h2>
                 </div>
                 <div className="h-auto">
                   <PrimaryButton text="Enroll Now" />

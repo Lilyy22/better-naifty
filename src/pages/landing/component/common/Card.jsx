@@ -10,7 +10,7 @@ export const IconCard = ({ title, subtitle, btnText, children }) => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         className="rounded-2xl border-t border-gray-700 p-6
-        transition-all hover:-mt-2 bg-custom-black-600 md:p-4 lg:p-6"
+        transition-all hover:-mt-2 bg-custom-gray-600 md:p-4 lg:p-6"
       >
         {children}
         <H5 text={title} />
@@ -38,7 +38,7 @@ export const ImgCard = ({ title, subtitle, btnText, img, imgAlt }) => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="bg-custom-black-600 rounded-3xl transition-all border border-gray-800 hover:-mt-2"
+        className="bg-custom-gray-600 rounded-3xl transition-all border border-gray-800 hover:-mt-2"
       >
         <motion.div className="w-full overflow-hidden rounded-t-3xl">
           <img
@@ -80,7 +80,7 @@ export const HorizontalCard = ({
   return (
     <>
       <Link className="transition-all hover:-mt-4">
-        <motion.div className="rounded-xl bg-custom-gray-900 w-full border border-purple-900/60 mx-auto hover:bg-custom-black-600 md:w-auto">
+        <motion.div className="rounded-xl bg-custom-gray-900 w-full border border-purple-900/60 mx-auto hover:bg-custom-gray-600 md:w-auto">
           <motion.div className="w-full h-44 rounded-3xl">
             <img
               className="w-full h-full object-cover object-center rounded-t-xl grayscale hover:grayscale-0 border-l border-gray-700"
@@ -156,6 +156,85 @@ export const HorizontalCard = ({
           </motion.div>
         </motion.div>
       </Link>
+    </>
+  );
+};
+
+export const TestimonialCard = ({ text, img, name, position }) => {
+  return (
+    <>
+      <div className="mx-auto text-center">
+        <div className="flex justify-center items-start">
+          <svg
+            className="w-12 h-12 fill-purple-500"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 448 512"
+          >
+            <path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V320 288 216zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H320c-35.3 0-64-28.7-64-64V320 288 216z" />
+          </svg>
+          {/* <Subtitle text={text} /> */}
+        </div>
+        <div className="mt-8">
+          <img
+            className="w-16 h-16 rounded-full object-cover object-center mx-auto my-2"
+            src={img}
+            alt="testimonial"
+          />
+          <h3 className="text-gray-200">{name}</h3>
+          <p className="text-gray-400 text-sm">{position}</p>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export const TeamCard = ({ photo }) => {
+  return (
+    <>
+      <div className="w-64 p-4 rounded-lg text-gray-400 bg-custom-black-900 border-t border-gray-700 hover:bg-custom-black-600 ">
+        <img
+          className="rounded-full w-44 h-44 object-cover mx-auto"
+          src={photo}
+          alt=""
+        />
+        <div className="text-center mt-4">
+          <p className="text-xs my-1">Teach lead</p>
+          <p className="font-bold text-gray-300">Jhon Doe</p>
+          <p className="text-sm my-6 text-gray-500">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. vel
+            exercitationem?
+          </p>
+          <div className="font-bold flex justify-center gap-1 mt-4">
+            <a>
+              <svg
+                className="w-4 h-4 fill-gray-500"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+              >
+                <path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z" />
+              </svg>
+            </a>
+            <a>
+              <svg
+                className="w-5 h-4 fill-gray-500"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+              >
+                <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z" />
+              </svg>
+            </a>
+            <a>
+              <svg
+                className="w-5 h-4 fill-gray-500"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+              >
+                <path d="M459.4 151.7c.3 4.5 .3 9.1 .3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53 51.7 63.7 129.3 105.3 216.4 109.8-1.6-7.8-2.6-15.9-2.6-24 0-57.8 46.8-104.9 104.9-104.9 30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

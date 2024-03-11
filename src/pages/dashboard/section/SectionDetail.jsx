@@ -3,8 +3,7 @@ import { EpisodeCard } from "../episode/component/Card";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GETSECTION } from "./data/query";
-import { DashForm } from "../../../components/form/Form";
-import { DashH4, DashH5 } from "../../../components/Heading";
+import { DashH4 } from "../../../components/Heading";
 
 export const SectionDetail = () => {
   const { section_url } = useParams();

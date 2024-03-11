@@ -23,6 +23,9 @@ export const GETSECTION = gql`
       id
       title
       description
+      course {
+        id
+      }
       episodes {
         id
         file

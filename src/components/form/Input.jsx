@@ -74,7 +74,7 @@ export const FileUpload = ({ id, label, onChange, isRequired, thumbnail }) => {
 
       <div className="mb-6 relative border-2 w-full h-20 rounded-lg cursor-pointer mx-auto md:mx-0 border-dashed border-gray-300 bg-[#e9eef1] overflow-hidden">
         <div className="flex justify-center items-center h-full text-xs text-gray-700">
-          {thumbnail ? thumbnail?.name : "Drop an Image or click here"}
+          {thumbnail ? thumbnail?.name : "Drop a Video file or click here"}
         </div>
         <input
           id={id}

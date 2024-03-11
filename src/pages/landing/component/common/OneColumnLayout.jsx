@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { SecondaryButton } from "../../../../components/Button";
+import { LandPrimaryButton, SecondaryButton } from "../../../../components/Button";
 import { H1 } from "../../../../components/Heading";
 
 export const OneColumnLayout = ({ title, subtitle, btnText }) => {
@@ -17,7 +17,7 @@ export const OneColumnLayout = ({ title, subtitle, btnText }) => {
         <div className="max-w-xl mx-auto text-center py-10 lg:py-12">
           <H1 text={title} />
           {/* <Subtitle text={subtitle} /> */}
-          <SecondaryButton text={btnText} />
+          <LandPrimaryButton text={btnText} />
         </div>
       </div>
     </>

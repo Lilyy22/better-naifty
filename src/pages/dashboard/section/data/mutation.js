@@ -15,6 +15,21 @@ export const CREATESECTION = gql`
     }
   }
 `;
+export const UPDATESECTION = gql`
+  mutation UPDATESECTION(
+    $sectionId: String
+    $courseId: String
+    $title: String
+    $description: String
+  ) {
+    update_coursesection(
+      input: { title: $title, description: $description, course_id: $courseId }
+      where: { id: { exact: $sectionId } }
+    ) {
+      affected_rows
+    }
+  }
+`;
 
 export const DELETESECTION = gql`
   mutation DELETESECTION($sectionId: String) {

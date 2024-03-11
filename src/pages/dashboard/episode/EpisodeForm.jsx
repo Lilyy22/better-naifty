@@ -8,7 +8,7 @@ import { fileUpload } from "../../../axios/mutation";
 import { Toast } from "../../../components/Toast";
 
 export const EpisodeForm = ({ sectionId, handleOpen }) => {
-  const [createEpisode, { data }] = useMutation(CREATEEPISODE);
+  const [createEpisode] = useMutation(CREATEEPISODE);
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);

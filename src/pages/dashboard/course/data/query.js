@@ -31,6 +31,27 @@ export const GETCOURSES = gql`
   }
 `;
 
+export const GETCOURSE = gql`
+  query GETCOURSE($courseId: String) {
+    course(where: { id: { exact: $courseId } }) {
+      id
+      name
+      description
+      thumbnail
+      updated_at
+      price
+      publish_date
+      instructor {
+        studentprofile {
+          first_name
+          last_name
+          profile_picture
+        }
+      }
+    }
+  }
+`;
+
 export const GETCOURSESECTION = gql`
   query GETCOURSESECTION($courseId: String) {
     course(where: { id: { exact: $courseId } }) {
@@ -38,6 +59,10 @@ export const GETCOURSESECTION = gql`
       name
       description
       thumbnail
+      price
+      category {
+        name
+      }
       updated_at
       instructor {
         studentprofile {
