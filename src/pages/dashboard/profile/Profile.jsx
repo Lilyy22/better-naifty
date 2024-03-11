@@ -9,7 +9,6 @@ import { SecondaryButton } from "../../../components/Button";
 
 export const Profile = () => {
   const { userId } = useContext(AuthContext);
-
   const [is_create, setIsCreate] = useState(true);
   const [profile, setProfile] = useState({
     bio: "",
@@ -26,10 +25,10 @@ export const Profile = () => {
     setIsCreate(false);
     setProfile({
       ...profile,
-      bio: data?.student_profile?.[0].bio,
-      firstName: data?.student_profile?.[0].first_name,
-      lastName: data?.student_profile?.[0].last_name,
-      profilePicture: data?.student_profile?.[0].profile_picture,
+      bio: data?.student_profile[0]?.bio,
+      firstName: data?.student_profile[0]?.first_name,
+      lastName: data?.student_profile[0]?.last_name,
+      profilePicture: data?.student_profile[0]?.profile_picture,
     });
   };
 
@@ -110,10 +109,10 @@ export const Profile = () => {
       ) : (
         <ProfileForm
           is_create={is_create}
-          bio={data.bio}
-          firstName={data.firstName}
-          lastName={data.lastName}
-          profilePicture={data.profilePicture}
+          bio={profile.bio}
+          firstName={profile.firstName}
+          lastName={profile.lastName}
+          profilePicture={profile.profilePicture}
         />
       )}
     </>
