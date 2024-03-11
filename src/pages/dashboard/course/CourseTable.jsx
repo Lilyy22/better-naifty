@@ -1,0 +1,77 @@
+import React, { useContext, useState } from "react";
+import { Action, TD, Table } from "../../../components/table/Table";
+import { useMutation, useQuery } from "@apollo/client";
+import { GETINSTRUCTORCOURSE } from "./data/query";
+import { AuthContext } from "../../../context/AuthContext";
+import { DELETECOURSE } from "./data/mutation";
+import { DeleteModal } from "../../../components/modal/Delete";
+import { Toast } from "../../../components/Toast";
+import { TableLoader } from "../../../components/Loader";
+
+export const CourseTable = () => {
+  const { userId } = useContext(AuthContext);
+
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+
+  const [del] = useMutation(DELETECOURSE);
+  const { data, loading } = useQuery(GETINSTRUCTORCOURSE, {
+    variables: {
+      userId: userId,
+    },
+  });
+
+  const thead = [
+    { head: "Name" },
+    { head: "Price" },
+    { head: "Status" },
+    { head: "Action" },
+  ];
+
+  const handleDelete = async (courseId) => {
+    console.log(courseId);
+    // const { data } = await del({
+    //   variables: {
+    //     courseId: courseId,
+    //   },
+    //   refetchQueries: [GETINSTRUCTORCOURSE, "GET_INST_COURSE"],
+    // });
+    // if (data) setOpenDeleteModal(false);
+  };
+
+  return (
+    <>
+      {loading ? (
+        <TableLoader />
+      ) : (
+        <Table title="Courses" data={thead} path="/dashboard/create-course">
+          {data?.course.map(({ id, name, price, status }, index) => {
+            return (
+              <>
+                <tr className="border p-1" key={id}>
+                  <TD>{index + 1}</TD>
+                  <TD text={name} />
+                  <TD text={`$ ${price}`} />
+                  <TD>
+                    <span className="rounded-xl text-[0.65rem] py-1 px-3 text-center font-semibold leading-3 bg-purple-100/50 text-purple-500 lowercase">
+                      {status}
+                    </span>
+                  </TD>
+                  <Action
+                    handleDeleteClick={() =>
+                      setOpenDeleteModal(!openDeleteModal)
+                    }
+                  />
+                  <DeleteModal
+                    isOpen={openDeleteModal}
+                    handleModal={() => setOpenDeleteModal(!openDeleteModal)}
+                    handleDelete={() => handleDelete(name)}
+                  />
+                </tr>
+              </>
+            );
+          })}
+        </Table>
+      )}
+    </>
+  );
+};

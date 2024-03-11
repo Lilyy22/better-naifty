@@ -1,16 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Logo } from "../../../../components/Logo";
 import { H2, H3 } from "../../../../components/Heading";
 import { Link } from "react-router-dom";
-import { PrimaryButton } from "../../../../components/Button";
+import { LandPrimaryButton } from "../../../../components/Button";
 import { motion } from "framer-motion";
-import { Sidebar } from "../../../../layouts/dashboard/Sidebar";
 
-export const AuthForm = ({ handleAuth, isSignUp }) => {
-  const [passwordToggle, setPasswordToggle] = useState(false);
+export const AuthForm = ({
+  handleSubmit,
+  isSignUp,
+  email,
+  password,
+  setEmail,
+  setPassword,
+  passwordToggle,
+  setPasswordToggle,
+  setPassFocus,
+  passFocus,
+  validPassword,
+  setValidPassword,
+  loading,
+}) => {
+  const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  useEffect(() => {
+    if (isSignUp) {
+      const pwdRes = PWD_REGEX.test(password);
+      setValidPassword(pwdRes);
+    }
+  }, [password]);
 
   return (
     <>
@@ -20,7 +37,7 @@ export const AuthForm = ({ handleAuth, isSignUp }) => {
             <Logo customStyle="mx-auto lg:w-20 mb-12" />
             <form
               className="max-w-lg mx-auto px-4 rounded-xl lg:px-12"
-              onSubmit={handleAuth}
+              onSubmit={handleSubmit}
             >
               <H3 text={isSignUp ? "Sign Up" : "Log In"} />
               <p className="text-gray-500">
@@ -52,6 +69,12 @@ export const AuthForm = ({ handleAuth, isSignUp }) => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
+                  onFocus={(e) => {
+                    setPassFocus(true);
+                  }}
+                  onBlur={(e) => {
+                    setPassFocus(false);
+                  }}
                 />
                 <button
                   type="button"
@@ -82,19 +105,24 @@ export const AuthForm = ({ handleAuth, isSignUp }) => {
                     Forgot Password?
                   </Link>
                 )}
+                {passFocus && !validPassword && (
+                  <div className="bg-slate-800 rounded p-2 text-xs text-amber-700 absolute w-full">
+                    must be at least 8 characters and include atleast one
+                    capital letter, number, and !@#$%.
+                  </div>
+                )}
               </div>
 
-              <PrimaryButton
+              <LandPrimaryButton
                 type="submit"
                 customStyle="w-full"
-                // text={loading ? "•••" : isSignUp ? "Sign Up" : "Log In"}
-                text={isSignUp ? "Sign Up" : "Log In"}
+                text={loading ? "•••" : isSignUp ? "Sign Up" : "Log In"}
               />
 
               <p className="text-gray-500 my-4 text-center">
                 {isSignUp ? "Already" : "Do not"} have an account.
                 <Link
-                  // to={isSignUp ? "/login" : "/"}
+                  to={isSignUp ? "/login" : "/signup"}
                   className="text-gray-300 hover:text-custom-purple-700"
                 >
                   {isSignUp ? " Log In" : " Sign Up"}

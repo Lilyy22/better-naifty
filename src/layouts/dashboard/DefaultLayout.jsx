@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Sidebar } from "./Sidebar";
 import { Outlet } from "react-router-dom";
 import { Header } from "./Header";
+import { OnlineStatusContext } from "../../context/OnlineStatusContext";
 
 export const DefaultLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
-
+  const { onlineStatus } = useContext(OnlineStatusContext);
+  console.log(onlineStatus);
   const handleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
@@ -27,7 +29,11 @@ export const DefaultLayout = () => {
           {/* <!-- ===== Main Content Start ===== --> */}
           <main>
             <div className="mx-auto max-w-screen-7xl min-h-screen p-4 md:p-6 2xl:p-10 bg-custom-gray-400">
-              <Outlet />
+              {/* {onlineStatus ? ( */}
+                <Outlet />
+              {/* ) : (
+                <p>You are offline. Please check your internet connection.</p>
+              )} */}
             </div>
           </main>
           {/* <!-- ===== Main Content End ===== --> */}

@@ -15,7 +15,7 @@ export const fileUpload = async (bucket, file, uploadProgress) => {
     formData.append("file", file);
 
     const response = await axios.post(
-      `https://naifty.abelayalew.dev/media/upload-file`,
+      `${URL}/media/upload-file`,
       formData,
       uploadProgress
     );

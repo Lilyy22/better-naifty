@@ -1,3 +1,4 @@
+// import { MotionConfig } from "framer-motion/dist/cjs";
 import React from "react";
 import { motion } from "framer-motion";
 
@@ -7,15 +8,17 @@ export const PrimaryButton = ({
   children,
   customStyle,
   handleClick,
+  isDisabled,
 }) => {
   return (
     <>
       <motion.button
-        whileTap={{ scale: 0.9 }}
-        type={type}
-        onClick={handleClick}
         className={`bg-purple-700/80 rounded text-white font-medium 
         py-2 transition-all hover:bg-custom-black-600 px-4 md:px-6 ${customStyle}`}
+        whileTap={{ scale: 0.9 }}
+        onClick={handleClick}
+        type={type}
+        disabled={isDisabled}
       >
         <div className="flex gap-2 justify-cente text-xs">
           <p>{text}</p>
@@ -28,13 +31,14 @@ export const PrimaryButton = ({
   );
 };
 
-export const SecondaryButton = ({ text, type, children }) => {
+export const SecondaryButton = ({ text, type, children, handleClick }) => {
   return (
     <>
       <motion.button
         whileTap={{ scale: 0.9 }}
         type={type}
-        className="bg-custom-white-100/90 rounded-2xl text-black font-medium px-6 py-1.5 transition-all hover:bg-custom-purple-700 hover:text-white"
+        className="bg-gray-200 px-3 py-2 !font-medium rounded flex gap-2 mb-auto text-sm"
+        onClick={handleClick}
       >
         <div className="flex gap-2">
           <p> {text}</p>
@@ -53,7 +57,7 @@ export const OutlineButton = ({ text, type, children }) => {
       <motion.button
         whileTap={{ scale: 0.9 }}
         type={type}
-        className="border border-custom-purple-700 rounded-2xl text-custom-white-100 px-6 py-1.5 transition-all bg-custom-black-900 hover:bg-custom-purple-900"
+        className="border border-custom-purple-700 rounded-2xl text-custom-white-100 px-6 py-1.5 transition-all bg-custom-gray-900 hover:bg-custom-purple-900"
       >
         <div className="flex gap-2">
           <p> {text}</p>
@@ -66,7 +70,7 @@ export const OutlineButton = ({ text, type, children }) => {
   );
 };
 
-export const PrimaryButtonDash = ({
+export const LandPrimaryButton = ({
   text,
   type,
   children,
@@ -79,15 +83,15 @@ export const PrimaryButtonDash = ({
         whileTap={{ scale: 0.9 }}
         type={type}
         onClick={handleClick}
-        className={`bg-purple-500 rounded-lg text-white font-medium 
-        py-1 transition-all border-2 border-custom-purple-700
-        hover:bg-purple-700 hover:text-white px-4 ${customStyle}`}
+        className={`bg-custom-purple-700 rounded-2xl text-white font-medium 
+        py-1.5 transition-all border-2 border-custom-purple-700
+        hover:bg-custom-black-600 hover:text-gray-200 px-4 md:px-6 ${customStyle}`}
       >
         <div className="flex gap-2 justify-center">
+          <p>{text}</p>
           <p className="my-auto">
             {children} {/* SVG icon */}
           </p>
-          <p>{text}</p>
         </div>
       </motion.button>
     </>

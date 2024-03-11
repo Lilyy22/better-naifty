@@ -3,13 +3,13 @@ import { Logo } from "../../components/Logo";
 import { AuthContext } from "../../context/AuthContext";
 import { Profile } from "../../components/Profile";
 
-export const Header = ({ handleClick, sidebarOpen }) => {
+export const Header = ({ handleClick }) => {
   const { isInstructor, userEmail } = useContext(AuthContext);
 
   return (
     <>
       {/* Start::Header */}
-      <header className="font-naifty flex justify-between bg-white sticky top-0 z-50">
+      <header className="font-naifty flex justify-between bg-white sticky top-0 z-50 border-b">
         <button
           type="button"
           className="md:px-[0.325rem]"

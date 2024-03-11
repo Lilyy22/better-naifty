@@ -7,30 +7,69 @@
     box-sizing: border-box;
   }
 
-  .passInput:focus > button > svg {
-    fill: #e937bd;
-  }
-
   html {
     scroll-behavior: smooth;
     position: relative;
   }
+
+  /* Target the select dropdown arrow */
+  select::-ms-expand,
+  select::-webkit-select-arrow {
+    /* Apply custom styles to the dropdown arrow */
+    margin-right: 100px; /* Add margin to the right of the dropdown arrow */
+    color: red; /* Set the color of the dropdown arrow to red */
+  }
+
+  /* Additional styles for different browsers */
+  select::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+
+  select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+  }
+
   /* scrollbar */
-  html::-webkit-scrollbar {
+  ::-webkit-scrollbar {
     width: 7px;
   }
 
   /* Track */
-  html::-webkit-scrollbar-track {
+  ::-webkit-scrollbar-track {
     border-radius: 10px;
     background-color: #2b2b2b;
     width: 5px;
   }
 
   /* Handle */
-  html::-webkit-scrollbar-thumb {
+  ::-webkit-scrollbar-thumb {
     background: #a259ff;
     border-radius: 10px;
     width: 5px;
+  }
+  /* scrollbar */
+  .scrollbar-hide::-webkit-scrollbar {
+    height: 6px;
+    display: none;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .scrollbar-hide:hover::-webkit-scrollbar {
+    display: block;
+  }
+  /* Track */
+  .scrollbar-hide::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #dfdfdf;
+    width: 2px;
+  }
+
+  /* Handle */
+  .scrollbar-hide::-webkit-scrollbar-thumb {
+    background: #a259ff;
+    border-radius: 10px;
+    width: 2px;
   }
 }

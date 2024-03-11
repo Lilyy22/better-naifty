@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { AuthProvider } from "./context/AuthContext";
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
+import { OnlineStatusProvider } from "./context/OnlineStatusContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const uploadLink = createUploadLink({
@@ -26,7 +27,9 @@ root.render(
   <BrowserRouter>
     <ApolloProvider client={client}>
       <AuthProvider>
-        <App />
+        <OnlineStatusProvider>
+          <App />
+        </OnlineStatusProvider>
       </AuthProvider>
     </ApolloProvider>
   </BrowserRouter>

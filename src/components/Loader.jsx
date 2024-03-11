@@ -1,120 +1,54 @@
 import React from "react";
 
 export const TableLoader = () => {
+  const array = [1, 2, 3, 4, 5, 6];
+
   return (
     <>
-      <div className="box overflow-hidden mt-8 rounded-xl animate-pulse">
-        <div className="box-header justify-between">
-          <div className="box-title bg-gray-200 rounded p-3 w-16"></div>
-          <div className=" bg-gray-200 rounded p-3 w-16"></div>
+      <div className="overflow-hidden mt-8 rounded-xl bg-white animate-pulse">
+        <div className="flex justify-between p-4">
+          <div className="bg-gray-200 rounded p-3 w-16"></div>
+          <div className="bg-gray-200 rounded p-3 w-16"></div>
         </div>
         <div className="box-body !p-0">
           <div className="px-4 my-4">
             <table className="mb-0 rounded-lg text-start border w-full overflow-x-scroll">
               <thead>
                 <tr className="border border-red-900">
-                  <th
-                    scope="col"
-                    className="text-start p-4 font-bold leading-3 border border-gray-100"
-                  >
-                    <div className="bg-gray-200 p-3 w-1/4 rounded"></div>
-                  </th>
-                  <th
-                    scope="col"
-                    className="text-start p-4 font-bold leading-3 border border-gray-100"
-                  >
-                    <div className="bg-gray-200 p-3 w-full rounded"></div>
-                  </th>
-                  <th
-                    scope="col"
-                    className="text-start p-4 font-bold leading-3 border border-gray-100"
-                  >
-                    <div className="bg-gray-200 p-3 w-full rounded"></div>
-                  </th>
-                  <th
-                    scope="col"
-                    className="text-start p-4 font-bold leading-3 border border-gray-100"
-                  >
-                    <div className="bg-gray-200 p-3 w-full rounded"></div>
-                  </th>
-                  <th
-                    scope="col"
-                    className="text-start p-4 font-bold leading-3 border border-gray-100"
-                  >
-                    <div className="bg-gray-200 p-3 w-full rounded"></div>
-                  </th>
-                  <th
-                    scope="col"
-                    className="text-start p-4 font-bold leading-3 border border-gray-100"
-                  >
-                    <div className="bg-gray-200 p-3 w-1/2 rounded"></div>
-                  </th>
+                  {array.map((item) => (
+                    <th
+                      scope="col"
+                      className="text-start p-4 font-bold leading-3 border border-gray-100"
+                      key={item}
+                    >
+                      <div className="bg-gray-200 p-3 w-1/4 rounded"></div>
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
-                <tr className="border p-1">
-                  <td className="text-start px-4 py-2 border border-gray-100">
-                    <div className="bg-gray-200 p-3 w-1/4 rounded"></div>
-                  </td>
-                  <td className="text-start px-4 py-2 border border-gray-100">
-                    <div className="bg-gray-200 p-3 w-full rounded"></div>
-                  </td>
-                  <td className="text-start px-4 py-2 border border-gray-100">
-                    <div className="bg-gray-200 p-3 w-full rounded"></div>
-                  </td>
-                  <td className="text-start px-4 py-2 border border-gray-100">
-                    <div className="bg-gray-200 p-3 w-full rounded"></div>
-                  </td>
-                  <td className="text-start px-4 py-2 border border-gray-100">
-                    <div className="bg-gray-200 p-3 w-full rounded"></div>
-                  </td>
-                  <td className="text-start px-4 py-2 flex gap-1">
-                    <div className="has-tooltip bg-gray-200 p-3 w-4 rounded"></div>
-                    <div className="has-tooltip bg-gray-200 p-3 w-4 rounded"></div>
-                  </td>
-                </tr>
-                <tr className="border p-1">
-                  <td className="text-start px-4 py-2 border border-gray-100">
-                    <div className="bg-gray-200 p-3 w-1/4 rounded"></div>
-                  </td>
-                  <td className="text-start px-4 py-2 border border-gray-100">
-                    <div className="bg-gray-200 p-3 w-full rounded"></div>
-                  </td>
-                  <td className="text-start px-4 py-2 border border-gray-100">
-                    <div className="bg-gray-200 p-3 w-full rounded"></div>
-                  </td>
-                  <td className="text-start px-4 py-2 border border-gray-100">
-                    <div className="bg-gray-200 p-3 w-full rounded"></div>
-                  </td>
-                  <td className="text-start px-4 py-2 border border-gray-100">
-                    <div className="bg-gray-200 p-3 w-full rounded"></div>
-                  </td>
-                  <td className="text-start px-4 py-2 flex gap-1">
-                    <div className="has-tooltip bg-gray-200 p-3 w-4 rounded"></div>
-                    <div className="has-tooltip bg-gray-200 p-3 w-4 rounded"></div>
-                  </td>
-                </tr>
-                <tr className="border p-1">
-                  <td className="text-start px-4 py-2 border border-gray-100">
-                    <div className="bg-gray-200 p-3 w-1/4 rounded"></div>
-                  </td>
-                  <td className="text-start px-4 py-2 border border-gray-100">
-                    <div className="bg-gray-200 p-3 w-full rounded"></div>
-                  </td>
-                  <td className="text-start px-4 py-2 border border-gray-100">
-                    <div className="bg-gray-200 p-3 w-full rounded"></div>
-                  </td>
-                  <td className="text-start px-4 py-2 border border-gray-100">
-                    <div className="bg-gray-200 p-3 w-full rounded"></div>
-                  </td>
-                  <td className="text-start px-4 py-2 border border-gray-100">
-                    <div className="bg-gray-200 p-3 w-full rounded"></div>
-                  </td>
-                  <td className="text-start px-4 py-2 flex gap-1">
-                    <div className="has-tooltip bg-gray-200 p-3 w-4 rounded"></div>
-                    <div className="has-tooltip bg-gray-200 p-3 w-4 rounded"></div>
-                  </td>
-                </tr>
+                {array.map((item) => (
+                  <tr className="border p-1" key={item}>
+                    <td className="text-start px-4 py-2 border border-gray-100">
+                      <div className="bg-gray-200 p-3 w-1/4 rounded"></div>
+                    </td>
+                    <td className="text-start px-4 py-2 border border-gray-100">
+                      <div className="bg-gray-200 p-3 w-1/4 rounded"></div>
+                    </td>
+                    <td className="text-start px-4 py-2 border border-gray-100">
+                      <div className="bg-gray-200 p-3 w-1/4 rounded"></div>
+                    </td>
+                    <td className="text-start px-4 py-2 border border-gray-100">
+                      <div className="bg-gray-200 p-3 w-1/4 rounded"></div>
+                    </td>
+                    <td className="text-start px-4 py-2 border border-gray-100">
+                      <div className="bg-gray-200 p-3 w-1/4 rounded"></div>
+                    </td>
+                    <td className="text-start px-4 py-2 border border-gray-100">
+                      <div className="bg-gray-200 p-3 w-1/4 rounded"></div>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

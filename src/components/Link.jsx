@@ -6,9 +6,8 @@ export const PrimaryLink = ({ text, children, goto }) => {
     <>
       <Link
         to={goto}
-        className={`bg-purple-500 rounded-lg text-white font-medium 
-        py-1 transition-all border-2 border-custom-purple-700
-        hover:bg-purple-700 hover:text-white px-4`}
+        className={`bg-purple-500 rounded text-white font-medium outline-none
+        py-1 transition-all px-4 my-auto text-xs hover:bg-purple-700`}
       >
         <div className="flex gap-2 justify-center">
           <p className="my-auto">

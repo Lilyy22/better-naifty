@@ -15,7 +15,7 @@ export const CourseCard = ({
     <>
       <Link
         to={`/dashboard/courses/${id}`}
-        className="bg-white shadow w-full md:w-80 rounded-lg flex-shrink-0 flex-grow-0"
+        className="bg-white shadow w-full md:w-80 rounded-lg flex-shrink-0 flex-grow-0 relative"
       >
         <div className="rounded-t-lg w-full h-40">
           <img
@@ -30,10 +30,13 @@ export const CourseCard = ({
         </div>
         <div className="p-4">
           <h5 className="font-bold text-gray-700 text-sm">{title}</h5>
-          <p className="text-gray-400">{description}</p>
+          <p className="text-gray-400 text-sm">
+            {description?.substring(0, 120)}
+            {description?.length > 120 ? "..." : ""}
+          </p>
         </div>
         {/* footer */}
-        <div className="px-4 py-3 flex justify-between items-center border-t">
+        <div className="flex justify-between items-center border-t pr-4 border-gray-100">
           <Profile
             name={instructorName}
             subText={formattedDate(updated_at)}

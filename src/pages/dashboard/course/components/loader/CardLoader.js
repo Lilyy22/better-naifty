@@ -3,12 +3,11 @@ import React from "react";
 export const CourseCardLoader = () => {
   return (
     <>
-      <div className="bg-white shadow w-full md:w-80 lg:w-72 rounded-lg mx-auto animate-pulse">
-        {/* thumbnail */}
-        <div className="bg-gray-300 rounded-t-lg w-full h-40"></div>
+      <div className="bg-white shadow w-full md:w-80 rounded-lg flex-shrink-0 flex-grow-0 relative">
+        <div className="rounded-t-lg w-full h-40 bg-gray-200"></div>
         {/* body */}
         <div className="p-4">
-          <h5 className="bg-gray-300 w-1/4 py-1.5 mb-2 rounded-lg"></h5>
+          <p className="bg-gray-300 w-1/4 py-1.5 mb-2 rounded-lg"></p>
           <p className="bg-gray-200 p-6 w-full py-1.5 mb-1 rounded-lg"></p>
           <p className="bg-gray-200 p-6 w-full py-1.5 mb-1 rounded-lg"></p>
           <p className="bg-gray-200 p-6 w-full py-1.5 mb-1 rounded-lg"></p>
