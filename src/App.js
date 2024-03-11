@@ -15,6 +15,7 @@ import { SectionDetail } from "./pages/dashboard/section/SectionDetail";
 import { ScrollTop } from "./utils/scrollTop";
 import Home from "./pages/landing/Home";
 import Verify from "./pages/dashboard/auth/Verify";
+import PrivateRoute from "./routes/PrivateRoute";
 
 function App() {
   return (
@@ -28,21 +29,26 @@ function App() {
         <Route path="login" element={<LogIn />} />
         <Route path="verify" element={<Verify />} />
 
-        <Route path="/dashboard" element={<DefaultLayout />}>
-          <Route path="course-list" element={<CourseTable />} />
-          <Route path="courses" element={<CourseGrid />} />
-          <Route path="create-course" element={<CourseForm />} />
-          <Route path="courses/:course_url" element={<CourseDetail />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/dashboard" element={<DefaultLayout />}>
+            <Route path="course-list" element={<CourseTable />} />
+            <Route path="courses" element={<CourseGrid />} />
+            <Route path="create-course" element={<CourseForm />} />
+            <Route path="courses/:course_url" element={<CourseDetail />} />
 
-          <Route path="section-list" element={<SectionTable />} />
-          <Route path="create-section" element={<SectionForm />} />
-          <Route path="section-list/:section_url" element={<SectionDetail />} />
-          <Route
-            path="courses/section/:episode_url"
-            element={<EpisodeDetail />}
-          />
+            <Route path="section-list" element={<SectionTable />} />
+            <Route path="create-section" element={<SectionForm />} />
+            <Route
+              path="section-list/:section_url"
+              element={<SectionDetail />}
+            />
+            <Route
+              path="courses/section/:episode_url"
+              element={<EpisodeDetail />}
+            />
 
-          <Route path="profile" element={<Profile />} />
+            <Route path="profile" element={<Profile />} />
+          </Route>
         </Route>
 
         <Route path="*" element={<NotFound />} />

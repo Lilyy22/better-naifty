@@ -1,23 +1,21 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Action, TD, Table } from "../../../components/table/Table";
 import { useMutation, useQuery } from "@apollo/client";
 import { GETINSTRUCTORSECTION } from "./data/query";
-import { AuthContext } from "../../../context/AuthContext";
-// import { DELETECOURSE } from "./data/mutation";
 import { DeleteModal } from "../../../components/modal/Delete";
-import { Toast } from "../../../components/Toast";
 import { TableLoader } from "../../../components/Loader";
 import { formattedDate } from "../../../utils/formattedDate";
 import { EpisodeForm } from "../episode/EpisodeForm";
 import { Link } from "react-router-dom";
+import { DELETESECTION } from "./data/mutation";
 
 export const SectionTable = () => {
-  const { userId } = useContext(AuthContext);
-
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openEpisodeModal, setOpenEpisodeModal] = useState(false);
 
-  //   const [del] = useMutation(DELETECOURSE);
+  const [sectionId, setSectionId] = useState();
+
+  const [del] = useMutation(DELETESECTION);
   const { data, loading } = useQuery(GETINSTRUCTORSECTION);
 
   const thead = [
@@ -27,15 +25,19 @@ export const SectionTable = () => {
     { head: "Action" },
   ];
 
+  const handleDeleteClick = (sectionId) => {
+    setOpenDeleteModal(!openDeleteModal);
+    setSectionId(sectionId);
+  };
+
   const handleDelete = async (id) => {
-    console.log(id);
-    // const { data } = await del({
-    //   variables: {
-    //     courseId: courseId,
-    //   },
-    //   refetchQueries: [GETINSTRUCTORCOURSE, "GET_INST_COURSE"],
-    // });
-    // if (data) setOpenDeleteModal(false);
+    const { data } = await del({
+      variables: {
+        sectionId: id,
+      },
+      refetchQueries: [GETINSTRUCTORSECTION, "GET_INST_SECTION"],
+    });
+    if (data) setOpenDeleteModal(false);
   };
 
   return (
@@ -60,11 +62,8 @@ export const SectionTable = () => {
                     </TD>
                     <TD text={course.name} />
                     <TD text={formattedDate(updated_at)} />
-                    <Action
-                      handleDeleteClick={() =>
-                        setOpenDeleteModal(!openDeleteModal)
-                      }
-                    >
+
+                    <Action handleDeleteClick={handleDeleteClick} id={id}>
                       <button
                         className="bg-gray-200/60 rounded px-2 py-1.5 my-auto flex gap-1 relative group"
                         onClick={() => setOpenEpisodeModal(!openEpisodeModal)}
@@ -82,12 +81,14 @@ export const SectionTable = () => {
                         <span className="text-xs">Episode</span>
                       </button>
                     </Action>
-                    <DeleteModal
-                      isOpen={openDeleteModal}
-                      handleModal={() => setOpenDeleteModal(!openDeleteModal)}
-                      handleDelete={() => handleDelete(id)}
-                    />
-
+                    {openDeleteModal && (
+                      <DeleteModal
+                        isOpen={openDeleteModal}
+                        courseId={sectionId}
+                        handleModal={() => setOpenDeleteModal(!openDeleteModal)}
+                        handleDelete={handleDelete}
+                      />
+                    )}
                     {openEpisodeModal && (
                       <div className="overflow-y-auto overflow-x-hidden fixed top-0 flex left-0 z-50 justify-center items-center w-full min-h-full bg-gray-700/10 ">
                         <EpisodeForm

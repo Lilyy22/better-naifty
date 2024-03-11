@@ -1,11 +1,14 @@
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Logo } from "../../components/Logo";
+import { AuthContext } from "../../context/AuthContext";
 
 export const Sidebar = ({ sidebarOpen }) => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+
+  const { isInstructor } = useContext(AuthContext);
 
   const handleLogout = () => {
     localStorage.clear();
@@ -44,80 +47,98 @@ export const Sidebar = ({ sidebarOpen }) => {
               </Li>
 
               <Title text="Pages" />
-              {/* {isInstructor === "true" || isInstructor === true ? ( */}
-              <>
-                <div className="m-0 py-0 px-3 grid cursor-pointer">
-                  <li
-                    className="p-3 relative flex items-center no-underline text-[0.78rem] text-custom-white-200 font-medium rounded-md"
-                    onClick={() => {
-                      setIsOpen(!isOpen);
-                    }}
-                  >
-                    <svg
-                      className="w-[14px] h-4 fill-custom-white-200 mx-2 group-hover:fill-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 448 512"
+              {isInstructor === "true" || isInstructor === true ? (
+                <>
+                  <div className="m-0 py-0 px-3 grid cursor-pointer">
+                    <li
+                      className="p-3 relative flex items-center no-underline text-[0.78rem] text-custom-white-200 font-medium rounded-md"
+                      onClick={() => {
+                        setIsOpen(!isOpen);
+                      }}
                     >
-                      <path d="M96 0C43 0 0 43 0 96V416c0 53 43 96 96 96H384h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V384c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H384 96zm0 384H352v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16zm16 48H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16s7.2-16 16-16z" />
-                    </svg>
-                    <span className="whitespace-nowrap text-custom-white-200 relative text-[0.85rem] leading-none align-middle">
-                      Manage Course
-                    </span>
-                    <svg
-                      className="w-[0.4rem] fill-custom-white-200 rtl:rotate-180 origin-center absolute end-3 text-[0.85rem] text-custom-white-200 transition-all ease-linear duration-[0.05s] my-auto"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 320 512"
-                    >
-                      <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
-                    </svg>
-                  </li>
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.ul
-                        key="content"
-                        initial="collapsed"
-                        animate="open"
-                        exit="collapsed"
-                        variants={{
-                          open: { opacity: 1, height: "auto" },
-                          collapsed: { opacity: 0, height: 0 },
-                        }}
-                        transition={{
-                          duration: 0.8,
-                          ease: [0.04, 0.62, 0.23, 0.98],
-                        }}
-                        className="py-[0.45rem] px-[1.6rem]"
+                      <svg
+                        className="w-[14px] h-4 fill-custom-white-200 mx-2 group-hover:fill-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 448 512"
                       >
-                        <li className="m-0 py-0 px-3">
-                          <NavLink
-                            to="/dashboard/course-list"
-                            className={({ isActive }) =>
-                              isActive
-                                ? "p-3 relative flex items-center no-underline text-[0.78rem] text-white font-medium rounded-md mb-2 bg-white/[0.07]"
-                                : "p-3 relative flex items-center no-underline text-[0.78rem] text-custom-white-200 font-medium rounded-md  group-hover:bg-white/[0.07]"
-                            }
-                          >
-                            Course
-                          </NavLink>
-                        </li>
-                        <li className="m-0 py-0 px-3">
-                          <NavLink
-                            to="/dashboard/section-list"
-                            className={({ isActive }) =>
-                              isActive
-                                ? "rounded-md p-3 relative flex items-center no-underline text-[0.78rem] text-white font-medium bg-white/[0.07]"
-                                : "p-3 relative flex items-center no-underline text-[0.78rem] text-custom-white-200 font-medium rounded-md  group-hover:bg-white/[0.07]"
-                            }
-                          >
-                            Section
-                          </NavLink>
-                        </li>
-                      </motion.ul>
-                    )}
-                  </AnimatePresence>
-                </div>
-                <li className="m-0 py-0 px-3 has-sub">
-                  <div className="p-3 relative flex items-center no-underline text-[0.78rem] text-custom-white-200 font-medium rounded-md">
+                        <path d="M96 0C43 0 0 43 0 96V416c0 53 43 96 96 96H384h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V384c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H384 96zm0 384H352v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16zm16 48H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16s7.2-16 16-16z" />
+                      </svg>
+                      <span className="whitespace-nowrap text-custom-white-200 relative text-[0.85rem] leading-none align-middle">
+                        Manage Course
+                      </span>
+                      <svg
+                        className="w-[0.4rem] fill-custom-white-200 rtl:rotate-180 origin-center absolute end-3 text-[0.85rem] text-custom-white-200 transition-all ease-linear duration-[0.05s] my-auto"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 320 512"
+                      >
+                        <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+                      </svg>
+                    </li>
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.ul
+                          key="content"
+                          initial="collapsed"
+                          animate="open"
+                          exit="collapsed"
+                          variants={{
+                            open: { opacity: 1, height: "auto" },
+                            collapsed: { opacity: 0, height: 0 },
+                          }}
+                          transition={{
+                            duration: 0.8,
+                            ease: [0.04, 0.62, 0.23, 0.98],
+                          }}
+                          className="py-[0.45rem] px-[1.6rem]"
+                        >
+                          <li className="m-0 py-0 px-3">
+                            <NavLink
+                              to="/dashboard/course-list"
+                              className={({ isActive }) =>
+                                isActive
+                                  ? "p-3 relative flex items-center no-underline text-[0.78rem] text-white font-medium rounded-md mb-2 bg-white/[0.07]"
+                                  : "p-3 relative flex items-center no-underline text-[0.78rem] text-custom-white-200 font-medium rounded-md  group-hover:bg-white/[0.07]"
+                              }
+                            >
+                              Course
+                            </NavLink>
+                          </li>
+                          <li className="m-0 py-0 px-3">
+                            <NavLink
+                              to="/dashboard/section-list"
+                              className={({ isActive }) =>
+                                isActive
+                                  ? "rounded-md p-3 relative flex items-center no-underline text-[0.78rem] text-white font-medium bg-white/[0.07]"
+                                  : "p-3 relative flex items-center no-underline text-[0.78rem] text-custom-white-200 font-medium rounded-md  group-hover:bg-white/[0.07]"
+                              }
+                            >
+                              Section
+                            </NavLink>
+                          </li>
+                        </motion.ul>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                  <li className="m-0 py-0 px-3 has-sub">
+                    <div className="p-3 relative flex items-center no-underline text-[0.78rem] text-custom-white-200 font-medium rounded-md">
+                      <svg
+                        className="w-[14px] h-4 fill-custom-white-200 mx-2 group-hover:fill-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 576 512"
+                      >
+                        <path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384v38.6C310.1 219.5 256 287.4 256 368c0 59.1 29.1 111.3 73.7 143.3c-3.2 .5-6.4 .7-9.7 .7H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128zM288 368a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm211.3-43.3c-6.2-6.2-16.4-6.2-22.6 0L416 385.4l-28.7-28.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l40 40c6.2 6.2 16.4 6.2 22.6 0l72-72c6.2-6.2 6.2-16.4 0-22.6z" />
+                      </svg>
+                      <span className="whitespace-nowrap text-custom-white-200 relative text-[0.85rem] leading-none align-middle">
+                        Manage Assessment
+                      </span>
+                      <i className="fe fe-chevron-right  origin-center absolute end-3 text-[0.85rem] text-custom-white-200 transition-all ease-linear duration-[0.05s]" />
+                    </div>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <DropDown />
+                  <Li text="Assessment" path="assessment">
                     <svg
                       className="w-[14px] h-4 fill-custom-white-200 mx-2 group-hover:fill-white"
                       xmlns="http://www.w3.org/2000/svg"
@@ -125,36 +146,9 @@ export const Sidebar = ({ sidebarOpen }) => {
                     >
                       <path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384v38.6C310.1 219.5 256 287.4 256 368c0 59.1 29.1 111.3 73.7 143.3c-3.2 .5-6.4 .7-9.7 .7H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128zM288 368a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm211.3-43.3c-6.2-6.2-16.4-6.2-22.6 0L416 385.4l-28.7-28.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l40 40c6.2 6.2 16.4 6.2 22.6 0l72-72c6.2-6.2 6.2-16.4 0-22.6z" />
                     </svg>
-                    <span className="whitespace-nowrap text-custom-white-200 relative text-[0.85rem] leading-none align-middle">
-                      Manage Assessment
-                    </span>
-                    <i className="fe fe-chevron-right  origin-center absolute end-3 text-[0.85rem] text-custom-white-200 transition-all ease-linear duration-[0.05s]" />
-                  </div>
-                </li>
-              </>
-              {/* ) : ( */}
-              <>
-                {/* <Li text="Course" path="/dashboard/courses">
-                  <svg
-                    className="w-[14px] h-4 fill-custom-white-200 mx-2 group-hover:fill-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 448 512"
-                  >
-                    <path d="M96 0C43 0 0 43 0 96V416c0 53 43 96 96 96H384h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V384c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H384 96zm0 384H352v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16zm16 48H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16s7.2-16 16-16z" />
-                  </svg>
-                </Li> */}
-                <DropDown />
-                <Li text="Assessment" path="assessment">
-                  <svg
-                    className="w-[14px] h-4 fill-custom-white-200 mx-2 group-hover:fill-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 576 512"
-                  >
-                    <path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384v38.6C310.1 219.5 256 287.4 256 368c0 59.1 29.1 111.3 73.7 143.3c-3.2 .5-6.4 .7-9.7 .7H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128zM288 368a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm211.3-43.3c-6.2-6.2-16.4-6.2-22.6 0L416 385.4l-28.7-28.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l40 40c6.2 6.2 16.4 6.2 22.6 0l72-72c6.2-6.2 6.2-16.4 0-22.6z" />
-                  </svg>
-                </Li>
-              </>
-              {/* )} */}
+                  </Li>
+                </>
+              )}
 
               <Title text="General" />
               <Li text="Profile" path="/dashboard/profile">

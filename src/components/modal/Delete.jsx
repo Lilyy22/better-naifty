@@ -1,4 +1,9 @@
-export const DeleteModal = ({ handleDelete, handleModal, isOpen }) => {
+export const DeleteModal = ({
+  handleDelete,
+  handleModal,
+  isOpen,
+  courseId,
+}) => {
   return (
     <>
       <div className={isOpen ? "" : "hidden"}>
@@ -57,7 +62,7 @@ export const DeleteModal = ({ handleDelete, handleModal, isOpen }) => {
                 </button>
                 <button
                   type="button"
-                  onClick={handleDelete}
+                  onClick={() => handleDelete(courseId)}
                   className="py-2 px-3 text-sm font-medium text-center text-white bg-red-500/80 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300"
                 >
                   Yes, I'm sure

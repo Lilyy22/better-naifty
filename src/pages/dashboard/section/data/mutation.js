@@ -15,3 +15,11 @@ export const CREATESECTION = gql`
     }
   }
 `;
+
+export const DELETESECTION = gql`
+  mutation DELETESECTION($sectionId: String) {
+    delete_coursesection(where: { id: { exact: $sectionId } }) {
+      affected_rows
+    }
+  }
+`;

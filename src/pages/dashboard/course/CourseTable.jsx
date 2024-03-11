@@ -5,13 +5,13 @@ import { GETINSTRUCTORCOURSE } from "./data/query";
 import { AuthContext } from "../../../context/AuthContext";
 import { DELETECOURSE } from "./data/mutation";
 import { DeleteModal } from "../../../components/modal/Delete";
-import { Toast } from "../../../components/Toast";
 import { TableLoader } from "../../../components/Loader";
 
 export const CourseTable = () => {
   const { userId } = useContext(AuthContext);
 
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [courseId, setCourseId] = useState();
 
   const [del] = useMutation(DELETECOURSE);
   const { data, loading } = useQuery(GETINSTRUCTORCOURSE, {
@@ -27,15 +27,19 @@ export const CourseTable = () => {
     { head: "Action" },
   ];
 
+  const handleDeleteClick = (courseId) => {
+    setOpenDeleteModal(!openDeleteModal);
+    setCourseId(courseId);
+  };
+
   const handleDelete = async (courseId) => {
-    console.log(courseId);
-    // const { data } = await del({
-    //   variables: {
-    //     courseId: courseId,
-    //   },
-    //   refetchQueries: [GETINSTRUCTORCOURSE, "GET_INST_COURSE"],
-    // });
-    // if (data) setOpenDeleteModal(false);
+    const { data } = await del({
+      variables: {
+        courseId: courseId,
+      },
+      refetchQueries: [GETINSTRUCTORCOURSE, "GET_INST_COURSE"],
+    });
+    if (data) setOpenDeleteModal(false);
   };
 
   return (
@@ -56,16 +60,15 @@ export const CourseTable = () => {
                       {status}
                     </span>
                   </TD>
-                  <Action
-                    handleDeleteClick={() =>
-                      setOpenDeleteModal(!openDeleteModal)
-                    }
-                  />
-                  <DeleteModal
-                    isOpen={openDeleteModal}
-                    handleModal={() => setOpenDeleteModal(!openDeleteModal)}
-                    handleDelete={() => handleDelete(name)}
-                  />
+                  <Action handleDeleteClick={handleDeleteClick} id={id} />
+                  {openDeleteModal && (
+                    <DeleteModal
+                      isOpen={openDeleteModal}
+                      courseId={courseId}
+                      handleModal={() => setOpenDeleteModal(!openDeleteModal)}
+                      handleDelete={handleDelete}
+                    />
+                  )}
                 </tr>
               </>
             );

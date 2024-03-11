@@ -63,7 +63,7 @@ export const TD = ({ text, children }) => {
   );
 };
 
-export const Action = ({ handleDeleteClick, children }) => {
+export const Action = ({ handleDeleteClick, children, id }) => {
   return (
     <>
       <div className="flex gap-1 px-4 py-2">
@@ -86,7 +86,7 @@ export const Action = ({ handleDeleteClick, children }) => {
           <button
             type="button"
             className="bg-red-100/50 p-2 inline rounded relative group hover:bg-red-600"
-            onClick={handleDeleteClick}
+            onClick={() => handleDeleteClick(id)}
           >
             <span class="invisible absolute -left-1 -top-1 text-xs rounded shadow-lg py-2 px-3 bg-gray-900 text-white -mt-8 group-hover:visible">
               Delete
