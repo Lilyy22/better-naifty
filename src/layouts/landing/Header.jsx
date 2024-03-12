@@ -60,6 +60,12 @@ const Header = () => {
                   About us
                 </NavLink>
               </li>
+              <NavLink
+                to="/login"
+                className="px-4 py-1 hover:text-gray-400 transition-all md:hidden"
+              >
+                <span>Log In</span>
+              </NavLink>
               {/* <li className="py-1 md:py-0">
                 <NavLink
                   to="/services"
