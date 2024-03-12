@@ -17,20 +17,7 @@ export const Loader = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg flex-1 p-6 mb-auto">
-          {/* <DashH4 text="Contents" /> */}
-          {/* <ol className="list-decimal list-outside">
-            {faqData.map(({ section, id, episodes }) => {
-              return (
-                <SectionDropDown
-                  key={id}
-                  section={section}
-                  episodes={episodes}
-                />
-              );
-            })}
-          </ol> */}
-        </div>
+        <div className="bg-white rounded-lg flex-1 p-6 mb-auto"></div>
       </div>
     </>
   );

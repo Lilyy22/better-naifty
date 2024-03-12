@@ -35,7 +35,7 @@ export const SectionDetail = () => {
       ) : (
         <>
           <DashH4 text="Episodes" />
-          <div className="flex space-x-4">
+          <div className="flex flex-wrap gap-4">
             {episodes?.map(({ id, title, description, file, updated_at }) => {
               return (
                 <EpisodeCard

@@ -9,7 +9,7 @@ export const PrimaryLink = ({ text, children, goto, customStyle }) => {
         className={`bg-purple-500 rounded text-white font-medium outline-none
         py-1 transition-all px-4 text-sm hover:bg-purple-700 inline-block my-auto whitespace-nowrap ${customStyle}`}
       >
-        <div className="flex gap-2">
+        <div className="flex gap-2 justify-center">
           <p>{text}</p>
           <p className="my-auto">
             {children} {/* SVG icon */}

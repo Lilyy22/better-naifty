@@ -10,9 +10,9 @@ export const GridFourLayout = () => {
     <>
       <div className="bg-custom-gray-600 py-16 px-4 lg:py-24 xl:px-0">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between">
-          <div className="mx-auto text-center mb-12">
+          <div className="mx-auto text-center mb-12 max-w-lg">
             {/* <H2 text="Explore Our Course Catalog" /> */}
-            <Subtitle text="Browse our comprehensice list of courses." />
+            <H2 text="Browse our comprehensice list of courses." />
           </div>
           <div className="grid grid-cols-1 gap-6 mx-auto md:grid-cols-3">
             <HorizontalCard
@@ -139,7 +139,7 @@ export const SectionThree = () => {
               <p className="mt-4"></p>
               <PrimaryLink
                 text="Learn More"
-                customStyle="hidden lg:block"
+                customStyle="hidden mx-auto lg:inline-block"
                 goto="/about"
               />
             </div>
@@ -154,7 +154,11 @@ export const SectionThree = () => {
                 real-life challenges. Join us today and take the first step
                 towards a successful future.
               </p>
-              <LandPrimaryButton text="Learn More" customStyle="lg:hidden" />
+              <PrimaryLink
+                text="Learn More"
+                goto="/about"
+                customStyle="lg:hidden"
+              />
             </div>
           </div>
           <div className="w-full h-96 overflow-hidden rounded-xl">

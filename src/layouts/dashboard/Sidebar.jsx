@@ -24,7 +24,7 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           ease: [0.04, 0.62, 0.23, 0.98],
         }}
         className={`z-50 flex-shrink-0 w-64 overflow-y-auto bg-custom-purple-900 h-full font-mont fixed md:static ${
-          sidebarOpen ? "block" : "hidden"
+          sidebarOpen ? "block" : "hidden md:block"
         }`}
       >
         <motion.div className="text-gray-500 font-naifty">

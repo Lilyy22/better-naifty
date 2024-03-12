@@ -52,7 +52,7 @@ export const SectionTable = () => {
 
   useEffect(() => {
     refetch();
-  }, [refetch]);
+  }, [data]);
 
   return (
     <>

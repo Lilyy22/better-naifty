@@ -1,4 +1,4 @@
-import React from "react";
+import React, { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
@@ -28,7 +28,9 @@ root.render(
     <ApolloProvider client={client}>
       <AuthProvider>
         <OnlineStatusProvider>
-          <App />
+          <StrictMode>
+            <App />
+          </StrictMode>
         </OnlineStatusProvider>
       </AuthProvider>
     </ApolloProvider>

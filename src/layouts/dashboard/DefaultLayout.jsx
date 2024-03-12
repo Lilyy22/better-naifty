@@ -6,29 +6,22 @@ import { OnlineStatusContext } from "../../context/OnlineStatusContext";
 
 export const DefaultLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { onlineStatus } = useContext(OnlineStatusContext);
-  console.log(onlineStatus);
+
+  // const { onlineStatus } = useContext(OnlineStatusContext);
   const handleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
   return (
     <>
-      {/* <!-- ===== Page Wrapper Start ===== --> */}
-      <div className="flex h-screen overflow-hidden">
-        {/* <!-- ===== Sidebar Start ===== --> */}
+      <div className="flex h-screen overflow-hidden backdrop-blur-md bg-transparent">
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        {/* <!-- ===== Sidebar End ===== --> */}
 
-        {/* <!-- ===== Content Area Start ===== --> */}
         <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
-          {/* <!-- ===== Header Start ===== --> */}
           <Header sidebarOpen={sidebarOpen} handleClick={handleSidebar} />
-          {/* <!-- ===== Header End ===== --> */}
 
-          {/* <!-- ===== Main Content Start ===== --> */}
           <main>
-            <div className="mx-auto max-w-screen-7xl min-h-screen p-4 md:p-6 2xl:p-10 bg-custom-gray-400">
+            <div className="mx-auto max-w-screen-7xl min-h-screen p-4 md:p-6 2xl:p-10 bg-custom-gray-400 ">
               {/* {onlineStatus ? ( */}
               <Outlet />
               {/* ) : (
@@ -36,11 +29,8 @@ export const DefaultLayout = () => {
               )} */}
             </div>
           </main>
-          {/* <!-- ===== Main Content End ===== --> */}
         </div>
-        {/* <!-- ===== Content Area End ===== --> */}
       </div>
-      {/* <!-- ===== Page Wrapper End ===== --> */}
     </>
   );
 };

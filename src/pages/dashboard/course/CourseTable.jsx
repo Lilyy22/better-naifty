@@ -16,7 +16,7 @@ export const CourseTable = () => {
   const [courseId, setCourseId] = useState();
 
   const [del] = useMutation(DELETECOURSE);
-  const { data, loading, refetch } = useQuery(GETINSTRUCTORCOURSE, {
+  const { data, loading, refetch, fetchMore } = useQuery(GETINSTRUCTORCOURSE, {
     variables: {
       userId: userId,
     },
@@ -50,7 +50,7 @@ export const CourseTable = () => {
 
   useEffect(() => {
     refetch();
-  }, [refetch]);
+  }, [data]);
 
   return (
     <>
