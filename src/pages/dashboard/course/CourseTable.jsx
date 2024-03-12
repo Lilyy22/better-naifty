@@ -51,6 +51,7 @@ export const CourseTable = () => {
   useEffect(() => {
     refetch();
   }, [refetch]);
+
   return (
     <>
       {loading ? (

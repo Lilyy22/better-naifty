@@ -1,8 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { LandPrimaryButton, SecondaryButton } from "../../../components/Button";
+import { LandPrimaryButton } from "../../../components/Button";
 import { HorizontalCard, TestimonialCard } from "./common/Card";
-import { H1, H2 } from "../../../components/Heading";
+import { H1, H2, Subtitle } from "../../../components/Heading";
+import { PrimaryLink, SecondaryLink } from "../../../components/Link";
 
 export const GridFourLayout = () => {
   return (
@@ -11,7 +12,7 @@ export const GridFourLayout = () => {
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between">
           <div className="mx-auto text-center mb-12">
             {/* <H2 text="Explore Our Course Catalog" /> */}
-            {/* <Subtitle text="Browse our comprehensice list of courses." /> */}
+            <Subtitle text="Browse our comprehensice list of courses." />
           </div>
           <div className="grid grid-cols-1 gap-6 mx-auto md:grid-cols-3">
             <HorizontalCard
@@ -52,9 +53,6 @@ export const GridFourLayout = () => {
             /> */}
           </div>
         </div>
-        <div className="mt-8 flex justify-center">
-          <LandPrimaryButton text="View all" />
-        </div>
       </div>
     </>
   );
@@ -67,11 +65,11 @@ export const PricingSection = () => {
         <div className="max-w-7xl mx-auto">
           <div className="mx-auto text-center mb-16">
             <H2 text="Pricing Options" />
-            {/* <Subtitle text="Choose the plan that suits your needs." /> */}
+            <Subtitle text="Choose the plan that suits your needs." />
             {/* buttons */}
             <div className="flex gap-2 justify-center">
               <LandPrimaryButton text="Monthly" />
-              <SecondaryButton text="Yearly" />
+              <LandPrimaryButton text="Yearly" />
             </div>
           </div>
           <div className="flex flex-wrap gap-6 justify-center relative">
@@ -87,7 +85,7 @@ export const PricingSection = () => {
               </p>
               <div className="my-12">
                 <H1 text="$19/mo" />
-                <LandPrimaryButton text="Subscribe" />
+                <SecondaryLink text="Subscribe" goto="/signup" />
               </div>
               <ul className="text-gray-300/80 list-disc list-inside">
                 <li className="mb-2">Interactive learning experience</li>
@@ -113,7 +111,7 @@ export const PricingSection = () => {
               </p>
               <div className="my-12">
                 <H1 text="$29/mo" />
-                <LandPrimaryButton text="Subscribe" />
+                <SecondaryLink text="Subscribe" goto="/signup" />
               </div>
               <ul className="text-gray-300/80 list-disc list-inside">
                 <li className="mb-2">Advanced skills development</li>
@@ -139,9 +137,10 @@ export const SectionThree = () => {
             <div>
               <H2 text="Unlock Your Potential with NAIFTY ACADEMY" />
               <p className="mt-4"></p>
-              <LandPrimaryButton
+              <PrimaryLink
                 text="Learn More"
                 customStyle="hidden lg:block"
+                goto="/about"
               />
             </div>
             <div className="lg:w-[70%] xl:w-1/2">
@@ -218,7 +217,15 @@ export const Head = () => {
             catalog.
           </p>
           <div className="flex items-center">
-            <SecondaryButton text="Explore" />
+            <SecondaryLink text="Explore" goto="/course/#course-section">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-4 h-4 fill-current"
+                viewBox="0 0 512 512"
+              >
+                <path d="M156.6 384.9L125.7 354c-8.5-8.5-11.5-20.8-7.7-32.2c3-8.9 7-20.5 11.8-33.8L24 288c-8.6 0-16.6-4.6-20.9-12.1s-4.2-16.7 .2-24.1l52.5-88.5c13-21.9 36.5-35.3 61.9-35.3l82.3 0c2.4-4 4.8-7.7 7.2-11.3C289.1-4.1 411.1-8.1 483.9 5.3c11.6 2.1 20.6 11.2 22.8 22.8c13.4 72.9 9.3 194.8-111.4 276.7c-3.5 2.4-7.3 4.8-11.3 7.2v82.3c0 25.4-13.4 49-35.3 61.9l-88.5 52.5c-7.4 4.4-16.6 4.5-24.1 .2s-12.1-12.2-12.1-20.9V380.8c-14.1 4.9-26.4 8.9-35.7 11.9c-11.2 3.6-23.4 .5-31.8-7.8zM384 168a40 40 0 1 0 0-80 40 40 0 1 0 0 80z" />
+              </svg>
+            </SecondaryLink>
           </div>
         </div>
       </div>

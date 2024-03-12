@@ -5,8 +5,10 @@ import { GETINSTRUCTORCOURSE } from "../course/data/query";
 import { CREATESECTION } from "./data/mutation";
 import { Toast } from "../../../components/Toast";
 import Crud from "./component/Crud";
+import { useNavigate } from "react-router-dom";
 
 export const CreateSection = () => {
+  const navigate = useNavigate();
   const { userId } = useContext(AuthContext);
   const [success, setSuccess] = useState(false);
 
@@ -46,7 +48,9 @@ export const CreateSection = () => {
           title: "",
           description: "",
         });
-        // navigate("/dashboard/section-list");
+        setTimeout(() => {
+          navigate("/dashboard/section-list");
+        }, 1000);
       }
     } catch (error) {}
   };

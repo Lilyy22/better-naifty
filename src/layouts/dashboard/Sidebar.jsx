@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { Logo } from "../../components/Logo";
 import { AuthContext } from "../../context/AuthContext";
 
-export const Sidebar = ({ sidebarOpen }) => {
+export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -23,13 +23,31 @@ export const Sidebar = ({ sidebarOpen }) => {
           duration: 1,
           ease: [0.04, 0.62, 0.23, 0.98],
         }}
-        className={`z-30 flex-shrink-0 w-64 overflow-y-auto bg-custom-purple-900 sticky h-full font-mont ${
+        className={`z-50 flex-shrink-0 w-64 overflow-y-auto bg-custom-purple-900 h-full font-mont fixed md:static ${
           sidebarOpen ? "block" : "hidden"
         }`}
       >
         <motion.div className="text-gray-500 font-naifty">
           <div className="pl-8 py-4 border-b border-gray-700">
             <Logo />
+            <button
+              className="md:hidden absolute top-4 right-4"
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+            >
+              <svg
+                aria-hidden="true"
+                className="w-5 h-5 fill-red-200 hover:fill-red-600"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
           </div>
 
           <nav className="flex-column text-white my-4">

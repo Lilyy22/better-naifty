@@ -1,4 +1,4 @@
-import { H2 } from "../../../components/Heading";
+import { H2, Subtitle } from "../../../components/Heading";
 import { ImgCard } from "./common/Card";
 import { motion } from "framer-motion";
 
@@ -8,7 +8,7 @@ export const BlogList = () => {
       <div className="bg-gray-900 py-24 px-4 lg:py-32 xl:px-0">
         <div className="max-w-lg m-auto text-center mb-24">
           <H2 text="Explore our Blog posts." />
-          {/* <Subtitle text="Stay updated with our latest articles and posts on the field." /> */}
+          <Subtitle text="Stay updated with our latest articles and posts on the field." />
         </div>
         <div className="mb-16 max-w-7xl mx-auto flex flex-wrap justify-center gap-6 md:flex-nowrap md:gap-4 lg:gap-6">
           <motion.div

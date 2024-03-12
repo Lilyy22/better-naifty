@@ -61,3 +61,7 @@ export const DashH5 = ({ text }) => {
 export const DashH4 = ({ text }) => {
   return <h4 className="font-bold mb-4 text-base font-mont">{text}</h4>;
 };
+
+export const Subtitle = ({ text }) => {
+  return <p className="text-gray-300 text-sm mb-4">{text}</p>;
+};

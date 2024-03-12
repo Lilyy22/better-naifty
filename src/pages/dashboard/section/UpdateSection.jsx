@@ -7,6 +7,7 @@ import { Toast } from "../../../components/Toast";
 import Crud from "./component/Crud";
 import { useNavigate, useParams } from "react-router-dom";
 import { GETSECTION } from "./data/query";
+import { GoBack } from "../../../components/Button";
 
 export const UpdateSection = () => {
   const navigate = useNavigate();
@@ -56,7 +57,9 @@ export const UpdateSection = () => {
           title: "",
           description: "",
         });
-        // navigate("/dashboard/section-list");
+        setTimeout(() => {
+          navigate("/dashboard/section-list");
+        }, 1000);
       }
     } catch (error) {}
   };
@@ -80,6 +83,7 @@ export const UpdateSection = () => {
       {success && (
         <Toast text="Section Successfully created!" isSuccess={true} />
       )}
+      <GoBack text="Back" pathname="/dashboard/section-list" />
       <Crud
         handleSubmit={handleSubmit}
         loading={loading}

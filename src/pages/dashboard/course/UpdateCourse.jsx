@@ -1,13 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GETCOURSECATEGORY } from "../courseCategory/data/query";
-import { AuthContext } from "../../../context/AuthContext";
 import { fileUpload } from "../../../axios/mutation";
 import { UPDATECOURSE } from "./data/mutation";
 import { Toast } from "../../../components/Toast";
 import { Crud } from "./components/Crud";
 import { useNavigate, useParams } from "react-router-dom";
 import { GETCOURSE } from "./data/query";
+import { GoBack } from "../../../components/Button";
 
 export const UpdateCourse = () => {
   const { course_id } = useParams();
@@ -66,7 +66,9 @@ export const UpdateCourse = () => {
       setLoading(false);
       if (!error) {
         setSuccess(true);
-        // navigate("/dashboard/course-list");
+        setTimeout(() => {
+          navigate("/dashboard/course-list");
+        }, 1000);
       }
     } catch (error) {}
   };
@@ -95,6 +97,7 @@ export const UpdateCourse = () => {
       {success && (
         <Toast text="Course Successfully Updated!" isSuccess={true} />
       )}
+      <GoBack text="Back" pathname="/dashboard/course-list" />
       <Crud
         handleSubmit={handleSubmit}
         handleThumbnail={handleThumbnail}

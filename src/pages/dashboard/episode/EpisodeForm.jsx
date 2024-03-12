@@ -6,8 +6,10 @@ import { FileUpload, Input, Textarea } from "../../../components/form/Input";
 import { PrimaryButton } from "../../../components/Button";
 import { fileUpload } from "../../../axios/mutation";
 import { Toast } from "../../../components/Toast";
+import { useNavigate } from "react-router-dom";
 
 export const EpisodeForm = ({ sectionId, handleOpen }) => {
+  const navigate = useNavigate();
   const [createEpisode] = useMutation(CREATEEPISODE);
 
   const [loading, setLoading] = useState(false);
@@ -52,6 +54,9 @@ export const EpisodeForm = ({ sectionId, handleOpen }) => {
         setSuccess(true);
         setEpisode({ ...episode, title: "", description: "" });
         setVideo("");
+        setTimeout(() => {
+          handleOpen();
+        }, 1000);
       }
     } catch (error) {}
   };

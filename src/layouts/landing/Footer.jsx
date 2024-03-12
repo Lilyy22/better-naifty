@@ -15,19 +15,19 @@ const Footer = () => {
               <h2 className="font-bold mb-4">About us</h2>
               <ul className="text-gray-400">
                 <li className="pb-2 hover:text-gray-500">
-                  <Link to="/courses">Courses</Link>
+                  <Link to="/course">Courses</Link>
                 </li>
                 <li className="pb-2 hover:text-gray-500">
-                  <Link to="/courses">Blog</Link>
+                  <Link to="/blog">Blog</Link>
                 </li>
                 <li className="pb-2 hover:text-gray-500">
                   <Link to="/courses">Contact Us</Link>
                 </li>
                 <li className="pb-2 hover:text-gray-500">
-                  <Link to="/courses">FAQs</Link>
+                  <Link to="/#faq-section">FAQs</Link>
                 </li>
                 <li className="pb-2 hover:text-gray-500">
-                  <Link to="/courses">Support</Link>
+                  <Link to="/">Support</Link>
                 </li>
               </ul>
             </div>
@@ -35,19 +35,19 @@ const Footer = () => {
               <h2 className="font-bold mb-4">Resources</h2>
               <ul className="text-gray-400">
                 <li className="pb-2 hover:text-gray-500">
-                  <Link to="/courses">Help Center</Link>
+                  <Link to="/">Help Center</Link>
                 </li>
                 <li className="pb-2 hover:text-gray-500">
-                  <Link to="/courses">Terms</Link>
+                  <Link to="/">Terms</Link>
                 </li>
                 <li className="pb-2 hover:text-gray-500">
-                  <Link to="/courses">Privacy</Link>
+                  <Link to="/">Privacy</Link>
                 </li>
                 <li className="pb-2 hover:text-gray-500">
-                  <Link to="/courses">Careers</Link>
+                  <Link to="/">Careers</Link>
                 </li>
                 <li className="pb-2 hover:text-gray-500">
-                  <Link to="/courses">Partners</Link>
+                  <Link to="/">Partners</Link>
                 </li>
               </ul>
             </div>
@@ -55,10 +55,10 @@ const Footer = () => {
               <h2 className="font-bold mb-4">Events</h2>
               <ul className="text-gray-400">
                 <li className="pb-2 hover:text-gray-500">
-                  <Link to="/courses">Press</Link>
+                  <Link to="/">Press</Link>
                 </li>
                 <li className="pb-2 hover:text-gray-500">
-                  <Link to="/courses">Sitemap</Link>
+                  <Link to="/">Sitemap</Link>
                 </li>
               </ul>
             </div>

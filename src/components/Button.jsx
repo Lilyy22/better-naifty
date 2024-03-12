@@ -1,6 +1,7 @@
 // import { MotionConfig } from "framer-motion/dist/cjs";
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export const PrimaryButton = ({
   text,
@@ -51,13 +52,13 @@ export const SecondaryButton = ({ text, type, children, handleClick }) => {
   );
 };
 
-export const OutlineButton = ({ text, type, children }) => {
+export const OutlineButton = ({ text, goto, children }) => {
   return (
     <>
-      <motion.button
+      <Link
         whileTap={{ scale: 0.9 }}
-        type={type}
-        className="border border-custom-purple-700 rounded-2xl text-custom-white-100 px-6 py-1.5 transition-all bg-custom-gray-900 hover:bg-custom-purple-900"
+        to={goto}
+        className="border border-custom-purple-700 rounded-2xl text-custom-white-100 px-6 py-1.5 transition-all bg-custom-gray-900 hover:bg-custom-purple-900 inline-block whitespace-nowrap"
       >
         <div className="flex gap-2">
           <p> {text}</p>
@@ -65,7 +66,7 @@ export const OutlineButton = ({ text, type, children }) => {
             {children} {/* SVG icon */}
           </p>
         </div>
-      </motion.button>
+      </Link>
     </>
   );
 };
@@ -95,5 +96,20 @@ export const LandPrimaryButton = ({
         </div>
       </motion.button>
     </>
+  );
+};
+
+export const GoBack = ({ pathname, text }) => {
+  return (
+    <Link to={pathname} className="flex my-2 text-blue-600 hover:text-blue-500">
+      <svg
+        className="w-3 h-3 fill-current my-auto"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 320 512"
+      >
+        <path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+      </svg>
+      <span className="text-sm whitespace-nowrap">{text}</span>
+    </Link>
   );
 };

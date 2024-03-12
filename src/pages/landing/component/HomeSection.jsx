@@ -1,9 +1,8 @@
-import { H2 } from "../../../components/Heading";
+import { H2, Subtitle } from "../../../components/Heading";
 import { Accordion } from "./common/Accordion";
 import { ImgCard, IconCard } from "./common/Card";
 import { OneColumnLayout } from "./common/OneColumnLayout";
 import { SplitImgLayout } from "./common/SplitImageLayout";
-
 
 export const Sections = () => {
   return (
@@ -28,6 +27,7 @@ export const Feature = () => {
               title="Unlock Your Potential with Naifty"
               subtitle="Gain hands-on expertise and practical knowledge through interactive courses."
               btnText="Learn More"
+              goto="/course"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -43,6 +43,7 @@ export const Feature = () => {
               title="Prepare for Real-Life Challenges"
               subtitle="Experience experiential learning that bridges the gap between theory and practice."
               btnText="Learn More"
+              goto="/course"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -58,6 +59,7 @@ export const Feature = () => {
               title="Shape the World of Tomorrow"
               subtitle="Equip yourself with the skills to solve the problems of today and create a better future."
               btnText="Learn More"
+              goto="/course"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +98,7 @@ export const Service = () => {
       <div className="bg-custom-gray-900 py-28 px-2 xl:px-0">
         <div className="max-w-lg mx-auto text-center mb-24">
           <H2 text="Discover New Learning Opportunities" />
-          {/* <Subtitle text="Explore our wide range of courses and expand your knowledge." /> */}
+          <Subtitle text="Explore our wide range of courses and expand your knowledge." />
         </div>
         <div className="max-w-7xl mx-auto flex flex-wrap justify-center gap-6 md:flex-nowrap md:gap-4 lg:gap-6">
           <div className="w-full md:w-1/3">

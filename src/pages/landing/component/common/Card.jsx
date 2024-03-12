@@ -1,9 +1,11 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { OutlineButton, SecondaryButton } from "../../../../components/Button";
-import { H5 } from "../../../../components/Heading";
+import { OutlineButton } from "../../../../components/Button";
+import { H5, Subtitle } from "../../../../components/Heading";
 import { motion } from "framer-motion";
+import { SecondaryLink } from "../../../../components/Link";
 
-export const IconCard = ({ title, subtitle, btnText, children }) => {
+export const IconCard = ({ title, subtitle, btnText, children, goto }) => {
   return (
     <>
       <motion.div
@@ -14,8 +16,8 @@ export const IconCard = ({ title, subtitle, btnText, children }) => {
       >
         {children}
         <H5 text={title} />
-        {/* <Subtitle text={subtitle} /> */}
-        <SecondaryButton text={btnText}>
+        <Subtitle text={subtitle} />
+        <SecondaryLink text={btnText} goto={goto}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="12"
@@ -25,7 +27,7 @@ export const IconCard = ({ title, subtitle, btnText, children }) => {
           >
             <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
           </svg>
-        </SecondaryButton>
+        </SecondaryLink>
       </motion.div>
     </>
   );
@@ -50,7 +52,7 @@ export const ImgCard = ({ title, subtitle, btnText, img, imgAlt }) => {
         <motion.div className="p-6 md:p-4 lg:p-6">
           <H5 text={title} />
           {/* <Subtitle text={subtitle} /> */}
-          <OutlineButton text={btnText}>
+          <OutlineButton text={btnText} goto="/blog-read">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="12"
@@ -160,30 +162,169 @@ export const HorizontalCard = ({
   );
 };
 
-export const TestimonialCard = ({ text, img, name, position }) => {
+export const TestimonialCard = () => {
+  const [toggle, setToggle] = useState(true);
+
+  const handleMore = (e) => {
+    setToggle(!toggle);
+  };
+
   return (
     <>
-      <div className="mx-auto text-center">
-        <div className="flex justify-center items-start">
-          <svg
-            className="w-12 h-12 fill-purple-500"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 448 512"
-          >
-            <path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V320 288 216zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H320c-35.3 0-64-28.7-64-64V320 288 216z" />
-          </svg>
-          {/* <Subtitle text={text} /> */}
+      <section className="mb-10 pb-12">
+        <div className="text-center max-w-md mx-auto mb-12">
+          <span className="bg-custom-pink-500/30 rounded-2xl px-4 py-1 text-sm my-4">
+            Testimonials
+          </span>
+          <h1 className="capitalize font-extrabold text-3xl my-4">
+            What our Learners Say.
+          </h1>
         </div>
-        <div className="mt-8">
-          <img
-            className="w-16 h-16 rounded-full object-cover object-center mx-auto my-2"
-            src={img}
-            alt="testimonial"
-          />
-          <h3 className="text-gray-200">{name}</h3>
-          <p className="text-gray-400 text-sm">{position}</p>
+        <div className="flex flex-wrap md:flex-nowrap gap-2 justify-center lg:justify-evenly">
+          <div className="max-w-xs lg:max-w-sm rounded-xl bg-custom-gray-600 px-4 py-6 lg:py-6 lg:px-6">
+            <p className="text-gray-400/80 py-4">
+              PivotSkool's guidance helped me create a professional resume that
+              truly showcased my skills. The instructors were supportive,
+              providing personalized feedback and insights that helped me stand
+              out to potential employers. Never think twice about booking their
+              services.👍🏽
+            </p>
+            <div className="flex gap-2">
+              <img
+                src="https://www.imilap.com/profileimages/profile_11%20SDN_01553%20copy.jpg"
+                className="rounded-full w-10 h-10 object-cover"
+                loading="lazy"
+                alt="Ravi Singh profile"
+              />
+              <div className="text-gray-300">
+                <p className="font-bold leading-tight">Ravi Singh</p>
+                <small>@India</small>
+              </div>
+            </div>
+          </div>
+
+          <div className="max-w-xs lg:max-w-sm rounded-xl bg-custom-gray-600 px-4 py-6 lg:py-6 lg:px-6">
+            <p className="text-gray-400/80 py-4">
+              After struggling to get callbacks from potential employers, They
+              helped me identify weaknesses in my resume and provided feedback
+              on how to improve it. With their help, I was able to land my first
+              Job as a Data Analyst.
+            </p>
+            <div className="flex gap-2">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXvhUepooGAV_6kntAF0yr9c9T82dCXtqVPjYFiavGWGQKpNhxpB--UJJFxDXt89QIA_c&usqp=CAU"
+                className="rounded-full w-10 h-10 object-cover"
+                loading="lazy"
+                alt="Abel Tekle profile"
+              />
+              <div>
+                <p className="font-bold leading-tight">Abel Tekle</p>
+                <small>@Ethiopia</small>
+              </div>
+            </div>
+          </div>
+
+          <div className="max-w-xs lg:max-w-sm rounded-xl bg-custom-gray-600 px-4 py-6 lg:py-6 lg:px-6">
+            <p className="text-gray-400/80 py-4">
+              The expert guidance and support from Pivotskool helped me to
+              navigate complex problems and gain the confidence to tackle new
+              challenges. Thanks to Pivotskool I was able to build a strong
+              portfolio and stand out to potential employers.
+            </p>
+            <div className="flex gap-2">
+              <img
+                src="https://media.istockphoto.com/id/1279504799/photo/businesswomans-portrait.jpg?s=612x612&w=0&k=20&c=I-54ajKgmxkY8s5-myHZDv_pcSCveaoopf1DH3arv0k="
+                className="rounded-full w-10 h-10 object-cover"
+                loading="lazy"
+                alt="Emily Tremblay Profile"
+              />
+              <div>
+                <p className="font-bold leading-tight">Emily Tremblay</p>
+                <small>@Canada</small>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+
+        {toggle && (
+          <div className="mx-auto w-48 mt-8">
+            <Link
+              className="rounded-xl px-4 py-1 md:px-6 md:py-2 bg-white text-black border border-custom-blue-500 transition delay-150 hover:scale-105 hover:shadow-xl ease-out"
+              onClick={handleMore}
+            >
+              View More
+            </Link>
+          </div>
+        )}
+        <div
+          className={`${
+            toggle ? "hidden" : ""
+          } flex flex-wrap md:flex-nowrap gap-2 justify-center lg:justify-evenly mt-8`}
+        >
+          <div className="max-w-xs lg:max-w-sm rounded-xl bg-custom-gray-600 px-4 py-6 lg:py-6 lg:px-6">
+            <p className="text-gray-400/80 py-4">
+              PivotSkool's interview preparation tips and tricks were
+              instrumental in helping me land a job with a better company as a
+              data engineer. With their help, I was able to showcase my skills
+              and experience and ultimately landed me my dream job.
+            </p>
+            <div className="flex gap-2">
+              <img
+                src="https://pbs.twimg.com/profile_images/1457243657963245568/ozO7R_Ct_400x400.jpg"
+                className="rounded-full w-10 h-10 object-cover"
+                loading="lazy"
+                alt="Katarzyna Nowak profile"
+              />
+              <div className="text-gray-300">
+                <p className="font-bold leading-tight">Katarzyna Nowak</p>
+                <small>@Poland</small>
+              </div>
+            </div>
+          </div>
+
+          <div className="max-w-xs lg:max-w-sm rounded-xl bg-custom-gray-600 px-4 py-6 lg:py-6 lg:px-6">
+            <p className="text-gray-400/80 py-4">
+              PivotSkool's career guidance is an essential investment for anyone
+              looking to transition to a career in data analytics. I was able to
+              identify my career goals and create a clear path toward achieving
+              them, ultimately landing my dream job as a data professional.🧠
+            </p>
+            <div className="flex gap-2">
+              <img
+                src="https://images.unsplash.com/photo-1618517047977-854f5c4b6976?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHdoaXRlJTIwbWFufGVufDB8fDB8fHww&w=1000&q=80"
+                className="rounded-full w-10 h-10 object-cover"
+                loading="lazy"
+                alt="Liam Smith profile"
+              />
+              <div className="text-gray-300">
+                <p className="font-bold leading-tight">Liam Smith</p>
+                <small>@Australia</small>
+              </div>
+            </div>
+          </div>
+
+          <div className="max-w-xs lg:max-w-sm rounded-xl bg-custom-gray-600 px-4 py-6 lg:py-6 lg:px-6">
+            <p className="text-gray-400/80 py-4">
+              PivotSkool's mock interview helped me land my first job as a
+              product analyst. The mock interviews were tailored to my specific
+              field and needs, and helped me to build my confidence and improve
+              my communication skills.
+            </p>
+            <div className="flex gap-2">
+              <img
+                src="https://www.aufini.com/image/95944.jpg?height=280&width=280&autorotate=true&mode=crop"
+                className="rounded-full w-10 h-10 object-cover"
+                loading="lazy"
+                alt="Lucas Silva Profile"
+              />
+              <div className="text-gray-300">
+                <p className="font-bold leading-tight">Lucas Silva</p>
+                <small>@Brazil</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 };
@@ -191,7 +332,7 @@ export const TestimonialCard = ({ text, img, name, position }) => {
 export const TeamCard = ({ photo }) => {
   return (
     <>
-      <div className="w-64 p-4 rounded-lg text-gray-400 bg-custom-black-900 border-t border-gray-700 hover:bg-custom-black-600 ">
+      <div className="w-64 p-4 rounded-lg text-gray-400 bg-custom-black-900 bg-gray-800/90 border-t border-gray-700 hover:bg-custom-black-600 ">
         <img
           className="rounded-full w-44 h-44 object-cover mx-auto"
           src={photo}

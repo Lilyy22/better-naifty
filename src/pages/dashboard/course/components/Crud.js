@@ -97,7 +97,7 @@ export const Crud = ({
           Thumbnail
         </label>
         <span className="text-red-500 pl-1 text-sm">*</span>
-        <div className="mb-6 relative border-2 w-96 h-52 cursor-pointer mx-auto md:mx-0 rounded-lg border-dashed">
+        <div className="mb-6 relative border-2 w-full md:w-96 h-52 cursor-pointer mx-auto md:mx-0 rounded-lg border-dashed">
           {thumbnail && !selectedFile ? (
             <img
               src={`https://naifty.abelayalew.dev/media/${thumbnail}`}

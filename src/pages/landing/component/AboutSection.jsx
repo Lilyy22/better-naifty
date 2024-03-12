@@ -1,5 +1,6 @@
 import { LandPrimaryButton, SecondaryButton } from "../../../components/Button";
-import { H1, H2 } from "../../../components/Heading";
+import { H1, H2, Subtitle } from "../../../components/Heading";
+import { SecondaryLink } from "../../../components/Link";
 import { TeamCard } from "./common/Card";
 import { motion } from "framer-motion";
 
@@ -20,12 +21,12 @@ export const Hero = () => {
             >
               Empowering students with practical knowledge.
             </h1>
-            {/* <Subtitle
+            <Subtitle
               text="A platform that bridges the 
           gap between theoretical learning and real-world application."
-            /> */}
+            />
             <div className="flex gap-4 mt-8">
-              <SecondaryButton type="button" text="Get Started" />
+              <SecondaryLink goto="/signup" text="Get Started" />
             </div>
           </div>
         </div>
@@ -112,10 +113,10 @@ export const Team = () => {
           {/* title */}
           <div className="max-w-md mx-auto text-center">
             <H1 text="Meet our team" />
-            {/* <Subtitle
+            <Subtitle
               text="lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
             alias enim cumque"
-            /> */}
+            />
           </div>
 
           {/* team cards */}
@@ -128,8 +129,8 @@ export const Team = () => {
 
           <div className="mx-auto text-center max-w-md py-12 lg:py-16">
             <H2 text="We're Hiring!" />
-            {/* <Subtitle text="Laboriosam accusantium assumenda possimus Deserunt possimus itaque dolorum cumque sed veniam et nesciunt enim, quam facilis." /> */}
-            <LandPrimaryButton text="View All" />
+            <Subtitle text="Laboriosam accusantium assumenda possimus Deserunt possimus itaque dolorum cumque sed veniam et nesciunt enim, quam facilis." />
+            {/* <LandPrimaryButton text="View All" /> */}
           </div>
         </div>
       </div>

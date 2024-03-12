@@ -60,7 +60,7 @@ const Header = () => {
                   About us
                 </NavLink>
               </li>
-              <li className="py-1 md:py-0">
+              {/* <li className="py-1 md:py-0">
                 <NavLink
                   to="/services"
                   className={({ isActive }) =>
@@ -80,13 +80,16 @@ const Header = () => {
                     </svg>
                   </div>
                 </NavLink>
-              </li>
+              </li> */}
             </ul>
           </nav>
           <div className="my-auto flex gap-2 md:gap-4">
             {/* dropdown */}
             <div class="mx-auto flex w-full gap-2 items-center justify-center">
-              <NavLink to="/login" className="text-white px-4 py-1">
+              <NavLink
+                to="/login"
+                className="text-white px-4 py-1 hidden md:block"
+              >
                 <span>Log In</span>
               </NavLink>
               <div class="group relative cursor-pointer py-2">

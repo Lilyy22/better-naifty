@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 export const Logo = ({ customStyle }) => {
   return (
     <>
-      <Link to="/">
+      <Link to="/" className="my-auto">
         <motion.img
           initial={{ width: 200 }}
           whileInView={{ width: 150 }}

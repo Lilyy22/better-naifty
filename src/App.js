@@ -20,6 +20,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import { UpdateSection } from "./pages/dashboard/section/UpdateSection";
 import { Course } from "./pages/landing/Course";
 import { About } from "./pages/landing/About";
+import { BlogDetail } from "./pages/landing/BlogDetail";
 import Blog from "./pages/landing/Blog";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route path="course" element={<Course />} />
         <Route path="about" element={<About />} />
         <Route path="blog" element={<Blog />} />
+        <Route path="blog-read" element={<BlogDetail />} />
 
         {/* auth */}
         <Route path="signup/:role?" element={<SignUp />} />

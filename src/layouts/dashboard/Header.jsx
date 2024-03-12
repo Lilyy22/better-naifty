@@ -9,7 +9,7 @@ export const Header = ({ handleClick }) => {
   return (
     <>
       {/* Start::Header */}
-      <header className="font-naifty flex justify-between bg-white sticky top-0 z-50 border-b">
+      <header className="font-naifty flex justify-between bg-white sticky top-0 z-40 border-b">
         <button
           type="button"
           className="md:px-[0.325rem]"

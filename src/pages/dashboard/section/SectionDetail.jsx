@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GETSECTION } from "./data/query";
 import { DashH4 } from "../../../components/Heading";
+import { GoBack } from "../../../components/Button";
 
 export const SectionDetail = () => {
   const { section_url } = useParams();
@@ -17,6 +18,7 @@ export const SectionDetail = () => {
   const episodes = data?.course_section[0]?.episodes;
   return (
     <>
+      <GoBack text="Back" pathname="/dashboard/section-list" />
       <DashH4 text="Section Detail" />
       <div className="p-4 mb-8 bg-white rounded-lg">
         <h1 className="font-semibold text-gray-400/70 text-xs">Title</h1>
