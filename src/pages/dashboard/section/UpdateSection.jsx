@@ -21,13 +21,23 @@ export const UpdateSection = () => {
       variables: { userId: userId },
     }
   );
-  const { data } = useQuery(GETSECTION, {
+  const {
+    data,
+    loading: sectionLoading,
+    refetch,
+  } = useQuery(GETSECTION, {
     variables: {
       sectionId: section_id,
     },
   });
 
-  const [success, setSuccess] = useState(false);
+  const [close, setClose] = useState(false);
+  const [status, setStatus] = useState({
+    success: false,
+    error: false,
+    errorContent: "",
+  });
+
   const [section, setSection] = useState({
     courseId: "",
     title: "",
@@ -41,7 +51,7 @@ export const UpdateSection = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { error } = await updateSection({
+      await updateSection({
         variables: {
           sectionId: section_id,
           courseId: section.courseId,
@@ -49,25 +59,35 @@ export const UpdateSection = () => {
           description: section.description,
         },
       });
-      if (!error) {
-        setSuccess(true);
-        setSection({
-          ...section,
-          courseId: "",
-          title: "",
-          description: "",
-        });
-        setTimeout(() => {
-          navigate("/dashboard/section-list");
-        }, 1000);
-      }
-    } catch (error) {}
+      setClose(false);
+      setStatus({
+        ...status,
+        success: true,
+      });
+      setSection({
+        ...section,
+        courseId: "",
+        title: "",
+        description: "",
+      });
+      setTimeout(() => {
+        navigate("/dashboard/section-list");
+      }, 1000);
+    } catch (error) {
+      setClose(false); // set close false incase toast is closed
+      setStatus({
+        success: false,
+        error: true,
+        errorContent: error?.graphQLErrors?.[0]?.message,
+      });
+    }
   };
 
   useEffect(() => {
     if (!section_id) {
       navigate("/dashboard/section-list");
     } else {
+      refetch();
       if (data?.course_section[0]) {
         setSection({
           title: data.course_section[0].title,
@@ -80,8 +100,21 @@ export const UpdateSection = () => {
 
   return (
     <>
-      {success && (
-        <Toast text="Section Successfully created!" isSuccess={true} />
+      {status.success && (
+        <Toast
+          text="Section Successfully updated"
+          isSuccess={true}
+          close={close}
+          setClose={setClose}
+        />
+      )}
+      {status.error && (
+        <Toast
+          text={status.errorContent ?? "Something went wrong!"}
+          isSuccess={false}
+          close={close}
+          setClose={setClose}
+        />
       )}
       <GoBack text="Back" pathname="/dashboard/section-list" />
       <Crud
@@ -92,6 +125,7 @@ export const UpdateSection = () => {
         courseData={courseData}
         courseLoading={courseLoading}
         handleCourse={handleCourse}
+        sectionLoading={sectionLoading}
       />
     </>
   );

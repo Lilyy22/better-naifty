@@ -13,7 +13,12 @@ export const EpisodeForm = ({ sectionId, handleOpen }) => {
   const [createEpisode] = useMutation(CREATEEPISODE);
 
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [close, setClose] = useState(false);
+  const [status, setStatus] = useState({
+    success: false,
+    error: false,
+    errorContent: "",
+  });
 
   const [uploadProgress, setUploadProgress] = useState(0);
 
@@ -40,7 +45,7 @@ export const EpisodeForm = ({ sectionId, handleOpen }) => {
         },
       });
 
-      const { error } = await createEpisode({
+      await createEpisode({
         variables: {
           sectionId: sectionId,
           title: episode.title,
@@ -49,21 +54,42 @@ export const EpisodeForm = ({ sectionId, handleOpen }) => {
         },
       });
       setLoading(false);
-
-      if (!error) {
-        setSuccess(true);
-        setEpisode({ ...episode, title: "", description: "" });
-        setVideo("");
-        setTimeout(() => {
-          handleOpen();
-        }, 1000);
-      }
-    } catch (error) {}
+      setClose(false);
+      setStatus({
+        ...status,
+        success: true,
+      });
+      setEpisode({ ...episode, title: "", description: "" });
+      setVideo("");
+      setTimeout(() => {
+        handleOpen();
+      }, 1000);
+    } catch (error) {
+      setClose(false); // set close false incase toast is closed
+      setStatus({
+        success: false,
+        error: true,
+        errorContent: error?.graphQLErrors?.[0]?.message,
+      });
+    }
   };
   return (
     <>
-      {success && (
-        <Toast text="Episode Successfully created!" isSuccess={true} />
+      {status.success && (
+        <Toast
+          text="Episode Successfully created!"
+          isSuccess={true}
+          close={close}
+          setClose={setClose}
+        />
+      )}
+      {status.error && (
+        <Toast
+          text={status.errorContent ?? "Something went wrong!"}
+          isSuccess={false}
+          close={close}
+          setClose={setClose}
+        />
       )}
       <DashForm title="Episode Form">
         <button

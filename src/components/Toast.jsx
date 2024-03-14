@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
-export const Toast = ({ isSuccess, text }) => {
-  const [close, setClose] = useState(false);
+export const Toast = ({ isSuccess, text, close, setClose }) => {
   useEffect(() => {
     setTimeout(() => {
       setClose(true);
-    }, 6000);
-  }, []);
+    }, 4000);
+  }, [close]);
 
   return (
     <>

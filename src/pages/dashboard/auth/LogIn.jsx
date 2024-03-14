@@ -4,9 +4,16 @@ import { LOGIN } from "./data/mutation";
 import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
+import { Toast } from "../../../components/Toast";
 
 export const LogIn = () => {
   const navigate = useNavigate();
+  const [close, setClose] = useState(false);
+  const [status, setStatus] = useState({
+    error: false,
+    errorContent: "",
+  });
+
   const { setAccessToken, setIsInstructor, setUserEmail } =
     useContext(AuthContext);
   const [loginUser, { loading }] = useMutation(LOGIN);
@@ -22,27 +29,38 @@ export const LogIn = () => {
       const { data } = await loginUser({
         variables: { email: email, password: password },
       });
-      if (data) {
-        localStorage.setItem("accessToken", data.login?.token);
-        localStorage.setItem("isInstructor", data.login?.user?.is_instructor);
-        localStorage.setItem("userId", data.login?.user?.id);
-        localStorage.setItem("userEmail", data.login?.user?.email);
+      localStorage.setItem("accessToken", data.login?.token);
+      localStorage.setItem("isInstructor", data.login?.user?.is_instructor);
+      localStorage.setItem("userId", data.login?.user?.id);
+      localStorage.setItem("userEmail", data.login?.user?.email);
 
-        setAccessToken(data.login?.token);
-        setIsInstructor(data.login?.user?.is_instructor);
-        setUserEmail(data.login?.user?.email);
+      setAccessToken(data.login?.token);
+      setIsInstructor(data.login?.user?.is_instructor);
+      setUserEmail(data.login?.user?.email);
 
-        setEmail("");
-        setPassword("");
-        navigate("/dashboard");
-      }
-    } catch (err) {
       setEmail("");
       setPassword("");
+      navigate("/dashboard");
+    } catch (error) {
+      setEmail("");
+      setPassword("");
+      setStatus({
+        error: true,
+        errorContent: error?.graphQLErrors?.[0]?.message,
+      });
+      setClose(false);
     }
   };
   return (
     <>
+      {status.error && (
+        <Toast
+          isSuccess={false}
+          text={status.errorContent ?? "Something went wrong"}
+          close={close}
+          setClose={setClose}
+        />
+      )}
       <AuthForm
         isSignUp={false}
         handleSubmit={handleSubmit}

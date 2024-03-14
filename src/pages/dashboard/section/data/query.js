@@ -36,3 +36,44 @@ export const GETSECTION = gql`
     }
   }
 `;
+
+export const GETCOURSESECTION = gql`
+  query GETCOURSESECTION($courseId: String) {
+    course(where: { id: { exact: $courseId } }) {
+      id
+      name
+      description
+      thumbnail
+      price
+      enrollments {
+        student {
+          id
+        }
+      }
+      category {
+        name
+      }
+      updated_at
+      instructor {
+        studentprofile {
+          first_name
+          last_name
+          profile_picture
+          bio
+          user {
+            email
+          }
+        }
+      }
+      sections {
+        id
+        title
+        episodes {
+          id
+          title
+          file
+        }
+      }
+    }
+  }
+`;

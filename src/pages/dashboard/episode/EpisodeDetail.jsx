@@ -1,19 +1,27 @@
 import { useQuery } from "@apollo/client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GETEPISODE } from "./data/query";
 import ReactPlayer from "react-player";
 import { DashH4 } from "../../../components/Heading";
 import { CommentForm } from "../comment/CommentForm";
 import { Loader } from "./component/Loader";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import SectionList from "../section/SectionList";
 
 export const EpisodeDetail = () => {
-  const { state } = useLocation();
-  const { data, loading } = useQuery(GETEPISODE, {
+  const { episode_id } = useParams();
+  const [commented, setCommented] = useState(false);
+
+  const { data, loading, refetch } = useQuery(GETEPISODE, {
     variables: {
-      episodeId: state?.episodeId,
+      episodeId: episode_id,
     },
   });
+
+  useEffect(() => {
+    refetch();
+  }, [commented]);
+
   return (
     <>
       {loading ? (
@@ -46,24 +54,18 @@ export const EpisodeDetail = () => {
               </div>
               <div className="px-6 py-4">
                 <p className="text-sm">0 Comments</p>
+                {/* commentlist */}
               </div>
             </div>
-            <CommentForm />
+            <CommentForm setCommented={setCommented} />
           </div>
 
           <div className="bg-white rounded-lg flex-1 p-6 mb-auto">
             <DashH4 text="Contents" />
-            {/* <ol className="list-decimal list-outside">
-            {faqData.map(({ section, id, episodes }) => {
-              return (
-                <SectionDropDown
-                  key={id}
-                  section={section}
-                  episodes={episodes}
-                />
-              );
-            })}
-          </ol> */}
+            <SectionList
+              courseId={data?.curse_episode[0]?.section?.course?.id}
+              enrolled={true}
+            />
           </div>
         </div>
       )}

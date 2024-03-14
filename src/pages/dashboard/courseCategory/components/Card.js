@@ -1,8 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-export const Card = ({ thumbnail, title }) => {
+export const Card = ({ thumbnail, title, categoryId }) => {
   return (
-    <div className="w-48 h-full rounded relative flex-shrink-0">
+    <Link
+      to={`/dashboard/courses/${categoryId}`}
+      className="w-48 h-full rounded relative flex-shrink-0"
+    >
       <img
         className="rounded-lg w-full h-full object-cover m-auto brightness-[.6]"
         src={
@@ -15,6 +19,6 @@ export const Card = ({ thumbnail, title }) => {
       <h1 className="absolute bottom-3 left-3 font-bold text-lg text-gray-100">
         {title}
       </h1>
-    </div>
+    </Link>
   );
 };

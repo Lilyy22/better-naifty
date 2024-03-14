@@ -10,7 +10,12 @@ import { useNavigate } from "react-router-dom";
 export const CreateSection = () => {
   const navigate = useNavigate();
   const { userId } = useContext(AuthContext);
-  const [success, setSuccess] = useState(false);
+  const [close, setClose] = useState(false);
+  const [status, setStatus] = useState({
+    success: false,
+    error: false,
+    errorContent: "",
+  });
 
   const [createSection, { loading }] = useMutation(CREATESECTION);
   const { data: courseData, loading: courseLoading } = useQuery(
@@ -33,32 +38,54 @@ export const CreateSection = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { error } = await createSection({
+      await createSection({
         variables: {
           courseId: section.courseId,
           title: section.title,
           description: section.description,
         },
       });
-      if (!error) {
-        setSuccess(true);
-        setSection({
-          ...section,
-          courseId: "",
-          title: "",
-          description: "",
-        });
-        setTimeout(() => {
-          navigate("/dashboard/section-list");
-        }, 1000);
-      }
-    } catch (error) {}
+      setClose(false);
+      setStatus({
+        ...status,
+        success: true,
+      });
+      setSection({
+        ...section,
+        courseId: "",
+        title: "",
+        description: "",
+      });
+      setTimeout(() => {
+        navigate("/dashboard/section-list");
+      }, 1000);
+    } catch (error) {
+      setClose(false); // set close false incase toast is closed
+      setStatus({
+        success: false,
+        error: true,
+        errorContent: error?.graphQLErrors?.[0]?.message,
+      });
+    }
   };
 
   return (
     <>
-      {success && (
-        <Toast text="Section Successfully created!" isSuccess={true} />
+      {status.success && (
+        <Toast
+          text="Section Successfully created!"
+          isSuccess={true}
+          close={close}
+          setClose={setClose}
+        />
+      )}
+      {status.error && (
+        <Toast
+          text={status.errorContent ?? "Something went wrong!"}
+          isSuccess={false}
+          close={close}
+          setClose={setClose}
+        />
       )}
       <Crud
         handleSubmit={handleSubmit}

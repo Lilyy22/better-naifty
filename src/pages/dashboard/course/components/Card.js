@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Profile } from "../../../../components/Profile";
 import { formattedDate } from "../../../../utils/formattedDate";
+import { ToolTip } from "../../../../components/ToolTip";
 
 export const CourseCard = ({
   id,
@@ -10,15 +11,16 @@ export const CourseCard = ({
   instructorName,
   instructorPhoto,
   updated_at,
+  category,
+  enrolled,
 }) => {
   return (
     <>
       <Link
-        to="/dashboard/courses-detail"
-        state={{ courseId: id }}
+        to={`/dashboard/courses-detail/${id}`}
         className="bg-white shadow w-full md:w-80 rounded-lg flex-shrink-0 flex-grow-0 relative"
       >
-        <div className="rounded-t-lg w-full h-40">
+        <div className="rounded-t-lg w-full h-40 border-b">
           <img
             className="w-full h-full object-cover rounded-t-lg"
             src={
@@ -29,7 +31,10 @@ export const CourseCard = ({
             alt="course thumbnail"
           />
         </div>
-        <div className="p-4">
+        <div className="px-4 py-2">
+          <span className="bg-purple-100/60 rounded-xl text-xs px-4 py-1 mb-1 inline-block leading-none font-mont font-medium">
+            {category?.name}
+          </span>
           <h5 className="font-bold text-gray-700 text-sm">{title}</h5>
           <p className="text-gray-400 text-sm">
             {description?.substring(0, 120)}
@@ -43,19 +48,31 @@ export const CourseCard = ({
             subText={formattedDate(updated_at)}
             photo={`https://naifty.abelayalew.dev/media/${instructorPhoto}`}
           />
-
-          {/* comment */}
-          <div className="bg-slate-100 rounded-md p-2 hover:bg-purple-500 group">
-            <svg
-              className="fill-purple-600 w-3 h-3 group-hover:fill-white"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-            >
-              <path d="M160 368c26.5 0 48 21.5 48 48v16l72.5-54.4c8.3-6.2 18.4-9.6 28.8-9.6H448c8.8 0 16-7.2 16-16V64c0-8.8-7.2-16-16-16H64c-8.8 0-16 7.2-16 16V352c0 8.8 7.2 16 16 16h96zm48 124l-.2 .2-5.1 3.8-17.1 12.8c-4.8 3.6-11.3 4.2-16.8 1.5s-8.8-8.2-8.8-14.3V474.7v-6.4V468v-4V416H112 64c-35.3 0-64-28.7-64-64V64C0 28.7 28.7 0 64 0H448c35.3 0 64 28.7 64 64V352c0 35.3-28.7 64-64 64H309.3L208 492z" />
-            </svg>
-          </div>
+          {/* end footer */}
+          {!enrolled ? (
+            <div className="bg-purple-100/50 my-auto p-2 text-purple-700 rounded relative group">
+              <ToolTip text="Enroll to Unlock course" />
+              <svg
+                className="w-3 h-3 fill-current my-auto float-right inline-block"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+              >
+                <path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" />
+              </svg>
+            </div>
+          ) : (
+            <div className="bg-green-100/50 my-auto p-2 text-green-700 rounded relative group">
+              <ToolTip text="Course Enrolled" />
+              <svg
+                className="w-4 h-4 fill-current my-auto"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+              >
+                <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+              </svg>
+            </div>
+          )}
         </div>
-        {/* end footer */}
       </Link>
     </>
   );

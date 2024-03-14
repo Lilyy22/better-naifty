@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { DashForm } from "../../../components/form/Form";
 import { CREATESTUDENTPROFILE, UPDATESTUDENTPROFILE } from "./data/mutation";
 import { AuthContext } from "../../../context/AuthContext";
-import { FileUpload, Input, Textarea } from "../../../components/form/Input";
+import { Input, Textarea } from "../../../components/form/Input";
 import { useMutation } from "@apollo/client";
 import { PrimaryButton } from "../../../components/Button";
 import { fileUpload } from "../../../axios/mutation";
@@ -18,7 +18,12 @@ export const ProfileForm = ({
   const { userId } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [close, setClose] = useState(false);
+  const [status, setStatus] = useState({
+    success: false,
+    error: false,
+    errorContent: "",
+  });
 
   const [profileImage, setProfileImage] = useState(profilePicture);
   const [selectedFile, setSelectedFile] = useState();
@@ -28,7 +33,7 @@ export const ProfileForm = ({
     bio: bio,
   });
 
-  const [profile, {}] = useMutation(
+  const [profile] = useMutation(
     is_create ? CREATESTUDENTPROFILE : UPDATESTUDENTPROFILE
   );
 
@@ -45,7 +50,7 @@ export const ProfileForm = ({
       if (selectedFile && profileImage) {
         filePath = await fileUpload("PROFILE_PICTURE", profileImage);
       }
-      const { error } = await profile({
+      await profile({
         variables: {
           userId: userId,
           firstName: data.firstName,
@@ -55,18 +60,38 @@ export const ProfileForm = ({
         },
       });
       setLoading(false);
-      if (!error) {
-        setSuccess(true);
-        window.location.reload();
-      }
-    } catch (error) {}
+      setClose(false);
+      setStatus({
+        ...status,
+        success: true,
+      });
+      window.location.reload();
+    } catch (error) {
+      setClose(false); // set close false incase toast is closed
+      setStatus({
+        success: false,
+        error: true,
+        errorContent: error?.graphQLErrors?.[0]?.message,
+      });
+    }
   };
+
   return (
     <>
-      {success && (
+      {status.success && (
         <Toast
-          text="Your Profile data is submitted successfully."
+          text={`Profile Successfully ${is_create ? "created" : "updated"}!`}
           isSuccess={true}
+          close={close}
+          setClose={setClose}
+        />
+      )}
+      {status.error && (
+        <Toast
+          text={status.errorContent ?? "Something went wrong!"}
+          isSuccess={false}
+          close={close}
+          setClose={setClose}
         />
       )}
       <DashForm title="Profile Form">

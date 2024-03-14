@@ -13,11 +13,17 @@ export const CreateCourse = () => {
   const navigate = useNavigate();
   const { userId } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+
+  const [close, setClose] = useState(false);
+  const [status, setStatus] = useState({
+    success: false,
+    error: false,
+    errorContent: "",
+  });
 
   const { data: categoryData, loading: categoryLoading } =
     useQuery(GETCOURSECATEGORY);
-  const [createCourse, {}] = useMutation(CREATECOURSE);
+  const [createCourse] = useMutation(CREATECOURSE);
 
   const [selectedFile, setSelectedFile] = useState();
   const [thumbnail, setThumbnail] = useState();
@@ -43,7 +49,7 @@ export const CreateCourse = () => {
     try {
       setLoading(true);
       const filePath = await fileUpload("COURSE_THUMBNAILS", thumbnail);
-      const { error } = await createCourse({
+      await createCourse({
         variables: {
           name: course.name,
           description: course.description,
@@ -55,28 +61,47 @@ export const CreateCourse = () => {
         },
       });
       setLoading(false);
-      if (!error) {
-        setSuccess(true);
-        setCourse({
-          ...course,
-          name: "",
-          description: "",
-          categoryId: "",
-          publishDate: "",
-          price: "",
-        });
-        setThumbnail("");
-        setSelectedFile("");
-        setTimeout(() => {
-          navigate("/dashboard/course-list");
-        }, 1000);
-      }
-    } catch (error) {}
+      setClose(false);
+      setStatus({ ...status, success: true });
+      setCourse({
+        ...course,
+        name: "",
+        description: "",
+        categoryId: "",
+        publishDate: "",
+        price: "",
+      });
+      setThumbnail("");
+      setSelectedFile("");
+      setTimeout(() => {
+        navigate("/dashboard/course-list");
+      }, 1000);
+    } catch (error) {
+      setClose(false);
+      setStatus({
+        success: false,
+        error: true,
+        errorContent: error?.graphQLErrors?.[0]?.message,
+      });
+    }
   };
   return (
     <>
-      {success && (
-        <Toast text="Course Successfully Created!" isSuccess={true} />
+      {status.success && (
+        <Toast
+          text="Course Successfully Created!"
+          isSuccess={true}
+          close={close}
+          setClose={setClose}
+        />
+      )}
+      {status.error && (
+        <Toast
+          text={status.errorContent ?? "Something went wrong!"}
+          isSuccess={false}
+          close={close}
+          setClose={setClose}
+        />
       )}
       <GoBack text="Back" pathname="/dashboard/course-list" />
       <Crud

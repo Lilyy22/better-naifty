@@ -5,14 +5,19 @@ import { Toast } from "../../../components/Toast";
 import { Logo } from "../../../components/Logo";
 import { H2, H3 } from "../../../components/Heading";
 import OTPInput from "react-otp-input";
-import { LandPrimaryButton, PrimaryButton } from "../../../components/Button";
+import { LandPrimaryButton } from "../../../components/Button";
 import { motion } from "framer-motion";
 import { useMutation } from "@apollo/client";
 
 const Verify = () => {
   const navigate = useNavigate();
-  const [success, setSuccess] = useState(false);
-  const [successResend, setSuccessResend] = useState(false);
+  const [close, setClose] = useState(false);
+  const [status, setStatus] = useState({
+    success: false,
+    error: false,
+    errorContent: "",
+    successContent: "",
+  });
 
   const email = sessionStorage.getItem("signup_email");
   const OTP_REGEX = /^\d{6}$/;
@@ -20,9 +25,8 @@ const Verify = () => {
   const [otp, setOtp] = useState();
   const [validOtp, setValidOtp] = useState(true);
 
-  const [verifyUser, { loading: verifyloader, error }] = useMutation(VERIFYOTP);
-  const [requestOtp, { loading: resedLoader, error: errorResend }] =
-    useMutation(REQUESTOTP);
+  const [verifyUser, { loading: verifyloader }] = useMutation(VERIFYOTP);
+  const [requestOtp, { loading: resedLoader }] = useMutation(REQUESTOTP);
 
   const handleVerification = async (e) => {
     e.preventDefault();
@@ -34,17 +38,43 @@ const Verify = () => {
         });
         setOtp("");
         if (data?.verify_otp?.success) {
-          setSuccess(true);
+          setClose(false);
+          setStatus({
+            ...status,
+            success: true,
+            successContent: "Account Verified!",
+          });
           setTimeout(() => {
             navigate("/login");
           }, 2000);
         } else {
+           setClose(false);
+           setStatus({
+             ...status,
+             error: true,
+             success: false,
+             errorContent: "Invalid OTP",
+           });
         }
-      } catch (err) {
+      } catch (error) {
         setOtp("");
+        setClose(false);
+        setStatus({
+          ...status,
+          error: true,
+          success: false,
+          errorContent: error?.graphQLErrors?.[0]?.message,
+        });
       }
     } else {
       setValidOtp(false);
+      setClose(false);
+      setStatus({
+        ...status,
+        error: true,
+        success: false,
+        errorContent: "Invalid OTP",
+      });
       setTimeout(() => {
         setValidOtp(true);
       }, 2000);
@@ -53,34 +83,45 @@ const Verify = () => {
 
   const handleResendOtp = async () => {
     try {
-      const { data } = await requestOtp({ variables: { email: email } });
-      if (data) {
-        setOtp("");
-        setSuccessResend(true);
-        setTimeout(() => {
-          setSuccessResend(false);
-        }, 4000);
-      }
-    } catch (err) {
+      await requestOtp({ variables: { email: email } });
       setOtp("");
+      setClose(false);
+      setStatus({
+        ...status,
+        error: false,
+        success: true,
+        successContent: "We have send a verification code to your email.",
+      });
+    } catch (error) {
+      setClose(false);
+      setStatus({
+        ...status,
+        error: true,
+        success: false,
+        errorContent: error?.graphQLErrors?.[0]?.message,
+      });
     }
   };
 
   return (
     <>
-      {(error || errorResend) && (
+      {status.error && (
         <Toast
-          text={error ? error.message : errorResend.message}
+          text={status.errorContent ?? "Something went wrong."}
           isSuccess={false}
+          close={close}
+          setClose={setClose}
         />
       )}
-      {success && <Toast text="Account Verified!" isSuccess={true} />}
-      {successResend && (
+      {status.success && (
         <Toast
-          text="We have send a verification code to your email."
+          text={status.successContent ?? "Successfull!"}
           isSuccess={true}
+          close={close}
+          setClose={setClose}
         />
       )}
+
       <div className="w-full flex justify-center items-center h-screen bg-gray-900">
         <div className="flex bg-gray-900 border-gray-800 m-auto rounded-xl lg:w-[70%] md:border">
           <div className="w-full py-8 md:py-10 xl:py-16 lg:w-1/2 lg:my-auto">

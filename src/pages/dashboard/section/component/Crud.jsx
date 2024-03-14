@@ -12,6 +12,7 @@ const Crud = ({
   section,
   setSection,
   loading,
+  sectionLoading,
 }) => {
   return (
     <DashForm title="Section Form">
@@ -29,7 +30,7 @@ const Crud = ({
           label="Section Title"
           type="text"
           placeholder="eg: Python"
-          value={section.title}
+          value={sectionLoading ? "•••" : section.title}
           onChange={(e) => {
             setSection({ ...section, title: e.target.value });
           }}
@@ -39,7 +40,7 @@ const Crud = ({
           id="Description"
           label="Description"
           placeholder="eg: Your description here"
-          value={section.description}
+          value={sectionLoading ? "•••" : section.description}
           onChange={(e) => {
             setSection({ ...section, description: e.target.value });
           }}

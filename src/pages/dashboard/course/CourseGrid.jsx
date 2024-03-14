@@ -2,13 +2,11 @@ import React from "react";
 import { CourseCategory } from "../courseCategory/CourseCategory";
 import { useQuery } from "@apollo/client";
 import { GETCOURSES } from "./data/query";
-import { CourseCardLoader } from "./components/loader/CardLoader";
-import { CourseCard } from "../course/components/Card";
 import { DashH4 } from "../../../components/Heading";
+import CourseList from "./components/CourseList";
 
 export const CourseGrid = () => {
   const { data, loading } = useQuery(GETCOURSES);
-  const array = [1, 2, 3, 4, 5, 6];
 
   return (
     <>
@@ -18,25 +16,7 @@ export const CourseGrid = () => {
       </div>
       <div className="border-t border-gray-200 py-8 my-8">
         <DashH4 text="Recent Courses" />
-        <div className="flex flex-wrap gap-4">
-          {loading && array.map((item) => <CourseCardLoader key={item} />)}
-          {data?.course.map(
-            ({ id, name, description, thumbnail, instructor, updated_at }) => {
-              return (
-                <CourseCard
-                  thumbnail={thumbnail}
-                  updated_at={updated_at}
-                  instructorName={`${instructor?.studentprofile?.first_name} ${instructor?.studentprofile?.last_name}`}
-                  instructorPhoto={instructor?.studentprofile?.profile_picture}
-                  title={name}
-                  description={description}
-                  id={id}
-                  key={id}
-                />
-              );
-            }
-          )}
-        </div>
+        <CourseList loading={loading} data={data} />
       </div>
     </>
   );

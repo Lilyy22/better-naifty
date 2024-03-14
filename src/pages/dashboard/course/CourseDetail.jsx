@@ -1,21 +1,33 @@
 import { useQuery } from "@apollo/client";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { GETCOURSESECTION } from "./data/query";
 import { CourseDetailLoader } from "./components/loader/DetailLoader";
 import { formattedDate } from "../../../utils/formattedDate";
-import { PrimaryButton } from "../../../components/Button";
 import { DashH4 } from "../../../components/Heading";
 import { Profile } from "../../../components/Profile";
 import { SectionDropDown } from "../section/component/List";
 import { Rating } from "../../../components/Rating";
+import Enroll from "../enroll/Enroll";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../../context/AuthContext";
+import { isStudentEnrolled } from "../../../utils/isStudentEnrolled";
+import { ToolTip } from "../../../components/ToolTip";
+import SectionList from "../section/SectionList";
 
 export const CourseDetail = () => {
-  const { state } = useLocation();
-  const { data, loading } = useQuery(GETCOURSESECTION, {
+  const { course_id } = useParams();
+  const { userId } = useContext(AuthContext);
+  const { data, loading, refetch } = useQuery(GETCOURSESECTION, {
     variables: {
-      courseId: state?.courseId,
+      courseId: course_id,
     },
   });
+  const [enrolled, setEnrolled] = useState(false);
+
+  useEffect(() => {
+    refetch();
+  }, [enrolled]);
+
   return (
     <>
       {loading ? (
@@ -37,9 +49,28 @@ export const CourseDetail = () => {
                   <Rating />
                   <h2 className="font-bold">${data?.course[0]?.price}</h2>
                 </div>
-                <div className="h-auto">
-                  <PrimaryButton text="Enroll Now" />
-                </div>
+                {isStudentEnrolled(data?.course[0]?.enrollments, userId) ? (
+                  <div className="flex gap-1 text-emerald-700 mb-auto bg-emerald-100/50 rounded-3xl font-mont px-4 py-1.5">
+                    <svg
+                      className="w-4 h-4 fill-current my-auto"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 448 512"
+                    >
+                      <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                    </svg>
+                    <span className="font-mediumbold text-sm">Enrolled</span>
+                  </div>
+                ) : (
+                  <Enroll
+                    courseId={course_id}
+                    studentId={userId}
+                    enrolled={isStudentEnrolled(
+                      data?.course[0]?.enrollments,
+                      userId
+                    )}
+                    setEnrolled={setEnrolled}
+                  />
+                )}
               </div>
               <h1 className="my-6 font-semibold mb-1">Course Description</h1>
               <p className="text-gray-500 text-sm">
@@ -48,10 +79,10 @@ export const CourseDetail = () => {
               <div className="border-t my-8 py-4">
                 <h1 className="font-semibold mb-1">Created by</h1>
                 <Profile
-                  name={`${data?.course[0]?.instructor.studentprofile.first_name} ${data?.course[0]?.instructor.studentprofile.last_name}`}
-                  photo={`https://naifty.abelayalew.dev/media/${data?.course[0]?.instructor.studentprofile.profile_picture}`}
+                  name={`${data?.course[0]?.instructor?.studentprofile?.first_name} ${data?.course[0]?.instructor?.studentprofile?.last_name}`}
+                  photo={`https://naifty.abelayalew.dev/media/${data?.course[0]?.instructor?.studentprofile?.profile_picture}`}
                   subText={
-                    data?.course[0]?.instructor.studentprofile.user.email
+                    data?.course[0]?.instructor?.studentprofile?.user?.email
                   }
                 />
                 <div className="pl-2 md:pl-4">
@@ -59,7 +90,7 @@ export const CourseDetail = () => {
                     About Author
                   </h1>
                   <p className="text-gray-500 text-xs">
-                    {data?.course[0]?.instructor.studentprofile.bio}
+                    {data?.course[0]?.instructor?.studentprofile?.bio}
                   </p>
                 </div>
               </div>
@@ -74,22 +105,34 @@ export const CourseDetail = () => {
               </div>
               <div className="p-6 bg-white rounded-b-lg">
                 <div className="bg-white rounded-b-lg">
-                  <h1 className="my-4 font-semibold text-base">
-                    What you will learn
-                  </h1>
-                  <ul>
-                    {data?.course[0]?.sections?.map(
-                      ({ title, id, episodes }) => {
-                        return (
-                          <SectionDropDown
-                            key={id}
-                            section={title}
-                            episodes={episodes}
-                          />
-                        );
-                      }
+                  <div className="flex justify-between">
+                    <h1 className="my-4 font-semibold text-base">
+                      What you will learn
+                    </h1>
+                    {!isStudentEnrolled(
+                      data?.course[0]?.enrollments,
+                      userId
+                    ) && (
+                      <div className="bg-purple-100/50 my-auto p-2 text-purple-700 rounded relative group">
+                        <ToolTip text="Enroll to Unlock course" />
+                        <svg
+                          className="w-3 h-3 fill-current my-auto float-right inline-block"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 448 512"
+                        >
+                          <path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" />
+                        </svg>
+                      </div>
                     )}
-                  </ul>
+                  </div>
+
+                  <SectionList
+                    courseId={course_id}
+                    enrolled={isStudentEnrolled(
+                      data?.course[0]?.enrollments,
+                      userId
+                    )}
+                  />
                 </div>
               </div>
             </div>

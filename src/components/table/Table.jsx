@@ -1,6 +1,7 @@
 import React from "react";
 import { DashH5 } from "../Heading";
 import { PrimaryLink } from "../Link";
+import { ToolTip } from "../ToolTip";
 
 export const Table = ({ title, children, path, data }) => {
   return (
@@ -78,9 +79,7 @@ export const Action = ({
             className="bg-green-100/50 p-2 inline rounded relative group hover:bg-green-600"
             onClick={() => handleEditClick(id)}
           >
-            <span class="invisible absolute -left-1 -top-1 text-xs rounded shadow-lg py-2 px-3 bg-gray-900 text-white -mt-8 group-hover:visible">
-              Edit
-            </span>
+            <ToolTip text="Edit" />
             <svg
               className="w-3 h-3 fill-green-500 group-hover:fill-white"
               xmlns="http://www.w3.org/2000/svg"
@@ -94,9 +93,7 @@ export const Action = ({
             className="bg-red-100/50 p-2 inline rounded relative group hover:bg-red-600"
             onClick={() => handleDeleteClick(id)}
           >
-            <span class="invisible absolute -left-1 -top-1 text-xs rounded shadow-lg py-2 px-3 bg-gray-900 text-white -mt-8 group-hover:visible">
-              Delete
-            </span>
+            <ToolTip text="Delete" />
             <svg
               className="w-3 h-3 fill-red-500 group-hover:fill-white"
               xmlns="http://www.w3.org/2000/svg"

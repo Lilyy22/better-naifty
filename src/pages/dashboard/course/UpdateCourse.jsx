@@ -14,12 +14,22 @@ export const UpdateCourse = () => {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [close, setClose] = useState(false);
+  const [status, setStatus] = useState({
+    success: false,
+    error: false,
+    errorContent: "",
+  });
 
   const { data: categoryData, loading: categoryLoading } =
     useQuery(GETCOURSECATEGORY);
+
   const [updateCourse] = useMutation(UPDATECOURSE);
-  const { data } = useQuery(GETCOURSE, {
+  const {
+    data,
+    loading: courseLoading,
+    refetch,
+  } = useQuery(GETCOURSE, {
     variables: {
       courseId: course_id,
     },
@@ -52,7 +62,7 @@ export const UpdateCourse = () => {
       if (selectedFile && thumbnail) {
         filePath = await fileUpload("COURSE_THUMBNAILS", thumbnail);
       }
-      const { error } = await updateCourse({
+      await updateCourse({
         variables: {
           courseId: course_id,
           name: course.name,
@@ -64,38 +74,58 @@ export const UpdateCourse = () => {
         },
       });
       setLoading(false);
-      if (!error) {
-        setSuccess(true);
-        setTimeout(() => {
-          navigate("/dashboard/course-list");
-        }, 1000);
-      }
-    } catch (error) {}
+      setClose(false);
+      setStatus({ ...status, success: true });
+      setTimeout(() => {
+        navigate("/dashboard/course-list");
+      }, 1000);
+    } catch (error) {
+      setClose(false);
+      setStatus({
+        success: false,
+        error: true,
+        errorContent: error?.graphQLErrors?.[0]?.message,
+      });
+    }
   };
 
   useEffect(() => {
     if (!course_id) {
       navigate("/dashboard/course-list");
     } else {
+      refetch();
       if (data?.course[0]) {
         setCourse({
-          name: data.course[0].name,
-          description: data.course[0].description,
-          categoryId: data.course[0].category?.id,
-          publishDate: new Date(data.course[0].publish_date)
+          name: data?.course[0]?.name,
+          description: data?.course[0]?.description,
+          categoryId: data?.course[0]?.category?.id,
+          publishDate: new Date(data?.course[0]?.publish_date)
             .toISOString()
             .split("T")[0],
-          price: data.course[0].price,
+          price: data?.course[0]?.price,
         });
-        setThumbnail(data.course[0].thumbnail);
+        setThumbnail(data?.course[0]?.thumbnail);
       }
     }
   }, [data?.course[0]]);
 
   return (
     <>
-      {success && (
-        <Toast text="Course Successfully Updated!" isSuccess={true} />
+      {status.success && (
+        <Toast
+          text="Course Successfully Updated!"
+          isSuccess={true}
+          close={close}
+          setClose={setClose}
+        />
+      )}
+      {status.error && (
+        <Toast
+          text={status.errorContent ?? "Something went wrong!"}
+          isSuccess={false}
+          close={close}
+          setClose={setClose}
+        />
       )}
       <GoBack text="Back" pathname="/dashboard/course-list" />
       <Crud
@@ -109,6 +139,7 @@ export const UpdateCourse = () => {
         categoryLoading={categoryLoading}
         handleCategory={handleCategory}
         selectedFile={selectedFile}
+        courseLoading={courseLoading}
       />
     </>
   );

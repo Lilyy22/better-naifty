@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/client";
 import { GETSECTION } from "./data/query";
 import { DashH4 } from "../../../components/Heading";
 import { GoBack } from "../../../components/Button";
+import DataNotFound from "../../../components/DataNotFound";
 
 export const SectionDetail = () => {
   const { section_url } = useParams();
@@ -27,11 +28,7 @@ export const SectionDetail = () => {
         <p>{data?.course_section[0]?.description}</p>
       </div>
       {episodes?.length === 0 ? (
-        <div className="flex justify-center items-center">
-          <h1 className="font-semibold text-lg text-gray-400">
-            No Episodes for this Section.
-          </h1>
-        </div>
+        <DataNotFound text="No Episodes for this Section." />
       ) : (
         <>
           <DashH4 text="Episodes" />

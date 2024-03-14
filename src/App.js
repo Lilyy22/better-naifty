@@ -22,6 +22,8 @@ import { Course } from "./pages/landing/Course";
 import { About } from "./pages/landing/About";
 import { BlogDetail } from "./pages/landing/BlogDetail";
 import Blog from "./pages/landing/Blog";
+import EnrolledCourses from "./pages/dashboard/enroll/EnrolledCourses";
+import CourseCategoryList from "./pages/dashboard/courseCategory/CourseCategoryList";
 
 function App() {
   return (
@@ -45,10 +47,19 @@ function App() {
           <Route path="/dashboard" element={<DefaultLayout />}>
             {/* course */}
             <Route path="course-list" element={<CourseTable />} />
+            <Route path="enrolled-courses" element={<EnrolledCourses />} />
             <Route path="courses" element={<CourseGrid />} />
             <Route path="create-course" element={<CreateCourse />} />
             <Route path="update-course/:course_id" element={<UpdateCourse />} />
-            <Route path="courses-detail" element={<CourseDetail />} />
+
+            <Route
+              path="courses/:category_id"
+              element={<CourseCategoryList />}
+            />
+            <Route
+              path="courses-detail/:course_id"
+              element={<CourseDetail />}
+            />
 
             {/* section */}
             <Route path="section-list" element={<SectionTable />} />
@@ -62,7 +73,7 @@ function App() {
               element={<SectionDetail />}
             />
             <Route
-              path="courses/section/episode"
+              path="courses/section/episode/:episode_id"
               element={<EpisodeDetail />}
               preventScrollReset={false}
             />

@@ -11,6 +11,6 @@ export const CourseCategory = () => {
   return loading
     ? array.map((item) => <CardLoader />)
     : data?.course_category?.map(({ id, image, name }) => {
-        return <Card key={id} thumbnail={image} title={name} />;
+        return <Card key={id} thumbnail={image} title={name} categoryId={id} />;
       });
 };

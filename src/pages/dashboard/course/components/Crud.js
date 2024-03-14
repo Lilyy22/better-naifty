@@ -15,6 +15,7 @@ export const Crud = ({
   categoryLoading,
   handleCategory,
   selectedFile,
+  courseLoading,
 }) => {
   return (
     <DashForm title="Course Form">
@@ -26,7 +27,7 @@ export const Crud = ({
               label="Course"
               type="text"
               placeholder="eg: Python"
-              value={course.name}
+              value={courseLoading ? "•••" : course.name}
               onChange={(e) => {
                 setCourse({
                   ...course,
@@ -34,6 +35,7 @@ export const Crud = ({
                 });
               }}
               isRequired={true}
+              disabled={loading ? true : false}
             />
           </div>
           <div className="w-full md:flex-1">
@@ -42,7 +44,7 @@ export const Crud = ({
               label="Price"
               type="number"
               placeholder="eg: $452"
-              value={course.price}
+              value={courseLoading ? "•••" : course.price}
               onChange={(e) => {
                 setCourse({
                   ...course,
@@ -50,6 +52,7 @@ export const Crud = ({
                 });
               }}
               isRequired={true}
+              disabled={loading ? true : false}
             />
           </div>
         </div>
@@ -62,6 +65,7 @@ export const Crud = ({
               loading={categoryLoading}
               onChange={handleCategory}
               isRequired={true}
+              disabled={loading ? true : false}
             />
           </div>
           <div className="w-full md:flex-1">
@@ -69,7 +73,7 @@ export const Crud = ({
               id="publish_Date"
               label="Publish Date"
               type="date"
-              value={course.publishDate}
+              value={courseLoading ? "•••" : course.publishDate}
               onChange={(e) => {
                 setCourse({
                   ...course,
@@ -77,6 +81,7 @@ export const Crud = ({
                 });
               }}
               isRequired={true}
+              disabled={loading ? true : false}
             />
           </div>
         </div>
@@ -84,11 +89,12 @@ export const Crud = ({
           id="Description"
           label="Description"
           placeholder="eg: Your description here"
-          value={course.description}
+          value={courseLoading ? "•••" : course.description}
           onChange={(e) => {
             setCourse({ ...course, description: e.target.value });
           }}
           isRequired={true}
+          disabled={loading ? true : false}
         />
         <label
           htmlFor="thumbnail"
@@ -101,7 +107,9 @@ export const Crud = ({
           {thumbnail && !selectedFile ? (
             <img
               src={`https://naifty.abelayalew.dev/media/${thumbnail}`}
-              className="cursor-pointer w-full h-full object-cover object-center rounded-lg"
+              className={`cursor-pointer w-full h-full object-cover object-center rounded-lg ${
+                courseLoading ?? "animate-pulse"
+              }`}
               alt="thumbnail"
             />
           ) : (
@@ -123,6 +131,7 @@ export const Crud = ({
             className="z-10 absolute w-full h-full rounded-full border p-6 top-0 left-0 opacity-0 cursor-pointer"
             onChange={handleThumbnail}
             required={thumbnail ? false : true}
+            disabled={loading ? true : false}
           />
         </div>
         {/* <FileUpload

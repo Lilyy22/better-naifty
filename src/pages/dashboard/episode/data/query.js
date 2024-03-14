@@ -7,6 +7,11 @@ export const GETEPISODE = gql`
       title
       description
       file
+      section {
+        course {
+          id
+        }
+      }
     }
   }
 `;

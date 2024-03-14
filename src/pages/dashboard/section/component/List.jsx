@@ -1,8 +1,9 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { ToolTip } from "../../../../components/ToolTip";
 
-export const SectionDropDown = ({ section, episodes }) => {
+export const SectionDropDown = ({ section, episodes, enrolled }) => {
   const [isActive, setIsActive] = useState(false);
   return (
     <>
@@ -43,18 +44,36 @@ export const SectionDropDown = ({ section, episodes }) => {
                 {episodes.map(({ title, id }) => {
                   return (
                     <Link
-                      to="/dashboard/courses/section/episode"
+                      to={`/dashboard/courses/section/episode/${id}`}
+                      onClick={(e) => (enrolled ? "" : e.preventDefault())}
+                      className={
+                        enrolled
+                          ? "hover:text-purple-500 hover:font-medium"
+                          : "text-red-900 relative group"
+                      }
                       state={{ episodeId: id }}
+                      disabled={enrolled ? false : true}
                       key={id}
                     >
-                      <li className="flex gap-2 mt-2 text-xs rounded-md hover:text-purple-500 hover:font-medium">
-                        <svg
-                          className="w-3 h-3 fill-current my-auto"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 512 512"
-                        >
-                          <path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z" />
-                        </svg>
+                      {!enrolled && <ToolTip text="Enroll to unlock course" />}
+                      <li className="flex gap-2 mt-2 text-xs rounded-md ">
+                        {enrolled ? (
+                          <svg
+                            className="w-3 h-3 fill-current my-auto"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512"
+                          >
+                            <path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z" />
+                          </svg>
+                        ) : (
+                          <svg
+                            className="w-3 h-3 fill-current my-auto"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 448 512"
+                          >
+                            <path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" />
+                          </svg>
+                        )}
                         <div className="flex justify-between flex-1">
                           <span>{title}</span>
                           <span>4:30</span>

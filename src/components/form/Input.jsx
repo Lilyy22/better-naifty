@@ -8,6 +8,7 @@ export const Input = ({
   onChange,
   isRequired,
   label,
+  disabled,
 }) => {
   return (
     <div className="w-full mb-4">
@@ -26,6 +27,7 @@ export const Input = ({
         value={value}
         onChange={onChange}
         required={isRequired}
+        disabled={disabled}
       />
     </div>
   );
@@ -38,6 +40,7 @@ export const Textarea = ({
   onChange,
   isRequired,
   label,
+  disabled,
 }) => {
   return (
     <div className="w-full mb-4">
@@ -56,12 +59,20 @@ export const Textarea = ({
         value={value}
         onChange={onChange}
         required={isRequired}
+        disabled={disabled}
       ></textarea>
     </div>
   );
 };
 
-export const FileUpload = ({ id, label, onChange, isRequired, thumbnail }) => {
+export const FileUpload = ({
+  id,
+  label,
+  onChange,
+  isRequired,
+  thumbnail,
+  disabled,
+}) => {
   return (
     <div className="w-full mb-4">
       <label
@@ -82,6 +93,7 @@ export const FileUpload = ({ id, label, onChange, isRequired, thumbnail }) => {
           className="z-10 absolute w-full h-full rounded-full border p-6 top-0 left-0 opacity-0 cursor-pointer"
           onChange={onChange}
           required={isRequired}
+          disabled={disabled}
         />
       </div>
     </div>

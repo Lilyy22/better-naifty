@@ -20,6 +20,14 @@ export const GETCOURSES = gql`
       description
       thumbnail
       updated_at
+      enrollments {
+        student {
+          id
+        }
+      }
+      category {
+        name
+      }
       instructor {
         studentprofile {
           first_name
@@ -60,6 +68,11 @@ export const GETCOURSESECTION = gql`
       description
       thumbnail
       price
+      enrollments {
+        student {
+          id
+        }
+      }
       category {
         name
       }

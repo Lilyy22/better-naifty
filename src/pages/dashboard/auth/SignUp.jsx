@@ -3,10 +3,17 @@ import { SIGNUP } from "./data/mutation";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthForm } from "./components/AuthForm";
 import { useMutation } from "@apollo/client";
+import { Toast } from "../../../components/Toast";
 
 export const SignUp = () => {
   const navigate = useNavigate();
   const { role } = useParams();
+  const [close, setClose] = useState(false);
+  const [status, setStatus] = useState({
+    success: false,
+    error: false,
+    errorContent: "",
+  });
 
   const [signUpUser, { loading }] = useMutation(SIGNUP);
 
@@ -22,25 +29,51 @@ export const SignUp = () => {
     sessionStorage.setItem("signup_email", email);
 
     try {
-      const { data } = await signUpUser({
+      await signUpUser({
         variables: {
           email: email,
           password: password,
           isInstructor: role ? true : false,
         },
       });
-      if (data) {
-        setEmail("");
-        setPassword("");
-        navigate("/verify");
-      }
-    } catch (err) {
+      setClose(false);
       setEmail("");
       setPassword("");
+      setStatus({
+        ...status,
+        success: true,
+      });
+      setTimeout(() => {
+        navigate("/verify");
+      }, 2000);
+    } catch (error) {
+      setEmail("");
+      setPassword("");
+      setStatus({
+        error: true,
+        errorContent: error?.graphQLErrors?.[0]?.message,
+      });
+      setClose(false);
     }
   };
   return (
     <>
+      {status.error && (
+        <Toast
+          isSuccess={false}
+          text={status.errorContent ?? "Something went wrong"}
+          close={close}
+          setClose={setClose}
+        />
+      )}
+      {status.success && (
+        <Toast
+          isSuccess={false}
+          text="We have send a verification email to your account!"
+          close={close}
+          setClose={setClose}
+        />
+      )}
       <AuthForm
         isSignUp={true}
         handleSubmit={handleSubmit}
