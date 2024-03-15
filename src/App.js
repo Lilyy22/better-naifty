@@ -24,6 +24,8 @@ import { BlogDetail } from "./pages/landing/BlogDetail";
 import Blog from "./pages/landing/Blog";
 import EnrolledCourses from "./pages/dashboard/enroll/EnrolledCourses";
 import CourseCategoryList from "./pages/dashboard/courseCategory/CourseCategoryList";
+import UsersList from "./pages/dashboard/user/UsersList";
+import CourseList from "./pages/dashboard/user/CourseList";
 
 function App() {
   return (
@@ -79,6 +81,9 @@ function App() {
             />
 
             <Route path="profile" element={<Profile />} />
+            {/* Dashboard */}
+            <Route path="users" element={<UsersList />} />
+            <Route path="all-courses" element={<CourseList />} />
           </Route>
         </Route>
         <Route path="/dashboard/*" element={<NotFound />} />
