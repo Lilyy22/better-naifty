@@ -20,10 +20,10 @@ export const DashboardCard = ({ total, icon, label, iconBg }) => {
 export const DashboardProgressCard = ({ total, icon, label }) => {
   return (
     <div className="rounded-xl bg-gray-50 w-full font-mont mb-4 xl:w-1/2">
-      <div className="p-6">
+      <div className="p-4 lg:p-6">
         <DashH4 text="Popular Courses" />
         {/* courses */}
-        <div className="flex flex-wrap gap-2 lg:gap-6 justify-between mb-4 mt-6">
+        <div className="flex flex-wrap md:flex-nowrap gap-2 lg:gap-6 justify-between mb-4 mt-6">
           {/* text */}
           <div className="flex justify-start my-auto">
             <div className="bg-green-100 inline-block p-1 rounded my-auto">
@@ -54,7 +54,7 @@ export const DashboardProgressCard = ({ total, icon, label }) => {
         </div>
         {/*  */}
         {/* courses */}
-        <div className="flex flex-wrap gap-2 lg:gap-6 justify-between mb-4">
+        <div className="flex flex-wrap md:flex-nowrap gap-2 lg:gap-6 justify-between mb-4">
           {/* text */}
           <div className="flex justify-start my-auto">
             <div className="bg-purple-100 inline-block p-1 rounded my-auto">
@@ -85,7 +85,7 @@ export const DashboardProgressCard = ({ total, icon, label }) => {
         </div>
         {/*  */}
         {/* courses */}
-        <div className="flex flex-wrap gap-2 lg:gap-6 justify-between mb-4">
+        <div className="flex flex-wrap md:flex-nowrap gap-2 lg:gap-6 justify-between mb-4">
           {/* text */}
           <div className="flex justify-start my-auto">
             <div className="bg-amber-100 inline-block p-1 rounded my-auto">
@@ -116,7 +116,7 @@ export const DashboardProgressCard = ({ total, icon, label }) => {
         </div>
         {/*  */}
         {/* courses */}
-        <div className="flex flex-wrap gap-2 lg:gap-6 justify-between mb-4">
+        <div className="flex flex-wrap md:flex-nowrap gap-2 lg:gap-6 justify-between mb-4">
           {/* text */}
           <div className="flex justify-start my-auto">
             <div className="bg-blue-100 inline-block p-1 rounded my-auto">

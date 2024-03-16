@@ -75,7 +75,9 @@ const Dashboard = () => {
     <div>
       <DashH4 text="Welcome Back ☺" />
 
-      <>
+      <hr />
+      <div className="pt-4">
+        {isStudent && <DashH4 text="My Courses" />}
         <div className="flex space-x-4 justify-start h-auto overflow-x-auto scrollbar-hide">
           {/* {loading && loader.map((item) => <DashCardLoader key={item} />)} */}
           {admin && (
@@ -217,10 +219,15 @@ const Dashboard = () => {
             </>
           )}
         </div>
-        <div className="h-auto flex gap-4">
-          {(admin || instructor) && <DashboardProgressCard />}
+        <div className="h-auto flex flex-wrap gap-4">
+          {(admin || instructor) && (
+            <div className="bg-gray-50 w-full rounded-xl p-4 lg:w-1/2">
+              <DashboardProgressCard />
+            </div>
+          )}
+
           {isStudent && (
-            <div className="bg-gray-50 rounded-xl py-2 md:p-4 md:h-72 w-full lg:w-1/2">
+            <div className="bg-gray-50 w-full rounded-xl p-4 md:w-1/2 md:h-72">
               <Doughnut
                 data={{
                   labels: ["Label 1", "Label 2"],
@@ -244,7 +251,7 @@ const Dashboard = () => {
           )}
 
           {admin && (
-            <div className="bg-gray-50 flex-1 rounded-xl p-4">
+            <div className="bg-gray-50 w-full rounded-xl p-4 lg:w-[47%]">
               <Line
                 data={{
                   labels: [
@@ -276,7 +283,7 @@ const Dashboard = () => {
             </div>
           )}
         </div>
-      </>
+      </div>
     </div>
   );
 };
