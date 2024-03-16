@@ -1,13 +1,12 @@
 import { gql } from "@apollo/client";
 
 export const GETUSERS = gql`
-  query GETUSERS {
-    users {
+  query GETUSERS($role: Boolean) {
+    users(where: { is_instructor: { exact: $role } }) {
       id
       email
       is_active
       is_instructor
-      is_approved
       studentprofile {
         first_name
         last_name
@@ -19,8 +18,12 @@ export const GETUSERS = gql`
 `;
 
 export const GETCOURSE = gql`
-  query GETCOURSE($offset: Int, $limit: Int) {
-    course(offset: $offset, limit: $limit) {
+  query GETCOURSE($offset: Int, $limit: Int, $status: String) {
+    course(
+      offset: $offset
+      limit: $limit
+      where: { status: { exact: $status } }
+    ) {
       id
       name
       status

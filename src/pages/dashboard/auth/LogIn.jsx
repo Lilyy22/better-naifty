@@ -14,8 +14,9 @@ export const LogIn = () => {
     errorContent: "",
   });
 
-  const { setAccessToken, setIsInstructor, setUserEmail } =
+  const { setAccessToken, setIsInstructor, setUserEmail, setIsSuperUser } =
     useContext(AuthContext);
+
   const [loginUser, { loading }] = useMutation(LOGIN);
 
   const [passwordToggle, setPasswordToggle] = useState(false);
@@ -31,9 +32,11 @@ export const LogIn = () => {
       });
       localStorage.setItem("accessToken", data.login?.token);
       localStorage.setItem("isInstructor", data.login?.user?.is_instructor);
+      localStorage.setItem("isSuperUser", data.login?.user?.is_superuser);
       localStorage.setItem("userId", data.login?.user?.id);
       localStorage.setItem("userEmail", data.login?.user?.email);
 
+      setIsSuperUser(data.login?.user?.is_superuser);
       setAccessToken(data.login?.token);
       setIsInstructor(data.login?.user?.is_instructor);
       setUserEmail(data.login?.user?.email);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Action, TD, Table } from "../../../components/table/Table";
 import { useMutation, useQuery } from "@apollo/client";
 import { GETINSTRUCTORSECTION } from "./data/query";
@@ -8,16 +8,23 @@ import { formattedDate } from "../../../utils/formattedDate";
 import { EpisodeForm } from "../episode/EpisodeForm";
 import { Link, useNavigate } from "react-router-dom";
 import { DELETESECTION } from "./data/mutation";
+import { AuthContext } from "../../../context/AuthContext";
 
 export const SectionTable = () => {
   const navigate = useNavigate();
+  const { userId } = useContext(AuthContext);
+
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openEpisodeModal, setOpenEpisodeModal] = useState(false);
 
   const [sectionId, setSectionId] = useState();
 
   const [del] = useMutation(DELETESECTION);
-  const { data, loading, refetch } = useQuery(GETINSTRUCTORSECTION);
+  const { data, loading, refetch } = useQuery(GETINSTRUCTORSECTION, {
+    variables: {
+      userId: userId,
+    },
+  });
 
   const thead = [
     { head: "Title" },

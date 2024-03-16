@@ -26,6 +26,7 @@ import EnrolledCourses from "./pages/dashboard/enroll/EnrolledCourses";
 import CourseCategoryList from "./pages/dashboard/courseCategory/CourseCategoryList";
 import UsersList from "./pages/dashboard/user/UsersList";
 import CourseList from "./pages/dashboard/user/CourseList";
+import Dashboard from "./pages/dashboard/dashboard/Dashboard";
 
 function App() {
   return (
@@ -48,11 +49,19 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<DefaultLayout />}>
             {/* course */}
+            <Route exact path="/dashboard/" element={<Dashboard />} />
             <Route path="course-list" element={<CourseTable />} />
             <Route path="enrolled-courses" element={<EnrolledCourses />} />
             <Route path="courses" element={<CourseGrid />} />
             <Route path="create-course" element={<CreateCourse />} />
             <Route path="update-course/:course_id" element={<UpdateCourse />} />
+            <Route path="all-courses" element={<CourseList />} />
+            <Route
+              path="approved-courses"
+              element={<CourseList approved={true} />}
+            />
+            <Route path="students" element={<UsersList />} />
+            <Route path="instructors" element={<UsersList role={true} />} />
 
             <Route
               path="courses/:category_id"
@@ -83,7 +92,6 @@ function App() {
             <Route path="profile" element={<Profile />} />
             {/* Dashboard */}
             <Route path="users" element={<UsersList />} />
-            <Route path="all-courses" element={<CourseList />} />
           </Route>
         </Route>
         <Route path="/dashboard/*" element={<NotFound />} />

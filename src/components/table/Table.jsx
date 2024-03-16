@@ -3,7 +3,7 @@ import { DashH5 } from "../Heading";
 import { PrimaryLink } from "../Link";
 import { ToolTip } from "../ToolTip";
 
-export const Table = ({ title, children, path, data }) => {
+export const Table = ({ title, children, path, data, noCrud }) => {
   return (
     <>
       <div className="bg-white rounded-lg min-w-5xl xl:w-[80%] font-mont">
@@ -11,15 +11,17 @@ export const Table = ({ title, children, path, data }) => {
           <div className="border-b px-4 py-5 border-gray-100">
             <DashH5 text={title} />
           </div>
-          <PrimaryLink text="Create" goto={path}>
-            <svg
-              className="w-2.5 h-2.5 fill-current leading-none"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 448 512"
-            >
-              <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
-            </svg>
-          </PrimaryLink>
+          {!noCrud && (
+            <PrimaryLink text="Create" goto={path}>
+              <svg
+                className="w-2.5 h-2.5 fill-current leading-none"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+              >
+                <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+              </svg>
+            </PrimaryLink>
+          )}
         </div>
         {/* table */}
         <div className="p-4">

@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const GETCOMMENT = gql`
   query GETCOMMENT($episodeId: String) {
-    comment(where: { episode_id: { exact: $episodeId" } }) {
+    comment(where: { episode_id: { exact: $episodeId } }) {
       id
       comment
       user {
@@ -14,6 +14,14 @@ export const GETCOMMENT = gql`
         }
       }
       updated_at
+    }
+  }
+`;
+
+export const GETCOMMENTCOUNT = gql`
+  query GETCOMMENTCOUNT($episodeId: String) {
+    comment_aggregate(where: { episode_id: { exact: $episodeId } }) {
+      count
     }
   }
 `;

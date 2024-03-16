@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Logo } from "../../components/Logo";
-import { LandPrimaryButton, PrimaryButton } from "../../components/Button";
+import { LandPrimaryButton } from "../../components/Button";
 
 const Header = () => {
   const navigate = useNavigate();

@@ -80,7 +80,11 @@ export const CourseDetail = () => {
                 <h1 className="font-semibold mb-1">Created by</h1>
                 <Profile
                   name={`${data?.course[0]?.instructor?.studentprofile?.first_name} ${data?.course[0]?.instructor?.studentprofile?.last_name}`}
-                  photo={`https://naifty.abelayalew.dev/media/${data?.course[0]?.instructor?.studentprofile?.profile_picture}`}
+                  photo={
+                    data?.course[0]?.instructor?.studentprofile?.profile_picture
+                      ? `https://naifty.abelayalew.dev/media/${data?.course[0]?.instructor?.studentprofile?.profile_picture}`
+                      : "https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png"
+                  }
                   subText={
                     data?.course[0]?.instructor?.studentprofile?.user?.email
                   }

@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Sidebar } from "./Sidebar";
 import { Outlet } from "react-router-dom";
 import { Header } from "./Header";
-import { OnlineStatusContext } from "../../context/OnlineStatusContext";
+// import { OnlineStatusContext } from "../../context/OnlineStatusContext";
 
 export const DefaultLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);

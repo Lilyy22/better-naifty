@@ -6,21 +6,17 @@ import { DashH4 } from "../../../components/Heading";
 import { CourseCardLoader } from "../course/components/loader/CardLoader";
 import { CourseCard } from "../course/components/Card";
 import DataNotFound from "../../../components/DataNotFound";
-import { isStudentEnrolled } from "../../../utils/isStudentEnrolled";
+// import { isStudentEnrolled } from "../../../utils/isStudentEnrolled";
 
 const EnrolledCourses = () => {
   const { userId } = useContext(AuthContext);
   const array = [1, 2, 3, 4, 5, 6];
 
-  const { data, loading, refetch } = useQuery(GETENROLLED, {
+  const { data, loading } = useQuery(GETENROLLED, {
     variables: {
-      student_id: userId,
+      studentId: userId,
     },
   });
-
-  useEffect(() => {
-    refetch();
-  }, []);
 
   return (
     <div className="pb-8">
@@ -28,7 +24,7 @@ const EnrolledCourses = () => {
       <div className="flex flex-wrap gap-4">
         {loading && array.map((item) => <CourseCardLoader key={item} />)}
         {data?.course_enrollment?.length === 0 && (
-          <DataNotFound text="Course Not Found." />
+          <DataNotFound text="You're not enrolled yet." />
         )}
 
         {data?.course_enrollment?.map(

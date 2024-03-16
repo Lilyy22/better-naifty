@@ -29,7 +29,10 @@ const CourseList = ({ data, loading }) => {
               thumbnail={thumbnail}
               updated_at={updated_at}
               instructorName={`${instructor?.studentprofile?.first_name} ${instructor?.studentprofile?.last_name}`}
-              instructorPhoto={instructor?.studentprofile?.profile_picture}
+              instructorPhoto={
+                instructor?.studentprofile?.profile_picture ??
+                "https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png"
+              }
               title={name}
               description={description}
               category={category}

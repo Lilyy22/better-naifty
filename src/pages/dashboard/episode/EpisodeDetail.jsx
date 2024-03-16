@@ -7,6 +7,7 @@ import { CommentForm } from "../comment/CommentForm";
 import { Loader } from "./component/Loader";
 import { useParams } from "react-router-dom";
 import SectionList from "../section/SectionList";
+import CommentList from "../comment/CommentList";
 
 export const EpisodeDetail = () => {
   const { episode_id } = useParams();
@@ -46,18 +47,17 @@ export const EpisodeDetail = () => {
                   },
                 }}
               />
-              <div className="p-6">
+              <div className="p-6 border-b border-gray-100">
                 <DashH4 text={data?.curse_episode[0]?.title} />
                 <p className="text-sm -mt-4">
                   {data?.curse_episode[0]?.description}
                 </p>
               </div>
               <div className="px-6 py-4">
-                <p className="text-sm">0 Comments</p>
-                {/* commentlist */}
+                <CommentList commented={commented} episodeId={episode_id} />
               </div>
             </div>
-            <CommentForm setCommented={setCommented} />
+            <CommentForm setCommented={setCommented} episodeId={episode_id} />
           </div>
 
           <div className="bg-white rounded-lg flex-1 p-6 mb-auto">

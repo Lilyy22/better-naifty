@@ -23,6 +23,7 @@ export const LOGIN = gql`
         id
         email
         is_instructor
+        is_superuser
       }
     }
   }

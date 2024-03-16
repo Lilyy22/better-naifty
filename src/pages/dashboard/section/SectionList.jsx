@@ -11,7 +11,7 @@ const SectionList = ({ courseId, enrolled }) => {
   });
   return data?.course[0]?.sections?.map(({ title, id, episodes }) => {
     return (
-      <ul>
+      <ul key={id}>
         <SectionDropDown
           key={id}
           section={title}

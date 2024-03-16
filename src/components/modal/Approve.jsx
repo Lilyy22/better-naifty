@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 export const ApproveModal = ({
   handleApprove,
@@ -6,6 +6,13 @@ export const ApproveModal = ({
   isOpen,
   courseId,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleClick = () => {
+    handleApprove(courseId, false);
+    setIsLoading(true);
+  };
+
   return (
     <>
       <div className={isOpen ? "" : "hidden"}>
@@ -38,36 +45,29 @@ export const ApproveModal = ({
                     clipRule="evenodd"
                   />
                 </svg>
-                <span className="sr-only">Close modal</span>
               </button>
               <svg
-                className="text-gray-400 w-11 h-11 mb-3.5 mx-auto"
-                aria-hidden="true"
-                fill="currentColor"
-                viewBox="0 0 20 20"
+                className="fill-green-900 w-9 h-9 mb-3.5 mx-auto"
                 xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 576 512"
               >
-                <path
-                  fillRule="evenodd"
-                  d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                  clipRule="evenodd"
-                />
+                <path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384v38.6C310.1 219.5 256 287.4 256 368c0 59.1 29.1 111.3 73.7 143.3c-3.2 .5-6.4 .7-9.7 .7H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128zM288 368a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm211.3-43.3c-6.2-6.2-16.4-6.2-22.6 0L416 385.4l-28.7-28.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l40 40c6.2 6.2 16.4 6.2 22.6 0l72-72c6.2-6.2 6.2-16.4 0-22.6z" />
               </svg>
-              <p className="mb-4">
+              <p className="mb-6 max-w-xs block mx-auto">
                 Are you sure you want to Approve this Course?
               </p>
               <div className="flex justify-center items-center space-x-4">
                 <button
-                  onClick={() => handleApprove(courseId, false)}
+                  onClick={handleClick}
                   type="button"
-                  className="py-2 px-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10"
+                  className="py-2 px-3 text-sm font-medium text-white bg-red-500/90 rounded-lg hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-primary-300 focus:z-10"
                 >
-                  No, Reject
+                  {isLoading ? "•••" : "No, Reject"}
                 </button>
                 <button
                   type="button"
                   onClick={() => handleApprove(courseId, true)}
-                  className="py-2 px-3 text-sm font-medium text-center text-white bg-red-500/80 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300"
+                  className="py-2 px-3 text-sm font-medium text-center text-white bg-green-600/80 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300"
                 >
                   Yes, Approve
                 </button>

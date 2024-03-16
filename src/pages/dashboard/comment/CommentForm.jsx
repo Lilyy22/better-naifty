@@ -7,9 +7,10 @@ import { useMutation } from "@apollo/client";
 import { CREATECOMMENT } from "./data/mutation";
 import { Toast } from "../../../components/Toast";
 
-export const CommentForm = ({ setCommented }) => {
+export const CommentForm = ({ setCommented, episodeId }) => {
   const { userId } = useContext(AuthContext);
   const [comment, setComment] = useState();
+
   const [close, setClose] = useState(false);
   const [status, setStatus] = useState({
     success: false,
@@ -26,7 +27,7 @@ export const CommentForm = ({ setCommented }) => {
         variables: {
           userId: userId,
           comment: comment,
-          // episodeId:
+          episodeId: episodeId,
         },
       });
       setComment("");

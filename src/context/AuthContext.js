@@ -9,6 +9,9 @@ export const AuthProvider = ({ children }) => {
   const [isInstructor, setIsInstructor] = useState(
     localStorage.getItem("isInstructor")
   );
+  const [isSuperUser, setIsSuperUser] = useState(
+    localStorage.getItem("isSuperUser")
+  );
   const [userId, setUserId] = useState(localStorage.getItem("userId"));
   const [userEmail, setUserEmail] = useState(localStorage.getItem("userEmail"));
   return (
@@ -20,6 +23,8 @@ export const AuthProvider = ({ children }) => {
         setIsInstructor,
         userId,
         setUserId,
+        isSuperUser,
+        setIsSuperUser,
         userEmail,
         setUserEmail,
       }}

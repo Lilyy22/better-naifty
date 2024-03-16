@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GETINSTRUCTORSECTION = gql`
-  query GETINSTRUCTORSECTION {
-    course_section {
+  query GETINSTRUCTORSECTION($userId: String) {
+    course_section(where: { instructor_id: { exact: $userId } }) {
       id
       title
       updated_at
