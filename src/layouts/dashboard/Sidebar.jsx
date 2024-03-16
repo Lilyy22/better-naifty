@@ -62,7 +62,7 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             </Li>
 
             <Title text="Pages" />
-            {isInstructor === "true" && (
+            {(isInstructor === "true" || isInstructor === true) && (
               <>
                 <DropDown
                   menu="Manage Course"
@@ -111,7 +111,7 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               </>
             )}
 
-            {isSuperUser === "true" && (
+            {(isSuperUser === "true" || isSuperUser === true) && (
               <>
                 <DropDown
                   menu="Courses"

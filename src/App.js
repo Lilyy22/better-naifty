@@ -61,7 +61,10 @@ function App() {
               element={<CourseList approved={true} />}
             />
             <Route path="students" element={<UsersList />} />
-            <Route path="instructors" element={<UsersList role={true} />} />
+            <Route
+              path="instructors"
+              element={<UsersList instructor={true} />}
+            />
 
             <Route
               path="courses/:category_id"
@@ -91,7 +94,7 @@ function App() {
 
             <Route path="profile" element={<Profile />} />
             {/* Dashboard */}
-            <Route path="users" element={<UsersList />} />
+            {/* <Route path="users" element={<UsersList />} /> */}
           </Route>
         </Route>
         <Route path="/dashboard/*" element={<NotFound />} />

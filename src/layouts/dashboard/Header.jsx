@@ -4,7 +4,19 @@ import { AuthContext } from "../../context/AuthContext";
 import { Profile } from "../../components/Profile";
 
 export const Header = ({ handleClick }) => {
-  const { isInstructor, userEmail } = useContext(AuthContext);
+  const { isInstructor, userEmail, isSuperUser } = useContext(AuthContext);
+
+  let name;
+  if (isInstructor === "true" || isInstructor === true) {
+    name = "Instructor";
+  } else if (
+    (isInstructor === "false" || isInstructor === false) &&
+    (isSuperUser === "false" || isSuperUser === false || isSuperUser === null)
+  ) {
+    name = "Student";
+  } else {
+    name = "Admin";
+  }
 
   return (
     <>
@@ -32,11 +44,7 @@ export const Header = ({ handleClick }) => {
           <div className="header-content-right">
             <div className="group header-element md:!px-[0.65rem] px-2 !items-center relative">
               <Profile
-                name={
-                  isInstructor === "true" || isInstructor === true
-                    ? "Instructor"
-                    : "Student"
-                }
+                name={name}
                 subText={userEmail ?? "gelilahhamid2gmail.com"}
                 photo="https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png"
               />

@@ -158,14 +158,15 @@ export const DashboardCourseProgressCard = ({
 }) => {
   return (
     <div
-      className={`rounded-xl bg-${bgColor}-50/80 border border-gray-300 w-64 font-mont mb-4 flex-shrink-0 xl:w-1/3 xl:flex-shrink`}
+      className={`rounded-xl bg-blue-50/80 border border-gray-300 w-64 font-mont mb-4 flex-shrink-0 xl:w-1/3 xl:flex-shrink`}
     >
       <div className="p-6">
         {/* text */}
         <div className="my-auto">
           <h1 className="font-bold">{course}</h1>
           <p className="whitespace-nowrap text-xs tracking-tight my-auto">
-            {description}
+            {description?.substring(0, 80)}
+            {description?.length > 80 ? "..." : ""}
           </p>
         </div>
         {/* end text */}
