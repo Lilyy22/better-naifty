@@ -190,12 +190,14 @@ const Dashboard = () => {
             </>
           )}
         </div>
-        <div className="h-auto flex gap-4 md:w-1/2 md:h-72">
+        <div className="flex flex-wrap gap-4 mt-4">
           {(isSuperUser === "true" || isInstructor === "true") && (
-            <DashboardProgressCard />
+            <div className="bg-gray-50 w-full rounded-xl p-4 lg:w-1/2">
+              <DashboardProgressCard />
+            </div>
           )}
           {isStudent && (
-            <div className="bg-gray-50 flex-1 rounded-xl p-4">
+            <div className="bg-gray-50 flex-1 rounded-xl p-4 md:w-1/2 md:h-72">
               <Doughnut
                 data={{
                   labels: ["Label 1", "Label 2"],
@@ -219,7 +221,7 @@ const Dashboard = () => {
           )}
 
           {isSuperUser === "true" && (
-            <div className="bg-gray-50 flex-1 rounded-xl p-4">
+            <div className="bg-gray-50 w-full rounded-xl p-4 lg:w-[47%]">
               <Line
                 data={{
                   labels: [
