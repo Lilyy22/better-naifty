@@ -190,7 +190,7 @@ const Dashboard = () => {
             </>
           )}
         </div>
-        <div className="h-auto flex gap-4">
+        <div className="h-auto flex gap-4 md:w-1/2">
           {(isSuperUser === "true" || isInstructor === "true") && (
             <DashboardProgressCard />
           )}
