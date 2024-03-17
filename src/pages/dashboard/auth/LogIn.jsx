@@ -14,8 +14,13 @@ export const LogIn = () => {
     errorContent: "",
   });
 
-  const { setAccessToken, setIsInstructor, setUserEmail, setIsSuperUser } =
-    useContext(AuthContext);
+  const {
+    setAccessToken,
+    setIsInstructor,
+    setUserEmail,
+    setIsSuperUser,
+    setUserId,
+  } = useContext(AuthContext);
 
   const [loginUser, { loading }] = useMutation(LOGIN);
 
@@ -36,10 +41,11 @@ export const LogIn = () => {
       localStorage.setItem("userId", data.login?.user?.id);
       localStorage.setItem("userEmail", data.login?.user?.email);
 
-      setIsSuperUser(data.login?.user?.is_superuser);
       setAccessToken(data.login?.token);
+      setIsSuperUser(data.login?.user?.is_superuser);
       setIsInstructor(data.login?.user?.is_instructor);
       setUserEmail(data.login?.user?.email);
+      setUserId(data.login?.user?.id);
 
       setEmail("");
       setPassword("");

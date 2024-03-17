@@ -62,7 +62,7 @@ const Dashboard = () => {
     refetch: refechEnrolled,
   } = useQuery(GETENROLLED, {
     variables: {
-      userId: userId,
+      studentId: userId,
     },
   });
 
@@ -71,6 +71,7 @@ const Dashboard = () => {
     refetchCourse();
     refetchAppCourse();
   }, [enrolledCourse, courseData]);
+  
   return (
     <div>
       <DashH4 text="Welcome Back ☺" />

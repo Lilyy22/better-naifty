@@ -68,7 +68,7 @@ export const SignUp = () => {
       )}
       {status.success && (
         <Toast
-          isSuccess={false}
+          isSuccess={true}
           text="We have send a verification email to your account!"
           close={close}
           setClose={setClose}

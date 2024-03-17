@@ -6,17 +6,20 @@ import { DashH4 } from "../../../components/Heading";
 import { CourseCardLoader } from "../course/components/loader/CardLoader";
 import { CourseCard } from "../course/components/Card";
 import DataNotFound from "../../../components/DataNotFound";
-// import { isStudentEnrolled } from "../../../utils/isStudentEnrolled";
 
 const EnrolledCourses = () => {
   const { userId } = useContext(AuthContext);
   const array = [1, 2, 3, 4, 5, 6];
 
-  const { data, loading } = useQuery(GETENROLLED, {
+  const { data, loading, refetch } = useQuery(GETENROLLED, {
     variables: {
       studentId: userId,
     },
   });
+
+  useEffect(() => {
+    refetch();
+  }, [data]);
 
   return (
     <div className="pb-8">

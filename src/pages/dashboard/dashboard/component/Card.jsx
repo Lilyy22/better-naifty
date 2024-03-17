@@ -164,9 +164,9 @@ export const DashboardCourseProgressCard = ({
         {/* text */}
         <div className="my-auto">
           <h1 className="font-bold">{course}</h1>
-          <p className="whitespace-nowrap text-xs tracking-tight my-auto">
-            {description?.substring(0, 80)}
-            {description?.length > 80 ? "..." : ""}
+          <p className="text-xs tracking-tight my-auto">
+            {description?.substring(0, 60)}
+            {description?.length > 60 ? "..." : ""}
           </p>
         </div>
         {/* end text */}
