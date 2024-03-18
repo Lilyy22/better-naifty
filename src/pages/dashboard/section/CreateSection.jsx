@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { useMutation, useQuery } from "@apollo/client";
 import { GETINSTRUCTORCOURSE } from "../course/data/query";
@@ -68,6 +68,8 @@ export const CreateSection = () => {
       });
     }
   };
+
+
 
   return (
     <>

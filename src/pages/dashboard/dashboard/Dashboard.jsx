@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { DashH4 } from "../../../components/Heading";
+import { DashH4, DashH5 } from "../../../components/Heading";
 import {
   DashboardCard,
   DashboardCourseProgressCard,
@@ -11,7 +11,7 @@ import { useQuery } from "@apollo/client";
 import { COURSECOUNT, USERSCOUNT } from "./data/query";
 import { GETENROLLED } from "../enroll/data/query";
 import DataNotFound from "../../../components/DataNotFound";
-import { Doughnut, Line } from "react-chartjs-2";
+import { Doughnut, Line, Pie } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 
 const Dashboard = () => {
@@ -78,8 +78,8 @@ const Dashboard = () => {
 
       <hr />
       <div className="pt-4">
-        {isStudent && <DashH4 text="My Courses" />}
-        <div className="flex space-x-4 justify-start h-auto overflow-x-auto scrollbar-hide">
+        {isStudent && <DashH5 text="My Courses" />}
+        <div className="flex space-x-4 justify-start h-auto overflow-x-auto scrollbar-hide pt-4">
           {/* {loading && loader.map((item) => <DashCardLoader key={item} />)} */}
           {admin && (
             <>
@@ -220,7 +220,10 @@ const Dashboard = () => {
             </>
           )}
         </div>
-        <div className="h-auto flex flex-wrap gap-4">
+        <hr className="py-2" />
+        {isStudent && <DashH5 text="Course Analysis" />}
+
+        <div className="h-auto flex flex-wrap gap-4 mt-4">
           {(admin || instructor) && (
             <div className="bg-gray-50 w-full rounded-xl p-4 lg:w-1/2">
               <DashboardProgressCard />
@@ -228,7 +231,7 @@ const Dashboard = () => {
           )}
 
           {isStudent && (
-            <div className="bg-gray-50 rounded-xl p-4 w-auto">
+            <div className="bg-gray-50 rounded-xl p-4 w-auto h-72">
               <Doughnut
                 data={{
                   labels: ["Course 1", "Course 2"],
@@ -250,9 +253,32 @@ const Dashboard = () => {
               />
             </div>
           )}
+          {isStudent && (
+            <div className="bg-gray-50 rounded-xl p-4 w-auto h-72">
+              <Pie
+                data={{
+                  labels: ["Course 1", "Course 2"],
+                  datasets: [
+                    {
+                      data: [2, 1], // Example data values
+                      backgroundColor: ["#b2d8d8", "#66b2b2"], // Example background colors
+                    },
+                  ],
+                }}
+                options={{
+                  plugins: {
+                    title: {
+                      display: true,
+                      text: "Course Compeleted",
+                    },
+                  },
+                }}
+              />
+            </div>
+          )}
 
           {isStudent && (
-            <div className="bg-gray-50 w-full rounded-xl p-4 flex-1">
+            <div className="bg-gray-50 w-full rounded-xl p-4 flex-1 lg:w-1/2">
               <DashboardProgressCard title="My Favorite Courses" />
             </div>
           )}
