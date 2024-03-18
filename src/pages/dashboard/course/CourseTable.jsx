@@ -7,6 +7,7 @@ import { DELETECOURSE } from "./data/mutation";
 import { DeleteModal } from "../../../components/modal/Delete";
 import { TableLoader } from "../../../components/Loader";
 import { useNavigate } from "react-router-dom";
+import { trimText } from "../../../utils/trimText";
 
 export const CourseTable = () => {
   const { userId } = useContext(AuthContext);
@@ -63,7 +64,7 @@ export const CourseTable = () => {
               <>
                 <tr className="border p-1" key={id}>
                   <TD>{index + 1}</TD>
-                  <TD text={name} />
+                  <TD text={trimText(name, 30)} />
                   <TD text={`$ ${price}`} />
                   <TD>
                     <span className="rounded-xl text-[0.65rem] py-1 px-3 text-center font-semibold leading-3 bg-purple-100/50 text-purple-500 lowercase">

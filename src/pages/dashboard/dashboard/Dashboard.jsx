@@ -71,10 +71,10 @@ const Dashboard = () => {
     refetchCourse();
     refetchAppCourse();
   }, [enrolledCourse, courseData]);
-  
+
   return (
     <div>
-      <DashH4 text="Welcome Back ☺" />
+      <DashH4 text={`Welcome Back ${admin ? "Admin" : ""} ☺`} />
 
       <hr />
       <div className="pt-4">
@@ -228,14 +228,14 @@ const Dashboard = () => {
           )}
 
           {isStudent && (
-            <div className="bg-gray-50 w-full rounded-xl p-4 md:w-1/2 md:h-72">
+            <div className="bg-gray-50 rounded-xl p-4 w-auto">
               <Doughnut
                 data={{
-                  labels: ["Label 1", "Label 2"],
+                  labels: ["Course 1", "Course 2"],
                   datasets: [
                     {
                       data: [1, 1], // Example data values
-                      backgroundColor: ["green", "blue"], // Example background colors
+                      backgroundColor: ["#a259ff", "#CF9FFF"], // Example background colors
                     },
                   ],
                 }}
@@ -251,7 +251,13 @@ const Dashboard = () => {
             </div>
           )}
 
-          {admin && (
+          {isStudent && (
+            <div className="bg-gray-50 w-full rounded-xl p-4 flex-1">
+              <DashboardProgressCard title="My Favorite Courses" />
+            </div>
+          )}
+
+          {(admin || instructor) && (
             <div className="bg-gray-50 w-full rounded-xl p-4 lg:w-[47%]">
               <Line
                 data={{
@@ -268,7 +274,7 @@ const Dashboard = () => {
                   datasets: [
                     {
                       data: [0, 0, 0, 0, 0, 0, 0, 0], // Example data values
-                      backgroundColor: ["green"], // Example background colors
+                      backgroundColor: ["#CF9FFF"], // Example background colors
                     },
                   ],
                 }}

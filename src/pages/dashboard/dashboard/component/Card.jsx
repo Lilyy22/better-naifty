@@ -1,5 +1,6 @@
 import React from "react";
 import { DashH4 } from "../../../../components/Heading";
+import { trimText } from "../../../../utils/trimText";
 
 export const DashboardCard = ({ total, icon, label, iconBg }) => {
   return (
@@ -17,11 +18,11 @@ export const DashboardCard = ({ total, icon, label, iconBg }) => {
   );
 };
 
-export const DashboardProgressCard = ({ total, icon, label }) => {
+export const DashboardProgressCard = ({ total, icon, label, title }) => {
   return (
-    <div className="rounded-xl bg-gray-50 w-full font-mont mb-4 xl:w-1/2">
+    <div className="rounded-xl bg-gray-50 w-full font-mont mb-4">
       <div className="p-4 lg:p-6">
-        <DashH4 text="Popular Courses" />
+        <DashH4 text={title ? title : "Popular Courses"} />
         {/* courses */}
         <div className="flex flex-wrap md:flex-nowrap gap-2 lg:gap-6 justify-between mb-4 mt-6">
           {/* text */}
@@ -165,8 +166,7 @@ export const DashboardCourseProgressCard = ({
         <div className="my-auto">
           <h1 className="font-bold">{course}</h1>
           <p className="text-xs tracking-tight my-auto">
-            {description?.substring(0, 60)}
-            {description?.length > 60 ? "..." : ""}
+            {trimText(description, 60)}
           </p>
         </div>
         {/* end text */}
