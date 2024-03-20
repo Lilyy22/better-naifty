@@ -10,6 +10,7 @@ import { ToolTip } from "../../../components/ToolTip";
 import { Toast } from "../../../components/Toast";
 import { DeleteModal } from "../../../components/modal/Delete";
 import { DELETECOURSE } from "../course/data/mutation";
+import { trimText } from "../../../utils/trimText";
 
 const CourseList = ({ approved }) => {
   const [openApproveModal, setOpenApproveModal] = useState(false);
@@ -83,7 +84,7 @@ const CourseList = ({ approved }) => {
 
   const thead = [
     { head: "Name" },
-    { head: "Role" },
+    { head: "Category" },
     { head: "Status" },
     { head: "Publish Date" },
     { head: "Action" },
@@ -127,7 +128,7 @@ const CourseList = ({ approved }) => {
                 return (
                   <tr className="border p-1" key={id}>
                     <TD>{index + 1}</TD>
-                    <TD text={name} />
+                    <TD text={trimText(name, 30)} />
                     <TD text={category?.name} />
                     <TD>
                       <span

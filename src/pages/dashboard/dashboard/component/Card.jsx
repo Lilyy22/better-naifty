@@ -1,27 +1,37 @@
 import React from "react";
 import { DashH4 } from "../../../../components/Heading";
+import { trimText } from "../../../../utils/trimText";
 
 export const DashboardCard = ({ total, icon, label, iconBg }) => {
   return (
     <div className="border border-gray-300 rounded-xl bg-gray-50 w-60 font-mont mb-4 flex-shrink-0 xl:w-1/4 xl:flex-shrink">
-      <div className="p-6">
-        <div className={`bg-${iconBg}-100 inline-block p-2 rounded-lg mb-3`}>
-          {icon}
+      <div className="p-6 flex justify-between">
+        <div>
+          <div className={`bg-${iconBg}-100 inline-block p-2 rounded-lg mb-3`}>
+            {icon}
+          </div>
+          <h1 className="font-bold text-2xl tracking-wider">{total}</h1>
+          <span className="text-sm tracking-tight whitespace-nowrap">
+            {label}
+          </span>
         </div>
-        <h1 className="font-bold text-2xl tracking-wider">{total}</h1>
-        <span className="text-sm tracking-tight whitespace-nowrap">
-          {label}
-        </span>
+        <svg
+          className="w-7 h-7 fill-gray-200"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+        >
+          <path d="M0 416c0 17.7 14.3 32 32 32l54.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48L480 448c17.7 0 32-14.3 32-32s-14.3-32-32-32l-246.7 0c-12.3-28.3-40.5-48-73.3-48s-61 19.7-73.3 48L32 384c-17.7 0-32 14.3-32 32zm128 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM320 256a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm32-80c-32.8 0-61 19.7-73.3 48L32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l246.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48l54.7 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-54.7 0c-12.3-28.3-40.5-48-73.3-48zM192 128a32 32 0 1 1 0-64 32 32 0 1 1 0 64zm73.3-64C253 35.7 224.8 16 192 16s-61 19.7-73.3 48L32 64C14.3 64 0 78.3 0 96s14.3 32 32 32l86.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48L480 128c17.7 0 32-14.3 32-32s-14.3-32-32-32L265.3 64z" />
+        </svg>
       </div>
     </div>
   );
 };
 
-export const DashboardProgressCard = ({ total, icon, label }) => {
+export const DashboardProgressCard = ({ total, icon, label, title }) => {
   return (
-    <div className="rounded-xl bg-gray-50 w-full font-mont mb-4 xl:w-1/2">
+    <div className="border border-gray-300 rounded-xl bg-gray-50 w-full font-mont mb-4">
       <div className="p-4 lg:p-6">
-        <DashH4 text="Popular Courses" />
+        <DashH4 text={title ? title : "Popular Courses"} />
         {/* courses */}
         <div className="flex flex-wrap md:flex-nowrap gap-2 lg:gap-6 justify-between mb-4 mt-6">
           {/* text */}
@@ -158,14 +168,14 @@ export const DashboardCourseProgressCard = ({
 }) => {
   return (
     <div
-      className={`rounded-xl bg-${bgColor}-50/80 border border-gray-300 w-64 font-mont mb-4 flex-shrink-0 xl:w-1/3 xl:flex-shrink`}
+      className={`rounded-xl bg-blue-50/80 border border-gray-300 w-64 font-mont mb-4 flex-shrink-0 xl:w-1/3 xl:flex-shrink`}
     >
       <div className="p-6">
         {/* text */}
         <div className="my-auto">
           <h1 className="font-bold">{course}</h1>
-          <p className="whitespace-nowrap text-xs tracking-tight my-auto">
-            {description}
+          <p className="text-xs tracking-tight my-auto">
+            {trimText(description, 60)}
           </p>
         </div>
         {/* end text */}

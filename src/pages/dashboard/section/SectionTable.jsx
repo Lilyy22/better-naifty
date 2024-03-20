@@ -9,6 +9,7 @@ import { EpisodeForm } from "../episode/EpisodeForm";
 import { Link, useNavigate } from "react-router-dom";
 import { DELETESECTION } from "./data/mutation";
 import { AuthContext } from "../../../context/AuthContext";
+import { trimText } from "../../../utils/trimText";
 
 export const SectionTable = () => {
   const navigate = useNavigate();
@@ -75,15 +76,8 @@ export const SectionTable = () => {
                   <tr className="border p-1" key={id}>
                     <TD>{index + 1}</TD>
 
-                    <TD>
-                      {/* <Link
-                        className="text-[0.79rem] text-blue-500 font-medium"
-                        to={`${id}`}
-                      >
-                    </Link> */}
-                      {title}
-                    </TD>
-                    <TD text={course.name} />
+                    <TD>{trimText(title, 20)}</TD>
+                    <TD text={trimText(course.name, 20)} />
                     <TD text={formattedDate(updated_at)} />
                     <TD>
                       <Link className="relative group" to={`${id}`}>
