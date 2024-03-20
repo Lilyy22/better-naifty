@@ -7,7 +7,7 @@ import { GETUSERS } from "./data/query";
 const UsersList = ({ role }) => {
   const { data, loading } = useQuery(GETUSERS, {
     variables: {
-      $role: role ? role : undefined,
+      role: role ? "True" : "False",
     },
   });
   const thead = [

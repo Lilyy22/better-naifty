@@ -14,7 +14,7 @@ export const GETINSTRUCTORCOURSE = gql`
 
 export const GETCOURSES = gql`
   query GETCOURSES {
-    course {
+    course(where: { status: { exact: "APPROVED" } }) {
       id
       name
       description

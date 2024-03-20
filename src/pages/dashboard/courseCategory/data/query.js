@@ -11,7 +11,7 @@ export const GETCOURSECATEGORY = gql`
 `;
 
 export const GETCOURSEBYCATEGORY = gql`
-  query GETCOURSES($categoryId: String) {
+  query GETCOURSEBYCATEGORY($categoryId: String) {
     course(where: { category_id: { exact: $categoryId } }) {
       id
       name

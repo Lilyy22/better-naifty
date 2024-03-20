@@ -7,3 +7,11 @@ export const COURSECOUNT = gql`
     }
   }
 `;
+
+export const USERSCOUNT = gql`
+  query USERSCOUNT($role: String) {
+    users_aggregate(where: { is_instructor: { exact: $role } }) {
+      count
+    }
+  }
+`;

@@ -2,7 +2,7 @@ import React from "react";
 
 const DataNotFound = ({ text }) => {
   return (
-    <div className="flex justify-center items-center min-h-44 m-auto  text-gray-400">
+    <div className="flex justify-center items-center min-h-44 m-auto text-gray-400">
       <div>
         <svg
           className="w-10 h-10 fill-gray-300 m-auto"

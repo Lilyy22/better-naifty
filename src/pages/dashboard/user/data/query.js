@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const GETUSERS = gql`
-  query GETUSERS($role: Boolean) {
+  query GETUSERS($role: String) {
     users(where: { is_instructor: { exact: $role } }) {
       id
       email

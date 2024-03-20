@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { DashH4 } from "../../../components/Heading";
 import {
   DashboardCard,
@@ -8,7 +8,7 @@ import {
 import { AuthContext } from "../../../context/AuthContext";
 import { DashCardLoader } from "./component/Loader";
 import { useQuery } from "@apollo/client";
-import { COURSECOUNT } from "./data/query";
+import { COURSECOUNT, USERSCOUNT } from "./data/query";
 import { GETENROLLED } from "../enroll/data/query";
 import DataNotFound from "../../../components/DataNotFound";
 import { Doughnut, Line } from "react-chartjs-2";
@@ -17,45 +17,71 @@ import { Chart as ChartJS } from "chart.js/auto";
 const Dashboard = () => {
   const loader = [1, 2, 3, 4];
   const { userId } = useContext(AuthContext);
-
   const { isInstructor, isSuperUser } = useContext(AuthContext);
 
-  const { data: courseData, loading } = useQuery(COURSECOUNT, {
-    variables: {
-      userId: isInstructor ? userId : undefined,
-    },
-  });
-
-  const { data: studentData, loading: studentLoading } = useQuery(COURSECOUNT, {
-    variables: {
-      userId: isInstructor ? userId : undefined,
-    },
-  });
-
-  const { data: enrolledCourse, loading: enrolledLoading } = useQuery(
-    GETENROLLED,
-    {
-      variables: {
-        userId: userId,
-      },
-    }
-  );
-
+  const instructor = isInstructor === "true" || isInstructor === true;
+  const admin = isSuperUser === "true" || isSuperUser === true;
   const isStudent =
     (isInstructor === "false" || isInstructor === false) &&
     (isSuperUser === "false" || isSuperUser === false || isSuperUser === null);
 
+  const {
+    data: courseData,
+    loading,
+    refetch: refetchCourse,
+  } = useQuery(COURSECOUNT, {
+    variables: {
+      userId: instructor ? userId : undefined,
+      status: undefined,
+    },
+  });
+  const { data: appcourseData, refetch: refetchAppCourse } = useQuery(
+    COURSECOUNT,
+    {
+      variables: {
+        userId: instructor ? userId : undefined,
+        status: "True",
+      },
+    }
+  );
+
+  const { data: studentData, loading: studentLoading } = useQuery(USERSCOUNT, {
+    variables: {
+      role: "False",
+    },
+  });
+  const { data: instData, loading: instLoading } = useQuery(USERSCOUNT, {
+    variables: {
+      role: "True",
+    },
+  });
+
+  const {
+    data: enrolledCourse,
+    loading: enrolledLoading,
+    refetch: refechEnrolled,
+  } = useQuery(GETENROLLED, {
+    variables: {
+      userId: userId,
+    },
+  });
+
+  useEffect(() => {
+    refechEnrolled();
+    refetchCourse();
+    refetchAppCourse();
+  }, [enrolledCourse, courseData]);
   return (
     <div>
       <DashH4 text="Welcome Back ☺" />
 
       <>
-        <div className="flex space-x-4 justify-between h-auto overflow-x-auto scrollbar-hide">
+        <div className="flex space-x-4 justify-start h-auto overflow-x-auto scrollbar-hide">
           {/* {loading && loader.map((item) => <DashCardLoader key={item} />)} */}
-          {isSuperUser === "true" && (
+          {admin && (
             <>
               <DashboardCard
-                total={courseData?.course_aggregate?.count}
+                total={studentData?.users_aggregate?.count}
                 label="Total Students"
                 iconBg="purple"
                 icon={
@@ -69,7 +95,7 @@ const Dashboard = () => {
                 }
               />
               <DashboardCard
-                total={0}
+                total={instData?.users_aggregate?.count}
                 label="Total Instructors"
                 iconBg="green"
                 icon={
@@ -83,7 +109,7 @@ const Dashboard = () => {
                 }
               />
               <DashboardCard
-                total={0}
+                total={courseData?.course_aggregate?.count}
                 label="Total Courses"
                 iconBg="blue"
                 icon={
@@ -112,10 +138,10 @@ const Dashboard = () => {
               />
             </>
           )}
-          {isInstructor === "true" && (
+          {instructor && (
             <>
               <DashboardCard
-                total={courseData?.course_aggregate?.count}
+                total={0}
                 label="Total Students"
                 iconBg="purple"
                 icon={
@@ -129,7 +155,7 @@ const Dashboard = () => {
                 }
               />
               <DashboardCard
-                total={0}
+                total={appcourseData?.course_aggregate?.count}
                 label="Total Approved Courses"
                 iconBg="green"
                 icon={
@@ -143,7 +169,7 @@ const Dashboard = () => {
                 }
               />
               <DashboardCard
-                total={0}
+                total={courseData?.course_aggregate?.count}
                 label="Total Courses"
                 iconBg="blue"
                 icon={
@@ -182,6 +208,7 @@ const Dashboard = () => {
                 return (
                   <DashboardCourseProgressCard
                     key={id}
+                    bgColor="blue"
                     course={course?.name}
                     description={course?.description}
                   />
@@ -190,14 +217,14 @@ const Dashboard = () => {
             </>
           )}
         </div>
-        <div className="flex flex-wrap gap-4 mt-4">
-          {(isSuperUser === "true" || isInstructor === "true") && (
+        <div className="h-auto flex flex-wrap gap-4">
+          {(admin || instructor) && (
             <div className="bg-gray-50 w-full rounded-xl p-4 lg:w-1/2">
               <DashboardProgressCard />
             </div>
           )}
           {isStudent && (
-            <div className="bg-gray-50 flex-1 rounded-xl p-4 md:w-1/2 md:h-72">
+            <div className="bg-gray-50 rounded-xl py-2 md:p-4 md:h-72 w-full lg:w-1/2">
               <Doughnut
                 data={{
                   labels: ["Label 1", "Label 2"],
@@ -220,7 +247,7 @@ const Dashboard = () => {
             </div>
           )}
 
-          {isSuperUser === "true" && (
+          {admin && (
             <div className="bg-gray-50 w-full rounded-xl p-4 lg:w-[47%]">
               <Line
                 data={{

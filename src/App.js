@@ -29,6 +29,7 @@ import CourseList from "./pages/dashboard/user/CourseList";
 import Dashboard from "./pages/dashboard/dashboard/Dashboard";
 
 function App() {
+    const is_online = window.navigator.onLine ? true : false;
   return (
     <>
       <ScrollTop />
