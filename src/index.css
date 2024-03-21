@@ -12,6 +12,10 @@
     position: relative;
   }
 
+  video {
+    border-radius: 5px;
+  }
+
   /* Target the select dropdown arrow */
   select::-ms-expand,
   select::-webkit-select-arrow {

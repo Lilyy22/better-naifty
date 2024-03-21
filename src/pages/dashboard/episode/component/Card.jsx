@@ -4,17 +4,24 @@ import { formattedDate } from "../../../../utils/formattedDate";
 import { ToolTip } from "../../../../components/ToolTip";
 import { trimText } from "../../../../utils/trimText";
 
-export const EpisodeCard = ({ title, description, file, updatedAt }) => {
+export const EpisodeCard = ({
+  id,
+  title,
+  description,
+  file,
+  updatedAt,
+  handleDeleteClick,
+}) => {
   return (
     <>
-      <div className="bg-white h-auto rounded-lg md:w-1/2 xl:w-1/3">
+      <div className="bg-white h-auto rounded-lg max-w-xs">
         <ReactPlayer
           url={`https://naifty.abelayalew.dev/media/${file}`}
           width="100%"
           height="50%"
           playing={false}
           controls={true}
-          style={{ borderRadius: 30 }}
+          style={{ borderRadius: 100 }}
         />
         <div className="p-6 bg-white">
           <h3 className="font-semibold font-mont text-sm mb-1">{title}</h3>
@@ -40,7 +47,7 @@ export const EpisodeCard = ({ title, description, file, updatedAt }) => {
               <button
                 type="button"
                 className="bg-red-100/50 p-2 inline rounded relative group hover:bg-red-600"
-                // onClick={() => handleDeleteClick(id)}
+                onClick={() => handleDeleteClick(id)}
               >
                 <ToolTip text="Delete" />
                 <svg

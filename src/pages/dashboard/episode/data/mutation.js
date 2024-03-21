@@ -19,3 +19,11 @@ export const CREATEEPISODE = gql`
     }
   }
 `;
+
+export const DELETEEPISODE = gql`
+  mutation DELETEEPISODE($episodeId: String) {
+    delete_curseepisode(where: { id: { exact: $episodeId } }) {
+      affected_rows
+    }
+  }
+`;

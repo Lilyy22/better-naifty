@@ -13,7 +13,7 @@ export const DeleteModal = ({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
           aria-hidden="true"
-          className="overflow-y-auto overflow-x-hidden fixed top-0 flex left-0 z-50 justify-center items-center w-full min-h-full bg-gray-700/10 "
+          className="overflow-y-auto overflow-x-hidden fixed top-0 flex left-0 z-50 justify-center items-center w-full min-h-full bg-gray-700/20"
         >
           <div className="relative p-4 w-full max-w-md h-full md:h-auto">
             {/* Modal content */}
