@@ -27,6 +27,9 @@ import CourseCategoryList from "./pages/dashboard/courseCategory/CourseCategoryL
 import UsersList from "./pages/dashboard/user/UsersList";
 import CourseList from "./pages/dashboard/user/CourseList";
 import Dashboard from "./pages/dashboard/dashboard/Dashboard";
+import CreateCategory from "./pages/dashboard/courseCategory/CreateCategory";
+import CategoryTable from "./pages/dashboard/courseCategory/CategoryTable";
+import UpdateCategory from "./pages/dashboard/courseCategory/UpdateCategory";
 
 function App() {
   return (
@@ -65,11 +68,19 @@ function App() {
               path="instructors"
               element={<UsersList instructor={true} />}
             />
-
             <Route
               path="courses/:category_id"
               element={<CourseCategoryList />}
             />
+
+            {/* category */}
+            <Route path="create-category" element={<CreateCategory />} />
+            <Route
+              path="update-category/:category_id"
+              element={<UpdateCategory />}
+            />
+            <Route path="categories" element={<CategoryTable />} />
+            {/*  */}
             <Route
               path="courses-detail/:course_id"
               element={<CourseDetail />}
@@ -91,7 +102,6 @@ function App() {
               element={<EpisodeDetail />}
               preventScrollReset={false}
             />
-
             <Route path="profile" element={<Profile />} />
             {/* Dashboard */}
             {/* <Route path="users" element={<UsersList />} /> */}

@@ -5,7 +5,6 @@ import { CourseDetailLoader } from "./components/loader/DetailLoader";
 import { formattedDate } from "../../../utils/formattedDate";
 import { DashH4 } from "../../../components/Heading";
 import { Profile } from "../../../components/Profile";
-import { SectionDropDown } from "../section/component/List";
 import { Rating } from "../../../components/Rating";
 import Enroll from "../enroll/Enroll";
 import { useContext, useEffect, useState } from "react";
@@ -13,10 +12,13 @@ import { AuthContext } from "../../../context/AuthContext";
 import { isStudentEnrolled } from "../../../utils/isStudentEnrolled";
 import { ToolTip } from "../../../components/ToolTip";
 import SectionList from "../section/SectionList";
+import { GoBack } from "../../../components/Button";
 
 export const CourseDetail = () => {
   const { course_id } = useParams();
-  const { userId } = useContext(AuthContext);
+  const { userId, isSuperUser } = useContext(AuthContext);
+  const admin = isSuperUser === "true" || isSuperUser === true;
+
   const { data, loading, refetch } = useQuery(GETCOURSESECTION, {
     variables: {
       courseId: course_id,
@@ -34,6 +36,7 @@ export const CourseDetail = () => {
         <CourseDetailLoader />
       ) : (
         <div className="rounded-lg">
+          {admin && <GoBack text="Back" pathname="/dashboard/all-courses" />}
           <DashH4 text={data?.course[0]?.name} />
           <div className="flex flex-wrap gap-4 justify-between">
             <div className="w-full lg:w-[45%] p-6 order-last flex-grow bg-white/60 rounded-lg mb-auto">
@@ -49,7 +52,11 @@ export const CourseDetail = () => {
                   <Rating />
                   <h2 className="font-bold">${data?.course[0]?.price}</h2>
                 </div>
-                {isStudentEnrolled(data?.course[0]?.enrollments, userId) ? (
+                {isStudentEnrolled(
+                  data?.course[0]?.enrollments,
+                  userId,
+                  admin
+                ) ? (
                   <div className="flex gap-1 text-emerald-700 mb-auto bg-emerald-100/50 rounded-3xl font-mont px-4 py-1.5">
                     <svg
                       className="w-4 h-4 fill-current my-auto"
@@ -66,7 +73,8 @@ export const CourseDetail = () => {
                     studentId={userId}
                     enrolled={isStudentEnrolled(
                       data?.course[0]?.enrollments,
-                      userId
+                      userId,
+                      admin
                     )}
                     setEnrolled={setEnrolled}
                   />
@@ -91,7 +99,7 @@ export const CourseDetail = () => {
                 />
                 <div className="pl-2 md:pl-4">
                   <h1 className="mb-1 font-semibold text-gray-600 text-xs">
-                    About Author
+                    About Instructor
                   </h1>
                   <p className="text-gray-500 text-xs">
                     {data?.course[0]?.instructor?.studentprofile?.bio}
@@ -115,7 +123,8 @@ export const CourseDetail = () => {
                     </h1>
                     {!isStudentEnrolled(
                       data?.course[0]?.enrollments,
-                      userId
+                      userId,
+                      admin
                     ) && (
                       <div className="bg-purple-100/50 my-auto p-2 text-purple-700 rounded relative group">
                         <ToolTip text="Enroll to Unlock course" />
@@ -134,7 +143,8 @@ export const CourseDetail = () => {
                     courseId={course_id}
                     enrolled={isStudentEnrolled(
                       data?.course[0]?.enrollments,
-                      userId
+                      userId,
+                      admin
                     )}
                   />
                 </div>
