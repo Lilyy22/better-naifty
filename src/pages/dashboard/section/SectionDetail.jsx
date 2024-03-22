@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { EpisodeCard } from "../episode/component/Card";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
@@ -8,15 +8,19 @@ import { GoBack } from "../../../components/Button";
 import DataNotFound from "../../../components/DataNotFound";
 import { DELETEEPISODE } from "../episode/data/mutation";
 import { DeleteModal } from "../../../components/modal/Delete";
+import UpdateEpisode from "../episode/UpdateEpisode";
+import { Loader } from "../episode/component/Loader";
 
 export const SectionDetail = () => {
   const { section_url } = useParams();
 
   const [episodeId, setEpisodeId] = useState();
+  const [episodeUpdate, setEpisodeUpdate] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openEpisodeModal, setOpenEpisodeModal] = useState(false);
 
   const [del] = useMutation(DELETEEPISODE);
-  const { data } = useQuery(GETSECTION, {
+  const { data, loading, refetch } = useQuery(GETSECTION, {
     variables: {
       sectionId: section_url,
     },
@@ -24,6 +28,11 @@ export const SectionDetail = () => {
 
   const handleDeleteClick = (episodeId) => {
     setOpenDeleteModal(!openDeleteModal);
+    setEpisodeId(episodeId);
+  };
+
+  const handleEditClick = (episodeId) => {
+    setOpenEpisodeModal(!openEpisodeModal);
     setEpisodeId(episodeId);
   };
 
@@ -38,15 +47,21 @@ export const SectionDetail = () => {
   };
 
   const episodes = data?.course_section[0]?.episodes;
+  const array = [1, 2, 3, 4];
+
+  useEffect(() => {
+    refetch();
+  }, [episodeUpdate]);
+
   return (
     <>
       <GoBack text="Back" pathname="/dashboard/section-list" />
       <DashH4 text="Section Detail" />
       <div className="p-4 mb-8 bg-white rounded-lg">
         <h1 className="font-semibold text-gray-400/70 text-xs">Title</h1>
-        <DashH4 text={data?.course_section[0]?.title} />
+        <DashH4 text={loading ? "•••" : data?.course_section[0]?.title} />
         <h1 className="font-semibold text-gray-400/70 text-xs">Description</h1>
-        <p>{data?.course_section[0]?.description}</p>
+        <p>{loading ? "•••" : data?.course_section[0]?.description}</p>
       </div>
       {episodes?.length === 0 ? (
         <DataNotFound text="No Episodes for this Section." />
@@ -54,6 +69,7 @@ export const SectionDetail = () => {
         <>
           <DashH4 text="Episodes" />
           <div className="flex flex-wrap gap-2 xl:gap-4">
+            {loading && array.map((item) => <Loader key={item} />)}
             {episodes?.map(({ id, title, description, file, updated_at }) => {
               return (
                 <EpisodeCard
@@ -64,6 +80,7 @@ export const SectionDetail = () => {
                   file={file}
                   updatedAt={updated_at}
                   handleDeleteClick={handleDeleteClick}
+                  handleEditClick={handleEditClick}
                 />
               );
             })}
@@ -75,6 +92,15 @@ export const SectionDetail = () => {
               isOpen={openDeleteModal}
               handleModal={() => setOpenDeleteModal(!openDeleteModal)}
             />
+          )}
+          {openEpisodeModal && (
+            <div className="overflow-y-auto overflow-x-hidden fixed top-0 flex left-0 z-50 justify-center items-center w-full min-h-full bg-gray-700/10 ">
+              <UpdateEpisode
+                episodeId={episodeId}
+                handleOpen={() => setOpenEpisodeModal(!openEpisodeModal)}
+                handleEpisodeUpdate={() => setEpisodeUpdate(!episodeUpdate)}
+              />
+            </div>
           )}
         </>
       )}

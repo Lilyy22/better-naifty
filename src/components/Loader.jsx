@@ -5,7 +5,7 @@ export const TableLoader = () => {
 
   return (
     <>
-      <div className="overflow-hidden mt-8 rounded-xl bg-white animate-pulse">
+      <div className="overflow-hidden mt-8 rounded-xl bg-white animate-pulse min-w-5xl xl:w-[80%] font-mont">
         <div className="flex justify-between p-4">
           <div className="bg-gray-200 rounded p-3 w-16"></div>
           <div className="bg-gray-200 rounded p-3 w-16"></div>
@@ -30,22 +30,22 @@ export const TableLoader = () => {
                 {array.map((item) => (
                   <tr className="border p-1" key={item}>
                     <td className="text-start px-4 py-2 border border-gray-100">
-                      <div className="bg-gray-200 p-3 w-1/4 rounded"></div>
+                      <div className="bg-gray-200 p-3 rounded"></div>
                     </td>
                     <td className="text-start px-4 py-2 border border-gray-100">
-                      <div className="bg-gray-200 p-3 w-1/4 rounded"></div>
+                      <div className="bg-gray-200 p-3 rounded"></div>
                     </td>
                     <td className="text-start px-4 py-2 border border-gray-100">
-                      <div className="bg-gray-200 p-3 w-1/4 rounded"></div>
+                      <div className="bg-gray-200 p-3 rounded"></div>
                     </td>
                     <td className="text-start px-4 py-2 border border-gray-100">
-                      <div className="bg-gray-200 p-3 w-1/4 rounded"></div>
+                      <div className="bg-gray-200 p-3 rounded"></div>
                     </td>
                     <td className="text-start px-4 py-2 border border-gray-100">
-                      <div className="bg-gray-200 p-3 w-1/4 rounded"></div>
+                      <div className="bg-gray-200 p-3 rounded"></div>
                     </td>
                     <td className="text-start px-4 py-2 border border-gray-100">
-                      <div className="bg-gray-200 p-3 w-1/4 rounded"></div>
+                      <div className="bg-gray-200 p-3 rounded"></div>
                     </td>
                   </tr>
                 ))}

@@ -20,6 +20,22 @@ export const CREATEEPISODE = gql`
   }
 `;
 
+export const UPDATEEPISODE = gql`
+  mutation UPDATEEPISODE(
+    $episodeId: String
+    $title: String
+    $description: String
+    $file: String
+  ) {
+    update_curseepisode(
+      input: { title: $title, description: $description, file: $file }
+      where: { id: { exact: $episodeId } }
+    ) {
+      affected_rows
+    }
+  }
+`;
+
 export const DELETEEPISODE = gql`
   mutation DELETEEPISODE($episodeId: String) {
     delete_curseepisode(where: { id: { exact: $episodeId } }) {

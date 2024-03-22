@@ -11,6 +11,7 @@ export const EpisodeCard = ({
   file,
   updatedAt,
   handleDeleteClick,
+  handleEditClick,
 }) => {
   return (
     <>
@@ -33,7 +34,7 @@ export const EpisodeCard = ({
               <button
                 type="button"
                 className="bg-green-100/50 p-2 inline rounded relative group hover:bg-green-600"
-                // onClick={() => handleEditClick(id)}
+                onClick={() => handleEditClick(id)}
               >
                 <ToolTip text="Edit" />
                 <svg
