@@ -19,7 +19,6 @@ export const CourseCategory = () => {
             ) : (
               <Card key={id} thumbnail={image} title={name} categoryId={id} />
             )}
-            ;
           </>
         );
       });

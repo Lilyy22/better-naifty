@@ -1,5 +1,5 @@
 import React from "react";
-import { Action, TD, Table } from "../../../components/table/Table";
+import { TD, Table } from "../../../components/table/Table";
 import { TableLoader } from "../../../components/Loader";
 import { useQuery } from "@apollo/client";
 import { GETUSERS } from "./data/query";

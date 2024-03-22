@@ -24,9 +24,12 @@ import { BlogDetail } from "./pages/landing/BlogDetail";
 import Blog from "./pages/landing/Blog";
 import EnrolledCourses from "./pages/dashboard/enroll/EnrolledCourses";
 import CourseCategoryList from "./pages/dashboard/courseCategory/CourseCategoryList";
-import UsersList from "./pages/dashboard/user/UsersList";
-import CourseList from "./pages/dashboard/user/CourseList";
 import Dashboard from "./pages/dashboard/dashboard/Dashboard";
+import CreateCategory from "./pages/dashboard/courseCategory/CreateCategory";
+import CategoryTable from "./pages/dashboard/courseCategory/CategoryTable";
+import UpdateCategory from "./pages/dashboard/courseCategory/UpdateCategory";
+import UsersList from "./pages/dashboard/admin/UsersList";
+import CourseList from "./pages/dashboard/admin/CourseList";
 
 function App() {
     const is_online = window.navigator.onLine ? true : false;
@@ -61,12 +64,6 @@ function App() {
               path="approved-courses"
               element={<CourseList approved={true} />}
             />
-            <Route path="students" element={<UsersList />} />
-            <Route
-              path="instructors"
-              element={<UsersList instructor={true} />}
-            />
-
             <Route
               path="courses/:category_id"
               element={<CourseCategoryList />}
@@ -75,6 +72,21 @@ function App() {
               path="courses-detail/:course_id"
               element={<CourseDetail />}
             />
+
+            {/* users */}
+            <Route path="students" element={<UsersList />} />
+            <Route
+              path="instructors"
+              element={<UsersList instructor={true} />}
+            />
+
+            {/* category */}
+            <Route path="create-category" element={<CreateCategory />} />
+            <Route
+              path="update-category/:category_id"
+              element={<UpdateCategory />}
+            />
+            <Route path="categories" element={<CategoryTable />} />
 
             {/* section */}
             <Route path="section-list" element={<SectionTable />} />
@@ -94,8 +106,6 @@ function App() {
             />
 
             <Route path="profile" element={<Profile />} />
-            {/* Dashboard */}
-            {/* <Route path="users" element={<UsersList />} /> */}
           </Route>
         </Route>
         <Route path="/dashboard/*" element={<NotFound />} />

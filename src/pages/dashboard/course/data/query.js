@@ -13,8 +13,8 @@ export const GETINSTRUCTORCOURSE = gql`
 `;
 
 export const GETCOURSES = gql`
-  query GETCOURSES {
-    course(where: { status: { exact: "APPROVED" } }) {
+  query GETCOURSES($status: String) {
+    course(where: { status: { exact: $status } }) {
       id
       name
       description

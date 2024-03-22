@@ -32,7 +32,7 @@ export const CourseCard = ({
           />
         </div>
         <div className="px-4 py-2">
-          <span className="bg-purple-100/60 rounded-xl text-xs px-4 py-1 mb-1 inline-block leading-none font-mont font-medium">
+          <span className="bg-purple-100/70 border rounded-xl text-xs px-4 py-1 mb-1 inline-block leading-none font-mont font-medium">
             {category?.name}
           </span>
           <h5 className="font-bold text-gray-700 text-sm">{title}</h5>

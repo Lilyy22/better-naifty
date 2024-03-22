@@ -1,14 +1,25 @@
-import { useMutation } from "@apollo/client";
-import React, { useState } from "react";
-import { CREATEEPISODE } from "./data/mutation";
-import { DashForm } from "../../../components/form/Form";
+import React, { useEffect, useState } from "react";
 import { FileUpload, Input, Textarea } from "../../../components/form/Input";
 import { PrimaryButton } from "../../../components/Button";
+import { useMutation, useQuery } from "@apollo/client";
+import { UPDATEEPISODE } from "./data/mutation";
 import { fileUpload } from "../../../axios/mutation";
+import { GETEPISODE } from "./data/query";
 import { Toast } from "../../../components/Toast";
+import { DashForm } from "../../../components/form/Form";
+import { Loader } from "./component/Loader";
 
-export const EpisodeForm = ({ sectionId, handleOpen }) => {
-  const [createEpisode] = useMutation(CREATEEPISODE);
+const UpdateEpisode = ({ episodeId, handleOpen, handleEpisodeUpdate }) => {
+  const [updateEpisode] = useMutation(UPDATEEPISODE);
+  const {
+    data,
+    loading: dataLoading,
+    refetch,
+  } = useQuery(GETEPISODE, {
+    variables: {
+      episodeId: episodeId,
+    },
+  });
 
   const [loading, setLoading] = useState(false);
   const [close, setClose] = useState(false);
@@ -21,6 +32,8 @@ export const EpisodeForm = ({ sectionId, handleOpen }) => {
   const [uploadProgress, setUploadProgress] = useState(0);
 
   const [video, setVideo] = useState(false);
+  const [selectedFile, setSelectedFile] = useState();
+
   const [episode, setEpisode] = useState({
     title: "",
     description: "",
@@ -28,27 +41,40 @@ export const EpisodeForm = ({ sectionId, handleOpen }) => {
 
   const handleVideo = (e) => {
     setVideo(e.target.files[0]);
+    setSelectedFile(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     try {
-      const filePath = await fileUpload("VIDEOS", video, {
-        onUploadProgress: (progressEvent) => {
-          const percentCompleted = Math.round(
-            (progressEvent.loaded * 100) / progressEvent.total
-          );
-          setUploadProgress(percentCompleted);
-        },
-      });
+      setLoading(true);
+      // const filePath = await fileUpload("VIDEOS", video, {
+      //   onUploadProgress: (progressEvent) => {
+      //     const percentCompleted = Math.round(
+      //       (progressEvent.loaded * 100) / progressEvent.total
+      //     );
+      //     setUploadProgress(percentCompleted);
+      //   },
+      // });
 
-      await createEpisode({
+      let filePath;
+      if (selectedFile && video) {
+        filePath = await fileUpload("VIDEOS", video, {
+          onUploadProgress: (progressEvent) => {
+            const percentCompleted = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            );
+            setUploadProgress(percentCompleted);
+          },
+        });
+      }
+
+      await updateEpisode({
         variables: {
-          sectionId: sectionId,
           title: episode.title,
           description: episode.description,
           file: filePath,
+          episodeId: episodeId,
         },
       });
       setLoading(false);
@@ -57,12 +83,12 @@ export const EpisodeForm = ({ sectionId, handleOpen }) => {
         ...status,
         success: true,
       });
-      setEpisode({ ...episode, title: "", description: "" });
-      setVideo("");
       setTimeout(() => {
+        handleEpisodeUpdate();
         handleOpen();
       }, 1000);
     } catch (error) {
+      setLoading(false);
       setClose(false); // set close false incase toast is closed
       setStatus({
         success: false,
@@ -71,11 +97,30 @@ export const EpisodeForm = ({ sectionId, handleOpen }) => {
       });
     }
   };
+
+  useEffect(() => {
+    if (!episodeId) {
+      // navigate("/dashboard/course-list");
+    } else {
+      refetch();
+      if (data?.curse_episode[0]) {
+        setEpisode({
+          title: data?.curse_episode[0]?.title,
+          description: data?.curse_episode[0]?.description,
+        });
+        const str = data?.curse_episode[0]?.file;
+        const startIndex = str.indexOf("VIDEOS/") + "VIDEOS/".length;
+        const extractedText = str.substring(startIndex);
+        setVideo(extractedText);
+      }
+    }
+  }, [data?.curse_episode[0]]);
+
   return (
     <>
       {status.success && (
         <Toast
-          text="Episode Successfully created!"
+          text="Episode Successfully updated!"
           isSuccess={true}
           close={close}
           setClose={setClose}
@@ -117,7 +162,7 @@ export const EpisodeForm = ({ sectionId, handleOpen }) => {
               label="Episode Title"
               type="text"
               placeholder="eg: Variables"
-              value={episode.title}
+              value={dataLoading ? "•••" : episode.title}
               onChange={(e) => {
                 setEpisode({ ...episode, title: e.target.value });
               }}
@@ -127,7 +172,7 @@ export const EpisodeForm = ({ sectionId, handleOpen }) => {
               id="Description"
               label="Description"
               placeholder="Your description here"
-              value={episode.description}
+              value={dataLoading ? "•••" : episode.description}
               onChange={(e) => {
                 setEpisode({ ...episode, description: e.target.value });
               }}
@@ -137,9 +182,10 @@ export const EpisodeForm = ({ sectionId, handleOpen }) => {
               id="Video"
               label="Video"
               onChange={handleVideo}
-              thumbnail={video}
-              isRequired={true}
+              thumbnail={dataLoading ? "•••" : video}
+              isRequired={video ? false : true}
             />
+
             {video && uploadProgress > 0 && (
               <div className="w-full bg-gray-300 h-5 py-0.5 rounded-full text-center text-xs font-medium text-white relative mb-4">
                 <div
@@ -159,3 +205,5 @@ export const EpisodeForm = ({ sectionId, handleOpen }) => {
     </>
   );
 };
+
+export default UpdateEpisode;

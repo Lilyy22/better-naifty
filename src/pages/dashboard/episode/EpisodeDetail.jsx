@@ -4,7 +4,7 @@ import { GETEPISODE } from "./data/query";
 import ReactPlayer from "react-player";
 import { DashH4 } from "../../../components/Heading";
 import { CommentForm } from "../comment/CommentForm";
-import { Loader } from "./component/Loader";
+import { DetailLoader, Loader } from "./component/Loader";
 import { useParams } from "react-router-dom";
 import SectionList from "../section/SectionList";
 import CommentList from "../comment/CommentList";
@@ -26,7 +26,7 @@ export const EpisodeDetail = () => {
   return (
     <>
       {loading ? (
-        <Loader />
+        <DetailLoader />
       ) : (
         <div className="flex flex-wrap gap-6 justify-between">
           <div className="w-full lg:w-[63%]">

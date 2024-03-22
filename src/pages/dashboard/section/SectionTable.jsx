@@ -102,7 +102,7 @@ export const SectionTable = () => {
                       handleEditClick={handleEditClick}
                     >
                       <button
-                        className="bg-gray-200/60 rounded px-2 py-1.5 my-auto flex gap-1 relative group"
+                        className="bg-gray-200/40 rounded px-2 py-1.5 my-auto flex gap-1 relative group hover:bg-gray-200"
                         onClick={() => handleEpisodeModal(id)}
                       >
                         <span class="invisible absolute -left-1 -top-1 text-xs whitespace-nowrap rounded shadow-lg py-2 px-3 bg-gray-900 text-white -mt-8 group-hover:visible z-10">

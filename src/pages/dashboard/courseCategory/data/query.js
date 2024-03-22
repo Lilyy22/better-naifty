@@ -5,6 +5,18 @@ export const GETCOURSECATEGORY = gql`
     course_category {
       id
       name
+      description
+      image
+    }
+  }
+`;
+
+export const GETCATEGORY = gql`
+  query GETCATEGORY($categoryId: String) {
+    course_category(where: { id: { exact: $categoryId } }) {
+      id
+      name
+      description
       image
     }
   }

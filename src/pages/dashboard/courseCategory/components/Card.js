@@ -12,7 +12,7 @@ export const Card = ({ thumbnail, title, categoryId }) => {
         className="rounded-lg w-full h-full object-cover m-auto brightness-[.6]"
         src={
           thumbnail
-            ? thumbnail
+            ? `https://naifty.abelayalew.dev/media/${thumbnail}`
             : "https://web.stlucie.k12.fl.us/wp-content/plugins/academy/assets//images/thumbnail-placeholder.png"
         }
         alt="category thumbnail"
