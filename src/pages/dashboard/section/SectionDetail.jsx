@@ -51,7 +51,7 @@ export const SectionDetail = () => {
 
   useEffect(() => {
     refetch();
-  }, [episodeUpdate]);
+  }, [episodeUpdate, refetch]);
 
   return (
     <>

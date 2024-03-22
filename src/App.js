@@ -24,12 +24,12 @@ import { BlogDetail } from "./pages/landing/BlogDetail";
 import Blog from "./pages/landing/Blog";
 import EnrolledCourses from "./pages/dashboard/enroll/EnrolledCourses";
 import CourseCategoryList from "./pages/dashboard/courseCategory/CourseCategoryList";
-import UsersList from "./pages/dashboard/user/UsersList";
-import CourseList from "./pages/dashboard/user/CourseList";
 import Dashboard from "./pages/dashboard/dashboard/Dashboard";
 import CreateCategory from "./pages/dashboard/courseCategory/CreateCategory";
 import CategoryTable from "./pages/dashboard/courseCategory/CategoryTable";
 import UpdateCategory from "./pages/dashboard/courseCategory/UpdateCategory";
+import UsersList from "./pages/dashboard/admin/UsersList";
+import CourseList from "./pages/dashboard/admin/CourseList";
 
 function App() {
   return (
