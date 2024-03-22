@@ -63,14 +63,20 @@ function App() {
               path="approved-courses"
               element={<CourseList approved={true} />}
             />
+            <Route
+              path="courses/:category_id"
+              element={<CourseCategoryList />}
+            />
+            <Route
+              path="courses-detail/:course_id"
+              element={<CourseDetail />}
+            />
+
+            {/* users */}
             <Route path="students" element={<UsersList />} />
             <Route
               path="instructors"
               element={<UsersList instructor={true} />}
-            />
-            <Route
-              path="courses/:category_id"
-              element={<CourseCategoryList />}
             />
 
             {/* category */}
@@ -80,11 +86,6 @@ function App() {
               element={<UpdateCategory />}
             />
             <Route path="categories" element={<CategoryTable />} />
-            {/*  */}
-            <Route
-              path="courses-detail/:course_id"
-              element={<CourseDetail />}
-            />
 
             {/* section */}
             <Route path="section-list" element={<SectionTable />} />
@@ -102,9 +103,8 @@ function App() {
               element={<EpisodeDetail />}
               preventScrollReset={false}
             />
+
             <Route path="profile" element={<Profile />} />
-            {/* Dashboard */}
-            {/* <Route path="users" element={<UsersList />} /> */}
           </Route>
         </Route>
         <Route path="/dashboard/*" element={<NotFound />} />

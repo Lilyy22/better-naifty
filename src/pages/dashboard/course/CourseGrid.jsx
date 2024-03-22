@@ -7,7 +7,11 @@ import CourseList from "./components/CourseList";
 import DataNotFound from "../../../components/DataNotFound";
 
 export const CourseGrid = () => {
-  const { data, loading } = useQuery(GETCOURSES);
+  const { data, loading } = useQuery(GETCOURSES, {
+    variables: {
+      status: "APPROVED",
+    },
+  });
 
   return (
     <>
