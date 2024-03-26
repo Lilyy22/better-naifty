@@ -99,9 +99,13 @@ export const LandPrimaryButton = ({
   );
 };
 
-export const GoBack = ({ pathname, text }) => {
+export const GoBack = ({ pathname, text, handleClick }) => {
   return (
-    <Link to={pathname} className="flex my-2 text-blue-600 hover:text-blue-500">
+    <Link
+      to={pathname}
+      onClick={handleClick}
+      className="flex my-2 text-blue-600 hover:text-blue-500"
+    >
       <svg
         className="w-3 h-3 fill-current my-auto"
         xmlns="http://www.w3.org/2000/svg"

@@ -9,8 +9,8 @@ export const SectionDropDown = ({ section, episodes, enrolled }) => {
     <>
       <li
         className={`${
-          isActive ? "text-purple-900 " : ""
-        }"last:mb-0 last:border-0 mb-2 px-4 py-2 border-b border-gray-100 rounded-lg bg-gray-100/70 "`}
+          isActive ? "text-purple-900 cursor-pointer " : ""
+        }"last:mb-0 last:border-0 mb-2 px-4 py-2 border-b border-gray-100 rounded-lg bg-gray-100/70 cursor-pointer "`}
         onClick={() => {
           setIsActive(!isActive);
         }}

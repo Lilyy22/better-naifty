@@ -28,9 +28,7 @@ root.render(
     <ApolloProvider client={client}>
       <AuthProvider>
         <OnlineStatusProvider>
-          <StrictMode>
-            <App />
-          </StrictMode>
+          <App />
         </OnlineStatusProvider>
       </AuthProvider>
     </ApolloProvider>

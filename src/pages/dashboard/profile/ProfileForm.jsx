@@ -4,7 +4,7 @@ import { CREATESTUDENTPROFILE, UPDATESTUDENTPROFILE } from "./data/mutation";
 import { AuthContext } from "../../../context/AuthContext";
 import { Input, Textarea } from "../../../components/form/Input";
 import { useMutation } from "@apollo/client";
-import { PrimaryButton } from "../../../components/Button";
+import { GoBack, PrimaryButton } from "../../../components/Button";
 import { fileUpload } from "../../../axios/mutation";
 import { Toast } from "../../../components/Toast";
 
@@ -94,6 +94,11 @@ export const ProfileForm = ({
           setClose={setClose}
         />
       )}
+
+      {!is_create && (
+        <GoBack text="Back" handleClick={() => window.location.reload()} />
+      )}
+
       <DashForm title="Profile Form">
         <form className="p-6" onSubmit={handleSubmit}>
           <Input
@@ -130,7 +135,7 @@ export const ProfileForm = ({
               <img
                 src={`https://naifty.abelayalew.dev/media/${profilePicture}`}
                 className="cursor-pointer w-full h-full object-cover object-center rounded-full"
-                alt="profile picture"
+                alt="profile"
               />
             ) : (
               <img
@@ -153,13 +158,6 @@ export const ProfileForm = ({
               required={profilePicture ? false : true}
             />
           </div>
-          {/* <FileUpload
-            id="profile"
-            label="Profile"
-            onChange={handleProfileImage}
-            isRequired={profilePicture ? false : true}
-            thumbnail={profileImage}
-          /> */}
           <Textarea
             id="Description"
             label="About Yourself"

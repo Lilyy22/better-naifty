@@ -107,7 +107,7 @@ function App() {
             <Route path="profile" element={<Profile />} />
           </Route>
         </Route>
-        <Route path="/dashboard/*" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
