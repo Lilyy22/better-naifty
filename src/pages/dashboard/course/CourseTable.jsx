@@ -26,6 +26,7 @@ export const CourseTable = () => {
   const thead = [
     { head: "Name" },
     { head: "Price" },
+    { head: "enrolled" },
     { head: "Status" },
     { head: "Action" },
   ];
@@ -59,35 +60,40 @@ export const CourseTable = () => {
         <TableLoader />
       ) : (
         <Table title="Courses" data={thead} path="/dashboard/create-course">
-          {data?.course.map(({ id, name, price, status }, index) => {
-            return (
-              <>
-                <tr className="border p-1" key={id}>
-                  <TD>{index + 1}</TD>
-                  <TD text={trimText(name, 30)} />
-                  <TD text={`$ ${price}`} />
-                  <TD>
-                    <span className="rounded-xl text-[0.65rem] py-1 px-3 text-center font-semibold leading-3 bg-purple-100/50 text-purple-500 lowercase">
-                      {status}
-                    </span>
-                  </TD>
-                  <Action
-                    id={id}
-                    handleDeleteClick={handleDeleteClick}
-                    handleEditClick={handleEditClick}
-                  />
-                  {openDeleteModal && (
-                    <DeleteModal
-                      isOpen={openDeleteModal}
-                      courseId={courseId}
-                      handleModal={() => setOpenDeleteModal(!openDeleteModal)}
-                      handleDelete={handleDelete}
+          {data?.course.map(
+            ({ id, name, price, status, enrollments }, index) => {
+              return (
+                <>
+                  <tr className="border p-1" key={id}>
+                    <TD>{index + 1}</TD>
+                    <TD text={trimText(name, 30)} />
+                    <TD text={`$ ${price}`} />
+                    <TD
+                      text={enrollments[0] ? enrollments[0].aggregate.count : 0}
                     />
-                  )}
-                </tr>
-              </>
-            );
-          })}
+                    <TD>
+                      <span className="rounded-xl text-[0.65rem] py-1 px-3 text-center font-semibold leading-3 bg-purple-100/50 text-purple-500 lowercase">
+                        {status}
+                      </span>
+                    </TD>
+                    <Action
+                      id={id}
+                      handleDeleteClick={handleDeleteClick}
+                      handleEditClick={handleEditClick}
+                    />
+                    {openDeleteModal && (
+                      <DeleteModal
+                        isOpen={openDeleteModal}
+                        courseId={courseId}
+                        handleModal={() => setOpenDeleteModal(!openDeleteModal)}
+                        handleDelete={handleDelete}
+                      />
+                    )}
+                  </tr>
+                </>
+              );
+            }
+          )}
         </Table>
       )}
     </>
