@@ -35,9 +35,8 @@ export const Profile = () => {
   return (
     <>
       {loading && <ProfileLoader />}
-
       {data?.student_profile?.length !== 0 && is_create ? (
-        <div className="bg-white rounded-xl w-full mx-auto">
+        <div className="bg-white rounded-xl w-full xl:w-[70%]">
           {data?.student_profile?.map(
             ({
               id,
