@@ -23,14 +23,17 @@ export const GETCATEGORY = gql`
 `;
 
 export const GETCOURSEBYCATEGORY = gql`
-  query GETCOURSEBYCATEGORY($categoryId: String) {
-    course(where: { category_id: { exact: $categoryId } }) {
+  query GETCOURSEBYCATEGORY($categoryId: String, $status: String) {
+    course(
+      where: { category_id: { exact: $categoryId }, status: { exact: $status } }
+    ) {
       id
       name
       description
       thumbnail
       updated_at
       enrollments {
+        status
         student {
           id
         }

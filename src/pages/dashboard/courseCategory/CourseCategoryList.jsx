@@ -11,6 +11,7 @@ const CourseCategoryList = () => {
   const { data, loading } = useQuery(GETCOURSEBYCATEGORY, {
     variables: {
       categoryId: category_id,
+      status: "APPROVED",
     },
   });
 

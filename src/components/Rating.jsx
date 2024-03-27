@@ -55,42 +55,42 @@ export const Rate = ({ rating, setRating }) => {
 
   const handleColor = (n) => {
     const colors = {
-      one: "yellow-50",
-      two: "yellow-50",
-      three: "yellow-50",
-      four: "yellow-50",
-      five: "yellow-50",
+      one: "",
+      two: "",
+      three: "",
+      four: "",
+      five: "",
     };
 
     switch (n) {
       case 1:
-        colors.one = "fill-yellow-400 border-gray-800";
+        colors.one = "fill-yellow-400";
         setRating(1);
         break;
       case 2:
-        colors.one = "fill-yellow-400 border-gray-800";
-        colors.two = "fill-yellow-400 border-gray-800";
+        colors.one = "fill-yellow-400";
+        colors.two = "fill-yellow-400";
         setRating(2);
         break;
       case 3:
-        colors.one = "fill-yellow-400 border-gray-800";
-        colors.two = "fill-yellow-400 border-gray-800";
-        colors.three = "fill-yellow-400 border-gray-800";
+        colors.one = "fill-yellow-400";
+        colors.two = "fill-yellow-400";
+        colors.three = "fill-yellow-400";
         setRating(3);
         break;
       case 4:
-        colors.one = "fill-yellow-400 border-gray-800";
-        colors.two = "fill-yellow-400 border-gray-800";
-        colors.three = "fill-yellow-400 border-gray-800";
-        colors.four = "fill-yellow-400 border-gray-800";
+        colors.one = "fill-yellow-400";
+        colors.two = "fill-yellow-400";
+        colors.three = "fill-yellow-400";
+        colors.four = "fill-yellow-400";
         setRating(4);
         break;
       case 5:
-        colors.one = "fill-yellow-400 border-gray-800";
-        colors.two = "fill-yellow-400 border-gray-800";
-        colors.three = "fill-yellow-400 border-gray-800";
-        colors.four = "fill-yellow-400 border-gray-800";
-        colors.five = "fill-yellow-400 border-gray-800";
+        colors.one = "fill-yellow-400";
+        colors.two = "fill-yellow-400";
+        colors.three = "fill-yellow-400";
+        colors.four = "fill-yellow-400";
+        colors.five = "fill-yellow-400";
         setRating(5);
         break;
       default:

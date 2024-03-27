@@ -86,8 +86,9 @@ const CourseRating = ({ handleModal, isOpen }) => {
         >
           <div className="relative p-4 w-full max-w-md h-full md:h-auto">
             <div className="bg-white shadow rounded-lg p-6 text-center max-w-sm">
-              <h3 className="font-mont font-semibold text-gray-500 text-sm">
-                Rate Course. Your opinion matter to us!
+              <h3 className="font-mont font-semibold text-sm text-purple-700">
+                Your opinion matter to us! <br />
+                Rate Course.
               </h3>
               <div className="flex justify-center mt-4 mb-6">
                 <Rate setRating={setRating} />

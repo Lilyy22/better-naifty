@@ -37,7 +37,13 @@ export const CourseDetail = () => {
         <CourseDetailLoader />
       ) : (
         <div className="rounded-lg">
-          <RateCourse enrolled={enrolled} />
+          <RateCourse
+            enrolled={isStudentEnrolled(
+              data?.course[0]?.enrollments,
+              userId,
+              admin
+            )}
+          />
           {admin && <GoBack text="Back" pathname="/dashboard/all-courses" />}
           <DashH4 text={data?.course[0]?.name} />
           <div className="flex flex-wrap gap-4 justify-between">
