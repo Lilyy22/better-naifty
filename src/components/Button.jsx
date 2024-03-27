@@ -21,7 +21,7 @@ export const PrimaryButton = ({
         type={type}
         disabled={isDisabled}
       >
-        <div className="flex gap-2 justify-cente text-xs">
+        <div className="flex gap-2 justify-center text-xs">
           <p>{text}</p>
           <p className="my-auto">
             {children} {/* SVG icon */}

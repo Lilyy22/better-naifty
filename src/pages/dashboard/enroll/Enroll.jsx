@@ -24,7 +24,6 @@ const Enroll = ({ courseId, studentId, setEnrolled }) => {
 
       const paymentlink = data?.create_courseenrollment?.data[0]?.payment_link;
       paymentlink ? (window.location.href = paymentlink) : new Error();
-      console.log(paymentlink);
       setClose(false);
       setStatus({ ...status, success: true });
       // setEnrolled(true);

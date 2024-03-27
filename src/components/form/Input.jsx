@@ -41,15 +41,18 @@ export const Textarea = ({
   isRequired,
   label,
   disabled,
+  noLabel,
 }) => {
   return (
     <div className="w-full mb-4">
-      <label
-        htmlFor={id}
-        className="inline-block mb-2 text-xs font-semibold tracking-wide"
-      >
-        {label}
-      </label>
+      {!noLabel && (
+        <label
+          htmlFor={id}
+          className="inline-block mb-2 text-xs font-semibold tracking-wide"
+        >
+          {label}
+        </label>
+      )}
       {isRequired && <span className="text-red-500 pl-1 text-sm">*</span>}
       <textarea
         id={id}

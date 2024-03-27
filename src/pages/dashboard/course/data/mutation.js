@@ -63,3 +63,23 @@ export const DELETECOURSE = gql`
     }
   }
 `;
+
+export const CREATECOURSERATING = gql`
+  mutation CREATECOURSERATING(
+    $courseId: String
+    $userId: String
+    $description: String
+    $rating: Int
+  ) {
+    create_rating(
+      inputs: {
+        course_id: $courseId
+        user_id: $userId
+        description: $description
+        rate: $rating
+      }
+    ) {
+      affected_rows
+    }
+  }
+`;

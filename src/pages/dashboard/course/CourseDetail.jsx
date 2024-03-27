@@ -13,6 +13,7 @@ import { isStudentEnrolled } from "../../../utils/isStudentEnrolled";
 import { ToolTip } from "../../../components/ToolTip";
 import SectionList from "../section/SectionList";
 import { GoBack } from "../../../components/Button";
+import RateCourse from "./RateCourse";
 
 export const CourseDetail = () => {
   const { course_id } = useParams();
@@ -36,6 +37,7 @@ export const CourseDetail = () => {
         <CourseDetailLoader />
       ) : (
         <div className="rounded-lg">
+          <RateCourse enrolled={enrolled} />
           {admin && <GoBack text="Back" pathname="/dashboard/all-courses" />}
           <DashH4 text={data?.course[0]?.name} />
           <div className="flex flex-wrap gap-4 justify-between">

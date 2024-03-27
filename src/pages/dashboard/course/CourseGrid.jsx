@@ -4,7 +4,6 @@ import { useQuery } from "@apollo/client";
 import { GETCOURSES } from "./data/query";
 import { DashH4 } from "../../../components/Heading";
 import CourseList from "./components/CourseList";
-import DataNotFound from "../../../components/DataNotFound";
 
 export const CourseGrid = () => {
   const { data, loading } = useQuery(GETCOURSES, {

@@ -106,3 +106,11 @@ export const GETCOURSESECTION = gql`
     }
   }
 `;
+
+export const GETUSERRATING = gql`
+  query GETUSERRATING($userId: String) {
+    rating(where: { user_id: { exact: $userId } }) {
+      id
+    }
+  }
+`;
