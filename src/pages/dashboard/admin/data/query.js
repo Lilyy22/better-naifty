@@ -28,6 +28,11 @@ export const GETCOURSE = gql`
       name
       status
       is_approved
+      enrollments {
+        aggregate {
+          count
+        }
+      }
       category {
         name
       }
