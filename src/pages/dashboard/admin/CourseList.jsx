@@ -87,6 +87,7 @@ const CourseList = ({ approved }) => {
     { head: "Name" },
     { head: "Category" },
     { head: "Status" },
+    { head: "Enrolled" },
     { head: "Publish Date" },
     { head: "Action" },
   ];
@@ -125,7 +126,10 @@ const CourseList = ({ approved }) => {
             noCrud={true}
           >
             {data?.course?.map(
-              ({ id, name, status, category, publish_date }, index) => {
+              (
+                { id, name, status, category, publish_date, enrollments },
+                index
+              ) => {
                 return (
                   <tr className="border p-1 hover:bg-gray-50/90" key={id}>
                     <TD>{index + 1}</TD>
@@ -138,6 +142,9 @@ const CourseList = ({ approved }) => {
                         {` ${status}`}
                       </span>
                     </TD>
+                    <TD
+                      text={enrollments[0] ? enrollments[0].aggregate.count : 0}
+                    />
                     <TD>
                       <span className="text-xs">
                         {formattedDate(publish_date)}

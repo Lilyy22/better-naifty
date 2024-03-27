@@ -8,6 +8,11 @@ export const GETINSTRUCTORCOURSE = gql`
       price
       status
       updated_at
+      enrollments {
+        aggregate {
+          count
+        }
+      }
     }
   }
 `;
@@ -69,6 +74,7 @@ export const GETCOURSESECTION = gql`
       thumbnail
       price
       enrollments {
+        status
         student {
           id
         }

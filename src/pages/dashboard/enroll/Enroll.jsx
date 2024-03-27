@@ -15,15 +15,19 @@ const Enroll = ({ courseId, studentId, setEnrolled }) => {
 
   const handleEnroll = async () => {
     try {
-      await enroll({
+      const { data } = await enroll({
         variables: {
           courseId: courseId,
           studentId: studentId,
         },
       });
+
+      const paymentlink = data?.create_courseenrollment?.data[0]?.payment_link;
+      paymentlink ? (window.location.href = paymentlink) : new Error();
+      console.log(paymentlink);
       setClose(false);
       setStatus({ ...status, success: true });
-      setEnrolled(true);
+      // setEnrolled(true);
     } catch (error) {
       setClose(false);
       setStatus({
@@ -39,7 +43,7 @@ const Enroll = ({ courseId, studentId, setEnrolled }) => {
       {status.success && (
         <Toast
           isSuccess={true}
-          text="Enrolled successfully!"
+          text="You are redirected for Payment!"
           close={close}
           setClose={setClose}
         />
