@@ -27,9 +27,9 @@ root.render(
   <BrowserRouter>
     <ApolloProvider client={client}>
       <AuthProvider>
-        <OnlineStatusProvider>
+        <StrictMode>
           <App />
-        </OnlineStatusProvider>
+        </StrictMode>
       </AuthProvider>
     </ApolloProvider>
   </BrowserRouter>

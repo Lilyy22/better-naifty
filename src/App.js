@@ -30,9 +30,10 @@ import CategoryTable from "./pages/dashboard/courseCategory/CategoryTable";
 import UpdateCategory from "./pages/dashboard/courseCategory/UpdateCategory";
 import UsersList from "./pages/dashboard/admin/UsersList";
 import CourseList from "./pages/dashboard/admin/CourseList";
+import AlreadyLogged from "./routes/AlreadyLogged";
 
 function App() {
-    const is_online = window.navigator.onLine ? true : false;
+  const is_online = window.navigator.onLine ? true : false;
   return (
     <>
       <ScrollTop />
@@ -46,7 +47,10 @@ function App() {
 
         {/* auth */}
         <Route path="signup/:role?" element={<SignUp />} />
-        <Route path="login" element={<LogIn />} />
+        <Route element={<AlreadyLogged />}>
+          <Route path="/login" element={<LogIn />} />
+        </Route>
+
         <Route path="verify" element={<Verify />} />
 
         {/* Dashboard */}

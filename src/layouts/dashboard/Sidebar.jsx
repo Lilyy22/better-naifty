@@ -7,7 +7,7 @@ import { AuthContext } from "../../context/AuthContext";
 export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const navigate = useNavigate();
 
-  const { isInstructor, isSuperUser } = useContext(AuthContext);
+  const { isInstructor, isSuperUser, setAccessToken } = useContext(AuthContext);
 
   const isStudent =
     (isInstructor === "false" || isInstructor === false) &&
@@ -15,6 +15,7 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
   const handleLogout = () => {
     localStorage.clear();
+    setAccessToken(null);
     navigate("/login");
   };
 

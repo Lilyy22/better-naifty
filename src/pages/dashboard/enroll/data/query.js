@@ -2,7 +2,12 @@ import { gql } from "@apollo/client";
 
 export const GETENROLLED = gql`
   query GETENROLLED($studentId: String) {
-    course_enrollment(where: { student_id: { exact: $studentId } }) {
+    course_enrollment(
+      where: {
+        student_id: { exact: $studentId }
+        status: { exact: "APPROVED" }
+      }
+    ) {
       id
       course {
         id
