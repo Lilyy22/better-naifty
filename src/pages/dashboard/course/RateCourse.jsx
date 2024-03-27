@@ -16,7 +16,7 @@ const RateCourse = ({ enrolled }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      if (data?.rating.length === 0 && enrolled) setIsOpen(!isOpen);
+      if (data?.rating?.length === 0 && enrolled) setIsOpen(!isOpen);
     }, 5000);
   }, [data, enrolled]);
 

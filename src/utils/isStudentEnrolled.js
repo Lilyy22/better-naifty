@@ -7,8 +7,7 @@ export const isStudentEnrolled = (list, userId, admin) => {
         return false;
       } else {
         return list.some(
-          ({ student, status }) =>
-            student.id === userId && status === "APPROVED"
+          ({ student, status }) => student.id === userId && status === "SUCCESS"
         );
       }
     } else {

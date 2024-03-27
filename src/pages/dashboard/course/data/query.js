@@ -26,6 +26,7 @@ export const GETCOURSES = gql`
       thumbnail
       updated_at
       enrollments {
+        status
         student {
           id
         }
