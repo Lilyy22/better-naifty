@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Logo } from "../../components/Logo";
 import { LandPrimaryButton } from "../../components/Button";
 
 const Header = () => {
-  const navigate = useNavigate();
   const [menuToggle, setMenuToggle] = useState(false);
-  const gotoSignUp = () => {
-    navigate("/signup");
-  };
+
   return (
     <>
       <header className="bg-transparent backdrop-blur py-4 fixed top-0 w-full xl:px-0 z-50">
@@ -22,7 +19,12 @@ const Header = () => {
                   : ""
               }`}
             >
-              <li className="py-1 md:py-0">
+              <li
+                className="py-1 md:py-0"
+                onClick={() => {
+                  setMenuToggle(!menuToggle);
+                }}
+              >
                 <NavLink
                   to="/course"
                   className={({ isActive }) =>
@@ -34,8 +36,12 @@ const Header = () => {
                   Courses
                 </NavLink>
               </li>
-              <li className="py-1 md:py-0">
-                {" "}
+              <li
+                className="py-1 md:py-0"
+                onClick={() => {
+                  setMenuToggle(!menuToggle);
+                }}
+              >
                 <NavLink
                   to="/blog"
                   className={({ isActive }) =>
@@ -47,8 +53,12 @@ const Header = () => {
                   Blog
                 </NavLink>
               </li>
-              <li className="py-1 md:py-0">
-                {" "}
+              <li
+                className="py-1 md:py-0"
+                onClick={() => {
+                  setMenuToggle(!menuToggle);
+                }}
+              >
                 <NavLink
                   to="/about"
                   className={({ isActive }) =>

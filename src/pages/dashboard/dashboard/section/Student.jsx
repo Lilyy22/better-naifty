@@ -10,18 +10,20 @@ import {
 } from "../component/Card";
 import { Doughnut, Pie } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
+import { DashCardLoader } from "../component/Loader";
 
 const Student = () => {
   const { userId } = useContext(AuthContext);
 
-  const { data: enrolledCourse, refetch: refechEnrolled } = useQuery(
-    GETENROLLED,
-    {
-      variables: {
-        studentId: userId,
-      },
-    }
-  );
+  const {
+    data: enrolledCourse,
+    refetch: refechEnrolled,
+    loading,
+  } = useQuery(GETENROLLED, {
+    variables: {
+      studentId: userId,
+    },
+  });
 
   useEffect(() => {
     refechEnrolled();
@@ -34,7 +36,12 @@ const Student = () => {
       <div className="pt-4">
         <DashH5 text="My Courses" />
         <div className="flex space-x-4 justify-start h-auto overflow-x-auto scrollbar-hide pt-4">
-          {/* {loading && loader.map((item) => <DashCardLoader key={item} />)} */}
+          {loading && (
+            <div className="flex space-x-4">
+              <DashCardLoader />
+              <DashCardLoader />
+            </div>
+          )}
 
           {enrolledCourse?.course_enrollment?.length === 0 && (
             <DataNotFound text="You're not enrolled yet." />

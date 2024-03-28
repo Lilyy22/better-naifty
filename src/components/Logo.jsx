@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-export const Logo = ({ customStyle }) => {
+export const Logo = ({ customStyle, noLink }) => {
   return (
     <>
-      <Link to="/" className="my-auto">
+      <Link to={noLink ? "" : "/"} className="my-auto">
         <motion.img
           initial={{ width: 200 }}
           whileInView={{ width: 150 }}

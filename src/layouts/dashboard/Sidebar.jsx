@@ -27,7 +27,7 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     >
       <motion.div className="text-gray-500 font-naifty">
         <div className="pl-8 py-4 border-b border-gray-700">
-          <Logo />
+          <Logo noLink={true} />
           <button
             className="md:hidden absolute top-4 right-4"
             onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -52,7 +52,11 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           <ul className="m-0">
             {/* Start::slide */}
             <Title text="Main" />
-            <Li text="Dashboard" path="/dashboard/">
+            <Li
+              handleClick={() => setSidebarOpen(!sidebarOpen)}
+              text="Dashboard"
+              path="/dashboard/"
+            >
               <svg
                 className="w-[14px] h-4 fill-custom-white-200 group-hover:fill-white mx-2"
                 xmlns="http://www.w3.org/2000/svg"
@@ -67,6 +71,7 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <>
                 <DropDown
                   menu="Manage Course"
+                  handleClick={() => setSidebarOpen(!sidebarOpen)}
                   submenu={[
                     {
                       id: 1,
@@ -80,7 +85,7 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     },
                   ]}
                 />
-                {/* <Li text="Manage Assessment" path="/dashboard/">
+                {/* <Li handleClick={() => setSidebarOpen(!sidebarOpen)} text="Manage Assessment" path="/dashboard/">
                   <svg
                     className="w-[14px] h-4 fill-custom-white-200 mx-2 group-hover:fill-white"
                     xmlns="http://www.w3.org/2000/svg"
@@ -96,6 +101,7 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <>
                 <DropDown
                   menu="Course"
+                  handleClick={() => setSidebarOpen(!sidebarOpen)}
                   submenu={[
                     {
                       id: 1,
@@ -116,6 +122,7 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <>
                 <DropDown
                   menu="Courses"
+                  handleClick={() => setSidebarOpen(!sidebarOpen)}
                   submenu={[
                     {
                       id: 1,
@@ -129,7 +136,11 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     },
                   ]}
                 />
-                <Li text="Students" path="/dashboard/students">
+                <Li
+                  handleClick={() => setSidebarOpen(!sidebarOpen)}
+                  text="Students"
+                  path="/dashboard/students"
+                >
                   <svg
                     className="w-[14px] h-4 fill-custom-white-200 mx-2 group-hover:fill-white"
                     xmlns="http://www.w3.org/2000/svg"
@@ -138,7 +149,11 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     <path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM609.3 512H471.4c5.4-9.4 8.6-20.3 8.6-32v-8c0-60.7-27.1-115.2-69.8-151.8c2.4-.1 4.7-.2 7.1-.2h61.4C567.8 320 640 392.2 640 481.3c0 17-13.8 30.7-30.7 30.7zM432 256c-31 0-59-12.6-79.3-32.9C372.4 196.5 384 163.6 384 128c0-26.8-6.6-52.1-18.3-74.3C384.3 40.1 407.2 32 432 32c61.9 0 112 50.1 112 112s-50.1 112-112 112z" />
                   </svg>
                 </Li>
-                <Li text="Instructors" path="/dashboard/instructors">
+                <Li
+                  handleClick={() => setSidebarOpen(!sidebarOpen)}
+                  text="Instructors"
+                  path="/dashboard/instructors"
+                >
                   <svg
                     className="w-[14px] h-3 fill-custom-white-200 mx-2 group-hover:fill-white"
                     xmlns="http://www.w3.org/2000/svg"
@@ -147,7 +162,11 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     <path d="M96 128a128 128 0 1 0 256 0A128 128 0 1 0 96 128zm94.5 200.2l18.6 31L175.8 483.1l-36-146.9c-2-8.1-9.8-13.4-17.9-11.3C51.9 342.4 0 405.8 0 481.3c0 17 13.8 30.7 30.7 30.7H162.5c0 0 0 0 .1 0H168 280h5.5c0 0 0 0 .1 0H417.3c17 0 30.7-13.8 30.7-30.7c0-75.5-51.9-138.9-121.9-156.4c-8.1-2-15.9 3.3-17.9 11.3l-36 146.9L238.9 359.2l18.6-31c6.4-10.7-1.3-24.2-13.7-24.2H224 204.3c-12.4 0-20.1 13.6-13.7 24.2z" />
                   </svg>
                 </Li>
-                <Li text="Category" path="/dashboard/categories">
+                <Li
+                  handleClick={() => setSidebarOpen(!sidebarOpen)}
+                  text="Category"
+                  path="/dashboard/categories"
+                >
                   <svg
                     className="w-[14px] h-3 fill-custom-white-200 mx-2 group-hover:fill-white"
                     xmlns="http://www.w3.org/2000/svg"
@@ -160,7 +179,11 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             )}
 
             <Title text="General" />
-            <Li text="Profile" path="/dashboard/profile">
+            <Li
+              handleClick={() => setSidebarOpen(!sidebarOpen)}
+              text="Profile"
+              path="/dashboard/profile"
+            >
               <svg
                 className="w-[14px] h-4 fill-custom-white-200 mx-2 group-hover:fill-white"
                 xmlns="http://www.w3.org/2000/svg"
@@ -170,7 +193,10 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               </svg>
             </Li>
 
-            <li className="m-0 py-0 px-3 grid group">
+            <li
+              handleClick={() => setSidebarOpen(!sidebarOpen)}
+              className="m-0 py-0 px-3 grid group"
+            >
               <button
                 className="w-full p-3 relative flex items-center no-underline text-[0.78rem] text-custom-white-200 font-medium rounded-md hover:bg-white/[0.07]"
                 onClick={handleLogout}
@@ -196,9 +222,9 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   );
 };
 
-const Li = ({ text, children, path }) => {
+const Li = ({ text, children, path, handleClick }) => {
   return (
-    <li className="m-0 py-0 px-3 grid group">
+    <li className="m-0 py-0 px-3 grid group" onClick={handleClick}>
       <NavLink
         to={path}
         className={({ isActive }) =>
@@ -224,7 +250,7 @@ const Title = ({ text }) => {
   );
 };
 
-const DropDown = ({ menu, submenu }) => {
+const DropDown = ({ menu, submenu, handleClick }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="m-0 py-0 px-3 grid cursor-pointer">
@@ -271,7 +297,7 @@ const DropDown = ({ menu, submenu }) => {
           >
             {submenu?.map(({ id, title, pathname }) => {
               return (
-                <li className="m-0 py-0 px-3" key={id}>
+                <li className="m-0 py-0 px-3" key={id} onClick={handleClick}>
                   <NavLink
                     to={pathname}
                     className={({ isActive }) =>

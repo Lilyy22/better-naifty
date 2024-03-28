@@ -21,7 +21,7 @@ export const Header = ({ handleClick }) => {
   return (
     <>
       {/* Start::Header */}
-      <header className="font-naifty flex justify-between bg-white sticky top-0 z-40 border-b">
+      <header className="font-naifty flex justify-between bg-gray-800 md:bg-white sticky top-0 z-40 border-b">
         <button
           type="button"
           className="md:px-[0.325rem]"
@@ -29,7 +29,7 @@ export const Header = ({ handleClick }) => {
         >
           {/* Start::header-link */}
           <svg
-            className="w-6 h-5 fill-current mx-2"
+            className="w-6 h-5 fill-gray-400 md:fill-current mx-2"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
           >
@@ -40,14 +40,20 @@ export const Header = ({ handleClick }) => {
         <div className="md:hidden my-auto">
           <Logo />
         </div>
-        <div className="main-header !h-[3.75rem]" aria-label="Global">
-          <div className="header-content-right">
-            <div className="group header-element md:!px-[0.65rem] px-2 !items-center relative">
-              <Profile
-                name={name}
-                subText={userEmail ?? "gelilahhamid2gmail.com"}
-                photo="https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png"
-              />
+        <div className="group relative">
+          <Profile
+            name={name}
+            subText={userEmail}
+            photo="https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png"
+          />
+          <div className="hidden group-hover:block absolute right-1 bg-white rounded-md p-4">
+            <div>
+              <p className="block text-gray-600 leading-tighter mb-0 font-semibold text-sm">
+                {name}
+              </p>
+              <p className="text-[11.5px] text-gray-400 tracking-loose leading-none">
+                {userEmail}
+              </p>
             </div>
           </div>
         </div>
