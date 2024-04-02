@@ -31,9 +31,10 @@ import UpdateCategory from "./pages/dashboard/courseCategory/UpdateCategory";
 import UsersList from "./pages/dashboard/admin/UsersList";
 import CourseList from "./pages/dashboard/admin/CourseList";
 import AlreadyLogged from "./routes/AlreadyLogged";
+import { CourseDescription } from "./pages/dashboard/course/CourseDescription";
 
 function App() {
-  const is_online = window.navigator.onLine ? true : false;
+  // const is_online = window.navigator.onLine ? true : false;
   return (
     <>
       <ScrollTop />
@@ -72,11 +73,15 @@ function App() {
               path="courses/:category_id"
               element={<CourseCategoryList />}
             />
+
             <Route
               path="courses-detail/:course_id"
               element={<CourseDetail />}
             />
-
+            <Route
+              path="courses-description/:course_id"
+              element={<CourseDescription />}
+            />
             {/* users */}
             <Route path="students" element={<UsersList />} />
             <Route

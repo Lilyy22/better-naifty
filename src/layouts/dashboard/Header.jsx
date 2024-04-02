@@ -2,9 +2,12 @@ import React, { useContext } from "react";
 import { Logo } from "../../components/Logo";
 import { AuthContext } from "../../context/AuthContext";
 import { Profile } from "../../components/Profile";
+import { useProfilePicture } from "../../hooks/useProfilePicture";
+import { trimText } from "../../utils/trimText";
 
 export const Header = ({ handleClick }) => {
   const { isInstructor, userEmail, isSuperUser } = useContext(AuthContext);
+  const profilePicture = useProfilePicture();
 
   let name;
   if (isInstructor === "true" || isInstructor === true) {
@@ -24,7 +27,7 @@ export const Header = ({ handleClick }) => {
       <header className="font-naifty flex justify-between bg-gray-800 md:bg-white sticky top-0 z-40 border-b">
         <button
           type="button"
-          className="md:px-[0.325rem]"
+          className="md:px-[0.325rem] z-40"
           onClick={handleClick}
         >
           {/* Start::header-link */}
@@ -43,10 +46,14 @@ export const Header = ({ handleClick }) => {
         <div className="group relative">
           <Profile
             name={name}
-            subText={userEmail}
-            photo="https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png"
+            subText={trimText(userEmail, 30)}
+            photo={
+              profilePicture
+                ? `https://naifty.abelayalew.dev/media/${profilePicture}`
+                : "https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png"
+            }
           />
-          <div className="hidden group-hover:block absolute right-1 bg-white rounded-md p-4">
+          <div className="hidden group-hover:block md:group-hover:hidden absolute right-1 bg-white rounded-md p-4">
             <div>
               <p className="block text-gray-600 leading-tighter mb-0 font-semibold text-sm">
                 {name}

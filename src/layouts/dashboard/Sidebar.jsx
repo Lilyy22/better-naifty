@@ -21,14 +21,14 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
   return (
     <aside
-      className={`z-50 flex-shrink-0 w-64 overflow-y-auto bg-custom-purple-900 h-full font-mont fixed md:static ${
+      className={`z-40 flex-shrink-0 w-full overflow-y-auto bg-custom-purple-900 h-full font-mont fixed md:static md:w-64 ${
         sidebarOpen ? "block" : "hidden md:block"
       }`}
     >
-      <motion.div className="text-gray-500 font-naifty">
+      <motion.div className="text-gray-500 font-mont">
         <div className="pl-8 py-4 border-b border-gray-700">
           <Logo noLink={true} />
-          <button
+          {/* <button
             className="md:hidden absolute top-4 right-4"
             onClick={() => setSidebarOpen(!sidebarOpen)}
           >
@@ -45,7 +45,7 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 clipRule="evenodd"
               />
             </svg>
-          </button>
+          </button> */}
         </div>
 
         <nav className="flex-column text-white my-4">
