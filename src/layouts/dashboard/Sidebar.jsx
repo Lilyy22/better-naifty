@@ -21,31 +21,13 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
   return (
     <aside
-      className={`z-40 flex-shrink-0 w-full overflow-y-auto bg-custom-purple-900 h-full font-mont fixed md:static md:w-64 ${
-        sidebarOpen ? "block" : "hidden md:block"
+      className={`z-40 flex-shrink-0 w-full overflow-y-auto bg-custom-purple-900 h-full font-mont fixed md:static md:block md:w-60 ${
+        sidebarOpen ? "block" : "hidden "
       }`}
     >
       <motion.div className="text-gray-500 font-mont">
         <div className="pl-8 py-4 border-b border-gray-700">
           <Logo noLink={true} />
-          {/* <button
-            className="md:hidden absolute top-4 right-4"
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-          >
-            <svg
-              aria-hidden="true"
-              className="w-5 h-5 fill-red-200 hover:fill-red-600"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </button> */}
         </div>
 
         <nav className="flex-column text-white my-4">

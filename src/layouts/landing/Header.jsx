@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Logo } from "../../components/Logo";
 import { LandPrimaryButton } from "../../components/Button";
+import { useProfilePicture } from "../../hooks/useProfilePicture";
+import { AuthContext } from "../../context/AuthContext";
 
 const Header = () => {
+  const profilePicture = useProfilePicture();
+  const { userId } = useContext(AuthContext);
+
   const [menuToggle, setMenuToggle] = useState(false);
 
   return (
@@ -70,70 +75,73 @@ const Header = () => {
                   About us
                 </NavLink>
               </li>
-              <NavLink
-                to="/login"
-                className="px-4 py-1 hover:text-gray-400 transition-all md:hidden"
-              >
-                <span>Log In</span>
-              </NavLink>
-              {/* <li className="py-1 md:py-0">
-                <NavLink
-                  to="/services"
-                  className={({ isActive }) =>
-                    isActive ? "text-gray-400" : "" + "hover:text-gray-400"
-                  }
-                >
-                  <div className="flex gap-2 justify-center">
-                    <span>Services</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      height="14"
-                      width="12"
-                      viewBox="0 0 512 512"
-                      className="my-auto fill-current"
-                    >
-                      <path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
-                    </svg>
-                  </div>
-                </NavLink>
-              </li> */}
+              {!userId && (
+                <li>
+                  <NavLink
+                    to="/login"
+                    className="px-4 py-1 hover:text-gray-400 transition-all md:hidden"
+                  >
+                    <span>Log In</span>
+                  </NavLink>
+                </li>
+              )}
             </ul>
           </nav>
           <div className="my-auto flex gap-2 md:gap-4">
             {/* dropdown */}
-            <div class="mx-auto flex w-full gap-2 items-center justify-center">
-              <NavLink
-                to="/login"
-                className="text-white px-4 py-1 hidden md:block"
-              >
-                <span>Log In</span>
-              </NavLink>
-              <div class="group relative cursor-pointer py-2">
-                <LandPrimaryButton type="button" text="Sign Up">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-4 h-4 fill-current"
-                    viewBox="0 0 512 512"
-                  >
-                    <path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z" />
-                  </svg>
-                </LandPrimaryButton>
-                <div class="invisible absolute z-50 flex w-full flex-col bg-custom-gray-900 rounded-lg mt-1 py-1 text-gray-800 shadow-xl group-hover:visible">
-                  <Link
-                    to="/signup"
-                    class="my-2 block p-2 font-semibold text-gray-500 text-sm hover:bg-custom-black-600 hover:text-custom-white-100 md:mx-2"
-                  >
-                    As Student
-                  </Link>
-                  <Link
-                    to="/signup/instructor"
-                    class="my-2 block p-2 font-semibold text-gray-500 text-sm hover:bg-custom-black-600 hover:text-custom-white-100 md:mx-2"
-                  >
-                    As Instructor
-                  </Link>
+            {!userId ? (
+              <div class="mx-auto flex w-full gap-2 items-center justify-center">
+                <NavLink
+                  to="/login"
+                  className="text-white px-4 py-1 hidden md:block"
+                >
+                  <span>Log In</span>
+                </NavLink>
+                <div class="group relative cursor-pointer py-2">
+                  <LandPrimaryButton type="button" text="Sign Up">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-4 h-4 fill-current"
+                      viewBox="0 0 512 512"
+                    >
+                      <path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z" />
+                    </svg>
+                  </LandPrimaryButton>
+                  <div class="invisible absolute z-50 flex w-full flex-col bg-custom-gray-900 rounded-lg mt-1 py-1 text-gray-800 shadow-xl group-hover:visible">
+                    <Link
+                      to="/signup"
+                      class="my-2 block p-2 font-semibold text-gray-500 text-sm hover:bg-custom-black-600 hover:text-custom-white-100 md:mx-2"
+                    >
+                      As Student
+                    </Link>
+                    <Link
+                      to="/signup/instructor"
+                      class="my-2 block p-2 font-semibold text-gray-500 text-sm hover:bg-custom-black-600 hover:text-custom-white-100 md:mx-2"
+                    >
+                      As Instructor
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              <div className="flex ml-2 bg-gray-200/30 md:py-1 md:px-2 rounded-full">
+                <NavLink
+                  to="/dashboard"
+                  className="text-white text-xs md:text-sm px-1 py-1 whitespace-nowrap my-auto"
+                >
+                  <span>My Learning</span>
+                </NavLink>
+                <img
+                  className="rounded-full h-9 w-9 object-cover m-auto"
+                  src={
+                    profilePicture
+                      ? `https://naifty.abelayalew.dev/media/${profilePicture}`
+                      : "https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png"
+                  }
+                  alt="profile"
+                />
+              </div>
+            )}
             <span
               onClick={() => {
                 setMenuToggle(!menuToggle);
