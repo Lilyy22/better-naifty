@@ -115,6 +115,7 @@ export const CreateCourse = () => {
         categoryLoading={categoryLoading}
         handleCategory={handleCategory}
         selectedFile={selectedFile}
+        note={true}
       />
     </>
   );

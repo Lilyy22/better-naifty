@@ -16,6 +16,7 @@ export const Crud = ({
   handleCategory,
   selectedFile,
   courseLoading,
+  note,
 }) => {
   return (
     <DashForm title="Course Form">
@@ -134,13 +135,14 @@ export const Crud = ({
             disabled={loading ? true : false}
           />
         </div>
-        {/* <FileUpload
-          id="thumbnail"
-          label="Thumbnail"
-          onChange={handleThumbnail}
-          isRequired={true}
-          thumbnail={thumbnail}
-        /> */}
+        {note && (
+          <div className="pb-4 w-3/4">
+            <p className="text-xs text-gray-500 italic tracking-wide">
+              Please Create section and episodes after creating course and your
+              course will be available after getting reviewed by Administrator.
+            </p>
+          </div>
+        )}
         <PrimaryButton
           text={loading ? "•••" : "Submit"}
           isDisabled={loading ? true : false}

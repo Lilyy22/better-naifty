@@ -1,33 +1,20 @@
-import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../../context/AuthContext";
+import React, { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
-import { GETINSTRUCTORCOURSE } from "../course/data/query";
-import { CREATESECTION, UPDATESECTION } from "./data/mutation";
+import { UPDATESECTION } from "./data/mutation";
 import { Toast } from "../../../components/Toast";
 import Crud from "./component/Crud";
-import { useNavigate, useParams } from "react-router-dom";
 import { GETSECTION } from "./data/query";
-import { GoBack } from "../../../components/Button";
+import { DashForm } from "../../../components/form/Form";
 
-export const UpdateSection = () => {
-  const navigate = useNavigate();
-  const { userId } = useContext(AuthContext);
-  const { section_id } = useParams();
-
+export const UpdateSection = ({ sectionId, handleOpen, modalUpdate }) => {
   const [updateSection, { loading }] = useMutation(UPDATESECTION);
-  const { data: courseData, loading: courseLoading } = useQuery(
-    GETINSTRUCTORCOURSE,
-    {
-      variables: { userId: userId },
-    }
-  );
   const {
     data,
     loading: sectionLoading,
     refetch,
   } = useQuery(GETSECTION, {
     variables: {
-      sectionId: section_id,
+      sectionId: sectionId,
     },
   });
 
@@ -39,22 +26,16 @@ export const UpdateSection = () => {
   });
 
   const [section, setSection] = useState({
-    courseId: "",
     title: "",
     description: "",
   });
-
-  const handleCourse = (e) => {
-    setSection({ ...section, courseId: e.target.value });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await updateSection({
         variables: {
-          sectionId: section_id,
-          courseId: section.courseId,
+          sectionId: sectionId,
           title: section.title,
           description: section.description,
         },
@@ -66,12 +47,12 @@ export const UpdateSection = () => {
       });
       setSection({
         ...section,
-        courseId: "",
         title: "",
         description: "",
       });
       setTimeout(() => {
-        navigate("/dashboard/section-list");
+        handleOpen();
+        modalUpdate();
       }, 1000);
     } catch (error) {
       setClose(false); // set close false incase toast is closed
@@ -84,15 +65,14 @@ export const UpdateSection = () => {
   };
 
   useEffect(() => {
-    if (!section_id) {
-      navigate("/dashboard/section-list");
+    if (!sectionId) {
+      // navigate("/courses-description");
     } else {
       refetch();
       if (data?.course_section[0]) {
         setSection({
           title: data.course_section[0].title,
           description: data.course_section[0].description,
-          courseId: data.course_section[0].course?.id,
         });
       }
     }
@@ -116,17 +96,37 @@ export const UpdateSection = () => {
           setClose={setClose}
         />
       )}
-      <GoBack text="Back" pathname="/dashboard/section-list" />
-      <Crud
-        handleSubmit={handleSubmit}
-        loading={loading}
-        section={section}
-        setSection={setSection}
-        courseData={courseData}
-        courseLoading={courseLoading}
-        handleCourse={handleCourse}
-        sectionLoading={sectionLoading}
-      />
+      <div className="relative p-4 w-full max-w-xl h-full xl:max-w-3xl">
+        <DashForm title="Edit Section">
+          <button
+            className="absolute top-4 right-4 group"
+            onClick={handleOpen}
+            disabled={loading ? true : false}
+          >
+            <svg
+              aria-hidden="true"
+              className="w-5 h-5 fill-current group-hover:fill-red-600"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <span className="sr-only">Close modal</span>
+          </button>
+          <Crud
+            handleSubmit={handleSubmit}
+            loading={loading}
+            section={section}
+            setSection={setSection}
+            sectionLoading={sectionLoading}
+          />
+        </DashForm>
+      </div>
     </>
   );
 };

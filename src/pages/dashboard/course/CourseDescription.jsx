@@ -4,50 +4,92 @@ import { GETCOURSESECTION } from "./data/query";
 import { CourseDetailLoader } from "./components/loader/DetailLoader";
 import { formattedDate } from "../../../utils/formattedDate";
 import { DashH4 } from "../../../components/Heading";
-import { Profile } from "../../../components/Profile";
 import { Rating } from "../../../components/Rating";
-import Enroll from "../enroll/Enroll";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../../context/AuthContext";
-import { isStudentEnrolled } from "../../../utils/isStudentEnrolled";
-import { ToolTip } from "../../../components/ToolTip";
-import SectionList from "../section/SectionList";
 import { GoBack } from "../../../components/Button";
-import RateCourse from "./RateCourse";
+import { useState } from "react";
+import { SectionTable } from "../section/SectionTable";
+import { EnrolledStudent } from "../enroll/EnrolledStudent";
 
 export const CourseDescription = () => {
   const { course_id } = useParams();
-  // const { userId, isSuperUser } = useContext(AuthContext);
-  // const admin = isSuperUser === "true" || isSuperUser === true;
+  const [openTab, setOpenTab] = useState(1);
 
-  const { data, loading, refetch } = useQuery(GETCOURSESECTION, {
+  const { data, loading } = useQuery(GETCOURSESECTION, {
     variables: {
       courseId: course_id,
     },
   });
-  // const [enrolled, setEnrolled] = useState(false);
-
-  // useEffect(() => {
-  //   refetch();
-  // }, [enrolled]);
 
   return (
     <>
+      <GoBack text="Back" pathname="/dashboard/course-list" />
       {loading ? (
         <CourseDetailLoader />
       ) : (
-        <div className="rounded-lg">
-          <GoBack text="Back" pathname="/dashboard/course-list" />
-          <DashH4 text={data?.course[0]?.name} />
-          <div className="flex flex-wrap gap-4 justify-between">
-            <div className="w-full lg:w-[45%] p-6 order-last flex-grow bg-white/60 rounded-lg mb-auto">
-              <div className="flex justify-between">
-                <h1 className="my-4 font-semibold text-base">
-                  What you will learn
-                </h1>
-              </div>
+        <div className="rounded-lg bg-white">
+          <div className="border-b border-gray-200">
+            <ul className="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 pl-2">
+              <li className="me-2" role="presentation">
+                <button
+                  className={`inline-block p-4 rounded-t-lg ${
+                    openTab === 1
+                      ? "text-blue-700 border-b border-blue-700"
+                      : ""
+                  }`}
+                  onClick={() => setOpenTab(1)}
+                >
+                  Course
+                </button>
+              </li>
+              <li className="me-2" role="presentation">
+                <button
+                  className={`inline-block p-4 rounded-t-lg ${
+                    openTab === 2
+                      ? "text-blue-700 border-b border-blue-700"
+                      : ""
+                  }`}
+                  onClick={() => setOpenTab(2)}
+                >
+                  Section
+                </button>
+              </li>
+              <li className="me-2" role="presentation">
+                <button
+                  className={`inline-block p-4 rounded-t-lg ${
+                    openTab === 3
+                      ? "text-blue-700 border-b border-blue-700"
+                      : ""
+                  }`}
+                  onClick={() => setOpenTab(3)}
+                >
+                  Assessment
+                </button>
+              </li>
+              <li className="me-2" role="presentation">
+                <button
+                  className={`inline-block p-4 rounded-t-lg ${
+                    openTab === 4
+                      ? "text-blue-700 border-b border-blue-700"
+                      : ""
+                  }`}
+                  onClick={() => setOpenTab(4)}
+                >
+                  Students
+                </button>
+              </li>
+            </ul>
+          </div>
 
-              <SectionList courseId={course_id} />
+          <div
+            className={`flex flex-wrap gap-4 justify-between p-4 mt-4 ${
+              openTab === 1 ? "flex" : "hidden"
+            }`}
+          >
+            <div className="w-full lg:w-[45%]  order-last flex-grow bg-white/60 rounded-lg mb-auto">
+              <h1 className="font-semibold mb-1">Course Description</h1>
+              <p className="text-gray-500 text-sm">
+                {data?.course[0]?.description}
+              </p>
             </div>
             <div className="w-full lg:w-[50%]">
               <div className="w-full h-72">
@@ -57,11 +99,12 @@ export const CourseDescription = () => {
                   alt="Course Thumbnail"
                 />
               </div>
-              <div className="p-6 bg-white rounded-b-lg">
-                <div className="">
-                  <span className="bg-purple-100/80 rounded-xl px-4 py-1 text-sm mb-4 inline-block">
+              <div className="px-4 py-2 bg-white rounded-b-lg">
+                <div>
+                  <span className="bg-purple-100/70 rounded-xl px-4 py-1 text-xs mb-2 inline-block">
                     {data?.course[0]?.category?.name}
                   </span>
+                  <DashH4 text={data?.course[0]?.name} />
                   <div className="text-gray-500 leading-3 text-xs tracking-tight">
                     <span>46 Videos •</span> <span>80 hours •</span>{" "}
                     <span>{formattedDate(data?.course[0]?.updated_at)}</span>
@@ -69,12 +112,23 @@ export const CourseDescription = () => {
                   <Rating />
                   <h2 className="font-bold">${data?.course[0]?.price}</h2>
                 </div>
-                <h1 className="my-6 font-semibold mb-1">Course Description</h1>
-                <p className="text-gray-500 text-sm">
-                  {data?.course[0]?.description}
-                </p>
               </div>
             </div>
+          </div>
+
+          <div
+            className={`flex flex-wrap gap-4 justify-between p-4 ${
+              openTab === 2 ? "flex" : "hidden"
+            }`}
+          >
+            <SectionTable courseId={course_id} setOpenTab={setOpenTab} />
+          </div>
+          <div
+            className={`flex flex-wrap gap-4 justify-between p-4 ${
+              openTab === 4 ? "flex" : "hidden"
+            }`}
+          >
+            <EnrolledStudent enrollment={data?.course[0]?.enrollments} loading={loading}/>
           </div>
           {/* END container */}
         </div>

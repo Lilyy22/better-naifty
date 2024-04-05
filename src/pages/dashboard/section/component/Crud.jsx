@@ -1,30 +1,16 @@
 import React from "react";
-import { DashForm } from "../../../../components/form/Form";
-import DropDown from "../../../../components/form/DropDown";
 import { Input, Textarea } from "../../../../components/form/Input";
 import { PrimaryButton } from "../../../../components/Button";
 
 const Crud = ({
   handleSubmit,
-  courseData,
-  courseLoading,
-  handleCourse,
   section,
   setSection,
   loading,
   sectionLoading,
 }) => {
   return (
-    <DashForm title="Section Form">
       <form className="p-6" onSubmit={handleSubmit}>
-        <DropDown
-          id="course"
-          label="Course"
-          data={courseData?.course}
-          loading={courseLoading}
-          onChange={handleCourse}
-          isRequired={true}
-        />
         <Input
           id="name"
           label="Section Title"
@@ -51,7 +37,6 @@ const Crud = ({
           isDisabled={loading ? true : false}
         />
       </form>
-    </DashForm>
   );
 };
 

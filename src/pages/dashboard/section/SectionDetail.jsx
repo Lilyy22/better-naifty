@@ -3,7 +3,7 @@ import { EpisodeCard } from "../episode/component/Card";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import { GETSECTION } from "./data/query";
-import { DashH4 } from "../../../components/Heading";
+import { DashH4, DashH5 } from "../../../components/Heading";
 import { GoBack } from "../../../components/Button";
 import DataNotFound from "../../../components/DataNotFound";
 import { DELETEEPISODE } from "../episode/data/mutation";
@@ -12,7 +12,7 @@ import UpdateEpisode from "../episode/UpdateEpisode";
 import { Loader } from "../episode/component/Loader";
 
 export const SectionDetail = () => {
-  const { section_url } = useParams();
+  const { section_url, course_url } = useParams();
 
   const [episodeId, setEpisodeId] = useState();
   const [episodeUpdate, setEpisodeUpdate] = useState(false);
@@ -55,10 +55,13 @@ export const SectionDetail = () => {
 
   return (
     <>
-      <GoBack text="Back" pathname="/dashboard/section-list" />
-      <DashH4 text="Section Detail" />
+      <GoBack
+        text="Back"
+        pathname={`/dashboard/courses-description/${course_url}`}
+      />
       <div className="p-4 mb-8 bg-white rounded-lg">
-        <h1 className="font-semibold text-gray-400/70 text-xs">Title</h1>
+        <DashH5 text="Section" />
+        <h1 className="font-semibold text-gray-400/70 text-xs mt-4">Title</h1>
         <DashH4 text={loading ? "•••" : data?.course_section[0]?.title} />
         <h1 className="font-semibold text-gray-400/70 text-xs">Description</h1>
         <p>{loading ? "•••" : data?.course_section[0]?.description}</p>
@@ -66,9 +69,9 @@ export const SectionDetail = () => {
       {episodes?.length === 0 ? (
         <DataNotFound text="No Episodes for this Section." />
       ) : (
-        <>
-          <DashH4 text="Episodes" />
-          <div className="flex flex-wrap gap-2 xl:gap-4">
+        <div className="p-4 mb-8 bg-white rounded-lg">
+          <DashH5 text={`Episodes (${episodes?.length})`} />
+          <div className="flex flex-wrap gap-2 xl:gap-4 mt-6">
             {loading && array.map((item) => <Loader key={item} />)}
             {episodes?.map(({ id, title, description, file, updated_at }) => {
               return (
@@ -102,7 +105,7 @@ export const SectionDetail = () => {
               />
             </div>
           )}
-        </>
+        </div>
       )}
     </>
   );

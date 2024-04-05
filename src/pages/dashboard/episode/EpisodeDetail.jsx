@@ -4,7 +4,7 @@ import { GETEPISODE } from "./data/query";
 import ReactPlayer from "react-player";
 import { DashH4 } from "../../../components/Heading";
 import { CommentForm } from "../comment/CommentForm";
-import { DetailLoader, Loader } from "./component/Loader";
+import { DetailLoader } from "./component/Loader";
 import { useParams } from "react-router-dom";
 import SectionList from "../section/SectionList";
 import CommentList from "../comment/CommentList";

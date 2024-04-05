@@ -28,19 +28,28 @@ const CommentList = ({ commented, episodeId }) => {
   return (
     <div>
       {loading && <span>Loading ....</span>}
-      <p className="text-sm font-medium">
-        {dataCount?.comment_aggregate?.count} Comments
+      <p className="mb-4 text-sm">
+        <span className="font-medium mb-4">
+          {dataCount?.comment_aggregate?.count}{" "}
+        </span>
+        Comments
       </p>
 
       {data?.comment?.map(({ id, comment, updated_at, user }) => {
         return (
-          <CommentCard
-            key={id}
-            photo={user?.studentprofile?.profile_picture}
-            name={`${user?.studentprofile?.first_name} ${user?.studentprofile?.last_name}`}
-            comment={comment}
-            updated_at={updated_at}
-          />
+          <ul
+            aria-label="User comment"
+            role="comment"
+            className="relative flex flex-col py-6 pl-4 before:absolute before:top-0 before:h-full before:-translate-x-1/2 before:border before:border-dashed after:absolute after:top-6 after:left-8 after:bottom-6 after:-translate-x-1/2"
+          >
+            <CommentCard
+              key={id}
+              photo={user?.studentprofile?.profile_picture}
+              name={`${user?.studentprofile?.first_name} ${user?.studentprofile?.last_name}`}
+              comment={comment}
+              updated_at={updated_at}
+            />
+          </ul>
         );
       })}
     </div>

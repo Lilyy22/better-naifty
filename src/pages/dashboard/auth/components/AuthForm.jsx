@@ -4,6 +4,7 @@ import { H2, H3 } from "../../../../components/Heading";
 import { Link } from "react-router-dom";
 import { LandPrimaryButton } from "../../../../components/Button";
 import { motion } from "framer-motion";
+import { Slider } from "./Slider";
 
 export const AuthForm = ({
   handleSubmit,
@@ -141,8 +142,7 @@ export const AuthForm = ({
               alt="3d circle"
             />
             <div className="max-w-sm m-auto text-center px-8 xl:max-w-md xl:px-2">
-              <H2 text="Unlock Your Potential with NAIFTY" />
-              {/* <Subtitle text="Discover interactive courses and gain practical skills to excel in the real world." /> */}
+              <Slider />
             </div>
           </div>
         </div>

@@ -51,7 +51,20 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             <Title text="Pages" />
             {(isInstructor === "true" || isInstructor === true) && (
               <>
-                <DropDown
+                <Li
+                  handleClick={() => setSidebarOpen(!sidebarOpen)}
+                  text="Manage Course"
+                  path="/dashboard/course-list"
+                >
+                  <svg
+                    className="w-[14px] h-4 fill-custom-white-200 mx-2 group-hover:fill-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 640 512"
+                  >
+                    <path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM609.3 512H471.4c5.4-9.4 8.6-20.3 8.6-32v-8c0-60.7-27.1-115.2-69.8-151.8c2.4-.1 4.7-.2 7.1-.2h61.4C567.8 320 640 392.2 640 481.3c0 17-13.8 30.7-30.7 30.7zM432 256c-31 0-59-12.6-79.3-32.9C372.4 196.5 384 163.6 384 128c0-26.8-6.6-52.1-18.3-74.3C384.3 40.1 407.2 32 432 32c61.9 0 112 50.1 112 112s-50.1 112-112 112z" />
+                  </svg>
+                </Li>
+                {/* <DropDown
                   menu="Manage Course"
                   handleClick={() => setSidebarOpen(!sidebarOpen)}
                   submenu={[
@@ -66,16 +79,7 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                       pathname: "/dashboard/section-list",
                     },
                   ]}
-                />
-                {/* <Li handleClick={() => setSidebarOpen(!sidebarOpen)} text="Manage Assessment" path="/dashboard/">
-                  <svg
-                    className="w-[14px] h-4 fill-custom-white-200 mx-2 group-hover:fill-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 576 512"
-                  >
-                    <path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384v38.6C310.1 219.5 256 287.4 256 368c0 59.1 29.1 111.3 73.7 143.3c-3.2 .5-6.4 .7-9.7 .7H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128zM288 368a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm211.3-43.3c-6.2-6.2-16.4-6.2-22.6 0L416 385.4l-28.7-28.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l40 40c6.2 6.2 16.4 6.2 22.6 0l72-72c6.2-6.2 6.2-16.4 0-22.6z" />
-                  </svg>
-                </Li> */}
+                /> */}
               </>
             )}
 

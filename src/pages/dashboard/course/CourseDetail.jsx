@@ -14,6 +14,7 @@ import { ToolTip } from "../../../components/ToolTip";
 import SectionList from "../section/SectionList";
 import { GoBack } from "../../../components/Button";
 import RateCourse from "./RateCourse";
+import { trimText } from "../../../utils/trimText";
 
 export const CourseDetail = () => {
   const { course_id } = useParams();
@@ -45,14 +46,10 @@ export const CourseDetail = () => {
             )}
           />
           {admin && <GoBack text="Back" pathname="/dashboard/all-courses" />}
-          <DashH4 text={data?.course[0]?.name} />
           <div className="flex flex-wrap gap-4 justify-between">
             <div className="w-full lg:w-[45%] p-6 order-last flex-grow bg-white/60 rounded-lg mb-auto">
               <div className="flex flex-wrap justify-between">
                 <div>
-                  <span className="bg-purple-100/80 rounded-xl px-4 py-1 text-sm mb-4 inline-block">
-                    {data?.course[0]?.category?.name}
-                  </span>
                   <div className="text-gray-500 leading-3 text-xs tracking-tight">
                     <span>46 Videos •</span> <span>80 hours •</span>{" "}
                     <span>{formattedDate(data?.course[0]?.updated_at)}</span>
@@ -110,21 +107,30 @@ export const CourseDetail = () => {
                     About Instructor
                   </h1>
                   <p className="text-gray-500 text-xs">
-                    {data?.course[0]?.instructor?.studentprofile?.bio}
+                    {trimText(
+                      data?.course[0]?.instructor?.studentprofile?.bio,
+                      300
+                    )}
                   </p>
                 </div>
               </div>
             </div>
-            <div className="w-full lg:w-[50%]">
+            <div className="w-full lg:w-[50%] bg-white rounded-lg">
+              <div className="p-4">
+                <span className="bg-purple-100/80 rounded-xl px-4 py-1 text-sm mb-4 inline-block">
+                  {data?.course[0]?.category?.name}
+                </span>
+                <DashH4 text={data?.course[0]?.name} />
+              </div>
               <div className="w-full h-72">
                 <img
-                  className="w-full h-full object-cover border rounded-t-lg"
+                  className="w-full h-full object-cover border "
                   src={`https://naifty.abelayalew.dev/media/${data?.course[0]?.thumbnail}`}
                   alt="Course Thumbnail"
                 />
               </div>
-              <div className="p-6 bg-white rounded-b-lg">
-                <div className="bg-white rounded-b-lg">
+              <div className="p-6">
+                <div>
                   <div className="flex justify-between">
                     <h1 className="my-4 font-semibold text-base">
                       What you will learn

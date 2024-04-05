@@ -13,7 +13,6 @@ export const useProfilePicture = () => {
 
   useEffect(() => {
     setProfilePicture(data?.student_profile[0]?.profile_picture);
-    console.log("form cus hook " + data?.student_profile[0]?.profile_picture);
   }, [data]);
 
   return profilePicture;

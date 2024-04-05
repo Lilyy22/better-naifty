@@ -7,7 +7,7 @@ import { PrimaryButton } from "../../../components/Button";
 import { fileUpload } from "../../../axios/mutation";
 import { Toast } from "../../../components/Toast";
 
-export const EpisodeForm = ({ sectionId, handleOpen }) => {
+export const EpisodeForm = ({ sectionId, handleOpen, modalUpdate }) => {
   const [createEpisode] = useMutation(CREATEEPISODE);
 
   const [loading, setLoading] = useState(false);
@@ -61,6 +61,7 @@ export const EpisodeForm = ({ sectionId, handleOpen }) => {
       setVideo("");
       setTimeout(() => {
         handleOpen();
+        modalUpdate();
       }, 1000);
     } catch (error) {
       setClose(false); // set close false incase toast is closed

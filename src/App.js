@@ -98,14 +98,14 @@ function App() {
             <Route path="categories" element={<CategoryTable />} />
 
             {/* section */}
-            <Route path="section-list" element={<SectionTable />} />
-            <Route path="create-section" element={<CreateSection />} />
-            <Route
+            {/* <Route path="section-list" element={<SectionTable />} /> */}
+            {/* <Route path="create-section" element={<CreateSection />} /> */}
+            {/* <Route
               path="update-section/:section_id"
               element={<UpdateSection />}
-            />
+            /> */}
             <Route
-              path="section-list/:section_url"
+              path="courses-description/:course_url/section/:section_url"
               element={<SectionDetail />}
             />
             <Route

@@ -27,8 +27,8 @@ export const CourseTable = () => {
   const thead = [
     { head: "Name" },
     { head: "Price" },
-    { head: "enrolled" },
     { head: "Status" },
+    { head: "enrolled" },
     { head: "Action" },
   ];
 

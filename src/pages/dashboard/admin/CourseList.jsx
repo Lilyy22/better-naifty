@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TD, Table } from "../../../components/table/Table";
 import { TableLoader } from "../../../components/Loader";
 import { useMutation, useQuery } from "@apollo/client";
@@ -28,7 +28,7 @@ const CourseList = ({ approved }) => {
 
   const [del] = useMutation(DELETECOURSE);
   const [approveCourse] = useMutation(APPROVECOURSE);
-  const { data, loading } = useQuery(GETCOURSE, {
+  const { data, loading, refetch } = useQuery(GETCOURSE, {
     variables: {
       status: approved ? "APPROVED" : undefined,
     },
@@ -98,6 +98,9 @@ const CourseList = ({ approved }) => {
     PENDING: "blue",
   };
 
+  useEffect(() => {
+    refetch();
+  }, [data]);
   return (
     <>
       {status.success && (

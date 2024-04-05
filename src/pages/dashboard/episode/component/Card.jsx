@@ -15,7 +15,7 @@ export const EpisodeCard = ({
 }) => {
   return (
     <>
-      <div className="bg-white h-auto rounded-lg max-w-xs">
+      <div className="bg-white h-auto rounded-lg max-w-xs shadow">
         <ReactPlayer
           url={`https://naifty.abelayalew.dev/media/${file}`}
           width="100%"

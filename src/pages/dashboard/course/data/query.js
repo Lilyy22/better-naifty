@@ -75,9 +75,17 @@ export const GETCOURSESECTION = gql`
       thumbnail
       price
       enrollments {
+        created_at
+        id
         status
         student {
+          email
           id
+          studentprofile {
+            profile_picture
+            first_name
+            last_name
+          }
         }
       }
       category {
