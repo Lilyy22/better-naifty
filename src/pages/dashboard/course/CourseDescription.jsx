@@ -9,6 +9,7 @@ import { GoBack } from "../../../components/Button";
 import { useState } from "react";
 import { SectionTable } from "../section/SectionTable";
 import { EnrolledStudent } from "../enroll/EnrolledStudent";
+import List from "../assessment/List";
 
 export const CourseDescription = () => {
   const { course_id } = useParams();
@@ -31,7 +32,7 @@ export const CourseDescription = () => {
             <ul className="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 pl-2">
               <li className="me-2" role="presentation">
                 <button
-                  className={`inline-block p-4 rounded-t-lg ${
+                  className={`inline-block p-2 md:p-4 rounded-t-lg ${
                     openTab === 1
                       ? "text-blue-700 border-b border-blue-700"
                       : ""
@@ -43,7 +44,7 @@ export const CourseDescription = () => {
               </li>
               <li className="me-2" role="presentation">
                 <button
-                  className={`inline-block p-4 rounded-t-lg ${
+                  className={`inline-block p-2 md:p-4 rounded-t-lg ${
                     openTab === 2
                       ? "text-blue-700 border-b border-blue-700"
                       : ""
@@ -55,7 +56,7 @@ export const CourseDescription = () => {
               </li>
               <li className="me-2" role="presentation">
                 <button
-                  className={`inline-block p-4 rounded-t-lg ${
+                  className={`inline-block p-2 md:p-4 rounded-t-lg ${
                     openTab === 3
                       ? "text-blue-700 border-b border-blue-700"
                       : ""
@@ -67,7 +68,7 @@ export const CourseDescription = () => {
               </li>
               <li className="me-2" role="presentation">
                 <button
-                  className={`inline-block p-4 rounded-t-lg ${
+                  className={`inline-block p-2 md:p-4 rounded-t-lg ${
                     openTab === 4
                       ? "text-blue-700 border-b border-blue-700"
                       : ""
@@ -116,19 +117,23 @@ export const CourseDescription = () => {
             </div>
           </div>
 
-          <div
-            className={`flex flex-wrap gap-4 justify-between p-4 ${
-              openTab === 2 ? "flex" : "hidden"
-            }`}
-          >
+          <div className={`pt-4 md:p-2 ${openTab === 2 ? "block" : "hidden"}`}>
             <SectionTable courseId={course_id} setOpenTab={setOpenTab} />
           </div>
+
+          <div className={`pt-4 md:p-2 ${openTab === 3 ? "block" : "hidden"}`}>
+            <List courseId={course_id} />
+          </div>
+
           <div
             className={`flex flex-wrap gap-4 justify-between p-4 ${
               openTab === 4 ? "flex" : "hidden"
             }`}
           >
-            <EnrolledStudent enrollment={data?.course[0]?.enrollments} loading={loading}/>
+            <EnrolledStudent
+              enrollment={data?.course[0]?.enrollments}
+              loading={loading}
+            />
           </div>
           {/* END container */}
         </div>

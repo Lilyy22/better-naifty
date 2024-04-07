@@ -29,12 +29,12 @@ export const Slider = () => {
       <div className="relative w-full glide-05">
         {/*    <!-- Slides --> */}
         <div className="overflow-hidden" data-glide-el="track">
-          <ul className="whitespace-no-wrap flex-no-wrap [backface-visibility: hidden] [transform-style: preserve-3d] [touch-action: pan-Y] [will-change: transform] relative flex w-full overflow-hidden p-0">
-            <li className="my-auto">
+          <ul className="whitespace-no-wrap flex-no-wrap relative flex justify-between w-full overflow-hidden p-0">
+            <li className="my-auto w-full">
               <H2 text="Unlock Your Potential with NAIFTY" />
               {/* <Subtitle text="Discover interactive courses and gain practical skills to excel in the real world." /> */}
             </li>
-            <li>
+            <li className="w-full">
               <img
                 src={require("../../../../assets/veect.png")}
                 className="w-full max-w-full max-h-full m-auto brightness-75"
