@@ -3,7 +3,7 @@ import { Input } from "../../../components/form/Input";
 
 const Answer = ({ loading, answerCount, setAnswerCount, index, count }) => {
   const handleCount = () => {
-    if (answerCount?.length > 1) {
+    if (answerCount?.length > 2) {
       const updatedArray = [...answerCount]; // Create a copy of the array
       const idx = updatedArray.findIndex((item) => item.id === index); // Get the index of the item
 

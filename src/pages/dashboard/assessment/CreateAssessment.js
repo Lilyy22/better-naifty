@@ -20,6 +20,7 @@ const CreateAssessment = ({ handleOpen, courseId }) => {
 
   const [answerCount, setAnswerCount] = useState([
     { id: 1, answer_text: "", is_true: false, question_id: "" },
+    { id: 2, answer_text: "", is_true: false, question_id: "" },
   ]);
 
   const [createQuestion] = useMutation(CREATEQUESTION);
