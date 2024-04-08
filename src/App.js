@@ -79,7 +79,7 @@ function App() {
               element={<CourseDetail />}
             />
             <Route
-              path="courses-description/:course_id"
+              path="course-list/courses-description/:course_id"
               element={<CourseDescription />}
             />
             {/* users */}
@@ -105,7 +105,7 @@ function App() {
               element={<UpdateSection />}
             /> */}
             <Route
-              path="courses-description/:course_url/section/:section_url"
+              path="course-list/courses-description/:course_url/section/:section_url"
               element={<SectionDetail />}
             />
             <Route

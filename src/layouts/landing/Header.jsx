@@ -6,7 +6,7 @@ import { useProfilePicture } from "../../hooks/useProfilePicture";
 import { AuthContext } from "../../context/AuthContext";
 
 const Header = () => {
-  const profilePicture = useProfilePicture();
+  const { profilePicture, loading } = useProfilePicture();
   const { userId } = useContext(AuthContext);
 
   const [menuToggle, setMenuToggle] = useState(false);
@@ -129,10 +129,12 @@ const Header = () => {
                   to="/dashboard"
                   className="text-white text-xs md:text-sm px-1 py-1 whitespace-nowrap my-auto"
                 >
-                  <span>My Learning</span>
+                  <span>My Page</span>
                 </NavLink>
                 <img
-                  className="rounded-full h-9 w-9 object-cover m-auto"
+                  className={`rounded-full h-9 w-9 object-cover m-auto ${
+                    loading ? "animate-pulse grayscale" : ""
+                  }`}
                   src={
                     profilePicture
                       ? `https://naifty.abelayalew.dev/media/${profilePicture}`

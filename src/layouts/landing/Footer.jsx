@@ -1,11 +1,12 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Logo } from "../../components/Logo";
+import { Subscription } from "./Subscription";
 
 const Footer = () => {
   return (
     <>
-      <footer className="mt-auto py-8 px-4 bg-custom-gray-900 text-custom-white-100 lg:py-16 xl:px-0">
+      <footer className="mt-auto py-8 px-4 bg-custom-gray-900 text-custom-white-100 lg:py-16 xl:px-0 border-t border-gray-700/70">
         <div className="max-w-7xl mx-auto">
           <nav className="w-full flex flex-wrap justify-between pb-12">
             <div className="w-full mb-6 md:w-[20%] lg:w-[15%]">
@@ -63,7 +64,7 @@ const Footer = () => {
               </ul>
             </div>
             <div className="w-full lg:w-[40%] xl:w-1/3">
-              {/* <Subscription /> */}
+              <Subscription />
               <p className="text-gray-300 text-xs my-2">
                 By subscribing, you agree to our Privacy Policy and consent to
                 receive updates.

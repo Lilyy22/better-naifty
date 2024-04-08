@@ -7,7 +7,7 @@ export const useProfilePicture = () => {
   const { userId } = useContext(AuthContext);
   const [profilePicture, setProfilePicture] = useState();
 
-  const { data } = useQuery(GETSTUDENTPROFILE, {
+  const { data, loading } = useQuery(GETSTUDENTPROFILE, {
     variables: { userId: userId },
   });
 
@@ -15,5 +15,5 @@ export const useProfilePicture = () => {
     setProfilePicture(data?.student_profile[0]?.profile_picture);
   }, [data]);
 
-  return profilePicture;
+  return { profilePicture, loading };
 };

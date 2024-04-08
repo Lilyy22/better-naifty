@@ -30,7 +30,7 @@ export const CourseDescription = () => {
         <div className="rounded-lg bg-white">
           <div className="border-b border-gray-200">
             <ul className="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 pl-2">
-              <li className="me-2" role="presentation">
+              <li className="me-2 outline-none" role="presentation">
                 <button
                   className={`inline-block p-2 md:p-4 rounded-t-lg ${
                     openTab === 1
@@ -42,7 +42,7 @@ export const CourseDescription = () => {
                   Course
                 </button>
               </li>
-              <li className="me-2" role="presentation">
+              <li className="me-2 outline-none" role="presentation">
                 <button
                   className={`inline-block p-2 md:p-4 rounded-t-lg ${
                     openTab === 2
@@ -54,7 +54,7 @@ export const CourseDescription = () => {
                   Section
                 </button>
               </li>
-              <li className="me-2" role="presentation">
+              <li className="me-2 outline-none" role="presentation">
                 <button
                   className={`inline-block p-2 md:p-4 rounded-t-lg ${
                     openTab === 3
@@ -66,7 +66,7 @@ export const CourseDescription = () => {
                   Assessment
                 </button>
               </li>
-              <li className="me-2" role="presentation">
+              <li className="me-2 outline-none" role="presentation">
                 <button
                   className={`inline-block p-2 md:p-4 rounded-t-lg ${
                     openTab === 4

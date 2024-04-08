@@ -98,11 +98,11 @@ export const PricingSection = () => {
               initial={{ y: -60 }}
               whileInView={{ y: 0 }}
               transition={{ duration: 2 }}
-              className="w-full md:w-[42%] lg:w-1/3 bg-purple-900/70 p-6 rounded-xl relative"
+              className="w-full md:w-[42%] lg:w-1/3 bg-pink-700/70 p-6 rounded-xl relative"
             >
               {/* cards */}
               <img
-                className="hidden md:block grayscale absolute h-32 w-32 -right-12 -top-24 z-0"
+                className="hidden md:block absolute h-32 w-32 -right-12 -top-24 z-0"
                 src={require("../../../assets/3d-wave.png")}
               />
               <h6 className="font-bold text-gray-200">Business Plan</h6>
@@ -196,7 +196,7 @@ export const Head = () => {
     <div className="relative flex flex-col-reverse py-24 lg:pt-0 lg:flex-col lg:pb-0 bg-custom-gray-900">
       <div className="inset-y-0 top-0 right-0 z-0 w-full max-w-xl px-4 mx-auto md:px-0 md:pr-0 md:mb-0 md:mx-0 md:w-7/12 md:max-w-full md:absolute xl:px-0">
         <svg
-          className="absolute left-0 hidden h-full transform -translate-x-1/2 md:block fill-custom-gray-600"
+          className="absolute left-0 hidden w-44 h-full transform -translate-x-1/2 md:block fill-custom-gray-600"
           viewBox="0 0 100 100"
           fill="currentColor"
           preserveAspectRatio="none slice"
@@ -204,8 +204,8 @@ export const Head = () => {
           <path d="M50 0H100L50 100H0L50 0Z" />
         </svg>
         <img
-          className="object-cover object-center w-full h-56 rounded shadow-lg lg:rounded-none lg:shadow-none md:h-full"
-          src="https://img.freepik.com/free-photo/young-person-taking-notes-textbook-paper-with-pen-looking-modern-laptop-woman-writing-information-notebook-files-doing-remote-work-adult-working-from-home-business_482257-27948.jpg?w=1380&t=st=1706522543~exp=1706523143~hmac=3196353f024db0a12381374cc7ac8bf8d5cff263edfddc571e0d11906cbc9f5c"
+          className="object-cover object-left w-full h-56 rounded shadow-lg lg:rounded-none lg:shadow-none md:h-full"
+          src="https://scc.losrios.edu/scc/main/img/reuse-event-735-414/student-resources/African-American-Studies-Classes-735x414.jpg"
           alt="course"
         />
       </div>

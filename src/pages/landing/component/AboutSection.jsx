@@ -9,9 +9,9 @@ export const Hero = () => {
     <>
       <div
         style={{
-          backgroundImage: `url(https://img.freepik.com/free-photo/business-people-board-room-meeting_53876-138090.jpg?w=1380&t=st=1706525997~exp=1706526597~hmac=91956cb525a402a30620af0a2a8324232f049262653dc6e36c300ad4f0349783)`,
+          backgroundImage: `url(https://www.wework.com/ideas/wp-content/uploads/sites/4/2017/06/Web_150DPI-20190927_10th_Floor_Conference_Room_2_v1.jpg)`,
         }}
-        className="w-full px-4 bg-cover bg-center relative bg-gray-800 bg-blend-overlay"
+        className="w-full px-4 bg-cover bg-center relative bg-gray-700 bg-blend-overlay"
       >
         <div className="max-w-7xl m-auto pt-24 pb-16 lg:pb-24 lg:pt-48">
           <div className="md:w-[45%] lg:w-1/2 xl:w-[44%]">
@@ -44,23 +44,23 @@ export const Mission = () => {
             <div className="px-8 mt-6 lg:mt-0">
               <div className="flex gap-4">
                 <svg
-                  className="bg-gray-700/40 rounded-full p-3 w-10 h-10 fill-current"
+                  className="bg-pink-700/40 rounded-full p-3 w-10 h-10 fill-current"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 576 512"
                 >
                   <path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z" />
                 </svg>
-                <h1 className="font-bold text-lg text-gray-300 lg:text-xl my-auto">
+                <h1 className="font-bold text-xl text-gray-300 lg:text-xl my-auto">
                   Vision
                 </h1>
               </div>
-              <p className="py-4 text-sm">
+              <p className="py-4 text-sm xl:text-base">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
                 alias enim cumque explicabo praesentium tempore nulla harum
                 consequatur mollitia. Sit veritatis maiores non ducimus
                 laboriosam odio quaerat, possimus voluptatibus debitis.
               </p>
-              <ul className="list-disc list-inside text-sm">
+              <ul className="list-disc list-inside text-sm xl:text-base">
                 <li className="mb-2">Interactive learning experience</li>
                 <li className="mb-2">Hands-on practical exercises</li>
                 <li className="mb-2">Real-world case studies</li>
@@ -76,23 +76,23 @@ export const Mission = () => {
             <div className="px-10 mt-6 lg:mt-0">
               <div className="flex gap-4">
                 <svg
-                  className="bg-gray-700/40 rounded-full p-3 w-10 h-10 fill-current"
+                  className="bg-pink-700/40 rounded-full p-3 w-10 h-10 fill-current"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
                 >
                   <path d="M176 56V96H336V56c0-4.4-3.6-8-8-8H184c-4.4 0-8 3.6-8 8zM128 96V56c0-30.9 25.1-56 56-56H328c30.9 0 56 25.1 56 56V96v32V480H128V128 96zM64 96H96V480H64c-35.3 0-64-28.7-64-64V160c0-35.3 28.7-64 64-64zM448 480H416V96h32c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64z" />
                 </svg>
-                <h1 className="font-bold text-lg text-gray-300 lg:text-xl my-auto">
-                  Misison
+                <h1 className="font-bold text-xl text-gray-300 lg:text-xl my-auto">
+                  Mission
                 </h1>
               </div>
-              <p className="py-4 text-sm">
+              <p className="py-4 text-sm xl:text-base">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
                 alias enim cumque explicabo praesentium tempore nulla harum
                 consequatur mollitia. Sit veritatis maiores non ducimus
                 laboriosam odio quaerat, possimus voluptatibus debitis.
               </p>
-              <ul className="list-disc list-inside text-sm">
+              <ul className="list-disc list-inside text-sm xl:text-base">
                 <li className="mb-2">Interactive learning experience</li>
                 <li className="mb-2">Hands-on practical exercises</li>
                 <li className="mb-2">Real-world case studies</li>

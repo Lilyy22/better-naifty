@@ -7,7 +7,7 @@ import { trimText } from "../../utils/trimText";
 
 export const Header = ({ handleClick, sidebarOpen }) => {
   const { isInstructor, userEmail, isSuperUser } = useContext(AuthContext);
-  const profilePicture = useProfilePicture();
+  const { profilePicture, loading } = useProfilePicture();
 
   let name;
   if (isInstructor === "true" || isInstructor === true) {
@@ -62,6 +62,7 @@ export const Header = ({ handleClick, sidebarOpen }) => {
                 ? `https://naifty.abelayalew.dev/media/${profilePicture}`
                 : "https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png"
             }
+            loading={loading}
           />
           <div className="hidden group-hover:block md:group-hover:hidden absolute right-1 bg-white rounded-md p-4">
             <div>

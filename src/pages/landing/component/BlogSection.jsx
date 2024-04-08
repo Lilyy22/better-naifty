@@ -15,7 +15,7 @@ export const BlogList = () => {
             initial={{ y: -90 }}
             whileInView={{ y: 0 }}
             transition={{ duration: 1 }}
-            className="w-full md:w-1/3"
+            className="w-full md:w-1/3 group"
           >
             <ImgCard
               img="https://www.simplilearn.com/ice9/free_resources_article_thumb/how_blockchain_works.jpg"

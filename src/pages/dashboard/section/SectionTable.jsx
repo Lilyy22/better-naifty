@@ -106,7 +106,7 @@ export const SectionTable = ({ courseId, setOpenTab }) => {
                     <TD>
                       <Link
                         className="relative group"
-                        to={`/dashboard/courses-description/${courseId}/section/${id}`}
+                        to={`/dashboard/course-list/courses-description/${courseId}/section/${id}`}
                       >
                         <span class="invisible absolute -left-1 -top-1 text-xs whitespace-nowrap rounded shadow-lg py-2 px-3 bg-gray-900 text-white -mt-8 group-hover:visible z-10">
                           View More

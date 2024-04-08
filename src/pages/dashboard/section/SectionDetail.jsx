@@ -57,7 +57,7 @@ export const SectionDetail = () => {
     <>
       <GoBack
         text="Back"
-        pathname={`/dashboard/courses-description/${course_url}`}
+        pathname={`/dashboard/course-list/courses-description/${course_url}`}
       />
       <div className="p-4 mb-8 bg-white rounded-lg">
         <DashH5 text="Section" />

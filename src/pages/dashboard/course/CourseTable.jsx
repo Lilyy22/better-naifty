@@ -78,7 +78,9 @@ export const CourseTable = () => {
                       text={enrollments[0] ? enrollments[0].aggregate.count : 0}
                     />
                     <TD>
-                      <Link to={`/dashboard/courses-description/${id}`}>
+                      <Link
+                        to={`/dashboard/course-list/courses-description/${id}`}
+                      >
                         <div className="bg-gray-100/50 py-1 rounded-2xl flex gap-1 text-xs justify-center text-green-400 relative">
                           <ToolTip text="View More" />
                           <svg

@@ -81,6 +81,9 @@ const CreateAssessment = ({ handleOpen, courseId }) => {
         ...status,
         success: true,
       });
+      setTimeout(() => {
+        handleOpen();
+      }, 1000);
     } catch (error) {
       setLoading(false);
       setClose(false);
@@ -89,6 +92,9 @@ const CreateAssessment = ({ handleOpen, courseId }) => {
         error: true,
         errorContent: error?.graphQLErrors?.[0]?.message,
       });
+      setTimeout(() => {
+        handleOpen();
+      }, 1000);
     }
   };
 
@@ -96,7 +102,7 @@ const CreateAssessment = ({ handleOpen, courseId }) => {
     <>
       {status.success && (
         <Toast
-          text="Episode Successfully created!"
+          text="Question Successfully created!"
           isSuccess={true}
           close={close}
           setClose={setClose}

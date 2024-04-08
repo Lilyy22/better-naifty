@@ -40,13 +40,13 @@ export const ImgCard = ({ title, subtitle, btnText, img, imgAlt }) => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="bg-custom-gray-600 rounded-3xl transition-all border border-gray-800 hover:-mt-2"
+        className="bg-custom-gray-600 rounded-3xl transition-all border border-gray-800 hover:-mt-2 group"
       >
         <motion.div className="w-full overflow-hidden rounded-t-3xl">
           <img
             src={img}
             alt={imgAlt}
-            className="w-full h-64 object-cover rounded-t-3xl object-center transition-all hover:scale-110"
+            className="w-full h-64 object-cover rounded-t-3xl object-center transition-all group-hover:scale-110"
           />
         </motion.div>
         <motion.div className="p-6 md:p-4 lg:p-6">
@@ -81,11 +81,11 @@ export const HorizontalCard = ({
 }) => {
   return (
     <>
-      <Link className="transition-all hover:-mt-4">
+      <Link className="transition-all hover:-mt-4 group">
         <motion.div className="rounded-xl bg-custom-gray-900 w-full border border-purple-900/60 mx-auto hover:bg-custom-gray-600 md:w-auto">
           <motion.div className="w-full h-44 rounded-3xl">
             <img
-              className="w-full h-full object-cover object-center rounded-t-xl grayscale hover:grayscale-0 border-l border-gray-700"
+              className="w-full h-full object-cover object-center rounded-t-xl grayscale group-hover:grayscale-0 border-l border-gray-700"
               src={img}
               alt={imgAlt}
             />
