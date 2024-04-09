@@ -95,7 +95,7 @@ export const CourseDetail = () => {
                   name={`${data?.course[0]?.instructor?.studentprofile?.first_name} ${data?.course[0]?.instructor?.studentprofile?.last_name}`}
                   photo={
                     data?.course[0]?.instructor?.studentprofile?.profile_picture
-                      ? `https://naifty.abelayalew.dev/media/${data?.course[0]?.instructor?.studentprofile?.profile_picture}`
+                      ? `https://api.naifty.academy/media/${data?.course[0]?.instructor?.studentprofile?.profile_picture}`
                       : "https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png"
                   }
                   subText={
@@ -125,7 +125,7 @@ export const CourseDetail = () => {
               <div className="w-full h-72">
                 <img
                   className="w-full h-full object-cover border "
-                  src={`https://naifty.abelayalew.dev/media/${data?.course[0]?.thumbnail}`}
+                  src={`https://api.naifty.academy/media/${data?.course[0]?.thumbnail}`}
                   alt="Course Thumbnail"
                 />
               </div>

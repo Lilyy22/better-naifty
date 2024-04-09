@@ -59,7 +59,7 @@ export const Header = ({ handleClick, sidebarOpen }) => {
             subText={trimText(userEmail, 30)}
             photo={
               profilePicture
-                ? `https://naifty.abelayalew.dev/media/${profilePicture}`
+                ? `https://api.naifty.academy/media/${profilePicture}`
                 : "https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png"
             }
             loading={loading}

@@ -25,7 +25,7 @@ export const CourseCard = ({
             className="w-full h-full object-cover rounded-t-lg"
             src={
               thumbnail
-                ? `https://naifty.abelayalew.dev/media/${thumbnail}`
+                ? `https://api.naifty.academy/media/${thumbnail}`
                 : "https://web.stlucie.k12.fl.us/wp-content/plugins/academy/assets//images/thumbnail-placeholder.png"
             }
             alt="course thumbnail"
@@ -46,7 +46,7 @@ export const CourseCard = ({
           <Profile
             name={instructorName}
             subText={formattedDate(updated_at)}
-            photo={`https://naifty.abelayalew.dev/media/${instructorPhoto}`}
+            photo={`https://api.naifty.academy/media/${instructorPhoto}`}
           />
           {/* end footer */}
           {!enrolled ? (

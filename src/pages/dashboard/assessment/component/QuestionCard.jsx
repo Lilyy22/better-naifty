@@ -1,25 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
+import { Action } from "../../../../components/table/Table";
+import { DeleteModal } from "../../../../components/modal/Delete";
 
-const QuestionCard = ({ question, options }) => {
+const QuestionCard = ({ id, question, options, handleDelete, setQuestion }) => {
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const handleDeleteClick = (questionId) => {
+    setOpenDeleteModal(!openDeleteModal);
+    setQuestion(questionId);
+  };
+
+  const handleEditClick = () => {};
+
   return (
-    <div className="mb-8">
-      <h1 className="font-medium mb-4 text-base">{question}</h1>
-      <ul>
-        {options.map(({ option }) => {
-          return (
-            <li className="mb-2 text-base flex gap-1">
-              <svg
-                className="w-[12px] h-[10px] fill-gray-400 my-auto"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 512 512"
-              >
-                <path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z" />
-              </svg>
-              {option}
-            </li>
-          );
-        })}
-      </ul>
+    <div className="mb-8 flex justify-between">
+      <div>
+        <h1 className="font-medium mb-4 text-base">{question}</h1>
+        <ul>
+          {options.map(({ id, answer_text, is_true }) => {
+            return (
+              <li key={id} className="mb-2 text-base flex gap-2">
+                {is_true ? (
+                  <svg
+                    className="w-[12px] h-[11px] fill-gray-400 my-auto"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512"
+                  >
+                    <path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z" />
+                  </svg>
+                ) : (
+                  <svg
+                    className="w-[12px] h-[11px] fill-purple-400 my-auto"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512"
+                  >
+                    <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z" />
+                  </svg>
+                )}
+                {answer_text}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+
+      <div className="mb-auto">
+        <Action
+          id={id}
+          handleDeleteClick={handleDeleteClick}
+          handleEditClick={handleEditClick}
+        />
+      </div>
+      {openDeleteModal && (
+        <DeleteModal
+          isOpen={openDeleteModal}
+          courseId={id}
+          handleModal={() => setOpenDeleteModal(!openDeleteModal)}
+          handleDelete={handleDelete}
+        />
+      )}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const URL =
-  process.env.REACT_APP_MINIO_ENDPOINT ?? `https://naifty.abelayalew.dev`;
+  process.env.REACT_APP_MINIO_ENDPOINT ?? `https://api.naifty.academy`;
 
 export const axiosInstance = axios.create({
   baseURL: URL,

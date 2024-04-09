@@ -32,7 +32,7 @@ export const EpisodeDetail = () => {
           <div className="w-full lg:w-[63%]">
             <div className="bg-white mb-4 rounded-lg">
               <ReactPlayer
-                url={`https://naifty.abelayalew.dev/media/${data?.curse_episode[0]?.file}`}
+                url={`https://api.naifty.academy/media/${data?.curse_episode[0]?.file}`}
                 width="100%"
                 height="100%"
                 playing={true}

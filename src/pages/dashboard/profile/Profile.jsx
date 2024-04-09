@@ -58,7 +58,7 @@ export const Profile = () => {
                     <div className="w-32 h-32 -mb-10 ml-4">
                       <img
                         className="object-center object-cover rounded-full w-full h-full border"
-                        src={`https://naifty.abelayalew.dev/media/${profile_picture}`}
+                        src={`https://api.naifty.academy/media/${profile_picture}`}
                         alt="Profile Picture"
                       />
                     </div>

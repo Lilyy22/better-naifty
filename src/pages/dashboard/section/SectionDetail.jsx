@@ -47,7 +47,7 @@ export const SectionDetail = () => {
   };
 
   const episodes = data?.course_section[0]?.episodes;
-  const array = [1, 2, 3, 4];
+  const array = [1, 2];
 
   useEffect(() => {
     refetch();

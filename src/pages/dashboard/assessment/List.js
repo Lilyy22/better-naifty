@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { GETASSESSMENT } from "./data/query";
 import DataNotFound from "../../../components/DataNotFound";
 import { TableLoader } from "../../../components/Loader";
@@ -7,19 +7,32 @@ import CreateAssessment from "./CreateAssessment";
 import { PrimaryButton } from "../../../components/Button";
 import QuestionCard from "./component/QuestionCard";
 import { DashH4 } from "../../../components/Heading";
+import { DELETEQUESTION } from "./data/mutation";
 
 const List = ({ courseId }) => {
   const [openCreateModal, setOpenCreateModal] = useState(false);
+  const [question, setQuestion] = useState();
 
+  const [delQuestion] = useMutation(DELETEQUESTION);
   const { data, loading, refetch } = useQuery(GETASSESSMENT, {
     variables: {
       courseId: courseId,
     },
   });
 
+  const handleDelete = async (questionId) => {
+    const { data } = await delQuestion({
+      variables: {
+        id: questionId,
+      },
+      refetchQueries: [GETASSESSMENT, "GETASSESSMENT"],
+    });
+  };
+
   useEffect(() => {
     refetch();
   }, [data]);
+
   return (
     <>
       {loading && <TableLoader />}
@@ -51,52 +64,23 @@ const List = ({ courseId }) => {
           />
         </div>
       )}
-      <div className="bg-gray-50/80 rounded p-8 border border-gray-100">
+      <div className="bg-gray-50/80 rounded p-8 border border-gray-100 xl:w-1/2">
         <div className="border-b mb-4">
           <DashH4 text="Quiz" />
         </div>
-        <QuestionCard
-          question="2x + 6y = 22, x + y = 5 What is x?"
-          options={[
-            {
-              option: "1",
-            },
-            {
-              option: "2",
-            },
-            {
-              option: "3",
-            },
-          ]}
-        />
-        <QuestionCard
-          question="2x + 6y = 22, x + y = 5 What is x?"
-          options={[
-            {
-              option: "1",
-            },
-            {
-              option: "2",
-            },
-            {
-              option: "3",
-            },
-          ]}
-        />
-        <QuestionCard
-          question="2x + 6y = 22, x + y = 5 What is x?"
-          options={[
-            {
-              option: "1",
-            },
-            {
-              option: "2",
-            },
-            {
-              option: "3",
-            },
-          ]}
-        />
+        {data?.assessment?.questions?.map(({ id, question_text, answers }) => {
+          //answers is a list
+          return (
+            <QuestionCard
+              key={id}
+              id={id}
+              question={question_text}
+              options={answers}
+              setQuestion={setQuestion}
+              handleDelete={handleDelete}
+            />
+          );
+        })}
       </div>
     </>
   );

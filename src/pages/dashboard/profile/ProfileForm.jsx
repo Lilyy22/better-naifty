@@ -133,7 +133,7 @@ export const ProfileForm = ({
           <div className="mb-6 relative border w-36 h-36 rounded-full cursor-pointer mx-auto md:mx-0">
             {profilePicture && !selectedFile ? (
               <img
-                src={`https://naifty.abelayalew.dev/media/${profilePicture}`}
+                src={`https://api.naifty.academy/media/${profilePicture}`}
                 className="cursor-pointer w-full h-full object-cover object-center rounded-full"
                 alt="profile"
               />

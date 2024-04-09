@@ -39,7 +39,7 @@ const UsersList = ({ instructor }) => {
                             className="w-full h-full object-cover rounded-full"
                             src={
                               studentprofile?.profile_picture
-                                ? `https://naifty.abelayalew.dev/media/${studentprofile?.profile_picture}`
+                                ? `https://api.naifty.academy/media/${studentprofile?.profile_picture}`
                                 : "https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png"
                             }
                             alt="course thumbnail"

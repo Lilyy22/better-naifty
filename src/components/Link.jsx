@@ -1,11 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const PrimaryLink = ({ text, children, goto, customStyle }) => {
+export const PrimaryLink = ({
+  text,
+  children,
+  goto,
+  customStyle,
+  handleClick,
+}) => {
   return (
     <>
       <Link
         to={goto}
+        onClick={handleClick}
         className={`bg-purple-500 rounded text-white font-medium outline-none
         py-1 transition-all px-4 text-sm hover:bg-purple-700 inline-block my-auto whitespace-nowrap ${customStyle}`}
       >

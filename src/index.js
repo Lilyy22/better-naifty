@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 const uploadLink = createUploadLink({
   uri:
     process.env.REACT_APP_GRAPHQL_ENDPOINT ??
-    "https://naifty.abelayalew.dev/graphql",
+    "https://api.naifty.academy/graphql",
   headers: {
     "keep-alive": "true",
   },

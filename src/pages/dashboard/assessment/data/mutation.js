@@ -11,6 +11,13 @@ export const CREATEQUESTION = gql`
     }
   }
 `;
+export const DELETEQUESTION = gql`
+  mutation DELETEQUESTION($id: String) {
+    delete_question(where: { id: { exact: $id } }) {
+      affected_rows
+    }
+  }
+`;
 
 export const CREATEANSWER = gql`
   mutation CREATEANSWER($inputs: [AnswerInputType]) {
@@ -19,6 +26,7 @@ export const CREATEANSWER = gql`
     }
   }
 `;
+
 // export const CREATEANSWER = gql`
 //   mutation CREATEANSWER(
 //     $questionId: String

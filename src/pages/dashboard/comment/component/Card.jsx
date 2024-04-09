@@ -7,7 +7,7 @@ export const CommentCard = ({ photo, name, comment, updated_at }) => {
         <div className="flex flex-col flex-1 gap-2">
           <div className="absolute z-10 inline-flex items-center justify-center w-8 h-8 text-white rounded-full -left-4 ring-2 ring-white">
             <img
-              src={`https://naifty.abelayalew.dev/media/${photo}`}
+              src={`https://api.naifty.academy/media/${photo}`}
               alt={name}
               width="48"
               height="48"

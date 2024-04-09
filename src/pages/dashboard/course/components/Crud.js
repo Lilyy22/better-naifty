@@ -107,7 +107,7 @@ export const Crud = ({
         <div className="mb-6 relative border-2 w-full md:w-96 h-52 cursor-pointer mx-auto md:mx-0 rounded-lg border-dashed">
           {thumbnail && !selectedFile ? (
             <img
-              src={`https://naifty.abelayalew.dev/media/${thumbnail}`}
+              src={`https://api.naifty.academy/media/${thumbnail}`}
               className={`cursor-pointer w-full h-full object-cover object-center rounded-lg ${
                 courseLoading ?? "animate-pulse"
               }`}
