@@ -1,15 +1,29 @@
 import React, { useState } from "react";
 import { Action } from "../../../../components/table/Table";
 import { DeleteModal } from "../../../../components/modal/Delete";
+import UpdateQuestion from "../updateAssessment";
 
-const QuestionCard = ({ id, question, options, handleDelete, setQuestion }) => {
+const QuestionCard = ({
+  id,
+  question,
+  options,
+  handleDelete,
+  setQuestion,
+  updated,
+  setUpdated,
+}) => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
+
   const handleDeleteClick = (questionId) => {
     setOpenDeleteModal(!openDeleteModal);
     setQuestion(questionId);
   };
 
-  const handleEditClick = () => {};
+  const handleEditClick = (questionId) => {
+    setOpenEditModal(!openEditModal);
+    setQuestion(questionId);
+  };
 
   return (
     <div className="mb-8 flex justify-between">
@@ -21,19 +35,19 @@ const QuestionCard = ({ id, question, options, handleDelete, setQuestion }) => {
               <li key={id} className="mb-2 text-base flex gap-2">
                 {is_true ? (
                   <svg
-                    className="w-[12px] h-[11px] fill-gray-400 my-auto"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 512 512"
-                  >
-                    <path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z" />
-                  </svg>
-                ) : (
-                  <svg
                     className="w-[12px] h-[11px] fill-purple-400 my-auto"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 512 512"
                   >
                     <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z" />
+                  </svg>
+                ) : (
+                  <svg
+                    className="w-[12px] h-[11px] fill-gray-400 my-auto"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512"
+                  >
+                    <path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z" />
                   </svg>
                 )}
                 {answer_text}
@@ -57,6 +71,16 @@ const QuestionCard = ({ id, question, options, handleDelete, setQuestion }) => {
           handleModal={() => setOpenDeleteModal(!openDeleteModal)}
           handleDelete={handleDelete}
         />
+      )}
+      {openEditModal && (
+        <div className="overflow-y-auto overflow-x-hidden fixed top-0 flex left-0 z-50 justify-center items-center w-full min-h-full bg-gray-700/20">
+          <UpdateQuestion
+            questionId={id}
+            handleOpen={() => setOpenEditModal(!openEditModal)}
+            updated={updated}
+            setUpdated={setUpdated}
+          />
+        </div>
       )}
     </div>
   );

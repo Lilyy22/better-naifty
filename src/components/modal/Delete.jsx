@@ -39,7 +39,7 @@ export const DeleteModal = ({
                 <span className="sr-only">Close modal</span>
               </button>
               <svg
-                className="text-gray-400 w-11 h-11 mb-3.5 mx-auto"
+                className="text-gray-400 w-11 h-11 mb-3.5 mx-auto fill-red-300"
                 aria-hidden="true"
                 fill="currentColor"
                 viewBox="0 0 20 20"

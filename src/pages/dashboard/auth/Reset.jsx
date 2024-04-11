@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { REQUESTOTP, VERIFYOTP } from "./data/mutation";
+import { REQUESTOTP, RESETPASSWORD } from "./data/mutation";
 import { useState } from "react";
 import { Toast } from "../../../components/Toast";
 import { Logo } from "../../../components/Logo";
@@ -7,8 +7,9 @@ import { H3 } from "../../../components/Heading";
 import OTPInput from "react-otp-input";
 import { LandPrimaryButton } from "../../../components/Button";
 import { useMutation } from "@apollo/client";
+import { Input } from "../../../components/form/Input";
 
-const Verify = () => {
+const Reset = () => {
   const navigate = useNavigate();
   const [close, setClose] = useState(false);
   const [status, setStatus] = useState({
@@ -23,17 +24,18 @@ const Verify = () => {
 
   const [otp, setOtp] = useState();
   const [validOtp, setValidOtp] = useState(true);
+  const [password, setPassword] = useState();
 
-  const [verifyUser, { loading: verifyloader }] = useMutation(VERIFYOTP);
+  const [resetPassword, { loading: resetloader }] = useMutation(RESETPASSWORD);
   const [requestOtp, { loading: resedLoader }] = useMutation(REQUESTOTP);
 
-  const handleVerification = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (OTP_REGEX.test(otp)) {
       try {
-        const { data } = await verifyUser({
-          variables: { email: email, otp: otp },
+        const { data } = await resetPassword({
+          variables: { email: email, otp: otp, password: password },
         });
         setOtp("");
         if (data?.verify_otp?.success) {
@@ -41,7 +43,7 @@ const Verify = () => {
           setStatus({
             ...status,
             success: true,
-            successContent: "Account Verified!",
+            successContent: "Password Reset!",
           });
           setTimeout(() => {
             navigate("/login");
@@ -89,7 +91,7 @@ const Verify = () => {
         ...status,
         error: false,
         success: true,
-        successContent: "We have send a verification code to your email.",
+        successContent: "We have send a reset code to your email.",
       });
     } catch (error) {
       setClose(false);
@@ -125,12 +127,10 @@ const Verify = () => {
         <Logo customStyle="mx-auto lg:w-20 mb-12" />
         <form
           className="max-w-lg mx-auto px-4 rounded-xl lg:px-12 text-center"
-          onSubmit={handleVerification}
+          onSubmit={handleSubmit}
         >
-          <H3 text="Verify Account" />
-          <p className="text-gray-500">
-            Please Insert code and verify account.
-          </p>
+          <H3 text="Reset Password" />
+          <p className="text-gray-500">Please Insert code and reset account.</p>
           <div className="text-gray-200 my-10 relative">
             <OTPInput
               value={otp}
@@ -149,11 +149,24 @@ const Verify = () => {
               </div>
             )}
           </div>
-
+          <div className="text-gray-200 mb-6 mt-12">
+            <label htmlFor="password">
+              New Password <span className="text-red-400">*</span>
+            </label>
+            <input
+              type="password"
+              id="password"
+              className="bg-slate-900 border border-gray-800 rounded-lg w-full py-1.5 px-3 mt-2 outline-none focus:ring-2 ring-purple-900"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
           <LandPrimaryButton
             type={otp !== null ? "submit" : "button"}
             customStyle="w-full"
-            text={verifyloader ? "•••" : "Verify"}
+            text={resetloader ? "•••" : "Reset"}
           />
         </form>
         <p className="text-gray-500 my-4 text-center">
@@ -171,4 +184,4 @@ const Verify = () => {
   );
 };
 
-export default Verify;
+export default Reset;

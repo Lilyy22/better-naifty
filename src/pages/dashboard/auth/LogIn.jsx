@@ -70,6 +70,7 @@ export const LogIn = () => {
           setClose={setClose}
         />
       )}
+
       <AuthForm
         isSignUp={false}
         handleSubmit={handleSubmit}

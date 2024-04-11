@@ -6,8 +6,6 @@ import { UpdateCourse } from "./pages/dashboard/course/UpdateCourse";
 import { CourseGrid } from "./pages/dashboard/course/CourseGrid";
 import { CourseTable } from "./pages/dashboard/course/CourseTable";
 import { Profile } from "./pages/dashboard/profile/Profile";
-import { SectionTable } from "./pages/dashboard/section/SectionTable";
-import { CreateSection } from "./pages/dashboard/section/CreateSection";
 import { CourseDetail } from "./pages/dashboard/course/CourseDetail";
 import { EpisodeDetail } from "./pages/dashboard/episode/EpisodeDetail";
 import { SignUp } from "./pages/dashboard/auth/SignUp";
@@ -17,7 +15,6 @@ import { ScrollTop } from "./utils/scrollTop";
 import Home from "./pages/landing/Home";
 import Verify from "./pages/dashboard/auth/Verify";
 import PrivateRoute from "./routes/PrivateRoute";
-import { UpdateSection } from "./pages/dashboard/section/UpdateSection";
 import { Course } from "./pages/landing/Course";
 import { About } from "./pages/landing/About";
 import { BlogDetail } from "./pages/landing/BlogDetail";
@@ -32,9 +29,10 @@ import UsersList from "./pages/dashboard/admin/UsersList";
 import CourseList from "./pages/dashboard/admin/CourseList";
 import AlreadyLogged from "./routes/AlreadyLogged";
 import { CourseDescription } from "./pages/dashboard/course/CourseDescription";
+import Layout from "./pages/dashboard/auth/components/Layout";
+import Reset from "./pages/dashboard/auth/Reset";
 
 function App() {
-  // const is_online = window.navigator.onLine ? true : false;
   return (
     <>
       <ScrollTop />
@@ -47,12 +45,14 @@ function App() {
         <Route path="blog-read" element={<BlogDetail />} />
 
         {/* auth */}
-        <Route path="signup/:role?" element={<SignUp />} />
-        <Route element={<AlreadyLogged />}>
-          <Route path="/login" element={<LogIn />} />
+        <Route path="/" element={<Layout />}>
+          <Route path="signup/:role?" element={<SignUp />} />
+          <Route element={<AlreadyLogged />}>
+            <Route path="/login" element={<LogIn />} />
+          </Route>
+          <Route path="verify" element={<Verify />} />
+          <Route path="reset" element={<Reset />} />
         </Route>
-
-        <Route path="verify" element={<Verify />} />
 
         {/* Dashboard */}
         <Route element={<PrivateRoute />}>
@@ -97,13 +97,6 @@ function App() {
             />
             <Route path="categories" element={<CategoryTable />} />
 
-            {/* section */}
-            {/* <Route path="section-list" element={<SectionTable />} /> */}
-            {/* <Route path="create-section" element={<CreateSection />} /> */}
-            {/* <Route
-              path="update-section/:section_id"
-              element={<UpdateSection />}
-            /> */}
             <Route
               path="course-list/courses-description/:course_url/section/:section_url"
               element={<SectionDetail />}

@@ -158,7 +158,7 @@ const CourseList = ({ approved }) => {
                         className="relative group"
                         to={`/dashboard/courses-detail/${id}`}
                       >
-                        <span class="invisible absolute -left-1 -top-1 text-xs whitespace-nowrap rounded shadow-lg py-2 px-3 bg-gray-900 text-white -mt-8 group-hover:visible z-10">
+                        <span className="invisible absolute -left-1 -top-1 text-xs whitespace-nowrap rounded shadow-lg py-2 px-3 bg-gray-900 text-white -mt-8 group-hover:visible z-10">
                           View More
                         </span>
                         <div className="bg-gray-100/50 py-1 rounded-2xl flex gap-1 text-xs justify-center text-purple-400">

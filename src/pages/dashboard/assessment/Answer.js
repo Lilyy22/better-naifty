@@ -1,7 +1,23 @@
 import React from "react";
 import { Input } from "../../../components/form/Input";
 
-const Answer = ({ loading, answerCount, setAnswerCount, index, count }) => {
+const Answer = ({
+  loading,
+  answerCount,
+  setAnswerCount,
+  index,
+  count,
+  questionLoading,
+}) => {
+  const handleAnswerChange = (e) => {
+    const updatedArray = [...answerCount]; // Create a copy of the array
+    updatedArray[count] = {
+      ...updatedArray[count],
+      answer_text: e.target.value,
+    };
+    setAnswerCount(updatedArray);
+  };
+
   const handleCount = () => {
     if (answerCount?.length > 2) {
       const updatedArray = [...answerCount]; // Create a copy of the array
@@ -20,7 +36,7 @@ const Answer = ({ loading, answerCount, setAnswerCount, index, count }) => {
         type="button"
         className="absolute top-4 right-4 group"
         onClick={handleCount}
-        disabled={loading ? true : false}
+        disabled={loading || questionLoading ? true : false}
       >
         <svg
           aria-hidden="true"
@@ -44,23 +60,18 @@ const Answer = ({ loading, answerCount, setAnswerCount, index, count }) => {
         placeholder="eg: data types"
         value={answerCount[count].answer_text}
         onChange={(e) => {
-          const updatedArray = [...answerCount]; // Create a copy of the array
-          updatedArray[count] = {
-            ...updatedArray[count],
-            answer_text: e.target.value,
-          };
-          setAnswerCount(updatedArray);
+          handleAnswerChange(e);
         }}
         isRequired={true}
-        disabled={loading ? true : false}
+        disabled={loading || questionLoading ? true : false}
       />
       <label className="inline-flex items-center cursor-pointer pl-2">
         <input
           type="checkbox"
-          value={answerCount[count].is_true}
+          checked={answerCount[count].is_true}
           onChange={(e) => {
             const updatedArray = [...answerCount]; // Create a copy of the array
-            updatedArray[count] = {
+            updatedArray[count] = { // get the answer at spec index
               ...updatedArray[count],
               is_true: e.target.checked,
             };

@@ -44,3 +44,11 @@ export const VERIFYOTP = gql`
     }
   }
 `;
+
+export const RESETPASSWORD = gql`
+  mutation RESETPASSWORD($email: String!, $otp: String!, $password: String!) {
+    reset_password(email: $email, otp: $otp, password: $password) {
+      success
+    }
+  }
+`;

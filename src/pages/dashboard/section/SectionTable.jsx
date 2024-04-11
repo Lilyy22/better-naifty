@@ -108,10 +108,10 @@ export const SectionTable = ({ courseId, setOpenTab }) => {
                         className="relative group"
                         to={`/dashboard/course-list/courses-description/${courseId}/section/${id}`}
                       >
-                        <span class="invisible absolute -left-1 -top-1 text-xs whitespace-nowrap rounded shadow-lg py-2 px-3 bg-gray-900 text-white -mt-8 group-hover:visible z-10">
+                        <span className="invisible absolute -left-1 -top-1 text-xs whitespace-nowrap rounded shadow-lg py-2 px-4 bg-gray-900 text-white -mt-8 group-hover:visible z-10">
                           View More
                         </span>
-                        <div className="bg-gray-100/50 py-1 rounded-2xl flex gap-1 text-xs justify-center text-purple-400">
+                        <div className="bg-gray-100/50 py-0.5 px-2 rounded-2xl flex gap-1 text-xs justify-center text-purple-600">
                           <svg
                             className="w-3 h-3 fill-current leading-none my-auto"
                             xmlns="http://www.w3.org/2000/svg"

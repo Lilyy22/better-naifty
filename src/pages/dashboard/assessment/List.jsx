@@ -12,6 +12,7 @@ import { DELETEQUESTION } from "./data/mutation";
 const List = ({ courseId }) => {
   const [openCreateModal, setOpenCreateModal] = useState(false);
   const [question, setQuestion] = useState();
+  const [updated, setUpdated] = useState(false);
 
   const [delQuestion] = useMutation(DELETEQUESTION);
   const { data, loading, refetch } = useQuery(GETASSESSMENT, {
@@ -31,17 +32,12 @@ const List = ({ courseId }) => {
 
   useEffect(() => {
     refetch();
-  }, [data]);
+  }, [data, updated]);
 
   return (
     <>
       {loading && <TableLoader />}
-      {data?.assessment?.length === 0 && <DataNotFound text="No Assessments" />}
-      <div className="px-6 py-2 flex justify-between">
-        <p className="text-gray-500 text-xs italic">
-          Please create a bunch of questions that could be used to make
-          assessment for enrolled students.
-        </p>
+      <div className="px-6 py-2">
         <PrimaryButton
           text="Create"
           customStyle="float-right mb-auto"
@@ -56,32 +52,49 @@ const List = ({ courseId }) => {
           </svg>
         </PrimaryButton>
       </div>
+      {data?.question?.length === 0 && (
+        <div>
+          <p className="text-gray-500 text-sm italic text-center mx-auto max-w-lg">
+            Please create a bunch of questions that could be used to make
+            assessment for enrolled students.
+          </p>
+          <DataNotFound text="No Assessments" />
+        </div>
+      )}
+
       {openCreateModal && (
         <div className="overflow-y-auto overflow-x-hidden fixed top-0 flex left-0 z-50 justify-center items-center w-full min-h-full bg-gray-700/20">
           <CreateAssessment
             courseId={courseId}
             handleOpen={() => setOpenCreateModal(!openCreateModal)}
+            updated={updated}
+            setUpdated={setUpdated}
           />
         </div>
       )}
-      <div className="bg-gray-50/80 rounded p-8 border border-gray-100 xl:w-1/2">
-        <div className="border-b mb-4">
-          <DashH4 text="Quiz" />
+
+      {data?.question?.length > 0 && (
+        <div className="rounded p-8 xl:border xl:bg-gray-50/80 border-gray-100 xl:w-1/2">
+          <div className="border-b mb-4">
+            <DashH4 text="Quiz" />
+          </div>
+          {data?.question?.map(({ id, question_text, answers }) => {
+            //answers is a list
+            return (
+              <QuestionCard
+                key={id}
+                id={id}
+                question={question_text}
+                options={answers}
+                setQuestion={setQuestion}
+                handleDelete={handleDelete}
+                updated={updated}
+                setUpdated={setUpdated}
+              />
+            );
+          })}
         </div>
-        {data?.assessment?.questions?.map(({ id, question_text, answers }) => {
-          //answers is a list
-          return (
-            <QuestionCard
-              key={id}
-              id={id}
-              question={question_text}
-              options={answers}
-              setQuestion={setQuestion}
-              handleDelete={handleDelete}
-            />
-          );
-        })}
-      </div>
+      )}
     </>
   );
 };

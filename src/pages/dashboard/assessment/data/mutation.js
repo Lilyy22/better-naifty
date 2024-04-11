@@ -27,17 +27,32 @@ export const CREATEANSWER = gql`
   }
 `;
 
-// export const CREATEANSWER = gql`
-//   mutation CREATEANSWER(
-//     $questionId: String
-//     $answer: String
-//   ) {
-//     create_answer(
-//       inputs: [
-//         { answer_text: $answer, question_id: $questionId, is_true: $isTrue }
-//       ]
-//     ) {
-//       affected_rows
-//     }
-//   }
-// `;
+export const UPDATEANSWER = gql`
+  mutation UPDATEANSWER($inputs: [AnswerInputType], $quesionId: String) {
+    update_answer(
+      where: { question_id: { exact: $quesionId } }
+      input: $inputs
+    ) {
+      affected_rows
+    }
+  }
+`;
+
+export const UPDATEQUESTION = gql`
+  mutation UPDATEQUESTION($questionId: String, $question: String) {
+    update_question(
+      input: { question_text: $question }
+      where: { id: { exact: $questionId } }
+    ) {
+      affected_rows
+    }
+  }
+`;
+
+export const DELETEANSWER = gql`
+  mutation DELETEANSWER($questionId: String) {
+    delete_answer(where: { question_id: { exact: $questionId } }) {
+      affected_rows
+    }
+  }
+`;
