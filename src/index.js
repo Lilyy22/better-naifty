@@ -1,12 +1,18 @@
-import React, { StrictMode } from "react";
+import React, { StrictMode, useContext } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import { AuthProvider } from "./context/AuthContext";
+import {
+  ApolloClient,
+  ApolloLink,
+  ApolloProvider,
+  InMemoryCache,
+} from "@apollo/client";
+import { AuthContext, AuthProvider } from "./context/AuthContext";
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
-import { OnlineStatusProvider } from "./context/OnlineStatusContext";
+
+const accessToken = localStorage.getItem("accessToken");
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const uploadLink = createUploadLink({
@@ -18,9 +24,21 @@ const uploadLink = createUploadLink({
   },
 });
 
+const authLink = new ApolloLink((operation, forward) => {
+  // Use the setContext method to set the HTTP headers.
+  operation.setContext({
+    headers: {
+      authorization: accessToken ? `Bearer ${accessToken}` : "",
+    },
+  });
+
+  // Call the next link in the middleware chain.
+  return forward(operation);
+});
+
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: uploadLink,
+  link: accessToken ? authLink.concat(uploadLink) : uploadLink,
 });
 
 root.render(
