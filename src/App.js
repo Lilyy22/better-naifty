@@ -31,6 +31,8 @@ import AlreadyLogged from "./routes/AlreadyLogged";
 import { CourseDescription } from "./pages/dashboard/course/CourseDescription";
 import Layout from "./pages/dashboard/auth/components/Layout";
 import Reset from "./pages/dashboard/auth/Reset";
+import EnrolledDescription from "./pages/dashboard/enroll/EnrolledDescription";
+import ForumDescription from "./pages/dashboard/forum/ForumDescription";
 
 function App() {
   return (
@@ -79,11 +81,19 @@ function App() {
               element={<CourseDetail />}
             />
             <Route
+              path="enrolled-courses/course/:course_id"
+              element={<EnrolledDescription />}
+            />
+            <Route
               path="course-list/courses-description/:course_id"
               element={<CourseDescription />}
             />
             {/* users */}
             <Route path="students" element={<UsersList />} />
+            <Route
+              path="enrolled-courses/course/:course_id/forum/:forum_id"
+              element={<ForumDescription />}
+            />
             <Route
               path="instructors"
               element={<UsersList instructor={true} />}

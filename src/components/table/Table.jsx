@@ -3,7 +3,17 @@ import { DashH5 } from "../Heading";
 import { PrimaryLink } from "../Link";
 import { ToolTip } from "../ToolTip";
 
-export const Table = ({ title, children, path, data, noCrud }) => {
+export const Table = ({
+  title,
+  children,
+  path,
+  data,
+  noCrud,
+  currentPage,
+  totalCount,
+  pageSize,
+  onPageChange,
+}) => {
   return (
     <>
       <div className="bg-white rounded-lg min-w-5xl xl:w-[80%] font-mont">
@@ -50,6 +60,14 @@ export const Table = ({ title, children, path, data, noCrud }) => {
               </thead>
               <tbody>{children}</tbody>
             </table>
+          </div>
+          <div className="l ml-auto">
+            {/* <Pagination
+            currentPage={currentPage}
+            totalCount={totalCount}
+            pageSize={pageSize}
+            onPageChange={onPageChange}
+            /> */}
           </div>
         </div>
       </div>

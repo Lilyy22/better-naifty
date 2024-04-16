@@ -4,15 +4,29 @@ import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import { GETSECTION } from "./data/query";
 import { DashH4, DashH5 } from "../../../components/Heading";
-import { GoBack } from "../../../components/Button";
 import DataNotFound from "../../../components/DataNotFound";
 import { DELETEEPISODE } from "../episode/data/mutation";
 import { DeleteModal } from "../../../components/modal/Delete";
 import UpdateEpisode from "../episode/UpdateEpisode";
 import { Loader } from "../episode/component/Loader";
+import Breadcrumb from "../../../components/Breadcrumb";
 
 export const SectionDetail = () => {
   const { section_url, course_url } = useParams();
+  const breadcrumbs = [
+    {
+      name: "Course",
+      path: `/dashboard/course-list/courses-description/${course_url}`,
+    },
+    {
+      name: "Section",
+      path: `/dashboard/course-list/courses-description/${course_url}`,
+    },
+    {
+      name: "Detail",
+      path: "",
+    },
+  ];
 
   const [episodeId, setEpisodeId] = useState();
   const [episodeUpdate, setEpisodeUpdate] = useState(false);
@@ -55,10 +69,8 @@ export const SectionDetail = () => {
 
   return (
     <>
-      <GoBack
-        text="Back"
-        pathname={`/dashboard/course-list/courses-description/${course_url}`}
-      />
+      <Breadcrumb breadcrumbs={breadcrumbs} />
+
       <div className="p-4 mb-8 bg-white rounded-lg">
         <DashH5 text="Section" />
         <h1 className="font-semibold text-gray-400/70 text-xs mt-4">Title</h1>

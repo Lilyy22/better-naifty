@@ -69,7 +69,7 @@ export const DefaultLayout = () => {
           <Header sidebarOpen={sidebarOpen} handleClick={handleSidebar} />
 
           <main>
-            <div className="mx-auto max-w-screen-7xl min-h-screen p-4 md:p-6 2xl:p-10 bg-custom-gray-400 ">
+            <div className="mx-auto max-w-screen-7xl min-h-screen px-4 md:px-8 md:py-6  bg-custom-gray-400 ">
               {isOnline ? (
                 <Outlet />
               ) : (

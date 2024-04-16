@@ -7,9 +7,20 @@ import { CREATECOURSE } from "./data/mutation";
 import { Toast } from "../../../components/Toast";
 import { Crud } from "./components/Crud";
 import { useNavigate } from "react-router-dom";
-import { GoBack } from "../../../components/Button";
+import Breadcrumb from "../../../components/Breadcrumb";
 
 export const CreateCourse = () => {
+  const breadcrumbs = [
+    {
+      name: "Course",
+      path: "/dashboard/course-list",
+    },
+    {
+      name: "Create",
+      path: "",
+    },
+  ];
+
   const navigate = useNavigate();
   const { userId } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
@@ -103,7 +114,7 @@ export const CreateCourse = () => {
           setClose={setClose}
         />
       )}
-      <GoBack text="Back" pathname="/dashboard/course-list" />
+      <Breadcrumb breadcrumbs={breadcrumbs} />
       <Crud
         handleSubmit={handleSubmit}
         handleThumbnail={handleThumbnail}

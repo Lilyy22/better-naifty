@@ -5,7 +5,7 @@ export const TableLoader = () => {
 
   return (
     <>
-      <div className="overflow-hidden mt-8 rounded-xl bg-white animate-pulse min-w-5xl xl:w-[80%] font-mont">
+      <div className="overflow-hidden rounded-xl bg-white animate-pulse min-w-5xl xl:w-[80%] font-mont">
         <div className="flex justify-between p-4">
           <div className="bg-gray-200 rounded p-3 w-16"></div>
           <div className="bg-gray-200 rounded p-3 w-16"></div>

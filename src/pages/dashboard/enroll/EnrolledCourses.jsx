@@ -40,11 +40,11 @@ const EnrolledCourses = () => {
               instructor,
               updated_at,
               category,
-              enrollments,
             },
           }) => {
             return (
               <CourseCard
+                enrolledCard={true}
                 thumbnail={thumbnail}
                 updated_at={updated_at}
                 instructorName={`${instructor?.studentprofile?.first_name} ${instructor?.studentprofile?.last_name}`}

@@ -4,9 +4,10 @@ import { CREATESTUDENTPROFILE, UPDATESTUDENTPROFILE } from "./data/mutation";
 import { AuthContext } from "../../../context/AuthContext";
 import { Input, Textarea } from "../../../components/form/Input";
 import { useMutation } from "@apollo/client";
-import { GoBack, PrimaryButton } from "../../../components/Button";
+import { PrimaryButton } from "../../../components/Button";
 import { fileUpload } from "../../../axios/mutation";
 import { Toast } from "../../../components/Toast";
+import Breadcrumb from "../../../components/Breadcrumb";
 
 export const ProfileForm = ({
   is_create,
@@ -15,6 +16,16 @@ export const ProfileForm = ({
   lastName,
   profilePicture,
 }) => {
+  const breadcrumbs = [
+    {
+      name: "Profile",
+      path: "/dashboard/profile",
+    },
+    {
+      name: "Update",
+      path: "",
+    },
+  ];
   const { userId } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(false);
@@ -96,7 +107,10 @@ export const ProfileForm = ({
       )}
 
       {!is_create && (
-        <GoBack text="Back" handleClick={() => window.location.reload()} />
+        <Breadcrumb
+          breadcrumbs={breadcrumbs}
+          handleClick={() => window.location.reload()}
+        />
       )}
 
       <DashForm title="Profile Form">

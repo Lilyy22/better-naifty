@@ -13,11 +13,16 @@ export const CourseCard = ({
   updated_at,
   category,
   enrolled,
+  enrolledCard,
 }) => {
   return (
     <>
       <Link
-        to={`/dashboard/courses-detail/${id}`}
+        to={
+          enrolledCard
+            ? `/dashboard/enrolled-courses/course/${id}`
+            : `/dashboard/courses-detail/${id}`
+        }
         className="bg-white shadow w-full md:w-80 rounded-lg flex-shrink-0 flex-grow-0 relative"
       >
         <div className="rounded-t-lg w-full h-40 border-b">

@@ -7,14 +7,11 @@ import Assessment from "./component/CRUD";
 import { removeKey } from "../../../utils/removeKey";
 
 const UpdateQuestion = ({ handleOpen, questionId, updated, setUpdated }) => {
-  const {
-    data,
-    loading: questionLoading,
-    refetch,
-  } = useQuery(GETQUESTION, {
+  const { data, loading: questionLoading } = useQuery(GETQUESTION, {
     variables: {
       questionId: questionId,
     },
+    fetchPolicy: "no-cache",
   });
 
   const [question, setQuestion] = useState("");
@@ -31,20 +28,6 @@ const UpdateQuestion = ({ handleOpen, questionId, updated, setUpdated }) => {
   const [updateQuestion] = useMutation(UPDATEQUESTION);
   const [deleteAnswer] = useMutation(DELETEANSWER);
   const [createAnswer] = useMutation(CREATEANSWER);
-
-  const handleAnswerCount = () => {
-    const updatedArray = [...answerCount]; // Create a copy of the array
-    const lastItem = updatedArray[updatedArray.length - 1];
-    const newArray = {
-      id: lastItem.id + 1,
-      answer_text: "",
-      is_true: false,
-      question_id: questionId,
-    };
-
-    updatedArray.push(newArray);
-    setAnswerCount(updatedArray);
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -109,14 +92,13 @@ const UpdateQuestion = ({ handleOpen, questionId, updated, setUpdated }) => {
   useEffect(() => {
     if (!questionId) {
     } else {
-      refetch();
       if (data?.question[0]) {
         setQuestion(data?.question[0]?.question_text);
         const withOutType = removeKey(data?.question[0]?.answers, "__typename");
         setAnswerCount(withOutType);
       }
     }
-  }, [data?.question[0]]);
+  }, [questionId, data]);
 
   return (
     <>
@@ -137,12 +119,11 @@ const UpdateQuestion = ({ handleOpen, questionId, updated, setUpdated }) => {
         />
       )}
       <Assessment
-        question={question}
         loading={loading}
+        question={question}
         setQuestion={setQuestion}
         answerCount={answerCount}
         setAnswerCount={setAnswerCount}
-        handleAnswerCount={handleAnswerCount}
         handleSubmit={handleSubmit}
         handleOpen={handleOpen}
         questionLoading={questionLoading}

@@ -1,7 +1,7 @@
 export const ProfileLoader = () => {
   return (
     <>
-      <div className="bg-white rounded-xl mt-8 w-full mx-auto animate-pulse">
+      <div className="bg-white rounded-xl mt-8 w-full xl:w-[70%] animate-pulse">
         <div>
           <div className="box overflow-hidden rounded-xl shadow bg-white">
             <div className="box-body !p-0">

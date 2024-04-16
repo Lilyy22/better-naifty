@@ -24,24 +24,16 @@ const CreateAssessment = ({ handleOpen, courseId, updated, setUpdated }) => {
   const [createQuestion] = useMutation(CREATEQUESTION);
   const [createAnswer] = useMutation(CREATEANSWER);
 
-  const handleAnswerCount = () => {
-    const updatedArray = [...answerCount]; // Create a copy of the array
-    const lastItem = updatedArray[updatedArray.length - 1];
-    const newArray = {
-      id: lastItem.id + 1,
-      answer_text: "",
-      is_true: false,
-      question_id: "",
-    };
-
-    updatedArray.push(newArray);
-    setAnswerCount(updatedArray);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    const hasOneTrue = answerCount?.reduce((total, { is_true }) => {
+      return is_true === true;
+    });
 
+    if (hasOneTrue) {
+      console.log("yayyy heree");
+    }
     try {
       const { data } = await createQuestion({
         variables: {
@@ -117,7 +109,6 @@ const CreateAssessment = ({ handleOpen, courseId, updated, setUpdated }) => {
         setQuestion={setQuestion}
         answerCount={answerCount}
         setAnswerCount={setAnswerCount}
-        handleAnswerCount={handleAnswerCount}
         handleSubmit={handleSubmit}
         handleOpen={handleOpen}
       />

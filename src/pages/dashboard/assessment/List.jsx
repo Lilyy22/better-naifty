@@ -2,27 +2,34 @@ import React, { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GETASSESSMENT } from "./data/query";
 import DataNotFound from "../../../components/DataNotFound";
-import { TableLoader } from "../../../components/Loader";
 import CreateAssessment from "./CreateAssessment";
 import { PrimaryButton } from "../../../components/Button";
 import QuestionCard from "./component/QuestionCard";
 import { DashH4 } from "../../../components/Heading";
 import { DELETEQUESTION } from "./data/mutation";
+import Pagination from "../../../components/Pagination";
+import { Loader } from "./component/Loader";
 
 const List = ({ courseId }) => {
+  const [pagination, setPagination] = useState({
+    limit: 5,
+    offset: 0,
+  });
+
   const [openCreateModal, setOpenCreateModal] = useState(false);
-  const [question, setQuestion] = useState();
   const [updated, setUpdated] = useState(false);
 
   const [delQuestion] = useMutation(DELETEQUESTION);
-  const { data, loading, refetch } = useQuery(GETASSESSMENT, {
+  const { data, loading, refetch, fetchMore } = useQuery(GETASSESSMENT, {
     variables: {
       courseId: courseId,
+      limit: pagination.limit,
+      offset: pagination.offset,
     },
   });
 
   const handleDelete = async (questionId) => {
-    const { data } = await delQuestion({
+    await delQuestion({
       variables: {
         id: questionId,
       },
@@ -32,11 +39,11 @@ const List = ({ courseId }) => {
 
   useEffect(() => {
     refetch();
-  }, [data, updated]);
+  }, [updated]);
 
   return (
     <>
-      {loading && <TableLoader />}
+      {loading && <Loader />}
       <div className="px-6 py-2">
         <PrimaryButton
           text="Create"
@@ -74,7 +81,7 @@ const List = ({ courseId }) => {
       )}
 
       {data?.question?.length > 0 && (
-        <div className="rounded p-8 xl:border xl:bg-gray-50/80 border-gray-100 xl:w-1/2">
+        <div className="rounded p-8 xl:border border-gray-100 xl:w-1/2">
           <div className="border-b mb-4">
             <DashH4 text="Quiz" />
           </div>
@@ -86,13 +93,20 @@ const List = ({ courseId }) => {
                 id={id}
                 question={question_text}
                 options={answers}
-                setQuestion={setQuestion}
                 handleDelete={handleDelete}
                 updated={updated}
                 setUpdated={setUpdated}
               />
             );
           })}
+          <div>
+            <Pagination
+              totalCount={data?.question[0]?.aggregate?.count}
+              fetchMore={fetchMore}
+              pagination={pagination}
+              setPagination={setPagination}
+            />
+          </div>
         </div>
       )}
     </>

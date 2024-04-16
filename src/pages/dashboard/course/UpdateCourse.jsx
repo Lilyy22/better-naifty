@@ -7,9 +7,19 @@ import { Toast } from "../../../components/Toast";
 import { Crud } from "./components/Crud";
 import { useNavigate, useParams } from "react-router-dom";
 import { GETCOURSE } from "./data/query";
-import { GoBack } from "../../../components/Button";
+import Breadcrumb from "../../../components/Breadcrumb";
 
 export const UpdateCourse = () => {
+  const breadcrumbs = [
+    {
+      name: "Course",
+      path: "/dashboard/course-list",
+    },
+    {
+      name: "Update",
+      path: "",
+    },
+  ];
   const { course_id } = useParams();
   const navigate = useNavigate();
 
@@ -127,7 +137,7 @@ export const UpdateCourse = () => {
           setClose={setClose}
         />
       )}
-      <GoBack text="Back" pathname="/dashboard/course-list" />
+      <Breadcrumb breadcrumbs={breadcrumbs} />
       <Crud
         handleSubmit={handleSubmit}
         handleThumbnail={handleThumbnail}

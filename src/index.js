@@ -11,6 +11,7 @@ import {
 } from "@apollo/client";
 import { AuthContext, AuthProvider } from "./context/AuthContext";
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
+import { offsetLimitPagination } from "@apollo/client/utilities";
 
 const accessToken = localStorage.getItem("accessToken");
 
@@ -37,7 +38,15 @@ const authLink = new ApolloLink((operation, forward) => {
 });
 
 const client = new ApolloClient({
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          question: offsetLimitPagination(),
+        },
+      },
+    },
+  }),
   link: accessToken ? authLink.concat(uploadLink) : uploadLink,
 });
 

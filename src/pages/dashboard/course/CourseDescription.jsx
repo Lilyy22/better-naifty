@@ -10,10 +10,22 @@ import { useState } from "react";
 import { SectionTable } from "../section/SectionTable";
 import { EnrolledStudent } from "../enroll/EnrolledStudent";
 import List from "../assessment/List";
+import Breadcrumb from "../../../components/Breadcrumb";
+import Forum from "../forum/Forum";
 
 export const CourseDescription = () => {
   const { course_id } = useParams();
   const [openTab, setOpenTab] = useState(1);
+  const breadcrumbs = [
+    {
+      name: "Course",
+      path: "/dashboard/course-list",
+    },
+    {
+      name: "Detail",
+      path: "",
+    },
+  ];
 
   const { data, loading } = useQuery(GETCOURSESECTION, {
     variables: {
@@ -23,7 +35,8 @@ export const CourseDescription = () => {
 
   return (
     <>
-      <GoBack text="Back" pathname="/dashboard/course-list" />
+      {/* <GoBack text="Back" pathname="/dashboard/course-list" /> */}
+      <Breadcrumb breadcrumbs={breadcrumbs} />
       {loading ? (
         <CourseDetailLoader />
       ) : (
@@ -76,6 +89,18 @@ export const CourseDescription = () => {
                   onClick={() => setOpenTab(4)}
                 >
                   Students
+                </button>
+              </li>
+              <li className="me-2 outline-none" role="presentation">
+                <button
+                  className={`inline-block p-2 md:p-4 rounded-t-lg ${
+                    openTab === 5
+                      ? "text-blue-700 border-b border-blue-700"
+                      : ""
+                  }`}
+                  onClick={() => setOpenTab(5)}
+                >
+                  Discussion
                 </button>
               </li>
             </ul>
@@ -134,6 +159,9 @@ export const CourseDescription = () => {
               enrollment={data?.course[0]?.enrollments}
               loading={loading}
             />
+          </div>
+          <div className={`p-4 ${openTab === 5 ? "block" : "hidden"}`}>
+            <Forum />
           </div>
           {/* END container */}
         </div>

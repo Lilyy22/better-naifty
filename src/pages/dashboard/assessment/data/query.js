@@ -1,14 +1,21 @@
 import { gql } from "@apollo/client";
 
 export const GETASSESSMENT = gql`
-  query GETASSESSMENT($courseId: String!) {
-    question(where: { course_id: { exact: $courseId } }) {
+  query GETASSESSMENT($courseId: String!, $limit: Int, $offset: Int) {
+    question(
+      where: { course_id: { exact: $courseId } }
+      limit: $limit
+      offset: $offset
+    ) {
       id
       question_text
       answers {
         id
         answer_text
         is_true
+      }
+      aggregate {
+        count
       }
     }
   }

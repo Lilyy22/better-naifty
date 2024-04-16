@@ -8,25 +8,25 @@ const QuestionCard = ({
   question,
   options,
   handleDelete,
-  setQuestion,
   updated,
   setUpdated,
 }) => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
+  const [questionId, setQuestionId] = useState();
 
   const handleDeleteClick = (questionId) => {
     setOpenDeleteModal(!openDeleteModal);
-    setQuestion(questionId);
+    setQuestionId(questionId);
   };
 
   const handleEditClick = (questionId) => {
     setOpenEditModal(!openEditModal);
-    setQuestion(questionId);
+    setQuestionId(questionId);
   };
 
   return (
-    <div className="mb-8 flex justify-between">
+    <div className="mb-8 flex flex-wrap justify-between">
       <div>
         <h1 className="font-medium mb-4 text-base">{question}</h1>
         <ul>
@@ -75,7 +75,7 @@ const QuestionCard = ({
       {openEditModal && (
         <div className="overflow-y-auto overflow-x-hidden fixed top-0 flex left-0 z-50 justify-center items-center w-full min-h-full bg-gray-700/20">
           <UpdateQuestion
-            questionId={id}
+            questionId={questionId}
             handleOpen={() => setOpenEditModal(!openEditModal)}
             updated={updated}
             setUpdated={setUpdated}

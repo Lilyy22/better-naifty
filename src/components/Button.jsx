@@ -15,7 +15,9 @@ export const PrimaryButton = ({
     <>
       <motion.button
         className={`bg-purple-700/80 rounded text-white font-medium 
-        py-2 transition-all hover:bg-custom-black-600 px-4 md:px-6 ${customStyle}`}
+        py-2 transition-all hover:bg-custom-black-600 px-4 md:px-6 ${
+          isDisabled ? "cursor-not-allowed " : ""
+        } ${customStyle}`}
         whileTap={{ scale: 0.9 }}
         onClick={handleClick}
         type={type}
