@@ -1,17 +1,13 @@
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Logo } from "../../components/Logo";
-import { AuthContext } from "../../context/AuthContext";
+import { useRole } from "../../hooks/useRole";
 
 export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const navigate = useNavigate();
 
-  const { isInstructor, isSuperUser, setAccessToken } = useContext(AuthContext);
-
-  const isStudent =
-    (isInstructor === "false" || isInstructor === false) &&
-    (isSuperUser === "false" || isSuperUser === false || isSuperUser === null);
+  const { isAInstructor, isAdmin, isAStudent, setAccessToken } = useRole();
 
   const handleLogout = () => {
     localStorage.clear();
@@ -49,7 +45,7 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             </Li>
 
             <Title text="Pages" />
-            {(isInstructor === "true" || isInstructor === true) && (
+            {isAInstructor && (
               <>
                 <Li
                   handleClick={() => setSidebarOpen(!sidebarOpen)}
@@ -83,7 +79,7 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               </>
             )}
 
-            {isStudent && (
+            {isAStudent && (
               <>
                 <DropDown
                   menu="Course"
@@ -104,7 +100,7 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               </>
             )}
 
-            {(isSuperUser === "true" || isSuperUser === true) && (
+            {isAdmin && (
               <>
                 <DropDown
                   menu="Courses"

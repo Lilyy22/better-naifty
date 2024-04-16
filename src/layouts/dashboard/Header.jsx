@@ -4,22 +4,12 @@ import { AuthContext } from "../../context/AuthContext";
 import { Profile } from "../../components/Profile";
 import { useProfilePicture } from "../../hooks/useProfilePicture";
 import { trimText } from "../../utils/trimText";
+import { useRole } from "../../hooks/useRole";
 
 export const Header = ({ handleClick, sidebarOpen }) => {
-  const { isInstructor, userEmail, isSuperUser } = useContext(AuthContext);
+  const { userEmail } = useContext(AuthContext);
+  const { userRole } = useRole();
   const { profilePicture, loading } = useProfilePicture();
-
-  let name;
-  if (isInstructor === "true" || isInstructor === true) {
-    name = "Instructor";
-  } else if (
-    (isInstructor === "false" || isInstructor === false) &&
-    (isSuperUser === "false" || isSuperUser === false || isSuperUser === null)
-  ) {
-    name = "Student";
-  } else {
-    name = "Admin";
-  }
 
   return (
     <>
@@ -55,7 +45,7 @@ export const Header = ({ handleClick, sidebarOpen }) => {
         </div>
         <div className="group relative">
           <Profile
-            name={name}
+            name={userRole}
             subText={trimText(userEmail, 30)}
             photo={
               profilePicture
@@ -67,7 +57,7 @@ export const Header = ({ handleClick, sidebarOpen }) => {
           <div className="hidden group-hover:block md:group-hover:hidden absolute right-1 bg-white rounded-md p-4">
             <div>
               <p className="block text-gray-600 leading-tighter mb-0 font-semibold text-sm">
-                {name}
+                {userRole}
               </p>
               <p className="text-[11.5px] text-gray-400 tracking-loose leading-none">
                 {userEmail}

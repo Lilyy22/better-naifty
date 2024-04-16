@@ -34,3 +34,14 @@ export const GETDISCUSSION = gql`
     }
   }
 `;
+
+export const GETUSERDISCUSSION = gql`
+  query GETUSERDISCUSSION($topicId: String) {
+    discussion_topic(where: { id: { exact: $topicId } }) {
+      id
+      user {
+        id
+      }
+    }
+  }
+`;

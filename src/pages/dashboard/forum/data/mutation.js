@@ -19,3 +19,26 @@ export const CREATEDISCUSSION = gql`
     }
   }
 `;
+
+export const UPDATEDISCUSSION = gql`
+  mutation UPDATEDISCUSSION(
+    $topicId: String
+    $title: String
+    $description: String
+  ) {
+    update_discussiontopic(
+      input: { title: $title, description: $description }
+      where: { id: { exact: $topicId } }
+    ) {
+      affected_rows
+    }
+  }
+`;
+
+export const DELETEDISCUSSION = gql`
+  mutation DELETEDISCUSSION($topicId: String) {
+    delete_discussiontopic(where: { id: { exact: $topicId } }) {
+      affected_rows
+    }
+  }
+`;

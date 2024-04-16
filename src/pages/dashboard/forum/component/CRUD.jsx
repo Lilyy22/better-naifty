@@ -60,8 +60,8 @@ const CRUD = ({
               disabled={loading || forumLoading ? true : false}
             />
             <PrimaryButton
-              text={loading ? "•••" : "Submit"}
-              isDisabled={loading ? true : false}
+              text={loading || forumLoading ? "•••" : "Submit"}
+              isDisabled={loading || forumLoading ? true : false}
             />
           </form>
         </DashForm>

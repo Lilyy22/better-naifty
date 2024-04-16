@@ -95,6 +95,10 @@ function App() {
               element={<ForumDescription />}
             />
             <Route
+              path="course/:course_id/forum/:forum_id"
+              element={<ForumDescription />}
+            />
+            <Route
               path="instructors"
               element={<UsersList instructor={true} />}
             />

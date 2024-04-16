@@ -14,9 +14,11 @@ export const List = ({ forumId }) => {
   return (
     data && (
       <div>
-        <p className="text-xs text-gray-500 pl-1 font-medium">
-          {data?.discussion_comment?.length} comments
-        </p>
+        {!loading && (
+          <p className="text-xs text-gray-500 pl-1 font-medium">
+            {data?.discussion_comment?.length} comments
+          </p>
+        )}
         <div className="my-4 p-2">
           {data?.discussion_comment?.map(
             ({ id, reply_text, updated_at, user }) => {

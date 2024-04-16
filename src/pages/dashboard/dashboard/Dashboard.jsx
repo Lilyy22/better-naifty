@@ -3,21 +3,16 @@ import { AuthContext } from "../../../context/AuthContext";
 import Student from "./section/Student";
 import Instructor from "./section/Instructor";
 import Admin from "./section/Admin";
+import { useRole } from "../../../hooks/useRole";
 
 const Dashboard = () => {
-  const { isInstructor, isSuperUser } = useContext(AuthContext);
-
-  const instructor = isInstructor === "true" || isInstructor === true;
-  const admin = isSuperUser === "true" || isSuperUser === true;
-  const isStudent =
-    (isInstructor === "false" || isInstructor === false) &&
-    (isSuperUser === "false" || isSuperUser === false || isSuperUser === null);
+  const { isAInstructor, isAStudent, isAdmin } = useRole();
 
   return (
     <>
-      {isStudent && <Student />}
-      {instructor && <Instructor />}
-      {admin && <Admin />}
+      {isAStudent && <Student />}
+      {isAInstructor && <Instructor />}
+      {isAdmin && <Admin />}
     </>
   );
 };
