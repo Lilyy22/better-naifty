@@ -1,13 +1,14 @@
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Logo } from "../../components/Logo";
 import { useRole } from "../../hooks/useRole";
+import { AuthContext } from "../../context/AuthContext";
 
 export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const navigate = useNavigate();
-
-  const { isAInstructor, isAdmin, isAStudent, setAccessToken } = useRole();
+  const { setAccessToken } = useContext(AuthContext);
+  const { isAInstructor, isAdmin, isAStudent } = useRole();
 
   const handleLogout = () => {
     localStorage.clear();

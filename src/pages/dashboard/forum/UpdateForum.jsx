@@ -13,6 +13,7 @@ export const UpdateForum = ({ handleOpen, topicId }) => {
     fetchPolicy: "no-cache",
   });
 
+  const [loading, setLoading] = useState(false);
   const [updateForum] = useMutation(UPDATEDISCUSSION);
 
   const [close, setClose] = useState(false);
@@ -30,6 +31,7 @@ export const UpdateForum = ({ handleOpen, topicId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       await updateForum({
         variables: {
           topicId: topicId,
@@ -39,6 +41,7 @@ export const UpdateForum = ({ handleOpen, topicId }) => {
         refetchQueries: [GETDISCUSSIONBYCOURSE, "GET_DISCUSSION_BY_COURSE"],
       });
 
+      setLoading(false);
       setClose(false);
       setStatus({
         ...status,
@@ -48,6 +51,7 @@ export const UpdateForum = ({ handleOpen, topicId }) => {
         handleOpen();
       }, 1000);
     } catch (error) {
+      setLoading(false);
       setClose(false); // set close false incase toast is closed
       setStatus({
         success: false,
@@ -90,6 +94,7 @@ export const UpdateForum = ({ handleOpen, topicId }) => {
         setForum={setForum}
         handleOpen={handleOpen}
         handleSubmit={handleSubmit}
+        loading={loading}
         forumLoading={forumLoading}
       />
     </div>

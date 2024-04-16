@@ -10,6 +10,7 @@ export const CreateForum = ({ handleOpen, courseId }) => {
   const [createForum] = useMutation(CREATEDISCUSSION);
   const { userId } = useContext(AuthContext);
 
+  const [loading, setLoading] = useState(false);
   const [close, setClose] = useState(false);
   const [status, setStatus] = useState({
     success: false,
@@ -25,6 +26,7 @@ export const CreateForum = ({ handleOpen, courseId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       await createForum({
         variables: {
           courseId: courseId,
@@ -35,6 +37,7 @@ export const CreateForum = ({ handleOpen, courseId }) => {
         refetchQueries: [GETDISCUSSIONBYCOURSE, "GET_DISCUSSION_BY_COURSE"],
       });
 
+      setLoading(false);
       setClose(false);
       setStatus({
         ...status,
@@ -44,6 +47,7 @@ export const CreateForum = ({ handleOpen, courseId }) => {
         handleOpen();
       }, 1000);
     } catch (error) {
+      setLoading(false);
       setClose(false); // set close false incase toast is closed
       setStatus({
         success: false,
@@ -76,6 +80,7 @@ export const CreateForum = ({ handleOpen, courseId }) => {
         setForum={setForum}
         handleOpen={handleOpen}
         handleSubmit={handleSubmit}
+        loading={loading}
       />
     </div>
   );

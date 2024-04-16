@@ -1,6 +1,7 @@
 import React from "react";
 import { Input, Textarea } from "../../../../components/form/Input";
 import { PrimaryButton } from "../../../../components/Button";
+import { FormModal } from "../../../../components/modal/FormModal";
 
 const Crud = ({
   handleSubmit,
@@ -8,8 +9,10 @@ const Crud = ({
   setSection,
   loading,
   sectionLoading,
+  handleOpen,
 }) => {
   return (
+    <FormModal handleOpen={handleOpen} title="Section" loading={loading}>
       <form className="p-6" onSubmit={handleSubmit}>
         <Input
           id="name"
@@ -37,6 +40,7 @@ const Crud = ({
           isDisabled={loading ? true : false}
         />
       </form>
+    </FormModal>
   );
 };
 

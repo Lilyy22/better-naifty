@@ -118,13 +118,6 @@ export const CourseDescription = () => {
               </p>
             </div>
             <div className="w-full lg:w-[50%]">
-              <div className="w-full h-72">
-                <img
-                  className="w-full h-full object-cover border rounded-t-lg"
-                  src={`https://api.naifty.academy/media/${data?.course[0]?.thumbnail}`}
-                  alt="Course Thumbnail"
-                />
-              </div>
               <div className="px-4 py-2 bg-white rounded-b-lg">
                 <div>
                   <span className="bg-purple-100/70 rounded-xl px-4 py-1 text-xs mb-2 inline-block">
@@ -138,6 +131,13 @@ export const CourseDescription = () => {
                   <Rating />
                   <h2 className="font-bold">${data?.course[0]?.price}</h2>
                 </div>
+              </div>
+              <div className="w-full h-72">
+                <img
+                  className="w-full h-full object-cover border rounded-t-lg"
+                  src={`https://api.naifty.academy/media/${data?.course[0]?.thumbnail}`}
+                  alt="Course Thumbnail"
+                />
               </div>
             </div>
           </div>
