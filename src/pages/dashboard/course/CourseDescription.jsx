@@ -134,7 +134,7 @@ export const CourseDescription = () => {
               </div>
               <div className="w-full h-72">
                 <img
-                  className="w-full h-full object-cover border rounded-t-lg"
+                  className="w-full h-full object-cover border rounded-lg"
                   src={`https://api.naifty.academy/media/${data?.course[0]?.thumbnail}`}
                   alt="Course Thumbnail"
                 />

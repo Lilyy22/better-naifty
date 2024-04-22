@@ -13,6 +13,7 @@ import { AuthProvider } from "./context/AuthContext";
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 import { offsetLimitPagination } from "@apollo/client/utilities";
 import { router } from "./routes/router";
+import { ErrorBoundary } from "react-error-boundary";
 
 const accessToken = localStorage.getItem("accessToken");
 
@@ -57,7 +58,9 @@ root.render(
       <AuthProvider>
         <StrictMode>
           {/* <RouterProvider router={router} /> */}
-          <App />
+          <ErrorBoundary fallback={<div>Something went wrong</div>}>
+            <App />
+          </ErrorBoundary>
         </StrictMode>
       </AuthProvider>
     </ApolloProvider>

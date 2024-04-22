@@ -9,6 +9,9 @@ export const GETASSESSMENT = gql`
     ) {
       id
       question_text
+      course {
+        name
+      }
       answers {
         id
         answer_text
@@ -36,9 +39,10 @@ export const GETQUESTION = gql`
 `;
 
 export const GETSTUDENTSCORE = gql`
-  query GETSTUDENTSCORE($courseId: String) {
+  query GETSTUDENTSCORE($courseId: ID!) {
     assessment_score(where: { course_id: $courseId }) {
       score
+      took_assessment
     }
   }
 `;

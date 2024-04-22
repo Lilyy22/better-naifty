@@ -69,7 +69,7 @@ export const CourseDetailLoader = () => {
             {/* header */}
             <div className="flex flex-wrap justify-between">
               <div>
-                <h1 className="bg-gray-200 mb-1 p-1.5 rounded"></h1>
+                <div className="bg-gray-200 mb-1 p-1.5 rounded"></div>
                 <div>
                   <span className="w-16 bg-gray-200 rounded py-1 mr-4"></span>
                   <span className="w-16 bg-gray-200 rounded py-1 mr-4"></span>
@@ -79,19 +79,19 @@ export const CourseDetailLoader = () => {
               <div className="p-2 rounded-xl bg-gray-300 h-8 w-24"></div>
             </div>
             {/* END header */}
-            <h1 className="my-6 bg-gray-300 rounded-md w-28 p-1.5 mb-1"></h1>
+            <div className="my-6 bg-gray-300 rounded-md w-28 p-1.5 mb-1"></div>
             <p className="bg-gray-200 rounded-md w-full p-1.5 mb-1"></p>
             <p className="bg-gray-200 rounded-md w-full p-1.5 mb-1"></p>
             <p className="bg-gray-200 rounded-md w-full p-1.5 mb-1"></p>
             <p className="bg-gray-200 rounded-md w-full p-1.5 mb-1"></p>
-            <h1 className="my-6 bg-gray-300 rounded-md w-28 p-1.5 mb-1"></h1>
+            <div className="my-6 bg-gray-300 rounded-md w-28 p-1.5 mb-1"></div>
           </div>
           {/*END description card */}
           <div className="w-full lg:w-[60%]">
             <div className="w-full h-72 bg-gray-300"></div>
             <div className="p-6 bg-white rounded-b-lg">
               <div className="bg-white rounded-b-lg">
-                <h1 className="my-4 w-24 p-1.5 bg-gray-300 rounded-md"></h1>
+                <div className="my-4 w-24 p-1.5 bg-gray-300 rounded-md"></div>
                 <ol className="list-outside">
                   <li className="bg-gray-200 w-full rounded-md p-2 mb-2"></li>
                   <li className="bg-gray-200 w-full rounded-md p-2 mb-2"></li>
@@ -123,20 +123,20 @@ export const ProfileLoader = () => {
                 </div>
                 <div className="flex-grow main-profile-info">
                   <div className="flex items-center !justify-between">
-                    <h6 className="font-semibold mb-1 bg-white text-[1rem] w-44 inline-block">
+                    <div className="font-semibold mb-1 bg-white text-[1rem] w-44 inline-block">
                       {/* {firstName} {lastName} */}
-                    </h6>
+                    </div>
                     <button
                       type="button"
                       className="bg-gray-200 px-3 py-2 !font-medium rounded flex gap-2 w-12 h-8"
                     ></button>
                   </div>
-                  <p className="mb-1 bg-white w-12 opacity-[0.7]">
+                  <div className="mb-1 bg-white w-12 opacity-[0.7]">
                     {/* {user.isInstructor ? "Instructor" : "Student"} @Naifty */}
-                  </p>
-                  <p className="text-[0.75rem] text-white mb-6 opacity-[0.5]">
+                  </div>
+                  <div className="text-[0.75rem] text-white mb-6 opacity-[0.5]">
                     {/* {user.email} */}
-                  </p>
+                  </div>
                 </div>
               </div>
               <div className="p-6 border-b border-dashed">
@@ -163,7 +163,7 @@ export const CourseCardLoader = () => {
         <div className="bg-gray-300 rounded-t-lg w-full h-40"></div>
         {/* body */}
         <div className="p-4">
-          <h5 className="bg-gray-300 w-1/4 py-1.5 mb-2 rounded-lg"></h5>
+          <div className="bg-gray-300 w-1/4 py-1.5 mb-2 rounded-lg"></div>
           <p className="bg-gray-200 p-6 w-full py-1.5 mb-1 rounded-lg"></p>
           <p className="bg-gray-200 p-6 w-full py-1.5 mb-1 rounded-lg"></p>
           <p className="bg-gray-200 p-6 w-full py-1.5 mb-1 rounded-lg"></p>

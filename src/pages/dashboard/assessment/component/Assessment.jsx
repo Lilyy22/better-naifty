@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../../../context/AuthContext";
 
-const Assessment = ({ id, question, options, answer, setAnswer }) => {
+const Assessment = ({ id, question, options, answer, setAnswer, no }) => {
   const { userId } = useContext(AuthContext);
 
   const handleAnswer = (e) => {
@@ -35,10 +35,13 @@ const Assessment = ({ id, question, options, answer, setAnswer }) => {
   return (
     <div className="p-4">
       <div className="font-bold mb-2">
-        <label htmlFor={id}>{question}</label>
+        <label htmlFor={id}>
+          <span className="text-xs text-gray-500 font-normal">Q{no}.</span>{" "}
+          {question}
+        </label>
       </div>
       {options.map(({ id: ansId, answer_text }) => (
-        <div className="flex items-center mb-2" key={ansId}>
+        <div className="flex items-center mb-2 ml-2" key={ansId}>
           <input
             onChange={handleAnswer}
             className="w-3 h-3 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500"
@@ -49,7 +52,7 @@ const Assessment = ({ id, question, options, answer, setAnswer }) => {
           />
           <label
             htmlFor={ansId}
-            className="ms-2 text-sm font-medium text-gray-900"
+            className="pl-2 text-sm font-medium text-gray-900"
           >
             {answer_text}
           </label>

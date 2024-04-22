@@ -7,11 +7,13 @@ export const PrimaryLink = ({
   goto,
   customStyle,
   handleClick,
+  data,
 }) => {
   return (
     <>
       <Link
         to={goto}
+        state={data}
         onClick={handleClick}
         className={`bg-purple-500 rounded text-white font-medium outline-none
         py-1 transition-all px-4 text-sm hover:bg-purple-700 inline-block my-auto whitespace-nowrap ${customStyle}`}

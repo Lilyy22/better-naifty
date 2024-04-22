@@ -1,3 +1,5 @@
+"use client";
+
 import { Route, Routes } from "react-router-dom";
 import { NotFound } from "./pages/NotFound";
 import { DefaultLayout } from "./layouts/dashboard/DefaultLayout";
@@ -35,14 +37,16 @@ import EnrolledDescription from "./pages/dashboard/enroll/EnrolledDescription";
 import ForumDescription from "./pages/dashboard/forum/ForumDescription";
 import { useRole } from "./hooks/useRole";
 import { useCheckOnlineStatus } from "./hooks/useCheckOnlineStatus";
+import StudentAssessment from "./pages/dashboard/assessment/StudentAssessment";
+import { ErrorBoundary } from "react-error-boundary";
 
 function App() {
   const { isAInstructor, isAStudent, isAdmin } = useRole();
-  // const isOnline = useCheckOnlineStatus();
+  const isOnline = useCheckOnlineStatus();
   return (
     <>
       <ScrollTop />
-      {/* {isOnline ? ( */}
+      {isOnline ? (
         <Routes>
           {/* landing */}
           <Route path="/" element={<Home />} />
@@ -63,6 +67,14 @@ function App() {
 
           {/* Dashboard */}
           <Route element={<PrivateRoute />}>
+            <Route
+              path="/assessment"
+              element={
+                <ErrorBoundary fallback={<div>Something went wrong</div>}>
+                  <StudentAssessment />
+                </ErrorBoundary>
+              }
+            />
             <Route path="/dashboard" element={<DefaultLayout />}>
               {/* course */}
               <Route exact path="/dashboard/" element={<Dashboard />} />
@@ -108,12 +120,12 @@ function App() {
               {(isAStudent || isAdmin) && (
                 <>
                   <Route
-                    path="enrolled-courses"
-                    element={<EnrolledCourses />}
-                  />
-                  <Route
                     path="enrolled-courses/course/:course_id"
                     element={<EnrolledDescription />}
+                  />
+                  <Route
+                    path="enrolled-courses"
+                    element={<EnrolledCourses />}
                   />
                   <Route
                     path="enrolled-courses/course/:course_id/forum/:forum_id"
@@ -148,7 +160,7 @@ function App() {
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
-      {/* ) : (
+      ) : (
         <div className="w-full flex items-center justify-center h-[60vh]">
           <div className="max-w-lg mx-auto">
             <div className="flex gap-4 justify-center">
@@ -167,7 +179,7 @@ function App() {
             </p>
           </div>
         </div>
-      )} */}
+      )}
     </>
   );
 }
