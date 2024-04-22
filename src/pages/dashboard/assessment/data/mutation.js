@@ -56,3 +56,11 @@ export const DELETEANSWER = gql`
     }
   }
 `;
+
+export const CREATESTUDENTASSESSMENT = gql`
+  mutation CREATESTUDENTASSESSMENT($studentAssessment: [AssessmentInputType]) {
+    create_assessment(inputs: $studentAssessment) {
+      affected_rows
+    }
+  }
+`;

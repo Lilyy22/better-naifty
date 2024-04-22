@@ -20,6 +20,37 @@ export const CREATEEPISODE = gql`
   }
 `;
 
+export const CREATEEPISODEPROGRESS = gql`
+  mutation (
+    $episode_id: String
+    $user_id: String
+    $course_started: Boolean
+    $course_finished: Boolean
+  ) {
+    create_courseprogress(
+      inputs: {
+        episode_id: $episode_id
+        user_id: $user_id
+        course_started: $course_started
+        course_finished: $course_finished
+      }
+    ) {
+      affected_rows
+    }
+  }
+`;
+
+export const UPDATEEPISODEPROGRESS = gql`
+  mutation ($episode_id: String, $course_finished: Boolean) {
+    update_courseprogress(
+      input: { course_finished: $course_finished }
+      where: { episode_id: { exact: $episode_id } }
+    ) {
+      affected_rows
+    }
+  }
+`;
+
 export const UPDATEEPISODE = gql`
   mutation UPDATEEPISODE(
     $episodeId: String

@@ -2,10 +2,10 @@ import React from "react";
 import { Input } from "../../../../components/form/Input";
 import { PrimaryButton } from "../../../../components/Button";
 import { DashForm } from "../../../../components/form/Form";
-import Answer from "../Answer";
+import Answer from "./Answer";
 import { FormModal } from "../../../../components/modal/FormModal";
 
-const Assessment = ({
+const Question = ({
   handleOpen,
   loading,
   questionLoading,
@@ -92,4 +92,4 @@ const Assessment = ({
   );
 };
 
-export default Assessment;
+export default Question;

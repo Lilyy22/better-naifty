@@ -21,7 +21,7 @@ export const TableLoader = () => {
                       className="text-start p-4 font-bold leading-3 border border-gray-100"
                       key={item}
                     >
-                      <div className="bg-gray-200 p-3 w-1/4 rounded"></div>
+                      <div className="bg-gray-200 p-3 rounded"></div>
                     </th>
                   ))}
                 </tr>

@@ -1,17 +1,18 @@
-import React, { StrictMode, useContext } from "react";
+import React, { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, RouterProvider } from "react-router-dom";
 import {
   ApolloClient,
   ApolloLink,
   ApolloProvider,
   InMemoryCache,
 } from "@apollo/client";
-import { AuthContext, AuthProvider } from "./context/AuthContext";
+import { AuthProvider } from "./context/AuthContext";
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 import { offsetLimitPagination } from "@apollo/client/utilities";
+import { router } from "./routes/router";
 
 const accessToken = localStorage.getItem("accessToken");
 
@@ -55,6 +56,7 @@ root.render(
     <ApolloProvider client={client}>
       <AuthProvider>
         <StrictMode>
+          {/* <RouterProvider router={router} /> */}
           <App />
         </StrictMode>
       </AuthProvider>

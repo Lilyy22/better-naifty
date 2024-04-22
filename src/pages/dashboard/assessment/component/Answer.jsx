@@ -1,5 +1,5 @@
 import React from "react";
-import { Input } from "../../../components/form/Input";
+import { Input } from "../../../../components/form/Input";
 
 const Answer = ({
   loading,
@@ -71,7 +71,8 @@ const Answer = ({
           checked={answerCount[count].is_true}
           onChange={(e) => {
             const updatedArray = [...answerCount]; // Create a copy of the array
-            updatedArray[count] = { // get the answer at spec index
+            updatedArray[count] = {
+              // get the answer at spec index
               ...updatedArray[count],
               is_true: e.target.checked,
             };

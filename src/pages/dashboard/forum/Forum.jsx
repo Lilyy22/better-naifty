@@ -48,7 +48,7 @@ const Forum = () => {
   };
 
   return (
-    <div className="bg-white lg:p-4 rounded">
+    <div className="bg-white p-4 rounded">
       <div className="flex flex-wrap gap-2 justify-between">
         <h1 className="font-medium mb-4">Discussions</h1>
         <PrimaryButton

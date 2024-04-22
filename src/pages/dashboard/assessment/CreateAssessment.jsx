@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATEANSWER, CREATEQUESTION } from "./data/mutation";
 import { Toast } from "../../../components/Toast";
-import Assessment from "./component/CRUD";
+import Question from "./component/CRUD";
 import { removeKey } from "../../../utils/removeKey";
 
 const CreateAssessment = ({ handleOpen, courseId, updated, setUpdated }) => {
@@ -103,7 +103,7 @@ const CreateAssessment = ({ handleOpen, courseId, updated, setUpdated }) => {
         />
       )}
 
-      <Assessment
+      <Question
         question={question}
         loading={loading}
         setQuestion={setQuestion}

@@ -3,7 +3,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { CREATEANSWER, DELETEANSWER, UPDATEQUESTION } from "./data/mutation";
 import { Toast } from "../../../components/Toast";
 import { GETQUESTION } from "./data/query";
-import Assessment from "./component/CRUD";
+import Question from "./component/CRUD";
 import { removeKey } from "../../../utils/removeKey";
 
 const UpdateQuestion = ({ handleOpen, questionId, updated, setUpdated }) => {
@@ -118,7 +118,7 @@ const UpdateQuestion = ({ handleOpen, questionId, updated, setUpdated }) => {
           setClose={setClose}
         />
       )}
-      <Assessment
+      <Question
         loading={loading}
         question={question}
         setQuestion={setQuestion}

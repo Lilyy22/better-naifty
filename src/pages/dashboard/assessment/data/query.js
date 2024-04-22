@@ -34,3 +34,11 @@ export const GETQUESTION = gql`
     }
   }
 `;
+
+export const GETSTUDENTSCORE = gql`
+  query GETSTUDENTSCORE($courseId: String) {
+    assessment_score(where: { course_id: $courseId }) {
+      score
+    }
+  }
+`;

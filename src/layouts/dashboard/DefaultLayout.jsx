@@ -9,7 +9,6 @@ import { useCheckOnlineStatus } from "../../hooks/useCheckOnlineStatus";
 export const DefaultLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const isOnline = useCheckOnlineStatus();
 
   const { profile } = useProfile();
 
@@ -70,28 +69,7 @@ export const DefaultLayout = () => {
 
           <main>
             <div className="mx-auto max-w-screen-7xl min-h-screen px-4 md:px-8 md:py-6  bg-custom-gray-400 ">
-              {isOnline ? (
-                <Outlet />
-              ) : (
-                <div className="w-full flex items-center justify-center h-[60vh]">
-                  <div className="max-w-lg mx-auto">
-                    <div className="flex gap-4 justify-center">
-                      <img
-                        width="24"
-                        height="24"
-                        src="https://img.icons8.com/material/24/wifi-off.png"
-                        alt="wifi-off"
-                      />
-                      <p className="text-center text-xl font-bold text-gray-500">
-                        You're offline.
-                      </p>
-                    </div>
-                    <p className="text-center text-sm text-gray-500">
-                      Please check your internet connection.
-                    </p>
-                  </div>
-                </div>
-              )}
+              <Outlet />
             </div>
           </main>
         </div>

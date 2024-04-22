@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { SectionTable } from "../section/SectionTable";
 import { CourseDetail } from "../course/CourseDetail";
 import Breadcrumb from "../../../components/Breadcrumb";
 import Forum from "../forum/Forum";
+import StudentAssessment from "../assessment/StudentAssessment";
 
 const EnrolledDescription = () => {
   const [openTab, setOpenTab] = useState(1);
@@ -68,7 +68,9 @@ const EnrolledDescription = () => {
           className={`bg-custom-gray-400 pt-4 ${
             openTab === 2 ? "block" : "hidden"
           }`}
-        ></div>
+        >
+          <StudentAssessment />
+        </div>
         <div
           className={`bg-custom-gray-400 pt-4 ${
             openTab === 3 ? "block" : "hidden"

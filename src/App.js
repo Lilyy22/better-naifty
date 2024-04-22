@@ -33,99 +33,141 @@ import Layout from "./pages/dashboard/auth/components/Layout";
 import Reset from "./pages/dashboard/auth/Reset";
 import EnrolledDescription from "./pages/dashboard/enroll/EnrolledDescription";
 import ForumDescription from "./pages/dashboard/forum/ForumDescription";
+import { useRole } from "./hooks/useRole";
+import { useCheckOnlineStatus } from "./hooks/useCheckOnlineStatus";
 
 function App() {
+  const { isAInstructor, isAStudent, isAdmin } = useRole();
+  // const isOnline = useCheckOnlineStatus();
   return (
     <>
       <ScrollTop />
-      <Routes>
-        {/* landing */}
-        <Route path="/" element={<Home />} />
-        <Route path="course" element={<Course />} />
-        <Route path="about" element={<About />} />
-        <Route path="blog" element={<Blog />} />
-        <Route path="blog-read" element={<BlogDetail />} />
+      {/* {isOnline ? ( */}
+        <Routes>
+          {/* landing */}
+          <Route path="/" element={<Home />} />
+          <Route path="course" element={<Course />} />
+          <Route path="about" element={<About />} />
+          <Route path="blog" element={<Blog />} />
+          <Route path="blog-read" element={<BlogDetail />} />
 
-        {/* auth */}
-        <Route path="/" element={<Layout />}>
-          <Route path="signup/:role?" element={<SignUp />} />
-          <Route element={<AlreadyLogged />}>
-            <Route path="/login" element={<LogIn />} />
+          {/* auth */}
+          <Route path="/" element={<Layout />}>
+            <Route path="signup/:role?" element={<SignUp />} />
+            <Route element={<AlreadyLogged />}>
+              <Route path="/login" element={<LogIn />} />
+            </Route>
+            <Route path="verify" element={<Verify />} />
+            <Route path="reset" element={<Reset />} />
           </Route>
-          <Route path="verify" element={<Verify />} />
-          <Route path="reset" element={<Reset />} />
-        </Route>
 
-        {/* Dashboard */}
-        <Route element={<PrivateRoute />}>
-          <Route path="/dashboard" element={<DefaultLayout />}>
-            {/* course */}
-            <Route exact path="/dashboard/" element={<Dashboard />} />
-            <Route path="course-list" element={<CourseTable />} />
-            <Route path="enrolled-courses" element={<EnrolledCourses />} />
-            <Route path="courses" element={<CourseGrid />} />
-            <Route path="create-course" element={<CreateCourse />} />
-            <Route path="update-course/:course_id" element={<UpdateCourse />} />
-            <Route path="all-courses" element={<CourseList />} />
-            <Route
-              path="approved-courses"
-              element={<CourseList approved={true} />}
-            />
-            <Route
-              path="courses/:category_id"
-              element={<CourseCategoryList />}
-            />
+          {/* Dashboard */}
+          <Route element={<PrivateRoute />}>
+            <Route path="/dashboard" element={<DefaultLayout />}>
+              {/* course */}
+              <Route exact path="/dashboard/" element={<Dashboard />} />
+              <Route path="courses" element={<CourseGrid />} />
+              <Route
+                path="courses-detail/:course_id"
+                element={<CourseDetail />}
+              />
+              <Route
+                path="courses/:category_id"
+                element={<CourseCategoryList />}
+              />
+              <Route
+                path="courses/section/episode/:episode_id"
+                element={<EpisodeDetail />}
+                preventScrollReset={false}
+              />
+              <Route path="profile" element={<Profile />} />
 
-            <Route
-              path="courses-detail/:course_id"
-              element={<CourseDetail />}
-            />
-            <Route
-              path="enrolled-courses/course/:course_id"
-              element={<EnrolledDescription />}
-            />
-            <Route
-              path="course-list/courses-description/:course_id"
-              element={<CourseDescription />}
-            />
-            {/* users */}
-            <Route path="students" element={<UsersList />} />
-            <Route
-              path="enrolled-courses/course/:course_id/forum/:forum_id"
-              element={<ForumDescription />}
-            />
-            <Route
-              path="course/:course_id/forum/:forum_id"
-              element={<ForumDescription />}
-            />
-            <Route
-              path="instructors"
-              element={<UsersList instructor={true} />}
-            />
+              {(isAInstructor || isAdmin) && (
+                <>
+                  <Route path="course-list" element={<CourseTable />} />
+                  <Route path="create-course" element={<CreateCourse />} />
+                  <Route
+                    path="update-course/:course_id"
+                    element={<UpdateCourse />}
+                  />
+                  <Route
+                    path="course/:course_id/forum/:forum_id"
+                    element={<ForumDescription />}
+                  />
+                  <Route
+                    path="course-list/courses-description/:course_id"
+                    element={<CourseDescription />}
+                  />
+                  <Route
+                    path="course-list/courses-description/:course_url/section/:section_url"
+                    element={<SectionDetail />}
+                  />
+                </>
+              )}
 
-            {/* category */}
-            <Route path="create-category" element={<CreateCategory />} />
-            <Route
-              path="update-category/:category_id"
-              element={<UpdateCategory />}
-            />
-            <Route path="categories" element={<CategoryTable />} />
+              {(isAStudent || isAdmin) && (
+                <>
+                  <Route
+                    path="enrolled-courses"
+                    element={<EnrolledCourses />}
+                  />
+                  <Route
+                    path="enrolled-courses/course/:course_id"
+                    element={<EnrolledDescription />}
+                  />
+                  <Route
+                    path="enrolled-courses/course/:course_id/forum/:forum_id"
+                    element={<ForumDescription />}
+                  />
+                </>
+              )}
 
-            <Route
-              path="course-list/courses-description/:course_url/section/:section_url"
-              element={<SectionDetail />}
-            />
-            <Route
-              path="courses/section/episode/:episode_id"
-              element={<EpisodeDetail />}
-              preventScrollReset={false}
-            />
-
-            <Route path="profile" element={<Profile />} />
+              {isAdmin && (
+                <>
+                  <Route path="all-courses" element={<CourseList />} />
+                  <Route
+                    path="approved-courses"
+                    element={<CourseList approved={true} />}
+                  />
+                  {/* users */}
+                  <Route path="students" element={<UsersList />} />
+                  <Route
+                    path="instructors"
+                    element={<UsersList instructor={true} />}
+                  />
+                  {/* category */}
+                  <Route path="create-category" element={<CreateCategory />} />
+                  <Route
+                    path="update-category/:category_id"
+                    element={<UpdateCategory />}
+                  />
+                  <Route path="categories" element={<CategoryTable />} />
+                </>
+              )}
+            </Route>
           </Route>
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      {/* ) : (
+        <div className="w-full flex items-center justify-center h-[60vh]">
+          <div className="max-w-lg mx-auto">
+            <div className="flex gap-4 justify-center">
+              <img
+                width="24"
+                height="24"
+                src="https://img.icons8.com/material/24/wifi-off.png"
+                alt="wifi-off"
+              />
+              <p className="text-center text-xl font-bold text-gray-500">
+                You're offline.
+              </p>
+            </div>
+            <p className="text-center text-sm text-gray-500">
+              Please check your internet connection.
+            </p>
+          </div>
+        </div>
+      )} */}
     </>
   );
 }
