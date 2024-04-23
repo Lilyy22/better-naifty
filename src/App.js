@@ -39,6 +39,7 @@ import { useRole } from "./hooks/useRole";
 import { useCheckOnlineStatus } from "./hooks/useCheckOnlineStatus";
 import StudentAssessment from "./pages/dashboard/assessment/StudentAssessment";
 import { ErrorBoundary } from "react-error-boundary";
+import EnrolledMiddleware from "./routes/EnrolledMiddleware";
 
 function App() {
   const { isAInstructor, isAStudent, isAdmin } = useRole();
@@ -87,11 +88,6 @@ function App() {
                 path="courses/:category_id"
                 element={<CourseCategoryList />}
               />
-              <Route
-                path="courses/section/episode/:episode_id"
-                element={<EpisodeDetail />}
-                preventScrollReset={false}
-              />
               <Route path="profile" element={<Profile />} />
 
               {(isAInstructor || isAdmin) && (
@@ -117,8 +113,36 @@ function App() {
                 </>
               )}
 
-              {(isAStudent || isAdmin) && (
+              {isAStudent && (
                 <>
+                  <Route element={<EnrolledMiddleware />}>
+                    <Route
+                      path="courses/:course_id/section/episode/:episode_id"
+                      element={<EpisodeDetail />}
+                      preventScrollReset={false}
+                    />
+                  </Route>
+                  <Route
+                    path="enrolled-courses/course/:course_id"
+                    element={<EnrolledDescription />}
+                  />
+                  <Route
+                    path="enrolled-courses"
+                    element={<EnrolledCourses />}
+                  />
+                  <Route
+                    path="enrolled-courses/course/:course_id/forum/:forum_id"
+                    element={<ForumDescription />}
+                  />
+                </>
+              )}
+              {isAdmin && (
+                <>
+                  <Route
+                    path="courses/:course_id/section/episode/:episode_id"
+                    element={<EpisodeDetail />}
+                    preventScrollReset={false}
+                  />
                   <Route
                     path="enrolled-courses/course/:course_id"
                     element={<EnrolledDescription />}

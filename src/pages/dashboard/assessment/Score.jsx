@@ -1,23 +1,45 @@
-import React, { useState } from "react";
-import { GETSTUDENTSCORE } from "./data/query";
-import { useQuery } from "@apollo/client";
+import React, { useEffect, useState } from "react";
+import { GETASSESSMENT, GETSTUDENTSCORE } from "./data/query";
+import { useQuery, useLazyQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { PrimaryButton } from "../../../components/Button";
 import OptionalModal from "../../../components/modal/OptionalModal";
+import DataNotFound from "../../../components/DataNotFound";
 
 const Score = () => {
   const { course_id } = useParams();
   const [openAssessment, setOpenAssessment] = useState(false);
 
-  const { data, loading } = useQuery(GETSTUDENTSCORE, {
-    variables: {
-      courseId: course_id,
-    },
-  });
+  const { data: assessment, loading: assessmentLoading } = useQuery(
+    GETASSESSMENT,
+    {
+      variables: {
+        courseId: course_id,
+      },
+    }
+  );
+
+  const [getScore, { data, loading }] = useLazyQuery(GETSTUDENTSCORE);
+
+  useEffect(() => {
+    if (assessment?.question?.length !== 0) {
+      getScore({
+        variables: {
+          courseId: course_id,
+        },
+      });
+    }
+  }, []);
 
   return (
     <>
-      {!loading && data?.assessment_score?.took_assessment ? (
+      {assessment?.question?.length === 0 ? (
+        <div>
+          <DataNotFound text="No Assessments Yet." />
+        </div>
+      ) : !loading &&
+        !assessmentLoading &&
+        data?.assessment_score?.took_assessment ? (
         <>
           <div className="bg-white rounded-lg p-4">
             <h1 className="font-semibold text-green-700 flex gap-1 mb-2 text-sm">
@@ -55,7 +77,7 @@ const Score = () => {
             />
           )}
         </div>
-      )}{" "}
+      )}
     </>
   );
 };

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ToolTip } from "../../../../components/ToolTip";
 
-export const SectionDropDown = ({ section, episodes, enrolled }) => {
+export const SectionDropDown = ({ section, episodes, enrolled, courseId }) => {
   const [isActive, setIsActive] = useState(false);
   return (
     <>
@@ -44,7 +44,7 @@ export const SectionDropDown = ({ section, episodes, enrolled }) => {
                 {episodes.map(({ title, id }) => {
                   return (
                     <Link
-                      to={`/dashboard/courses/section/episode/${id}`}
+                      to={`/dashboard/courses/${courseId}/section/episode/${id}`}
                       onClick={(e) => (enrolled ? "" : e.preventDefault())}
                       className={
                         enrolled

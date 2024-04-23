@@ -16,6 +16,32 @@ export const GETENROLLEDSTUDENTS = gql`
   }
 `;
 
+export const GETENROLLEDEPISODE = gql`
+  query GETENROLLEDEPISODE($episodeId: String) {
+    curse_episode(where: { id: { exact: $episodeId } }) {
+      section {
+        course {
+          enrollments {
+            student {
+              id
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GETENROLLEDCOURSE = gql`
+  query GETENROLLEDCOURSE($userId: String) {
+    course_enrollment(where: { student_id: { exact: $userId } }) {
+      course {
+        id
+      }
+    }
+  }
+`;
+
 export const GETENROLLED = gql`
   query GETENROLLED($studentId: String) {
     course_enrollment(
