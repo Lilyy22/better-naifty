@@ -5,7 +5,6 @@ import { CourseDetailLoader } from "./components/loader/DetailLoader";
 import { formattedDate } from "../../../utils/formattedDate";
 import { DashH4 } from "../../../components/Heading";
 import { Rating } from "../../../components/Rating";
-import { GoBack } from "../../../components/Button";
 import { useState } from "react";
 import { SectionTable } from "../section/SectionTable";
 import { EnrolledStudent } from "../enroll/EnrolledStudent";
@@ -35,7 +34,6 @@ export const CourseDescription = () => {
 
   return (
     <>
-      {/* <GoBack text="Back" pathname="/dashboard/course-list" /> */}
       <Breadcrumb breadcrumbs={breadcrumbs} />
       {loading ? (
         <CourseDetailLoader />

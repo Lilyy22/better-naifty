@@ -1,5 +1,21 @@
 import { gql } from "@apollo/client";
 
+export const GETENROLLEDSTUDENTS = gql`
+  query GETENROLLEDSTUDENTS($courseId: String) {
+    course_enrollment(where: { course_id: { exact: $courseId } }) {
+      id
+      student {
+        email
+        studentprofile {
+          first_name
+          last_name
+          profile_picture
+        }
+      }
+    }
+  }
+`;
+
 export const GETENROLLED = gql`
   query GETENROLLED($studentId: String) {
     course_enrollment(
@@ -26,4 +42,3 @@ export const GETENROLLED = gql`
     }
   }
 `;
-

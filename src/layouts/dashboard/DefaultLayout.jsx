@@ -3,8 +3,6 @@ import { Sidebar } from "./Sidebar";
 import { Outlet } from "react-router-dom";
 import { Header } from "./Header";
 import { useProfile } from "../../hooks/useProfile";
-import { PrimaryLink } from "../../components/Link";
-import { useCheckOnlineStatus } from "../../hooks/useCheckOnlineStatus";
 import OptionalModal from "../../components/modal/OptionalModal";
 
 export const DefaultLayout = () => {
@@ -42,7 +40,7 @@ export const DefaultLayout = () => {
           <Header sidebarOpen={sidebarOpen} handleClick={handleSidebar} />
 
           <main>
-            <div className="mx-auto max-w-screen-7xl min-h-screen px-4 md:px-8 md:py-6  bg-custom-gray-400 ">
+            <div className="mx-auto max-w-screen-7xl min-h-screen px-4 md:px-8 py-6  bg-custom-gray-400">
               <Outlet />
             </div>
           </main>

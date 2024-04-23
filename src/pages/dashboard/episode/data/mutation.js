@@ -21,18 +21,12 @@ export const CREATEEPISODE = gql`
 `;
 
 export const CREATEEPISODEPROGRESS = gql`
-  mutation (
-    $episode_id: String
-    $user_id: String
-    $course_started: Boolean
-    $course_finished: Boolean
-  ) {
+  mutation ($episodeId: String, $userId: String, $courseStarted: Boolean) {
     create_courseprogress(
       inputs: {
-        episode_id: $episode_id
-        user_id: $user_id
-        course_started: $course_started
-        course_finished: $course_finished
+        episode_id: $episodeId
+        user_id: $userId
+        course_started: $courseStarted
       }
     ) {
       affected_rows
@@ -41,10 +35,10 @@ export const CREATEEPISODEPROGRESS = gql`
 `;
 
 export const UPDATEEPISODEPROGRESS = gql`
-  mutation ($episode_id: String, $course_finished: Boolean) {
+  mutation ($progressId: String, $courseFinished: Boolean) {
     update_courseprogress(
-      input: { course_finished: $course_finished }
-      where: { episode_id: { exact: $episode_id } }
+      input: { course_finished: $courseFinished }
+      where: { id: { exact: $progressId } }
     ) {
       affected_rows
     }
