@@ -1,6 +1,7 @@
 import React from "react";
 import { DashH4 } from "../../../../components/Heading";
 import { trimText } from "../../../../utils/trimText";
+import { Link } from "react-router-dom";
 
 export const DashboardCard = ({ total, icon, label, iconBg }) => {
   return (
@@ -162,12 +163,14 @@ export const DashboardProgressCard = ({ total, icon, label, title }) => {
 };
 
 export const DashboardCourseProgressCard = ({
+  id,
   course,
   description,
   bgColor,
 }) => {
   return (
-    <div
+    <Link
+      to={`/dashboard/enrolled-courses/course/${id}`}
       className={`rounded-xl bg-blue-50/80 border border-gray-300 w-64 font-mont mb-4 flex-shrink-0 xl:w-1/3 xl:flex-shrink`}
     >
       <div className="p-6">
@@ -191,6 +194,6 @@ export const DashboardCourseProgressCard = ({
         </div>
         {/* end progress bar */}
       </div>
-    </div>
+    </Link>
   );
 };

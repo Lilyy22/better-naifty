@@ -51,6 +51,7 @@ const Student = () => {
             return (
               <DashboardCourseProgressCard
                 key={id}
+                id={course?.id}
                 bgColor="blue"
                 course={course?.name}
                 description={course?.description}

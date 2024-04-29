@@ -13,13 +13,14 @@ const UsersList = ({ instructor }) => {
     variables: {
       role: instructor ? "True" : "False",
     },
+    fetchPolicy: "network-only",
   });
 
-  const currentTableData = useMemo(() => {
-    const firstPageIndex = (currentPage - 1) * PageSize;
-    const lastPageIndex = firstPageIndex + PageSize;
-    return data?.users?.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage]);
+  // const currentTableData = useMemo(() => {
+  //   const firstPageIndex = (currentPage - 1) * PageSize;
+  //   const lastPageIndex = firstPageIndex + PageSize;
+  //   return data?.users?.slice(firstPageIndex, lastPageIndex);
+  // }, [currentPage]);
 
   const thead = [
     { head: "Name" },
@@ -35,7 +36,7 @@ const UsersList = ({ instructor }) => {
       ) : (
         <>
           <Table title="Users" data={thead} noCrud={true}>
-            {currentTableData?.map(
+            {data?.users?.map(
               (
                 { id, email, is_active, is_instructor, studentprofile },
                 index
@@ -87,7 +88,6 @@ const UsersList = ({ instructor }) => {
               }
             )}
           </Table>
-         
         </>
       )}
     </>
