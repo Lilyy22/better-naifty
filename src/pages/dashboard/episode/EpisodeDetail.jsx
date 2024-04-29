@@ -31,51 +31,53 @@ export const EpisodeDetail = () => {
 
   return (
     <>
-      <EpisodeProgress videoEnd={end} />
       {loading ? (
         <DetailLoader />
       ) : (
-        <div className="flex flex-wrap gap-6 justify-between">
-          <div className="w-full lg:w-[63%]">
-            <div className="bg-white mb-4 rounded-lg">
-              <ReactPlayer
-                url={`https://api.naifty.academy/media/${data?.curse_episode[0]?.file}`}
-                width="100%"
-                height="100%"
-                playing={true}
-                controls={true}
-                style={{ borderRadius: 30 }}
-                config={{
-                  youtube: {
-                    playerVars: { showinfo: 1 },
-                  },
-                  facebook: {
-                    appId: "12345",
-                  },
-                }}
-                onEnded={handleEnd}
-              />
-              <div className="p-6 border-b border-gray-100">
-                <DashH4 text={data?.curse_episode[0]?.title} />
-                <p className="text-sm -mt-4">
-                  {data?.curse_episode[0]?.description}
-                </p>
+        <>
+          <EpisodeProgress videoEnd={end} />
+          <div className="flex flex-wrap gap-6 justify-between">
+            <div className="w-full lg:w-[63%]">
+              <div className="bg-white mb-4 rounded-lg">
+                <ReactPlayer
+                  url={`https://api.naifty.academy/media/${data?.curse_episode[0]?.file}`}
+                  width="100%"
+                  height="100%"
+                  playing={true}
+                  controls={true}
+                  style={{ borderRadius: 30 }}
+                  config={{
+                    youtube: {
+                      playerVars: { showinfo: 1 },
+                    },
+                    facebook: {
+                      appId: "12345",
+                    },
+                  }}
+                  onEnded={handleEnd}
+                />
+                <div className="p-6 border-b border-gray-100">
+                  <DashH4 text={data?.curse_episode[0]?.title} />
+                  <p className="text-sm -mt-4">
+                    {data?.curse_episode[0]?.description}
+                  </p>
+                </div>
+                <div className="px-6 py-4">
+                  <CommentList commented={commented} episodeId={episode_id} />
+                </div>
               </div>
-              <div className="px-6 py-4">
-                <CommentList commented={commented} episodeId={episode_id} />
-              </div>
+              <CommentForm setCommented={setCommented} episodeId={episode_id} />
             </div>
-            <CommentForm setCommented={setCommented} episodeId={episode_id} />
-          </div>
 
-          <div className="bg-white rounded-lg flex-1 p-6 mb-auto">
-            <DashH4 text="Contents" />
-            <SectionList
-              courseId={data?.curse_episode[0]?.section?.course?.id}
-              enrolled={true}
-            />
+            <div className="bg-white rounded-lg flex-1 p-6 mb-auto">
+              <DashH4 text="Contents" />
+              <SectionList
+                courseId={data?.curse_episode[0]?.section?.course?.id}
+                enrolled={true}
+              />
+            </div>
           </div>
-        </div>
+        </>
       )}
     </>
   );

@@ -5,48 +5,24 @@ import { DetailLoader } from "../pages/dashboard/episode/component/Loader";
 
 const EnrolledMiddleware = () => {
   const { course_id } = useParams();
-  const { isEpisodeEnrolled, loading } = useEnrolledCourse(course_id);
-  const [enrollmentChanged, setEnrollmentChanged] = useState(false);
+  const { isCourseEnrolled, loading } = useEnrolledCourse(course_id);
+  const [enrollmentChanged, setEnrollmentChanged] = useState(true);
 
   useEffect(() => {
-    if (loading === false) {
-      setEnrollmentChanged(true);
+    if (!loading) {
+      setEnrollmentChanged(false);
     }
   }, [loading]);
 
-  if (loading) {
-    return <DetailLoader />;
-  } else if (enrollmentChanged) {
-    if (isEpisodeEnrolled) {
-      return <Outlet />;
-    } else {
-      return <Navigate to="/dashboard/enrolled-courses" />;
-    }
+  if (!enrollmentChanged) {
+    return isCourseEnrolled ? (
+      <Outlet />
+    ) : (
+      <Navigate to="/dashboard/enrolled-courses" />
+    );
   } else {
-    return null;
+    return <DetailLoader />;
   }
 };
 
 export default EnrolledMiddleware;
-
-//   useEffect(() => {
-//     if (loading || !isEpisodeEnrolled) {
-//       return <DetailLoader />;
-//     } else {
-//       console.log(isEpisodeEnrolled);
-//       return isEpisodeEnrolled ? (
-//         <Outlet />
-//       ) : (
-//         <Navigate to="/dashboard/enrolled-courses" />
-//       );
-//     }
-//   }, [isEpisodeEnrolled]);
-
-//    return isEpisodeEnrolled ? (
-//      <Outlet />
-//    ) : (
-//      <Navigate to="/dashboard/enrolled-courses" />
-//    );
-// };
-
-// export default EnrolledMiddleware;

@@ -3,13 +3,13 @@ import { useContext, useEffect, useState } from "react";
 import { GETENROLLEDCOURSE } from "../pages/dashboard/enroll/data/query";
 import { AuthContext } from "../context/AuthContext";
 
-export const useEnrolledCourse = (courseId) => {
+export const useEnrolledCourse = (courseId, episodeId, sectionId) => {
   const [enrolled_course, setEnrolledCourse] = useState([]);
-  //   const [enrolled_sections, setEnrolledSections] = useState([]);
-  //   const [enrolled_episodes, setEnrolledEpisodes] = useState([]);
+  const [enrolled_sections, setEnrolledSections] = useState([]);
+  const [enrolled_episodes, setEnrolledEpisodes] = useState([]);
   const [isCourseEnrolled, setIsCourseEnrolled] = useState(false);
-  //   const [isSectionEnrolled, setIsSectionEnrolled] = useState(false);
-  //   const [isEpisodeEnrolled, setIsEpisodeEnrolled] = useState(false);
+  const [isSectionEnrolled, setIsSectionEnrolled] = useState(false);
+  const [isEpisodeEnrolled, setIsEpisodeEnrolled] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const { userId } = useContext(AuthContext);
@@ -23,23 +23,23 @@ export const useEnrolledCourse = (courseId) => {
     const enrolledCourse = data?.course_enrollment?.map(
       ({ course }) => course.id
     );
-    // const enrolledSections = data?.course_enrollment?.map(({ course }) =>
-    //   course?.sections?.map(({ id }) => id)
-    // );
-    // const enrolledEpisodes = data?.course_enrollment?.flatMap(({ course }) =>
-    //   course?.sections?.flatMap(({ episodes }) => episodes?.map(({ id }) => id))
-    // );
+    const enrolledSections = data?.course_enrollment?.map(({ course }) =>
+      course?.sections?.map(({ id }) => id)
+    );
+    const enrolledEpisodes = data?.course_enrollment?.flatMap(({ course }) =>
+      course?.sections?.flatMap(({ episodes }) => episodes?.map(({ id }) => id))
+    );
 
     const courseEnrolled = enrolledCourse?.some((id) => id === courseId);
-    // const sectionEnrolled = enrolledSections?.some((id) => id === sectionId);
-    // const episodeEnrolled = enrolledEpisodes?.some((id) => id === episodeId);
+    const sectionEnrolled = enrolledSections?.some((id) => id === sectionId);
+    const episodeEnrolled = enrolledEpisodes?.some((id) => id === episodeId);
 
     setEnrolledCourse(enrolledCourse);
-    // setEnrolledSections(enrolledSections);
-    // setEnrolledEpisodes(enrolledEpisodes);
+    setEnrolledSections(enrolledSections);
+    setEnrolledEpisodes(enrolledEpisodes);
     setIsCourseEnrolled(courseEnrolled);
-    // setIsSectionEnrolled(sectionEnrolled);
-    // setIsEpisodeEnrolled(episodeEnrolled);
+    setIsSectionEnrolled(sectionEnrolled);
+    setIsEpisodeEnrolled(episodeEnrolled);
   };
 
   useEffect(() => {
@@ -52,11 +52,11 @@ export const useEnrolledCourse = (courseId) => {
 
   return {
     enrolled_course,
-    // enrolled_sections,
-    // enrolled_episodes,
+    enrolled_sections,
+    enrolled_episodes,
     isCourseEnrolled,
-    // isEpisodeEnrolled,
-    // isSectionEnrolled,
+    isEpisodeEnrolled,
+    isSectionEnrolled,
     loading,
   };
 };
