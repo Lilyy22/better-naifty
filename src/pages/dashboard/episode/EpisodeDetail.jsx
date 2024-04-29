@@ -8,9 +8,11 @@ import { DetailLoader } from "./component/Loader";
 import { useParams } from "react-router-dom";
 import SectionList from "../section/SectionList";
 import CommentList from "../comment/CommentList";
+import { EpisodeProgress } from "./component/EpisodeProgress";
 
 export const EpisodeDetail = () => {
   const { episode_id } = useParams();
+  const [end, setEnd] = useState(false);
   const [commented, setCommented] = useState(false);
 
   const { data, loading, refetch } = useQuery(GETEPISODE, {
@@ -19,12 +21,17 @@ export const EpisodeDetail = () => {
     },
   });
 
+  const handleEnd = () => {
+    setEnd(true);
+  };
+
   useEffect(() => {
     refetch();
   }, [commented]);
 
   return (
     <>
+      <EpisodeProgress videoEnd={end} />
       {loading ? (
         <DetailLoader />
       ) : (
@@ -46,6 +53,7 @@ export const EpisodeDetail = () => {
                     appId: "12345",
                   },
                 }}
+                onEnded={handleEnd}
               />
               <div className="p-6 border-b border-gray-100">
                 <DashH4 text={data?.curse_episode[0]?.title} />

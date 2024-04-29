@@ -15,10 +15,23 @@ export const GETEPISODE = gql`
     }
   }
 `;
+
 export const GETEPISODECOUNT = gql`
   query GETEPISODECOUNT($sectionId: String) {
     curse_episode_aggregate(where: { section_id: { exact: $sectionId } }) {
       count
+    }
+  }
+`;
+
+export const GETEPISODEPROGRESS = gql`
+  query GETEPISODEPROGRESS($episodeId: String, $userId: String) {
+    course_progress(
+      where: { user_id: { exact: $userId }, episode_id: { exact: $episodeId } }
+    ) {
+      id
+      course_started
+      course_finished
     }
   }
 `;

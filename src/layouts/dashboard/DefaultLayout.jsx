@@ -3,8 +3,6 @@ import { Sidebar } from "./Sidebar";
 import { Outlet } from "react-router-dom";
 import { Header } from "./Header";
 import { useProfile } from "../../hooks/useProfile";
-import { PrimaryLink } from "../../components/Link";
-import { useCheckOnlineStatus } from "../../hooks/useCheckOnlineStatus";
 import OptionalModal from "../../components/modal/OptionalModal";
 
 export const DefaultLayout = () => {

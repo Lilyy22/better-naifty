@@ -14,6 +14,7 @@ const SectionList = ({ courseId, enrolled }) => {
       <ul key={id}>
         <SectionDropDown
           key={id}
+          courseId={courseId}
           section={title}
           episodes={episodes}
           enrolled={enrolled}
