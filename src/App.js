@@ -68,14 +68,16 @@ function App() {
 
           {/* Dashboard */}
           <Route element={<PrivateRoute />}>
-            <Route
-              path="/assessment"
-              element={
-                <ErrorBoundary fallback={<div>Something went wrong</div>}>
-                  <StudentAssessment />
-                </ErrorBoundary>
-              }
-            />
+            {isAInstructor && (
+              <Route
+                path="/assessment"
+                element={
+                  <ErrorBoundary fallback={<div>Something went wrong</div>}>
+                    <StudentAssessment />
+                  </ErrorBoundary>
+                }
+              />
+            )}
             <Route path="/dashboard" element={<DefaultLayout />}>
               {/* course */}
               <Route exact path="/dashboard/" element={<Dashboard />} />

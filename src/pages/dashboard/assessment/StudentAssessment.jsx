@@ -42,7 +42,7 @@ const StudentAssessment = () => {
       courseId: courseId,
     },
   });
-  const { remainingMinutes, remainingSeconds } = useCountdownTimer(1);
+  const { remainingMinutes, remainingSeconds } = useCountdownTimer(20);
 
   const handleSubmit = async (e) => {
     e?.preventDefault();
@@ -54,7 +54,7 @@ const StudentAssessment = () => {
         },
       });
 
-      getScore({
+      await getScore({
         variables: {
           courseId: courseId,
         },

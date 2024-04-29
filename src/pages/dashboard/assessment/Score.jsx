@@ -16,6 +16,7 @@ const Score = () => {
       variables: {
         courseId: course_id,
       },
+      fetchPolicy: "network-only",
     }
   );
 
