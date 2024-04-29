@@ -42,7 +42,7 @@ export const DefaultLayout = () => {
           <Header sidebarOpen={sidebarOpen} handleClick={handleSidebar} />
 
           <main>
-            <div className="mx-auto max-w-screen-7xl min-h-screen px-4 md:px-8 md:py-6  bg-custom-gray-400 ">
+            <div className="mx-auto max-w-screen-7xl min-h-screen px-4 md:px-8 py-6 bg-custom-gray-400 ">
               <Outlet />
             </div>
           </main>
