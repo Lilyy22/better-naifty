@@ -119,6 +119,7 @@ export const EpisodeForm = ({ sectionId, handleOpen, modalUpdate }) => {
             onChange={handleVideo}
             thumbnail={video}
             isRequired={true}
+            accept=".mp4,.avi"
           />
           {video && uploadProgress > 0 && (
             <div className="w-full bg-gray-300 h-5 py-0.5 rounded-full text-center text-xs font-medium text-white relative mb-4">

@@ -9,11 +9,14 @@ import { useParams } from "react-router-dom";
 import SectionList from "../section/SectionList";
 import CommentList from "../comment/CommentList";
 import { EpisodeProgress } from "./component/EpisodeProgress";
+import { useEpisodeProgress } from "../../../hooks/useEpisodeProgress";
 
 export const EpisodeDetail = () => {
   const { episode_id } = useParams();
   const [end, setEnd] = useState(false);
   const [commented, setCommented] = useState(false);
+
+  const { data: progress } = useEpisodeProgress(episode_id);
 
   const { data, loading, refetch } = useQuery(GETEPISODE, {
     variables: {
@@ -39,23 +42,34 @@ export const EpisodeDetail = () => {
           <div className="flex flex-wrap gap-6 justify-between">
             <div className="w-full lg:w-[63%]">
               <div className="bg-white mb-4 rounded-lg">
-                <ReactPlayer
-                  url={`https://api.naifty.academy/media/${data?.curse_episode[0]?.file}`}
-                  width="100%"
-                  height="100%"
-                  playing={true}
-                  controls={true}
-                  style={{ borderRadius: 30 }}
-                  config={{
-                    youtube: {
-                      playerVars: { showinfo: 1 },
-                    },
-                    facebook: {
-                      appId: "12345",
-                    },
-                  }}
-                  onEnded={handleEnd}
-                />
+                <div
+                  className={`border-b-4 rounded-md ${
+                    progress?.course_progress[0]?.course_finished
+                      ? "border-red-500"
+                      : "border-yellow-500"
+                  }`}
+                >
+                  <ReactPlayer
+                    url={`https://api.naifty.academy/media/${data?.curse_episode[0]?.file}`}
+                    width="100%"
+                    height="100%"
+                    playing={true}
+                    controls={true}
+                    style={{
+                      borderTopLeftRadius: 30,
+                      borderTopRightRadius: 30,
+                    }}
+                    config={{
+                      youtube: {
+                        playerVars: { showinfo: 1 },
+                      },
+                      facebook: {
+                        appId: "12345",
+                      },
+                    }}
+                    onEnded={handleEnd}
+                  />
+                </div>
                 <div className="p-6 border-b border-gray-100">
                   <DashH4 text={data?.curse_episode[0]?.title} />
                   <p className="text-sm -mt-4">

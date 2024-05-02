@@ -75,6 +75,7 @@ export const FileUpload = ({
   isRequired,
   thumbnail,
   disabled,
+  accept,
 }) => {
   return (
     <div className="w-full mb-4">
@@ -101,6 +102,7 @@ export const FileUpload = ({
           onChange={onChange}
           required={isRequired}
           disabled={disabled}
+          accept={accept}
         />
       </div>
     </div>

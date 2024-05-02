@@ -48,9 +48,13 @@ const Student = () => {
           )}
 
           {enrolledCourse?.course_enrollment?.map(({ id, course }) => {
+            const totals = course?.sections?.reduce((acc, { episodes }) => {
+              return acc + episodes?.length;
+            }, 0);
             return (
               <DashboardCourseProgressCard
                 key={id}
+                totalVideos={totals}
                 id={course?.id}
                 bgColor="blue"
                 course={course?.name}

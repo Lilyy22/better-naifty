@@ -57,6 +57,11 @@ export const GETENROLLED = gql`
         category {
           name
         }
+        sections {
+          episodes {
+            id
+          }
+        }
         instructor {
           studentprofile {
             first_name

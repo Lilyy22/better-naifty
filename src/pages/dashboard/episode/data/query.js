@@ -30,6 +30,19 @@ export const GETEPISODEPROGRESS = gql`
       where: { user_id: { exact: $userId }, episode_id: { exact: $episodeId } }
     ) {
       id
+      episode {
+        id
+      }
+      course_started
+      course_finished
+    }
+  }
+`;
+
+export const GETCOURSEEPISODEPROGRESS = gql`
+  query GETCOURSEEPISODEPROGRESS($userId: String) {
+    course_progress(where: { user_id: { exact: $userId } }) {
+      id
       course_started
       course_finished
     }

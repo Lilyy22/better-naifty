@@ -167,11 +167,12 @@ export const DashboardCourseProgressCard = ({
   course,
   description,
   bgColor,
+  totalVideos,
 }) => {
   return (
     <Link
       to={`/dashboard/enrolled-courses/course/${id}`}
-      className={`rounded-xl bg-blue-50/80 border border-gray-300 w-64 font-mont mb-4 flex-shrink-0 xl:w-1/3 xl:flex-shrink`}
+      className={`rounded-xl bg-blue-50/80 border border-gray-300 w-64 font-mont mb-4 flex-shrink-0 xl:w-[30%] xl:flex-shrink md:mb-auto`}
     >
       <div className="p-6">
         {/* text */}
@@ -184,7 +185,8 @@ export const DashboardCourseProgressCard = ({
         {/* end text */}
         {/* progress bar */}
         <div className="w-full mt-6">
-          <p className="inline-block text-xs">0/0</p>
+          <span className="text-xs text-gray-400 block">Total Videos</span>
+          <p className="inline-block text-xs">0 / {totalVideos}</p>
           <div className="bg-gray-200 rounded-full w-full my-auto h-1.5">
             <div
               className="bg-blue-600 h-1.5 rounded-full "
