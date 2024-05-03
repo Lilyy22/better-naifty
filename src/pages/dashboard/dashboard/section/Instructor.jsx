@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import { COURSECOUNT } from "../data/query";
+import { COURSECOUNT, INSTTOTALSALES } from "../data/query";
 import { AuthContext } from "../../../../context/AuthContext";
 import { DashboardCard, DashboardProgressCard } from "../component/Card";
 import { DashH4, DashH5 } from "../../../../components/Heading";
@@ -27,10 +27,31 @@ const Instructor = () => {
     }
   );
 
+  const { data: salesData, refetch: refetchSales } = useQuery(INSTTOTALSALES, {
+    variables: {
+      userId: userId,
+    },
+  });
+
+  const totalSales = salesData?.course?.reduce((acc, { enrollments }) => {
+    return (
+      acc +
+      enrollments?.reduce(
+        (innerAcc, { course }) => innerAcc + parseFloat(course?.price),
+        0
+      )
+    );
+  }, 0);
+
+  const totalEnrollment = salesData?.course?.reduce((acc, { enrollments }) => {
+    return acc + enrollments?.length;
+  }, 0);
+
   useEffect(() => {
     refetchCourse();
     refetchAppCourse();
-  }, [appcourseData, courseData]);
+    refetchSales();
+  }, [appcourseData, courseData, salesData]);
 
   return (
     <div>
@@ -40,8 +61,8 @@ const Instructor = () => {
         <div className="flex space-x-4 justify-start h-auto overflow-x-auto scrollbar-hide pt-4">
           {/* {loading && loader.map((item) => <DashCardLoader key={item} />)} */}
           <DashboardCard
-            total={0}
-            label="Total Students"
+            total={totalEnrollment}
+            label="Total Enrolled Students"
             iconBg="purple"
             icon={
               <svg
@@ -82,7 +103,7 @@ const Instructor = () => {
             }
           />
           <DashboardCard
-            total={0}
+            total={`$${totalSales}`}
             label="Total Sales"
             iconBg="red"
             icon={

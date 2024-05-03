@@ -81,7 +81,7 @@ export const CourseTable = () => {
                       <Link
                         to={`/dashboard/course-list/courses-description/${id}`}
                       >
-                        <div className="bg-gray-100/50 py-1 rounded-2xl flex gap-1 text-xs justify-center text-green-400 relative">
+                        <div className="bg-gray-100/50 py-1 px-2 rounded-2xl flex gap-1 text-xs justify-center text-green-500 relative">
                           <ToolTip text="View More" />
                           <svg
                             className="w-3 h-3 fill-current leading-none my-auto"

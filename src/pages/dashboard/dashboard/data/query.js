@@ -17,3 +17,31 @@ export const USERSCOUNT = gql`
     }
   }
 `;
+
+export const TOTALSALES = gql`
+  query TOTALSALES {
+    course_enrollment(where: { status: { exact: "SUCCESS" } }) {
+      id
+      course {
+        price
+      }
+    }
+  }
+`;
+
+export const INSTTOTALSALES = gql`
+  query INSTTOTALSALES($userId: String) {
+    course(
+      where: {
+        instructor_id: { exact: $userId }
+        status: { exact: "APPROVED" }
+      }
+    ) {
+      enrollments {
+        course {
+          price
+        }
+      }
+    }
+  }
+`;

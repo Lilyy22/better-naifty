@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import { COURSECOUNT, USERSCOUNT } from "../data/query";
+import { COURSECOUNT, TOTALSALES, USERSCOUNT } from "../data/query";
 import { DashH4, DashH5 } from "../../../../components/Heading";
 import { DashboardCard, DashboardProgressCard } from "../component/Card";
 import { Line } from "react-chartjs-2";
@@ -14,6 +14,8 @@ const Admin = () => {
     },
   });
 
+  const { data: salesData, refetch: refetchSales } = useQuery(TOTALSALES);
+
   const { data: studentData, refetch: refetchStudent } = useQuery(USERSCOUNT, {
     variables: {
       role: "False",
@@ -25,11 +27,16 @@ const Admin = () => {
     },
   });
 
+  const totalSales = salesData?.course_enrollment?.reduce((acc, { course }) => {
+    return acc + parseFloat(course?.price);
+  }, 0);
+
   useEffect(() => {
     refetchCourse();
     refetchInst();
     refetchStudent();
-  }, [courseData, studentData, instData]);
+    refetchSales();
+  }, [courseData, studentData, instData, salesData]);
 
   return (
     <div>
@@ -83,7 +90,7 @@ const Admin = () => {
             }
           />
           <DashboardCard
-            total={0}
+            total={`$${totalSales}`}
             label="Total Sales"
             iconBg="red"
             icon={

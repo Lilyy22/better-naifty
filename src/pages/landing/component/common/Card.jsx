@@ -332,9 +332,9 @@ export const TestimonialCard = () => {
 export const TeamCard = ({ photo }) => {
   return (
     <>
-      <div className="w-64 p-4 rounded-lg text-gray-400 bg-custom-black-900 bg-gray-800/90 border-t border-gray-700 hover:bg-custom-black-600 ">
+      <div className="w-64 p-4 rounded-lg text-gray-400 bg-custom-black-900 bg-gray-800/90 border-t border-gray-700 hover:bg-custom-black-600 group hover:bg-slate-800 hover:-mt-2">
         <img
-          className="rounded-full w-44 h-44 object-cover mx-auto"
+          className="rounded-full w-44 h-44 object-cover mx-auto group-hover:scale-105"
           src={photo}
           alt=""
         />
@@ -348,7 +348,7 @@ export const TeamCard = ({ photo }) => {
           <div className="font-bold flex justify-center gap-1 mt-4">
             <a>
               <svg
-                className="w-4 h-4 fill-gray-500"
+                className="w-4 h-4 fill-gray-500 group-hover:fill-purple-200"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
               >
@@ -357,7 +357,7 @@ export const TeamCard = ({ photo }) => {
             </a>
             <a>
               <svg
-                className="w-5 h-4 fill-gray-500"
+                className="w-5 h-4 fill-gray-500 group-hover:fill-purple-200"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 448 512"
               >
@@ -366,7 +366,7 @@ export const TeamCard = ({ photo }) => {
             </a>
             <a>
               <svg
-                className="w-5 h-4 fill-gray-500"
+                className="w-5 h-4 fill-gray-500 group-hover:fill-purple-200"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
               >

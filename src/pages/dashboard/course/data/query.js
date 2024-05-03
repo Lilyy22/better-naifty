@@ -82,6 +82,7 @@ export const GETCOURSESECTION = gql`
           email
           id
           studentprofile {
+            bio
             profile_picture
             first_name
             last_name
@@ -123,3 +124,26 @@ export const GETUSERRATING = gql`
     }
   }
 `;
+
+// export const GETENROLLEDSTUDENTS = gql`
+//   query GETENROLLEDSTUDENTS($userId: String, $courseId: String) {
+//     course(
+//       where: {
+//         instructor_id: { exact: $userId }
+//         status: { exact: "APPROVED" }
+//         id: { exact: $courseId }
+//       }
+//     ) {
+//       enrollments {
+//         id
+//         student {
+//           studentprofile {
+//             first_name
+//             last_name
+//             profile_picture
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;

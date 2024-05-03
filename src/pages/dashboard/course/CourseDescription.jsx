@@ -158,7 +158,7 @@ export const CourseDescription = () => {
               loading={loading}
             />
           </div>
-          <div className={`p-4 ${openTab === 5 ? "block" : "hidden"}`}>
+          <div className={`${openTab === 5 ? "block" : "hidden"}`}>
             <Forum />
           </div>
           {/* END container */}
