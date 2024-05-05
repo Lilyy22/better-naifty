@@ -2,7 +2,6 @@ import React from "react";
 import { useEpisodeProgress } from "../../../../hooks/useEpisodeProgress";
 import { Link } from "react-router-dom";
 import { ToolTip } from "../../../../components/ToolTip";
-import { animate } from "framer-motion";
 
 export const EpisodeText = ({ episodeId, courseId, enrolled, title }) => {
   const { data, loading } = useEpisodeProgress(episodeId);

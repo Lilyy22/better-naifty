@@ -21,11 +21,11 @@ const OptionalModal = ({
         className="overflow-y-auto overflow-x-hidden fixed top-0 flex left-0 z-50 justify-center items-center w-full min-h-full bg-gray-800/30 "
       >
         <div className="relative p-6 w-full max-w-md h-full md:h-auto">
-          <div className="bg-white shadow rounded-lg p-6 text-center max-w-sm">
-            <h3 className="font-mont font-semibold text-sm text-purple-700">
+          <div className="bg-purple-800  shadow rounded-lg p-6 text-center max-w-sm">
+            <h3 className="font-mont font-semibold text-sm text-purple-50">
               {heading}
             </h3>
-            <p className="my-8 font-medium text-gray-500">{subText}</p>
+            <p className="my-8 font-medium text-gray-300">{subText}</p>
             <div className="flex gap-2 justify-center">
               <PrimaryLink
                 goto={goto}
@@ -36,7 +36,7 @@ const OptionalModal = ({
               />
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full text-gray-400 font-semibold text-xs hover:text-gray-600"
+                className="bg-gray-400 rounded w-full font-semibold text-xs hover:bg-gray-500 hover:text-gray-200"
               >
                 Maybe, Later
               </button>
