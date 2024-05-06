@@ -100,7 +100,7 @@ export const CreateCourse = () => {
 
   useEffect(() => {
     setCourse({ ...course, categoryId: categoryData?.course_category[0]?.id });
-  }, [loading]);
+  }, [categoryLoading]);
 
   return (
     <>
