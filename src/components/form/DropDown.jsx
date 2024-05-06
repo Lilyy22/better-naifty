@@ -20,9 +20,9 @@ const DropDown = ({ onChange, loading, data, id, label, isRequired }) => {
           {loading ? (
             <option>•••</option>
           ) : (
-            data?.map(({ id, name }) => {
+            data?.map(({ id: catID, name }) => {
               return (
-                <option key={id} value={id}>
+                <option key={catID} value={catID}>
                   {name}
                 </option>
               );

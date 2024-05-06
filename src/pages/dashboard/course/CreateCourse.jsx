@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GETCOURSECATEGORY } from "../courseCategory/data/query";
 import { AuthContext } from "../../../context/AuthContext";
@@ -88,6 +88,7 @@ export const CreateCourse = () => {
         navigate("/dashboard/course-list");
       }, 1000);
     } catch (error) {
+      setLoading(false);
       setClose(false);
       setStatus({
         success: false,
@@ -96,6 +97,11 @@ export const CreateCourse = () => {
       });
     }
   };
+
+  useEffect(() => {
+    setCourse({ ...course, categoryId: categoryData?.course_category[0]?.id });
+  }, [loading]);
+
   return (
     <>
       {status.success && (

@@ -90,6 +90,7 @@ export const UpdateCourse = () => {
         navigate("/dashboard/course-list");
       }, 1000);
     } catch (error) {
+      setLoading(false);
       setClose(false);
       setStatus({
         success: false,
