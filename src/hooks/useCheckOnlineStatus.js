@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 
 export const useCheckOnlineStatus = () => {
   const [isOnline, setIsOnline] = useState(true);
-
   const CHECK_ONLINE_STATUS = gql`
     {
       __schema {

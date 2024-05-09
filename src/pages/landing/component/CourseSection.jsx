@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { LandPrimaryButton } from "../../../components/Button";
+import {
+  LandPrimaryButton,
+  LandSecondaryButton,
+  SecondaryButton,
+} from "../../../components/Button";
 import { HorizontalCard, TestimonialCard } from "./common/Card";
 import { H1, H2, Subtitle } from "../../../components/Heading";
 import { PrimaryLink, SecondaryLink } from "../../../components/Link";
@@ -59,6 +63,7 @@ export const GridFourLayout = () => {
 };
 
 export const PricingSection = () => {
+  const [monthly, setMonthly] = useState(true);
   return (
     <>
       <div className="bg-gray-900 py-16 px-4 lg:py-32 xl:px-0">
@@ -68,8 +73,29 @@ export const PricingSection = () => {
             <Subtitle text="Choose the plan that suits your needs." />
             {/* buttons */}
             <div className="flex gap-2 justify-center">
-              <LandPrimaryButton text="Monthly" />
-              <LandPrimaryButton text="Yearly" />
+              {monthly ? (
+                <>
+                  <LandPrimaryButton
+                    text="Monthly"
+                    handleClick={() => setMonthly(!monthly)}
+                  />
+                  <LandSecondaryButton
+                    text="Yearly"
+                    handleClick={() => setMonthly(!monthly)}
+                  />
+                </>
+              ) : (
+                <>
+                  <LandSecondaryButton
+                    text="Monthly"
+                    handleClick={() => setMonthly(!monthly)}
+                  />
+                  <LandPrimaryButton
+                    text="Yearly"
+                    handleClick={() => setMonthly(!monthly)}
+                  />
+                </>
+              )}
             </div>
           </div>
           <div className="flex flex-wrap gap-6 justify-center relative">
@@ -84,7 +110,7 @@ export const PricingSection = () => {
                 Perfect for beginners and enthusiasts.
               </p>
               <div className="my-12">
-                <H1 text="$19/mo" />
+                <H1 text={monthly ? "$19/mo" : "$299/yr"} />
                 <SecondaryLink text="Subscribe" goto="/signup" />
               </div>
               <ul className="text-gray-300/80 list-disc list-inside">
@@ -110,7 +136,7 @@ export const PricingSection = () => {
                 Ideal for professionals and entrepreneurs.
               </p>
               <div className="my-12">
-                <H1 text="$29/mo" />
+                <H1 text={monthly ? "$29/mo" : "$489/yr"} />
                 <SecondaryLink text="Subscribe" goto="/signup" />
               </div>
               <ul className="text-gray-300/80 list-disc list-inside">

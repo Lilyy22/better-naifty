@@ -1,8 +1,12 @@
 import React, { useEffect } from "react";
 import Glide from "@glidejs/glide";
-import { H2 } from "../../../../components/Heading";
+import { H2, Subtitle } from "../../../../components/Heading";
+import { useLocation } from "react-router-dom";
 
 export const Slider = () => {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   useEffect(() => {
     const slider = new Glide(".glide-05", {
       type: "slider",
@@ -31,8 +35,20 @@ export const Slider = () => {
         <div className="overflow-hidden" data-glide-el="track">
           <ul className="whitespace-no-wrap flex-no-wrap relative flex justify-between w-full overflow-hidden p-0">
             <li className="my-auto w-full">
-              <H2 text="Unlock Your Potential with NAIFTY" />
-              {/* <Subtitle text="Discover interactive courses and gain practical skills to excel in the real world." /> */}
+              <H2
+                text={
+                  currentPath === "/signup/instructor"
+                    ? "Join Our Team of Educators."
+                    : "Unlock Your Potential with NAIFTY"
+                }
+              />
+              <Subtitle
+                text={
+                  currentPath === "/signup/instructor"
+                    ? "Teach and transform lives, get instant access to our community and students."
+                    : "Discover interactive courses and gain practical skills to excel in the real world."
+                }
+              />
             </li>
             <li className="w-full">
               <img

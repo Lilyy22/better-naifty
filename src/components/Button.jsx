@@ -100,6 +100,33 @@ export const LandPrimaryButton = ({
     </>
   );
 };
+export const LandSecondaryButton = ({
+  text,
+  type,
+  children,
+  customStyle,
+  handleClick,
+}) => {
+  return (
+    <>
+      <motion.button
+        whileTap={{ scale: 0.9 }}
+        type={type}
+        onClick={handleClick}
+        className={`bg-gray-700 rounded-2xl text-white font-medium 
+        py-1.5 transition-all border-2 border-gray-700
+        hover:bg-custom-black-600 hover:text-gray-200 px-4 md:px-6 ${customStyle}`}
+      >
+        <div className="flex gap-2 justify-center">
+          <p>{text}</p>
+          <p className="my-auto">
+            {children} {/* SVG icon */}
+          </p>
+        </div>
+      </motion.button>
+    </>
+  );
+};
 
 export const GoBack = ({ pathname, text, handleClick }) => {
   return (

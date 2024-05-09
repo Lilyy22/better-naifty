@@ -12,11 +12,15 @@ import { useLocation } from "react-router-dom";
 export const Course = () => {
   const location = useLocation();
   const section1 = useRef(null);
+  const section2 = useRef(null);
 
   useEffect(() => {
     if (location.hash) {
       if (section1.current && location.hash === "#course-section") {
         section1.current.scrollIntoView({ behavior: "smooth" });
+      }
+      if (section2.current && location.hash === "#course-pricing") {
+        section2.current.scrollIntoView({ behavior: "smooth" });
       }
     }
   }, [location]);
@@ -32,7 +36,13 @@ export const Course = () => {
       >
         <GridFourLayout />
       </section>
-      <PricingSection />
+      <section
+        id="#course-pricing"
+        ref={section2}
+        className="bg-custom-beige-100/90 rounded-2xl"
+      >
+        <PricingSection />
+      </section>
       <SectionThree />
       <Footer />
     </div>

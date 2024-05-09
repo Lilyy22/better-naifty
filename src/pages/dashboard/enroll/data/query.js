@@ -42,6 +42,16 @@ export const GETENROLLEDCOURSE = gql`
   }
 `;
 
+export const LATESTCOURSES = gql`
+  query LATESTCOURSES($currentDate: String!, $limit: Int!) {
+    course(where: { created_at: { lte: $currentDate } }, limit: $limit) {
+      id
+      name
+      created_at
+    }
+  }
+`;
+
 export const GETENROLLED = gql`
   query GETENROLLED($studentId: String) {
     course_enrollment(

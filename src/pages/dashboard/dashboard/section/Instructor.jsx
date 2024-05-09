@@ -121,10 +121,6 @@ const Instructor = () => {
         <DashH5 text="Course Analysis" />
 
         <div className="h-auto flex flex-wrap gap-4 mt-4">
-          <div className="w-full rounded-xl lg:w-1/2">
-            <DashboardProgressCard />
-          </div>
-
           <div className="bg-white w-full p-2 rounded-xl lg:w-[47%]">
             <Line
               data={{

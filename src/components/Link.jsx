@@ -15,8 +15,8 @@ export const PrimaryLink = ({
         to={goto}
         state={data}
         onClick={handleClick}
-        className={`bg-purple-500 rounded text-white font-medium outline-none
-        py-1 transition-all px-4 text-sm hover:bg-purple-700 inline-block my-auto whitespace-nowrap ${customStyle}`}
+        className={`bg-purple-500 rounded-md text-white font-medium outline-none
+        py-2 transition-all px-4 text-sm hover:bg-purple-700 inline-block my-auto whitespace-nowrap ${customStyle}`}
       >
         <div className="flex gap-2 justify-center">
           <p>{text}</p>

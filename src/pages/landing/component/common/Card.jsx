@@ -183,11 +183,11 @@ export const TestimonialCard = () => {
         <div className="flex flex-wrap md:flex-nowrap gap-2 justify-center lg:justify-evenly">
           <div className="max-w-xs lg:max-w-sm rounded-xl bg-custom-gray-600 px-4 py-6 lg:py-6 lg:px-6">
             <p className="text-gray-400/80 py-4">
-              PivotSkool's guidance helped me create a professional resume that
-              truly showcased my skills. The instructors were supportive,
-              providing personalized feedback and insights that helped me stand
-              out to potential employers. Never think twice about booking their
-              services.👍🏽
+              NAIFTY Academy's focus on practical knowledge enabled me to
+              develop a professional resume that truly showcased my skills. The
+              hands-on learning and interactive courses were instrumental in
+              helping me stand out to potential employers. I highly recommend
+              their transformative educational approach.👍🏽
             </p>
             <div className="flex gap-2">
               <img
@@ -205,10 +205,10 @@ export const TestimonialCard = () => {
 
           <div className="max-w-xs lg:max-w-sm rounded-xl bg-custom-gray-600 px-4 py-6 lg:py-6 lg:px-6">
             <p className="text-gray-400/80 py-4">
-              After struggling to get callbacks from potential employers, They
-              helped me identify weaknesses in my resume and provided feedback
-              on how to improve it. With their help, I was able to land my first
-              Job as a Data Analyst.
+              With NAIFTY Academy, I gained the hands-on expertise necessary to
+              enhance my resume and skills in data analytics. Their approach to
+              blending theoretical learning with real-world application was
+              exactly what I needed to secure my first role as a Data Analyst.
             </p>
             <div className="flex gap-2">
               <img
@@ -226,10 +226,10 @@ export const TestimonialCard = () => {
 
           <div className="max-w-xs lg:max-w-sm rounded-xl bg-custom-gray-600 px-4 py-6 lg:py-6 lg:px-6">
             <p className="text-gray-400/80 py-4">
-              The expert guidance and support from Pivotskool helped me to
-              navigate complex problems and gain the confidence to tackle new
-              challenges. Thanks to Pivotskool I was able to build a strong
-              portfolio and stand out to potential employers.
+              The real-world focused training and expert guidance at NAIFTY
+              Academy empowered me to tackle complex challenges and build a
+              significant portfolio. Their courses not only boosted my
+              confidence but also made me a standout candidate to employers.
             </p>
             <div className="flex gap-2">
               <img
@@ -263,10 +263,11 @@ export const TestimonialCard = () => {
         >
           <div className="max-w-xs lg:max-w-sm rounded-xl bg-custom-gray-600 px-4 py-6 lg:py-6 lg:px-6">
             <p className="text-gray-400/80 py-4">
-              PivotSkool's interview preparation tips and tricks were
-              instrumental in helping me land a job with a better company as a
-              data engineer. With their help, I was able to showcase my skills
-              and experience and ultimately landed me my dream job.
+              Thanks to NAIFTY Academy, I mastered crucial practical skills
+              through their interactive engineering courses, which were crucial
+              in helping me land a dream job with a top tech company. The
+              academy's emphasis on real-world application made all the
+              difference.
             </p>
             <div className="flex gap-2">
               <img
@@ -284,10 +285,10 @@ export const TestimonialCard = () => {
 
           <div className="max-w-xs lg:max-w-sm rounded-xl bg-custom-gray-600 px-4 py-6 lg:py-6 lg:px-6">
             <p className="text-gray-400/80 py-4">
-              PivotSkool's career guidance is an essential investment for anyone
-              looking to transition to a career in data analytics. I was able to
-              identify my career goals and create a clear path toward achieving
-              them, ultimately landing my dream job as a data professional.🧠
+              Choosing NAIFTY Academy was pivotal for transitioning my career
+              towards data analytics. The experiential learning environment
+              helped me clarify my career goals and develop actionable
+              strategies to achieve them, ultimately landing my dream job.🧠
             </p>
             <div className="flex gap-2">
               <img
@@ -305,10 +306,10 @@ export const TestimonialCard = () => {
 
           <div className="max-w-xs lg:max-w-sm rounded-xl bg-custom-gray-600 px-4 py-6 lg:py-6 lg:px-6">
             <p className="text-gray-400/80 py-4">
-              PivotSkool's mock interview helped me land my first job as a
-              product analyst. The mock interviews were tailored to my specific
-              field and needs, and helped me to build my confidence and improve
-              my communication skills.
+              NAIFTY Academy's hands-on training in product analysis were
+              valuable. Their focus on practical learning prepared me perfectly
+              for the real-world challenges of my first job, boosting both my
+              confidence and my communication skills.
             </p>
             <div className="flex gap-2">
               <img

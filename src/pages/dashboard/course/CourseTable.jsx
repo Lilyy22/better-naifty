@@ -74,9 +74,7 @@ export const CourseTable = () => {
                         {status}
                       </span>
                     </TD>
-                    <TD
-                      text={enrollments[0] ? enrollments[0].aggregate.count : 0}
-                    />
+                    <TD text={enrollments?.length} />
                     <TD>
                       <Link
                         to={`/dashboard/course-list/courses-description/${id}`}

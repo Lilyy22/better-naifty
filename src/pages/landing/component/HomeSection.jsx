@@ -29,13 +29,15 @@ export const Feature = () => {
               btnText="Learn More"
               goto="/course"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-4 h-6 fill-custom-white-100 my-2"
-                viewBox="0 0 448 512"
-              >
-                <path d="M224 64c-44.2 0-80 35.8-80 80v48H384c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80V144C80 64.5 144.5 0 224 0c57.5 0 107 33.7 130.1 82.3c7.6 16 .8 35.1-15.2 42.6s-35.1 .8-42.6-15.2C283.4 82.6 255.9 64 224 64zm32 320c17.7 0 32-14.3 32-32s-14.3-32-32-32H192c-17.7 0-32 14.3-32 32s14.3 32 32 32h64z" />
-              </svg>
+              <div className="bg-purple-900/60 rounded-full inline-block w-12 h-12">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-6 fill-purple-300 my-3 mx-auto"
+                  viewBox="0 0 448 512"
+                >
+                  <path d="M224 64c-44.2 0-80 35.8-80 80v48H384c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80V144C80 64.5 144.5 0 224 0c57.5 0 107 33.7 130.1 82.3c7.6 16 .8 35.1-15.2 42.6s-35.1 .8-42.6-15.2C283.4 82.6 255.9 64 224 64zm32 320c17.7 0 32-14.3 32-32s-14.3-32-32-32H192c-17.7 0-32 14.3-32 32s14.3 32 32 32h64z" />
+                </svg>
+              </div>
             </IconCard>
           </div>
           <div className="w-full md:w-1/3 lg:w-1/3">
@@ -45,13 +47,15 @@ export const Feature = () => {
               btnText="Learn More"
               goto="/course"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-10 fill-custom-white-100"
-                viewBox="0 0 512 512"
-              >
-                <path d="M234.5 5.7c13.9-5 29.1-5 43.1 0l192 68.6C495 83.4 512 107.5 512 134.6V377.4c0 27-17 51.2-42.5 60.3l-192 68.6c-13.9 5-29.1 5-43.1 0l-192-68.6C17 428.6 0 404.5 0 377.4V134.6c0-27 17-51.2 42.5-60.3l192-68.6zM256 66L82.3 128 256 190l173.7-62L256 66zm32 368.6l160-57.1v-188L288 246.6v188z" />
-              </svg>
+              <div className="bg-purple-900/60 rounded-full inline-block w-12 h-12">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-6 h-6 fill-purple-300 my-3 mx-auto"
+                  viewBox="0 0 512 512"
+                >
+                  <path d="M256 64a192 192 0 1 1 0 384 192 192 0 1 1 0-384zm0 448A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM200 256c0-20.7 11.3-38.8 28-48.5l-36-62.3c-8.8-15.3-28.7-20.8-42-9c-25.6 22.6-43.9 53.3-50.9 88.1C95.7 241.5 110.3 256 128 256l72 0zm28 48.5l-36 62.4c-8.8 15.3-3.6 35.2 13.1 40.8c16 5.4 33.1 8.3 50.9 8.3s34.9-2.9 50.9-8.3c16.7-5.6 21.9-25.5 13.1-40.8l-36-62.4c-8.2 4.8-17.8 7.5-28 7.5s-19.8-2.7-28-7.5zM312 256l72 0c17.7 0 32.3-14.5 28.8-31.8c-7-34.8-25.3-65.5-50.9-88.1c-13.2-11.7-33.1-6.3-42 9l-36 62.3c16.7 9.7 28 27.8 28 48.5zm-56 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64z" />
+                </svg>
+              </div>
             </IconCard>
           </div>
           <div className="w-full md:w-1/3 lg:w-1/3">
@@ -61,13 +65,15 @@ export const Feature = () => {
               btnText="Learn More"
               goto="/course"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-10 fill-custom-white-100"
-                viewBox="0 0 512 512"
-              >
-                <path d="M234.5 5.7c13.9-5 29.1-5 43.1 0l192 68.6C495 83.4 512 107.5 512 134.6V377.4c0 27-17 51.2-42.5 60.3l-192 68.6c-13.9 5-29.1 5-43.1 0l-192-68.6C17 428.6 0 404.5 0 377.4V134.6c0-27 17-51.2 42.5-60.3l192-68.6zM256 66L82.3 128 256 190l173.7-62L256 66zm32 368.6l160-57.1v-188L288 246.6v188z" />
-              </svg>
+              <div className="bg-purple-900/60 rounded-full inline-block w-12 h-12">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-6 h-6 fill-purple-300 my-3 mx-auto"
+                  viewBox="0 0 512 512"
+                >
+                  <path d="M234.5 5.7c13.9-5 29.1-5 43.1 0l192 68.6C495 83.4 512 107.5 512 134.6V377.4c0 27-17 51.2-42.5 60.3l-192 68.6c-13.9 5-29.1 5-43.1 0l-192-68.6C17 428.6 0 404.5 0 377.4V134.6c0-27 17-51.2 42.5-60.3l192-68.6zM256 66L82.3 128 256 190l173.7-62L256 66zm32 368.6l160-57.1v-188L288 246.6v188z" />
+                </svg>
+              </div>
             </IconCard>
           </div>
         </div>
@@ -139,42 +145,47 @@ export const FAQ = () => {
     {
       i: 1,
       question: "How do I enroll?",
-      content: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia veniam
-        reprehenderit nam assumenda voluptatem ut. Ipsum eius dicta, officiis
-        quidem maiores doloremque est numquam praesentium eos voluptatem amet!
-        Repudiandae, mollitia id reprehenderit a ab odit!`,
+      content: `To enroll in a course, first create an account or log in 
+      to your existing account. Browse or search for a course that interests you, 
+      then click on the course to access its page. If the course meets your needs, you can
+       enroll by clicking the "Buy Now" or "Enroll Now" button. Payment methods include credit/debit cards, 
+       PayPal, and other regional options depending on your location.
+`,
     },
     {
       i: 2,
       question: "What Courses do you offer?",
-      content: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia veniam
-        reprehenderit nam assumenda voluptatem ut. Ipsum eius dicta, officiis
-        quidem maiores doloremque est numquam praesentium eos voluptatem amet!
-        Repudiandae, mollitia id reprehenderit a ab odit!`,
+      content: `We offer diverse courses designed for practical application in Technology,
+       Business, Arts, Personal Development, Languages, and Health & Fitness. Our courses, 
+       from web development to wellness training, emphasize hands-on learning and real-world
+        challenges to prepare you for today's demands and future opportunities.
+`,
     },
     {
       i: 3,
       question: "How long are the courses?",
-      content: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia veniam
-        reprehenderit nam assumenda voluptatem ut. Ipsum eius dicta, officiis
-        quidem maiores doloremque est numquam praesentium eos voluptatem amet!
-        Repudiandae, mollitia id reprehenderit a ab odit!`,
+      content: `The duration of courses can vary widely depending on the subject matter 
+      and the depth of content covered. Some courses are just a couple of hours long,
+       while others might span over 50 hours of content. Each course page includes information
+        about the duration, so you can choose one that fits your schedule.
+`,
     },
     {
       i: 4,
       question: "Are the courses self-paced?",
-      content: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia veniam
-        reprehenderit nam assumenda voluptatem ut. Ipsum eius dicta, officiis
-        quidem maiores doloremque est numquam praesentium eos voluptatem amet!
-        Repudiandae, mollitia id reprehenderit a ab odit!`,
+      content: `Yes, most of our courses are self-paced. This means you can start and 
+      complete the course on your own schedule. There are no set times for classes, 
+      and you have lifetime access to the course materials, so you can revisit them anytime.
+`,
     },
     {
       i: 5,
       question: "Do you offer certification?",
-      content: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia veniam
-        reprehenderit nam assumenda voluptatem ut. Ipsum eius dicta, officiis
-        quidem maiores doloremque est numquam praesentium eos voluptatem amet!
-        Repudiandae, mollitia id reprehenderit a ab odit!`,
+      content: `Yes, upon successful completion of a course, you will receive a certificate of completion. 
+      These certificates can be shared on your social media profiles, CVs, or resumes to demonstrate your 
+      commitment to learning and developing new skills. Note that these certificates represent the completion
+       of a course and are not the same as traditional academic credits or professional certifications.
+`,
     },
   ];
   return (

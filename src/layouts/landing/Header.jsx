@@ -4,24 +4,24 @@ import { Logo } from "../../components/Logo";
 import { LandPrimaryButton } from "../../components/Button";
 import { useProfilePicture } from "../../hooks/useProfilePicture";
 import { AuthContext } from "../../context/AuthContext";
+import { PrimaryLink } from "../../components/Link";
 
 const Header = () => {
   const { profilePicture, loading } = useProfilePicture();
   const { userId } = useContext(AuthContext);
-  
 
   const [menuToggle, setMenuToggle] = useState(false);
 
   return (
     <>
-      <header className="bg-transparent backdrop-blur py-4 fixed top-0 w-full xl:px-0 z-50">
+      <header className="bg-transparent backdrop-blur py-6 fixed top-0 w-full xl:px-0 z-50">
         <div className="max-w-7xl mx-auto flex justify-between relative px-2">
           <Logo />
-          <nav className={`my-auto ${menuToggle ? "" : "hidden md:block "}`}>
+          <nav className={`my-auto ${menuToggle ? "" : "hidden lg:block "}`}>
             <ul
-              className={`flex font-medium md:flex-row md:justify-evenly md:text-custom-white-100 md:gap-6 md:relative md:bg-transparent md:top-0 md:z-0 md:text-left ${
+              className={`flex font-semibold lg:flex-row lg:justify-evenly text-custom-white-100 lg:gap-6 lg:relative lg:bg-transparent lg:top-0 lg:z-0 lg:text-left ${
                 menuToggle
-                  ? "flex-col justify-center gap-2 absolute top-14 w-full left-0 bg-gray-50/95 backdrop-blur text-center px-3 py-4 z-10 rounded"
+                  ? "flex-col justify-center gap-4 absolute top-14 w-full left-0 bg-gray-600/95 backdrop-blur text-center px-3 py-4 z-10"
                   : ""
               }`}
             >
@@ -32,7 +32,7 @@ const Header = () => {
                 }}
               >
                 <NavLink
-                  to="/course"
+                  to="/course/#course-section"
                   className={({ isActive }) =>
                     isActive
                       ? "text-gray-400"
@@ -76,6 +76,41 @@ const Header = () => {
                   About us
                 </NavLink>
               </li>
+
+              <li
+                className="py-1 md:py-0"
+                onClick={() => {
+                  setMenuToggle(!menuToggle);
+                }}
+              >
+                <NavLink
+                  to="/course/#course-pricing"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-gray-400"
+                      : "" + "hover:text-gray-400 transition-all"
+                  }
+                >
+                  Pricing
+                </NavLink>
+              </li>
+              <li
+                className="py-1 md:py-0"
+                onClick={() => {
+                  setMenuToggle(!menuToggle);
+                }}
+              >
+                <NavLink
+                  to="/signup/instructor"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-gray-400"
+                      : "" + "hover:text-gray-400 transition-all"
+                  }
+                >
+                  Become Instructor
+                </NavLink>
+              </li>
               {!userId && (
                 <li>
                   <NavLink
@@ -98,31 +133,15 @@ const Header = () => {
                 >
                   <span>Log In</span>
                 </NavLink>
-                <div className="group relative cursor-pointer py-2">
-                  <LandPrimaryButton type="button" text="Sign Up">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-4 h-4 fill-current"
-                      viewBox="0 0 512 512"
-                    >
-                      <path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z" />
-                    </svg>
-                  </LandPrimaryButton>
-                  <div className="invisible absolute z-50 flex w-full flex-col bg-custom-gray-900 rounded-lg mt-1 py-1 text-gray-800 shadow-xl group-hover:visible">
-                    <Link
-                      to="/signup"
-                      className="my-2 block p-2 font-semibold text-gray-500 text-sm hover:bg-custom-black-600 hover:text-custom-white-100 md:mx-2"
-                    >
-                      As Student
-                    </Link>
-                    <Link
-                      to="/signup/instructor"
-                      className="my-2 block p-2 font-semibold text-gray-500 text-sm hover:bg-custom-black-600 hover:text-custom-white-100 md:mx-2"
-                    >
-                      As Instructor
-                    </Link>
-                  </div>
-                </div>
+                <PrimaryLink goto="/signup" text="Sign Up">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-4 h-4 fill-current"
+                    viewBox="0 0 512 512"
+                  >
+                    <path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z" />
+                  </svg>
+                </PrimaryLink>
               </div>
             ) : (
               <div className="flex ml-2 bg-gray-200/30 md:py-1 md:px-2 rounded-full">
@@ -149,7 +168,7 @@ const Header = () => {
               onClick={() => {
                 setMenuToggle(!menuToggle);
               }}
-              className="md:hidden my-auto cursor-pointer"
+              className="lg:hidden my-auto cursor-pointer"
             >
               {menuToggle ? (
                 <svg

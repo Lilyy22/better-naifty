@@ -4,10 +4,7 @@ import { useQuery } from "@apollo/client";
 import { GETENROLLED } from "../../enroll/data/query";
 import { DashH4, DashH5 } from "../../../../components/Heading";
 import DataNotFound from "../../../../components/DataNotFound";
-import {
-  DashboardCourseProgressCard,
-  DashboardProgressCard,
-} from "../component/Card";
+import { DashboardCourseProgressCard } from "../component/Card";
 import { Doughnut, Pie } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import { DashCardLoader } from "../component/Loader";
@@ -108,9 +105,6 @@ const Student = () => {
                 },
               }}
             />
-          </div>
-          <div className="bg-gray-50 w-full rounded-xl p-4 flex-1 lg:w-1/2">
-            <DashboardProgressCard title="My Favorite Courses" />
           </div>
         </div>
       </div>
