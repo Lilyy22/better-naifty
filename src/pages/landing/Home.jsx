@@ -58,25 +58,26 @@ const Home = () => {
 
       <Feature />
       <Sections />
-      <div className="mt-auto py-8 px-4 bg-custom-gray-900 text-custom-white-100 xl:px-0">
-        <div className="max-w-7xl mx-auto">
-          <TestimonialCard />
+
+      <div className="bg-custom-gray-900 py-12">
+        <div className="max-w-7xl px-4 m-auto">
+          <div className="max-w-xl mx-auto text-center mb-12">
+            <H2 text="Product and Service Offerings" />
+            <Subtitle text="Harnessing Innovation, Empowering Solutions, and Exceeding Every Customer Need with Unparalleled Commitment and Dedication." />
+          </div>
+          <div className="grid place-items-stretch md:grid-cols-2 lg:grid-cols-3">
+            {productData.map(({ id, title, subtitle }) => {
+              return <ProductCard key={id} title={title} subtitle={subtitle} />;
+            })}
+          </div>
         </div>
       </div>
 
       <Cta />
 
-      <div className="bg-custom-gray-900 py-12">
-        <div className="max-w-7xl px-4 m-auto">
-          <div className="max-w-xl mx-auto text-center mb-8">
-            <H2 text="Product" />
-            <Subtitle text="lorem ipsum lorem ispishf dsjhfjh" />
-          </div>
-          <div className="grid  place-items-stretch md:grid-col-2 lg:grid-cols-3">
-            {productData.map(({ id, title, subtitle }) => {
-              return <ProductCard key={id} title={title} subtitle={subtitle} />;
-            })}
-          </div>
+      <div className="mt-auto py-8 px-4 bg-custom-gray-900 text-custom-white-100 xl:px-0">
+        <div className="max-w-7xl mx-auto">
+          <TestimonialCard />
         </div>
       </div>
 
