@@ -1,8 +1,8 @@
-import { LandPrimaryButton, SecondaryButton } from "../../../components/Button";
 import { H1, H2, Subtitle } from "../../../components/Heading";
-import { SecondaryLink } from "../../../components/Link";
+import { PrimaryLink, SecondaryLink } from "../../../components/Link";
+import { teamData } from "../data/data";
 import { TeamCard } from "./common/Card";
-import { motion } from "framer-motion";
+import { OneColumnLayout } from "./common/OneColumnLayout";
 
 export const Hero = () => {
   return (
@@ -38,13 +38,13 @@ export const Hero = () => {
 export const Mission = () => {
   return (
     <>
-      <div className="bg-custom-gray-900 pb-24">
+      <div className="bg-custom-gray-900 py-12">
         <div className="max-w-6xl mx-auto py-6 bg-custom-gray-600 border border-gray-800 rounded-3xl xl:p-8 md:mx-4 xl:mx-auto">
           <div className="flex flex-wrap lg:flex-nowrap text-gray-400">
             <div className="px-8 mt-6 lg:mt-0">
               <div className="flex gap-4">
                 <svg
-                  className="bg-pink-700/40 rounded-full p-3 w-10 h-10 fill-current"
+                  className="bg-purple-900/60 rounded-full p-3 w-10 h-10 fill-purple-300"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 576 512"
                 >
@@ -54,29 +54,30 @@ export const Mission = () => {
                   Vision
                 </h1>
               </div>
-              <p className="py-4 text-sm xl:text-base">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
-                alias enim cumque explicabo praesentium tempore nulla harum
-                consequatur mollitia. Sit veritatis maiores non ducimus
-                laboriosam odio quaerat, possimus voluptatibus debitis.
+              <p className="py-4 font-bold xl:text-base">
+                NAIFTY Academy aims to be a global leader in blending
+                educational innovation with practical outcomes. laboriosam odio
+                quaerat, possimus voluptatibus debitis.
               </p>
-              <ul className="list-disc list-inside text-sm xl:text-base">
-                <li className="mb-2">Interactive learning experience</li>
-                <li className="mb-2">Hands-on practical exercises</li>
-                <li className="mb-2">Real-world case studies</li>
-              </ul>
+              <p className="text-sm">
+                Our vision includes advanced simulations mirroring upcoming
+                industry trends, practical exercises preparing students for
+                future technological shifts, global case studies broadening
+                perspectives, and collaborative projects encouraging diversity
+                in problem-solving.
+              </p>
             </div>
-            <motion.img
+            {/* <motion.img
               initial={{ y: -100 }}
               whileInView={{ y: 10 }}
               transition={{ duration: 1 }}
               className="w-24 h-24 m-auto"
               src={require("../../../assets/3d-circle.png")}
-            />
+            /> */}
             <div className="px-10 mt-6 lg:mt-0">
               <div className="flex gap-4">
                 <svg
-                  className="bg-pink-700/40 rounded-full p-3 w-10 h-10 fill-current"
+                  className="bg-purple-900/60 rounded-full p-3 w-10 h-10 fill-purple-300"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
                 >
@@ -86,17 +87,18 @@ export const Mission = () => {
                   Mission
                 </h1>
               </div>
-              <p className="py-4 text-sm xl:text-base">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
-                alias enim cumque explicabo praesentium tempore nulla harum
-                consequatur mollitia. Sit veritatis maiores non ducimus
-                laboriosam odio quaerat, possimus voluptatibus debitis.
+              <p className="py-4 font-bold xl:text-base">
+                NAIFTY Academy's mission focuses on empowering learners through
+                dynamic educational models that prepare them for global
+                challenges.
               </p>
-              <ul className="list-disc list-inside text-sm xl:text-base">
-                <li className="mb-2">Interactive learning experience</li>
-                <li className="mb-2">Hands-on practical exercises</li>
-                <li className="mb-2">Real-world case studies</li>
-              </ul>
+              <p className="text-sm">
+                Our commitments include coursework integrating the latest
+                industry practices, experiential learning promoting career
+                readiness, real-world problem solving through multidisciplinary
+                approaches, and creating a worldwide network of thought leaders
+                and innovators.
+              </p>
             </div>
           </div>
         </div>
@@ -108,30 +110,42 @@ export const Mission = () => {
 export const Team = () => {
   return (
     <>
-      <div className="bg-gray-900 py-12 lg:py-24">
+      <div className="bg-custom-gray-900 py-12 lg:py-16">
         <div className="max-w-7xl mx-auto p-8">
           {/* title */}
           <div className="max-w-md mx-auto text-center">
             <H1 text="Meet our team" />
-            <Subtitle
-              text="lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
-            alias enim cumque"
-            />
+            <Subtitle text="Introducing Our Exceptional Team: Uniting Talents, Expertise, and Passion for Unparalleled Success." />
           </div>
 
           {/* team cards */}
-          <div className="flex flex-wrap justify-center gap-4 my-12 lg:flex-nowrap">
-            <TeamCard photo="https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg" />
-            <TeamCard photo="https://www.georgetown.edu/wp-content/uploads/2022/02/Jkramerheadshot-scaled-e1645036825432-1050x1050-c-default.jpg" />
-            <TeamCard photo="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Pierre-Person.jpg/1200px-Pierre-Person.jpg" />
-            <TeamCard photo="https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg" />
+          <div className="flex flex-wrap justify-center gap-6 my-12 lg:flex-nowrap">
+            {teamData.map(
+              ({ id, name, photo, position, description, linked, twitter }) => {
+                return (
+                  <TeamCard
+                    key={id}
+                    photo={photo}
+                    name={name}
+                    position={position}
+                    description={description}
+                    linked={linked}
+                    twitter={twitter}
+                  />
+                );
+              }
+            )}
           </div>
-
-          <div className="mx-auto text-center max-w-md py-12 lg:py-16">
-            <H2 text="We're Hiring!" />
-            <Subtitle text="Laboriosam accusantium assumenda possimus Deserunt possimus itaque dolorum cumque sed veniam et nesciunt enim, quam facilis." />
-            {/* <LandPrimaryButton text="View All" /> */}
-          </div>
+        </div>
+      </div>
+      <div className="bg-custom-gray-900 pb-16">
+        <div className="max-w-7xl mx-auto">
+          <OneColumnLayout
+            title="We're Hiring!"
+            subtitle="We're looking for passionate individuals ready to tackle
+          challenging projects and grow with us. Join our dynamic team."
+            btnText="Join Now"
+          />
         </div>
       </div>
     </>

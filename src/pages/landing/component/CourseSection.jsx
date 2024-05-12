@@ -8,6 +8,7 @@ import {
 import { HorizontalCard, TestimonialCard } from "./common/Card";
 import { H1, H2, Subtitle } from "../../../components/Heading";
 import { PrimaryLink, SecondaryLink } from "../../../components/Link";
+import { CheckedList } from "../../../components/CheckedList";
 
 export const GridFourLayout = () => {
   return (
@@ -113,10 +114,10 @@ export const PricingSection = () => {
                 <H1 text={monthly ? "$19/mo" : "$299/yr"} />
                 <SecondaryLink text="Subscribe" goto="/signup" />
               </div>
-              <ul className="text-gray-300/80 list-disc list-inside">
-                <li className="mb-2">Interactive learning experience</li>
-                <li className="mb-2">Hands-on practical exercises</li>
-                <li className="mb-2">Real-world case studies</li>
+              <ul className="text-gray-300/80 list-inside">
+                <CheckedList text="Interactive learning experience" />
+                <CheckedList text="Hands-on practical exercises" />
+                <CheckedList text="Real-world case studies" />
               </ul>
             </motion.div>
             {/* cards */}
@@ -124,7 +125,7 @@ export const PricingSection = () => {
               initial={{ y: -60 }}
               whileInView={{ y: 0 }}
               transition={{ duration: 2 }}
-              className="w-full md:w-[42%] lg:w-1/3 bg-pink-700/70 p-6 rounded-xl relative"
+              className="w-full md:w-[42%] lg:w-1/3 bg-teal-800 p-6 rounded-xl relative"
             >
               {/* cards */}
               <img
@@ -140,11 +141,11 @@ export const PricingSection = () => {
                 <SecondaryLink text="Subscribe" goto="/signup" />
               </div>
               <ul className="text-gray-300/80 list-disc list-inside">
-                <li className="mb-2">Advanced skills development</li>
-                <li className="mb-2">Expert-led instruction</li>
-                <li className="mb-2">Industry-relevant projects</li>
-                <li className="mb-2">Networking opportunities</li>
-                <li className="mb-2">Career advancement support</li>
+                <CheckedList text="Advanced skills development" />
+                <CheckedList text="Expert-led instruction" />
+                <CheckedList text="Industry-relevant projects" />
+                <CheckedList text="Networking opportunities" />
+                <CheckedList text="Career advancement support" />
               </ul>
             </motion.div>
           </div>

@@ -1,16 +1,14 @@
 import React, { useContext, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Logo } from "../../components/Logo";
-import { LandPrimaryButton } from "../../components/Button";
 import { useProfilePicture } from "../../hooks/useProfilePicture";
 import { AuthContext } from "../../context/AuthContext";
 import { PrimaryLink } from "../../components/Link";
 
 const Header = () => {
+  const [menuToggle, setMenuToggle] = useState(false);
   const { profilePicture, loading } = useProfilePicture();
   const { userId } = useContext(AuthContext);
-
-  const [menuToggle, setMenuToggle] = useState(false);
 
   return (
     <>
@@ -42,6 +40,23 @@ const Header = () => {
                   Courses
                 </NavLink>
               </li>
+              {/* <li
+                className="py-1 md:py-0"
+                onClick={() => {
+                  setMenuToggle(!menuToggle);
+                }}
+              >
+                <NavLink
+                  to="/#product-section"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-gray-400"
+                      : "" + "hover:text-gray-400 transition-all"
+                  }
+                >
+                  Products
+                </NavLink>
+              </li> */}
               <li
                 className="py-1 md:py-0"
                 onClick={() => {
@@ -73,7 +88,7 @@ const Header = () => {
                       : "" + "hover:text-gray-400 transition-all"
                   }
                 >
-                  About us
+                  About
                 </NavLink>
               </li>
 
