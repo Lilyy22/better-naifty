@@ -52,7 +52,7 @@ export const EpisodeDetail = () => {
                   <ReactPlayer
                     url={`https://api.naifty.academy/media/${data?.curse_episode[0]?.file}`}
                     width="100%"
-                    height="100%"
+                    height="60vh"
                     playing={true}
                     controls={true}
                     style={{

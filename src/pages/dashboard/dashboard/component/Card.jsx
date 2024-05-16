@@ -31,8 +31,8 @@ export const DashboardCard = ({ total, icon, label, iconBg }) => {
 
 export const DashboardProgressCard = ({ courses }) => {
   return (
-    <div className="border border-gray-300 rounded-xl bg-gray-50 w-full font-mont mb-4">
-      <div className="p-4 lg:p-6">
+    <div className="rounded-xl bg-gray-50 w-full font-mont">
+      <div className="px-4 pt-4 lg:px-6 lg:pt-6">
         <DashH4 text="Latest Courses" />
         {/* courses */}
         {courses?.map(({ name, id, created_at }, index) => {
@@ -43,7 +43,7 @@ export const DashboardProgressCard = ({ courses }) => {
             >
               {/* text */}
               <div className="flex justify-start my-auto">
-                <div className="bg-gray-100 inline-block p-1 rounded my-auto">
+                <div className="bg-gray-100 inline-block p-1 rounded mb-auto">
                   <svg
                     className={`w-3 h-3 fill-${
                       index % 2 === 0 ? "purple" : "green"

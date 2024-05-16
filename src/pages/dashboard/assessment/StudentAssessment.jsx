@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { PrimaryButton } from "../../../components/Button";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { GETASSESSMENT, GETSTUDENTSCORE } from "./data/query";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Assessment from "./component/Assessment";
 import { CREATESTUDENTASSESSMENT } from "./data/mutation";
 import { Loader } from "./component/Loader";
@@ -17,12 +17,11 @@ import ToastModal from "../../../components/modal/Toast";
 
 const StudentAssessment = () => {
   const navigate = useNavigate();
+  const { course_id } = useParams();
+
   const { userEmail, userId } = useContext(AuthContext);
   const { userRole } = useRole();
   const { profilePicture, loading: profileLoading } = useProfilePicture();
-
-  const location = useLocation();
-  const { courseId } = location.state;
 
   const [answer, setAnswer] = useState([]);
 
@@ -39,7 +38,7 @@ const StudentAssessment = () => {
   const [createAssessment] = useMutation(CREATESTUDENTASSESSMENT);
   const { data, loading: assessmentLoading } = useQuery(GETASSESSMENT, {
     variables: {
-      courseId: courseId,
+      courseId: course_id,
     },
   });
   const { remainingMinutes, remainingSeconds } = useCountdownTimer(20);
@@ -56,7 +55,7 @@ const StudentAssessment = () => {
 
       await getScore({
         variables: {
-          courseId: courseId,
+          courseId: course_id,
         },
         refetchQueries: [GETSTUDENTSCORE, "GET_STUDENT_SCORE"],
       });
@@ -69,7 +68,7 @@ const StudentAssessment = () => {
       });
       setTimeout(() => {
         setOpen(false);
-        navigate(`/dashboard/enrolled-courses/course/${courseId}`);
+        navigate(`/dashboard/enrolled-courses/course/${course_id}`);
       }, 3000);
     } catch (error) {
       setLoading(false);
@@ -81,7 +80,7 @@ const StudentAssessment = () => {
       });
       setTimeout(() => {
         setOpen(false);
-        navigate(`/dashboard/enrolled-courses/course/${courseId}`);
+        navigate(`/dashboard/enrolled-courses/course/${course_id}`);
       }, 2000);
     }
   };

@@ -39,6 +39,7 @@ export const CourseDetail = () => {
       ) : (
         <div className="rounded-lg">
           <RateCourse
+            courseId={course_id}
             enrolled={isStudentEnrolled(
               data?.course[0]?.enrollments,
               userId,

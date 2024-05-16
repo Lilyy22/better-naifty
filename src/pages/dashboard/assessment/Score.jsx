@@ -23,14 +23,17 @@ const Score = () => {
   const [getScore, { data, loading }] = useLazyQuery(GETSTUDENTSCORE);
 
   useEffect(() => {
-    if (assessment?.question?.length !== 0) {
-      getScore({
-        variables: {
-          courseId: course_id,
-        },
-      });
-    }
-  }, []);
+    const getStuScore = async () => {
+      if (assessment?.question?.length !== 0) {
+        await getScore({
+          variables: {
+            courseId: course_id,
+          },
+        });
+      }
+    };
+    getStuScore();
+  }, [assessment]);
 
   return (
     <>
@@ -69,8 +72,7 @@ const Score = () => {
           {openAssessment && (
             <OptionalModal
               btnText="Yes"
-              goto="/assessment"
-              data={{ courseId: course_id }}
+              goto={`/assessment/${course_id}`}
               setIsOpen={setOpenAssessment}
               isOpen={openAssessment}
               heading="You will have 20 minutes for the exam! ☻"

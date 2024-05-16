@@ -5,6 +5,7 @@ import { DashH4, DashH5 } from "../../../../components/Heading";
 import { DashboardCard, DashboardProgressCard } from "../component/Card";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
+import { Common } from "../component/Common";
 
 const Admin = () => {
   const { data: courseData, refetch: refetchCourse } = useQuery(COURSECOUNT, {
@@ -108,9 +109,7 @@ const Admin = () => {
         <DashH5 text="Course Analysis" />
 
         <div className="h-auto flex flex-wrap gap-4 mt-4">
-          <div className="w-full rounded-xl lg:w-1/2">
-            <DashboardProgressCard />
-          </div>
+          <Common />
 
           <div className="bg-white w-full p-2 rounded-xl lg:w-[47%]">
             <Line

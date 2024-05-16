@@ -94,6 +94,7 @@ export const CourseTable = () => {
                     </TD>
                     <Action
                       id={id}
+                      isApproved={status === "APPROVED"}
                       handleDeleteClick={handleDeleteClick}
                       handleEditClick={handleEditClick}
                     />

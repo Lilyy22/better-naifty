@@ -10,6 +10,7 @@ export const GETEPISODE = gql`
       section {
         course {
           id
+          status
         }
       }
     }

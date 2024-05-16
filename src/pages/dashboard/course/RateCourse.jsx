@@ -4,19 +4,21 @@ import { useQuery } from "@apollo/client";
 import { GETUSERRATING } from "./data/query";
 import { AuthContext } from "../../../context/AuthContext";
 
-const RateCourse = ({ enrolled }) => {
+const RateCourse = ({ enrolled, courseId }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { userId } = useContext(AuthContext);
 
-  const { data } = useQuery(GETUSERRATING, {
+  const { data, refetch } = useQuery(GETUSERRATING, {
     variables: {
       userId: userId,
+      courseId: courseId,
     },
   });
 
   useEffect(() => {
+    refetch();
     setTimeout(() => {
-      if (data?.rating?.length === 0 && enrolled) setIsOpen(!isOpen);
+      if (data?.rating?.length === 0 && enrolled) setIsOpen(true);
     }, 5000);
   }, [data, enrolled]);
 

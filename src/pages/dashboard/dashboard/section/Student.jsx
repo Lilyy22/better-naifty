@@ -8,6 +8,7 @@ import { DashboardCourseProgressCard } from "../component/Card";
 import { Doughnut, Pie } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import { DashCardLoader } from "../component/Loader";
+import { Common } from "../component/Common";
 
 const Student = () => {
   const { userId } = useContext(AuthContext);
@@ -106,6 +107,7 @@ const Student = () => {
               }}
             />
           </div>
+          <Common />
         </div>
       </div>
     </div>

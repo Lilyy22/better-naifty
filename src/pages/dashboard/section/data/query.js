@@ -11,6 +11,10 @@ export const GETINSTRUCTORSECTION = gql`
         id
         title
       }
+      course {
+        id
+        status
+      }
     }
   }
 `;
@@ -23,6 +27,7 @@ export const GETSECTION = gql`
       description
       course {
         id
+        status
       }
       episodes {
         id

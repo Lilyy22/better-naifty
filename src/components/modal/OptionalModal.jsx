@@ -4,12 +4,12 @@ import { PrimaryLink } from "../Link";
 const OptionalModal = ({
   goto,
   btnText,
-  data,
   isOpen,
   setIsOpen,
   heading,
   subText,
 }) => {
+
   return (
     <div className={isOpen ? "" : "hidden"}>
       <div
@@ -29,7 +29,6 @@ const OptionalModal = ({
             <div className="flex gap-2 justify-center">
               <PrimaryLink
                 goto={goto}
-                data={data}
                 customStyle="w-full"
                 text={btnText}
                 handleClick={() => setIsOpen(!isOpen)}

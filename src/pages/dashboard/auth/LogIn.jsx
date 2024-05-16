@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { AuthForm } from "./components/AuthForm";
 import { LOGIN } from "./data/mutation";
 import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import { TopToast } from "../../../components/Toast";
-import { SetUserSession } from "../../../utils/setUserSession";
+import { AuthContext } from "../../../context/AuthContext";
 
 export const LogIn = () => {
   const navigate = useNavigate();
+  const {
+    setAccessToken,
+    setIsInstructor,
+    setUserEmail,
+    setIsSuperUser,
+    setUserId,
+  } = useContext(AuthContext);
+
   const [close, setClose] = useState(false);
   const [status, setStatus] = useState({
     error: false,
@@ -26,13 +34,27 @@ export const LogIn = () => {
       const { data } = await loginUser({
         variables: { email: email, password: password },
       });
-      SetUserSession({userData: data?.login});
-      console.log("herrr")
+
+      // Store the necessary data in localStorage
+      localStorage.setItem("accessToken", data?.login?.token);
+      localStorage.setItem("isInstructor", data?.login?.user?.is_instructor);
+      localStorage.setItem("isSuperUser", data?.login?.user?.is_superuser);
+      localStorage.setItem("userId", data?.login?.user?.id);
+      localStorage.setItem("userEmail", data?.login?.user?.email);
+
+      // Update the values in AuthContext using the extracted functions
+      setAccessToken(data?.login?.token);
+      setIsSuperUser(data?.login?.user?.is_superuser);
+      setIsInstructor(data?.login?.user?.is_instructor);
+      setUserEmail(data?.login?.user?.email);
+      setUserId(data?.login?.user?.id);
+
+      console.log("herrr");
       setEmail("");
       setPassword("");
       navigate("/dashboard");
     } catch (error) {
-      console.log("herrreeeee")
+      console.log("herrreeeee");
       setEmail("");
       setPassword("");
       setStatus({

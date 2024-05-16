@@ -130,14 +130,33 @@ const CourseList = ({ approved }) => {
           >
             {data?.course?.map(
               (
-                { id, name, status, category, publish_date, enrollments },
+                {
+                  id,
+                  name,
+                  status,
+                  category,
+                  publish_date,
+                  enrollments,
+                  instructor,
+                },
                 index
               ) => {
                 return (
                   <tr className="border p-1 hover:bg-gray-50/90" key={id}>
                     <TD>{index + 1}</TD>
-                    <TD text={trimText(name, 30)} />
-                    <TD text={category?.name} />
+                    <TD text={trimText(name, 30)}>
+                      <span className="text-[0.6rem] text-gray-500 leading-none">
+                        {instructor?.studentprofile?.length === 0
+                          ? trimText(instructor?.email, 15)
+                          : trimText(
+                              instructor?.studentprofile?.first_name +
+                                " " +
+                                instructor?.studentprofile?.last_name,
+                              15
+                            )}
+                      </span>
+                    </TD>
+                    <TD text={trimText(category?.name, 15)} />
                     <TD>
                       <span
                         className={`text-${statusColorMap[status]}-500 text-xs font-medium lowercase`}
@@ -145,9 +164,7 @@ const CourseList = ({ approved }) => {
                         {` ${status}`}
                       </span>
                     </TD>
-                    <TD
-                      text={enrollments[0] ? enrollments[0].aggregate.count : 0}
-                    />
+                    <TD text={enrollments?.length} />
                     <TD>
                       <span className="text-xs">
                         {formattedDate(publish_date)}

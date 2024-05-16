@@ -61,6 +61,7 @@ export const SectionDetail = () => {
   };
 
   const episodes = data?.course_section[0]?.episodes;
+  const isApproved = data?.course_section[0]?.course?.status === "APPROVED";
   const array = [1, 2];
 
   useEffect(() => {
@@ -93,6 +94,7 @@ export const SectionDetail = () => {
                   title={title}
                   description={description}
                   file={file}
+                  isApproved={isApproved}
                   updatedAt={updated_at}
                   handleDeleteClick={handleDeleteClick}
                   handleEditClick={handleEditClick}

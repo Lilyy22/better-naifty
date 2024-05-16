@@ -10,9 +10,6 @@ export const EnrolledStudent = ({ enrollment, loading }) => {
   return (
     <>
       {loading && <TableLoader />}
-      {enrollment?.length === 0 && (
-        <DataNotFound text="No students enrolled yet." />
-      )}
       <Table title="Enrolled Students" data={thead} noCrud={true}>
         {enrollment?.map(({ id, student, created_at }, index) => {
           return (

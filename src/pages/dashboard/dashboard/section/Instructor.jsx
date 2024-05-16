@@ -6,6 +6,7 @@ import { DashboardCard, DashboardProgressCard } from "../component/Card";
 import { DashH4, DashH5 } from "../../../../components/Heading";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
+import { Common } from "../component/Common";
 
 const Instructor = () => {
   const { userId } = useContext(AuthContext);
@@ -151,6 +152,7 @@ const Instructor = () => {
               }}
             />
           </div>
+          <Common />
         </div>
       </div>
     </div>

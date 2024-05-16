@@ -70,15 +70,13 @@ function App() {
 
           {/* Dashboard */}
           <Route element={<PrivateRoute />}>
-            {isAInstructor && (
-              <Route
-                path="/assessment"
-                element={
-                  <ErrorBoundary fallback={<div>Something went wrong</div>}>
-                    <StudentAssessment />
-                  </ErrorBoundary>
-                }
-              />
+            {isAStudent && (
+              <Route element={<EnrolledMiddleware />}>
+                <Route
+                  path="/assessment/:course_id"
+                  element={<StudentAssessment />}
+                />
+              </Route>
             )}
             <Route path="/dashboard" element={<DefaultLayout />}>
               {/* course */}
