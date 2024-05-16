@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { REQUESTOTP } from "./data/mutation";
 import { useState } from "react";
 import { TopToast } from "../../../components/Toast";
@@ -93,6 +93,15 @@ const Reset = () => {
           text={resedLoader ? "•••" : "Send"}
         />
       </form>
+      <p className="text-gray-500 my-4 text-center">
+        Already have an account.{" "}
+        <Link
+          to="/login"
+          className="text-gray-300 hover:text-custom-purple-700"
+        >
+          Log In
+        </Link>
+      </p>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { REQUESTOTP, VERIFYOTP } from "./data/mutation";
 import { useState } from "react";
 import { TopToast } from "../../../components/Toast";
@@ -125,50 +125,56 @@ const VerifyResetOtp = () => {
         />
       )}
 
-      <div className="w-full py-8 md:py-10 xl:py-16 lg:w-1/2 lg:my-auto">
-        <Logo customStyle="mx-auto lg:w-20 mb-12" />
-        <form
-          className="max-w-lg mx-auto px-4 rounded-xl lg:px-12 text-center"
-          onSubmit={handleVerification}
-        >
-          <H3 text="Verify Account" />
-          <p className="text-gray-500">Please Insert code to Reset password.</p>
-          <div className="text-gray-200 my-10 relative">
-            <OTPInput
-              value={otp}
-              onChange={setOtp}
-              numInputs={6}
-              renderSeparator={<span className="text-purple-500 px-1"></span>}
-              renderInput={(props) => <input {...props} />}
-              inputStyle="rounded-lg w-9 h-10 bg-custom-gray-600 px-3 border border-gray-700 focus:ring-2 ring-purple-900 text-white text-lg"
-              containerStyle="justify-center"
-              skipDefaultStyles={true}
-              required
-            />
-            {!validOtp && (
-              <div className="bg-slate-800 rounded p-2 text-xs text-amber-700 absolute top-11 w-full">
-                A 6 digit Code is required.
-              </div>
-            )}
-          </div>
-
-          <LandPrimaryButton
-            type={otp !== null ? "submit" : "button"}
-            customStyle="w-full"
-            text={verifyloader ? "•••" : "Verify"}
+      <form
+        className="max-w-lg mx-auto px-4 rounded-xl lg:px-12 text-center"
+        onSubmit={handleVerification}
+      >
+        <H3 text="Verify Account" />
+        <p className="text-gray-500">Please Insert code to Reset password.</p>
+        <div className="text-gray-200 my-10 relative">
+          <OTPInput
+            value={otp}
+            onChange={setOtp}
+            numInputs={6}
+            renderSeparator={<span className="text-purple-500 px-1"></span>}
+            renderInput={(props) => <input {...props} />}
+            inputStyle="rounded-lg w-9 h-10 bg-custom-gray-600 px-3 border border-gray-700 focus:ring-2 ring-purple-900 text-white text-lg"
+            containerStyle="justify-center"
+            skipDefaultStyles={true}
+            required
           />
-        </form>
-        <p className="text-gray-500 my-4 text-center">
-          Did not get Otp.{" "}
-          <button
-            type="button"
-            onClick={handleResendOtp}
-            className="text-gray-300 hover:text-custom-purple-700"
-          >
-            {resedLoader ? " Sending ••• " : "Resend"}
-          </button>
-        </p>
-      </div>
+          {!validOtp && (
+            <div className="bg-slate-800 rounded p-2 text-xs text-amber-700 absolute top-11 w-full">
+              A 6 digit Code is required.
+            </div>
+          )}
+        </div>
+
+        <LandPrimaryButton
+          type={otp !== null ? "submit" : "button"}
+          customStyle="w-full"
+          text={verifyloader ? "•••" : "Verify"}
+        />
+      </form>
+      <p className="text-gray-500 my-4 text-center">
+        Did not get Otp.{" "}
+        <button
+          type="button"
+          onClick={handleResendOtp}
+          className="text-gray-300 hover:text-custom-purple-700"
+        >
+          {resedLoader ? " Sending ••• " : "Resend"}
+        </button>
+      </p>
+      <p className="text-gray-500 my-4 text-center">
+        Already have an account.{" "}
+        <Link
+          to="/login"
+          className="text-gray-300 hover:text-custom-purple-700"
+        >
+          Log In
+        </Link>
+      </p>
     </>
   );
 };

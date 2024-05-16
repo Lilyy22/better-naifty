@@ -14,7 +14,7 @@ const Layout = () => {
       <div className="w-full flex justify-center items-center h-screen bg-gray-900">
         <div className="flex bg-gray-900 border-gray-800 m-auto rounded-xl lg:w-[70%] md:border">
           <div className="w-full py-8 md:py-10 xl:py-16 lg:w-1/2 lg:my-auto">
-            <Logo customStyle="mx-auto lg:w-20" />
+            <Logo customStyle="mx-auto lg:w-20 mb-4" />
             <li className="text-center p-2 m-4 rounded-md bg-custom-purple-900 lg:hidden">
               <H4
                 text={

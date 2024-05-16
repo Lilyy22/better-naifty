@@ -41,6 +41,7 @@ import StudentAssessment from "./pages/dashboard/assessment/StudentAssessment";
 import { ErrorBoundary } from "react-error-boundary";
 import EnrolledMiddleware from "./routes/EnrolledMiddleware";
 import VerifyResetOtp from "./pages/dashboard/auth/VerifyResetOtp";
+import { ChangePassword } from "./pages/dashboard/auth/ChangePassword";
 
 function App() {
   const { isAInstructor, isAStudent, isAdmin } = useRole();
@@ -66,6 +67,7 @@ function App() {
             <Route path="verify" element={<Verify />} />
             <Route path="reset" element={<Reset />} />
             <Route path="verify-reset" element={<VerifyResetOtp />} />
+            <Route path="reset-password" element={<ChangePassword />} />
           </Route>
 
           {/* Dashboard */}
