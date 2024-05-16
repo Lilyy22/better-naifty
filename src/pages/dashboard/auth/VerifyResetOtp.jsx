@@ -9,7 +9,7 @@ import { LandPrimaryButton } from "../../../components/Button";
 import { useMutation } from "@apollo/client";
 import { SetUserSession } from "../../../utils/setUserSession";
 
-const Verify = () => {
+const VerifyResetOtp = () => {
   const navigate = useNavigate();
   const [close, setClose] = useState(false);
   const [status, setStatus] = useState({
@@ -19,7 +19,7 @@ const Verify = () => {
     successContent: "",
   });
 
-  const email = sessionStorage.getItem("signup_email");
+  const email = sessionStorage.getItem("verify_email");
   const OTP_REGEX = /^\d{6}$/;
 
   const [otp, setOtp] = useState();
@@ -36,19 +36,21 @@ const Verify = () => {
         const { data } = await verifyUser({
           variables: { email: email, otp: otp },
         });
-        setOtp("");
         if (data?.verify_otp?.success) {
+          sessionStorage.setItem("verify_otp", otp);
+          setOtp("");
           setClose(false);
           setStatus({
             ...status,
             success: true,
             successContent: "Account Verified!",
           });
-          SetUserSession()
+          SetUserSession();
           setTimeout(() => {
             navigate("/dashboard");
           }, 2000);
         } else {
+          setOtp("");
           setClose(false);
           setStatus({
             ...status,
@@ -91,7 +93,7 @@ const Verify = () => {
         ...status,
         error: false,
         success: true,
-        successContent: "We have send a verification code to your email.",
+        successContent: "We have send a Reset code to your email.",
       });
     } catch (error) {
       setClose(false);
@@ -130,9 +132,7 @@ const Verify = () => {
           onSubmit={handleVerification}
         >
           <H3 text="Verify Account" />
-          <p className="text-gray-500">
-            Please Insert code and verify account.
-          </p>
+          <p className="text-gray-500">Please Insert code to Reset password.</p>
           <div className="text-gray-200 my-10 relative">
             <OTPInput
               value={otp}
@@ -173,4 +173,4 @@ const Verify = () => {
   );
 };
 
-export default Verify;
+export default VerifyResetOtp;

@@ -30,8 +30,6 @@ export const AuthForm = ({
 
   return (
     <>
-      <div className="w-full py-8 md:py-10 xl:py-16 lg:w-1/2 lg:my-auto">
-        <Logo customStyle="mx-auto lg:w-20 mb-12" />
         <form
           className="max-w-lg mx-auto px-4 rounded-xl lg:px-12"
           onSubmit={handleSubmit}
@@ -126,7 +124,6 @@ export const AuthForm = ({
             </Link>
           </p>
         </form>
-      </div>
     </>
   );
 };

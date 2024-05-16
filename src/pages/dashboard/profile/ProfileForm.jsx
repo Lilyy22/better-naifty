@@ -76,7 +76,9 @@ export const ProfileForm = ({
         ...status,
         success: true,
       });
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (error) {
       setClose(false); // set close false incase toast is closed
       setStatus({

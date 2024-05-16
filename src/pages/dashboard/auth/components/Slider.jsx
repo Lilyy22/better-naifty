@@ -33,7 +33,7 @@ export const Slider = () => {
       <div className="relative w-full glide-05">
         {/*    <!-- Slides --> */}
         <div className="overflow-hidden" data-glide-el="track">
-          <ul className="whitespace-no-wrap flex-no-wrap relative flex justify-between w-full overflow-hidden p-0">
+          <ul className="whitespace-no-wrap flex-nowrap relative flex justify-between w-full overflow-hidden p-0">
             <li className="my-auto w-full">
               <H2
                 text={

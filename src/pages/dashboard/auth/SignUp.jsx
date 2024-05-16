@@ -3,7 +3,7 @@ import { SIGNUP } from "./data/mutation";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthForm } from "./components/AuthForm";
 import { useMutation } from "@apollo/client";
-import { Toast } from "../../../components/Toast";
+import { TopToast } from "../../../components/Toast";
 
 export const SignUp = () => {
   const navigate = useNavigate();
@@ -59,7 +59,7 @@ export const SignUp = () => {
   return (
     <>
       {status.error && (
-        <Toast
+        <TopToast
           isSuccess={false}
           text={status.errorContent ?? "Something went wrong"}
           close={close}
@@ -67,7 +67,7 @@ export const SignUp = () => {
         />
       )}
       {status.success && (
-        <Toast
+        <TopToast
           isSuccess={true}
           text="We have send a verification email to your account!"
           close={close}
