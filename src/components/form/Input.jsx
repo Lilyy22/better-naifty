@@ -109,21 +109,27 @@ export const FileUpload = ({
   );
 };
 
-export const InputPassword = ({ label, password, setPassword }) => {
+export const InputPassword = ({ label, password, setPassword, dark }) => {
   const [passwordToggle, setPasswordToggle] = useState(false);
 
   return (
     <div className="relative mb-4">
       <label
         htmlFor="password"
-        className="inline-block mb-2 text-xs font-semibold tracking-wide"
+        className={`inline-block mb-2 font-semibold tracking-wide ${
+          dark ? "text-gray-200" : ""
+        }`}
       >
         {label} <span className="text-red-400">*</span>
       </label>
       <input
         type={passwordToggle ? "text" : "password"}
         id="password"
-        className="group border border-gray-200 text-gray-900 text-sm rounded focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 outline-none"
+        className={`group border text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 outline-none ${
+          dark
+            ? "bg-slate-900 border-gray-800 text-gray-200"
+            : "border-gray-200 text-gray-900"
+        }`}
         placeholder="••••••••"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
@@ -137,7 +143,9 @@ export const InputPassword = ({ label, password, setPassword }) => {
       >
         {passwordToggle ? (
           <svg
-            className="fill-gray-200 w-4 h-4 group-hover:fill-purple-300"
+            className={`w-4 h-4 group-hover:fill-purple-300 ${
+              dark ? "fill-gray-500" : "fill-gray-200"
+            }`}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 576 512"
           >
@@ -145,7 +153,9 @@ export const InputPassword = ({ label, password, setPassword }) => {
           </svg>
         ) : (
           <svg
-            className="fill-gray-300 w-4 h-4 group-hover:fill-purple-300"
+            className={`w-4 h-4 group-hover:fill-purple-300 ${
+              dark ? "fill-gray-500" : "fill-gray-200"
+            }`}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 640 512"
           >

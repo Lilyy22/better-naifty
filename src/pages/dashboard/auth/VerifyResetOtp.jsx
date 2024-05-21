@@ -2,12 +2,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { REQUESTOTP, VERIFYOTP } from "./data/mutation";
 import { useState } from "react";
 import { TopToast } from "../../../components/Toast";
-import { Logo } from "../../../components/Logo";
 import { H3 } from "../../../components/Heading";
 import OTPInput from "react-otp-input";
 import { LandPrimaryButton } from "../../../components/Button";
 import { useMutation } from "@apollo/client";
-import { SetUserSession } from "../../../utils/setUserSession";
 
 const VerifyResetOtp = () => {
   const navigate = useNavigate();
@@ -38,16 +36,16 @@ const VerifyResetOtp = () => {
         });
         if (data?.verify_otp?.success) {
           sessionStorage.setItem("verify_otp", otp);
-          setOtp("");
           setClose(false);
           setStatus({
             ...status,
+            error: false,
             success: true,
             successContent: "Account Verified!",
           });
-          SetUserSession();
+          setOtp("");
           setTimeout(() => {
-            navigate("/dashboard");
+            navigate("/reset-password");
           }, 2000);
         } else {
           setOtp("");

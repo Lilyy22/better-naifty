@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import Footer from "../../layouts/landing/Footer";
 import Header from "../../layouts/landing/Header";
-import { Cta, FAQ, Feature, Sections, Service } from "./component/HomeSection";
+import { Cta, FAQ, Feature, Sections } from "./component/HomeSection";
 import { PrimaryLink } from "../../components/Link";
 import { Link, useLocation } from "react-router-dom";
 import { TestimonialCard } from "./component/common/Card";

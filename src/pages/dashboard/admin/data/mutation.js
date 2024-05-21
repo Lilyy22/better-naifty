@@ -18,3 +18,25 @@ export const DELETEUSER = gql`
     }
   }
 `;
+
+export const UPDATEUSERSTATUS = gql`
+  mutation UPDATEUSERSTATUS($userId: String!, $status: Boolean!) {
+    update_users(
+      where: { id: { exact: $userId } }
+      input: { is_active: $status }
+    ) {
+      affected_rows
+    }
+  }
+`;
+
+export const UPDATEUSERROLE = gql`
+  mutation UPDATEUSERROLE($userId: String!, $role: Boolean!) {
+    update_users(
+      where: { id: { exact: $userId } }
+      input: { is_instructor: $role }
+    ) {
+      affected_rows
+    }
+  }
+`;

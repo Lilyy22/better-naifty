@@ -38,7 +38,6 @@ import ForumDescription from "./pages/dashboard/forum/ForumDescription";
 import { useRole } from "./hooks/useRole";
 import { useCheckOnlineStatus } from "./hooks/useCheckOnlineStatus";
 import StudentAssessment from "./pages/dashboard/assessment/StudentAssessment";
-import { ErrorBoundary } from "react-error-boundary";
 import EnrolledMiddleware from "./routes/EnrolledMiddleware";
 import VerifyResetOtp from "./pages/dashboard/auth/VerifyResetOtp";
 import { ResetPassword } from "./pages/dashboard/auth/ResetPassword";
