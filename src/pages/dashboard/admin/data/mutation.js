@@ -10,3 +10,11 @@ export const APPROVECOURSE = gql`
     }
   }
 `;
+
+export const DELETEUSER = gql`
+  mutation DELETEUSER($userId: String!) {
+    delete_users(where: { id: { exact: $userId } }) {
+      affected_rows
+    }
+  }
+`;

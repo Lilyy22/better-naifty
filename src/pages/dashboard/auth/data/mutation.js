@@ -52,3 +52,11 @@ export const RESETPASSWORD = gql`
     }
   }
 `;
+
+export const CHANGEPASSWORD = gql`
+  mutation CHANGEPASSWORD($newPassword: String!, $oldPassword: String!) {
+    change_password(new_password: $newPassword, old_password: $oldPassword) {
+      success
+    }
+  }
+`;
