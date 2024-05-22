@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { PrimaryButton } from "../../../components/Button";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { GETASSESSMENT, GETSTUDENTSCORE } from "./data/query";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Assessment from "./component/Assessment";
 import { CREATESTUDENTASSESSMENT } from "./data/mutation";
 import { Loader } from "./component/Loader";
