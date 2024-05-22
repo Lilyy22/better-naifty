@@ -5,7 +5,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { GETUSERS } from "./data/query";
 import Pagination from "../../../components/Pagination";
 import { ToolTip } from "../../../components/ToolTip";
-import { DELETEUSER, UPDATEUSERSTATUS } from "./data/mutation";
+import { DELETEUSER, UPDATEUSERROLE, UPDATEUSERSTATUS } from "./data/mutation";
 import { DeleteModal } from "../../../components/modal/Delete";
 
 let PageSize = 10;
@@ -14,12 +14,15 @@ const UsersList = ({ instructor }) => {
 
   const [userId, setUserId] = useState("");
   const [userStatus, setUserStatus] = useState();
+  const [userRole, setUserRole] = useState();
 
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openStatusModal, setOpenStatusModal] = useState(false);
+  const [openRoleModal, setOpenRoleModal] = useState(false);
 
   const [delUser] = useMutation(DELETEUSER);
   const [statusUser] = useMutation(UPDATEUSERSTATUS);
+  const [roleUser] = useMutation(UPDATEUSERROLE);
 
   const { data, loading } = useQuery(GETUSERS, {
     variables: {
@@ -32,10 +35,16 @@ const UsersList = ({ instructor }) => {
     setOpenDeleteModal(!openDeleteModal);
     setUserId(userId);
   };
-  
+
   const handleStatusClick = (userId, is_active) => {
     setOpenStatusModal(!openStatusModal);
     setUserStatus(!is_active);
+    setUserId(userId);
+  };
+
+  const handleRoleClick = (userId, is_instructor) => {
+    setOpenRoleModal(!openStatusModal);
+    setUserRole(!is_instructor);
     setUserId(userId);
   };
 
@@ -60,6 +69,17 @@ const UsersList = ({ instructor }) => {
     if (data) setOpenStatusModal(false);
   };
 
+  const handleRole = async (userId, is_instructor) => {
+    const { data } = await roleUser({
+      variables: {
+        userId: userId,
+        role: is_instructor,
+      },
+      refetchQueries: [roleUser, "STATUS_USER"],
+    });
+    if (data) setOpenRoleModal(false);
+  };
+
   // const currentTableData = useMemo(() => {
   //   const firstPageIndex = (currentPage - 1) * PageSize;
   //   const lastPageIndex = firstPageIndex + PageSize;
@@ -69,8 +89,8 @@ const UsersList = ({ instructor }) => {
   const thead = [
     { head: "Name" },
     { head: "Email" },
-    { head: "Role" },
     { head: "Status" },
+    { head: "Role" },
     // { head: "Action" },
   ];
   return (
@@ -110,11 +130,6 @@ const UsersList = ({ instructor }) => {
                       </TD>
                       <TD text={email} />
                       <TD>
-                        <span className="bg-purple-100/50 text-purple-800 text-xs px-2 py-1 rounded-xl">
-                          {is_instructor ? "Instructor" : "Student"}
-                        </span>
-                      </TD>
-                      <TD>
                         {is_active ? (
                           <span className="text-green-500 text-xs">
                             {`○ ${is_active}`}
@@ -124,6 +139,20 @@ const UsersList = ({ instructor }) => {
                             {`○ ${is_active}`}
                           </span>
                         )}
+                      </TD>
+                      <TD>
+                        <td className="text-start flex gap-1 p-1">
+                          <button
+                            type="button"
+                            className="inline rounded relative group"
+                            onClick={() => handleRoleClick(id, is_instructor)}
+                          >
+                            <ToolTip text="Change Role" />
+                            <span className="bg-purple-100/50 text-purple-800 text-xs px-2 py-1 rounded-xl">
+                              {is_instructor ? "Instructor" : "Student"}
+                            </span>
+                          </button>
+                        </td>
                       </TD>
                       <div className="flex gap-1">
                         <td className="text-start flex gap-1 p-1">
@@ -154,6 +183,7 @@ const UsersList = ({ instructor }) => {
                             )}
                           </button>
                         </td>
+
                         <td className="text-start flex gap-1 p-1">
                           <button
                             type="button"
@@ -183,7 +213,7 @@ const UsersList = ({ instructor }) => {
                       )}
                       {openStatusModal && (
                         <DeleteModal
-                          text="Are You sure you want to change user status?"
+                          text="Are You sure you want to change user Status?"
                           isOpen={openStatusModal}
                           courseId={userId}
                           statusUser={userStatus}
@@ -191,6 +221,18 @@ const UsersList = ({ instructor }) => {
                             setOpenStatusModal(!openStatusModal)
                           }
                           handleDelete={handleStatus}
+                        />
+                      )}
+                      {openRoleModal && (
+                        <DeleteModal
+                          text={`Are You sure you want to change user Role to ${
+                            userRole ? "Instructor" : "Student"
+                          }?`}
+                          isOpen={openRoleModal}
+                          courseId={userId}
+                          statusUser={userRole}
+                          handleModal={() => setOpenRoleModal(!openRoleModal)}
+                          handleDelete={handleRole}
                         />
                       )}
                       {/* <Action /> */}
