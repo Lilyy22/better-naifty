@@ -34,7 +34,7 @@ export const ResetPassword = () => {
         const { data } = await resetPassword({
           variables: { email: email, otp: otp, password: password },
         });
-        if (data?.verify_otp?.success) {
+        if (data?.reset_password?.success) {
           setClose(false);
           setStatus({
             ...status,
