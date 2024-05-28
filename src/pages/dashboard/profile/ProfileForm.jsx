@@ -116,29 +116,7 @@ export const ProfileForm = ({
       )}
 
       <DashForm title="Profile Form">
-        <form className="p-6" onSubmit={handleSubmit}>
-          <Input
-            id="firstname"
-            label="First Name"
-            type="text"
-            placeholder="eg: John"
-            value={data.firstName}
-            onChange={(e) => {
-              setData({ ...data, firstName: e.target.value });
-            }}
-            isRequired={true}
-          />
-          <Input
-            id="lastname"
-            label="Last Name"
-            type="text"
-            placeholder="eg: Doe"
-            value={data.lastName}
-            onChange={(e) => {
-              setData({ ...data, lastName: e.target.value });
-            }}
-            isRequired={true}
-          />
+        <form className="pt-4" onSubmit={handleSubmit}>
           <label
             htmlFor="profilePicture"
             className="inline-block mb-2 text-xs font-semibold tracking-wide"
@@ -174,6 +152,29 @@ export const ProfileForm = ({
               required={profilePicture ? false : true}
             />
           </div>
+          <Input
+            id="firstname"
+            label="First Name"
+            type="text"
+            placeholder="eg: John"
+            value={data.firstName}
+            onChange={(e) => {
+              setData({ ...data, firstName: e.target.value });
+            }}
+            isRequired={true}
+          />
+          <Input
+            id="lastname"
+            label="Last Name"
+            type="text"
+            placeholder="eg: Doe"
+            value={data.lastName}
+            onChange={(e) => {
+              setData({ ...data, lastName: e.target.value });
+            }}
+            isRequired={true}
+          />
+
           <Textarea
             id="Description"
             label="About Yourself"

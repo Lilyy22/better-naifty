@@ -119,32 +119,36 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     },
                   ]}
                 />
-                <Li
+                <DropDown
+                  menu="Users"
                   handleClick={() => setSidebarOpen(!sidebarOpen)}
-                  text="Students"
-                  path="/dashboard/students"
-                >
-                  <svg
-                    className="w-[14px] h-4 fill-custom-white-200 mx-2 group-hover:fill-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 640 512"
-                  >
-                    <path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM609.3 512H471.4c5.4-9.4 8.6-20.3 8.6-32v-8c0-60.7-27.1-115.2-69.8-151.8c2.4-.1 4.7-.2 7.1-.2h61.4C567.8 320 640 392.2 640 481.3c0 17-13.8 30.7-30.7 30.7zM432 256c-31 0-59-12.6-79.3-32.9C372.4 196.5 384 163.6 384 128c0-26.8-6.6-52.1-18.3-74.3C384.3 40.1 407.2 32 432 32c61.9 0 112 50.1 112 112s-50.1 112-112 112z" />
-                  </svg>
-                </Li>
-                <Li
-                  handleClick={() => setSidebarOpen(!sidebarOpen)}
-                  text="Instructors"
-                  path="/dashboard/instructors"
-                >
-                  <svg
-                    className="w-[14px] h-3 fill-custom-white-200 mx-2 group-hover:fill-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 448 512"
-                  >
-                    <path d="M96 128a128 128 0 1 0 256 0A128 128 0 1 0 96 128zm94.5 200.2l18.6 31L175.8 483.1l-36-146.9c-2-8.1-9.8-13.4-17.9-11.3C51.9 342.4 0 405.8 0 481.3c0 17 13.8 30.7 30.7 30.7H162.5c0 0 0 0 .1 0H168 280h5.5c0 0 0 0 .1 0H417.3c17 0 30.7-13.8 30.7-30.7c0-75.5-51.9-138.9-121.9-156.4c-8.1-2-15.9 3.3-17.9 11.3l-36 146.9L238.9 359.2l18.6-31c6.4-10.7-1.3-24.2-13.7-24.2H224 204.3c-12.4 0-20.1 13.6-13.7 24.2z" />
-                  </svg>
-                </Li>
+                  icon={
+                    <svg
+                      className="w-[14px] h-4 fill-custom-white-200 mx-2 group-hover:fill-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 640 512"
+                    >
+                      <path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM609.3 512H471.4c5.4-9.4 8.6-20.3 8.6-32v-8c0-60.7-27.1-115.2-69.8-151.8c2.4-.1 4.7-.2 7.1-.2h61.4C567.8 320 640 392.2 640 481.3c0 17-13.8 30.7-30.7 30.7zM432 256c-31 0-59-12.6-79.3-32.9C372.4 196.5 384 163.6 384 128c0-26.8-6.6-52.1-18.3-74.3C384.3 40.1 407.2 32 432 32c61.9 0 112 50.1 112 112s-50.1 112-112 112z" />
+                    </svg>
+                  }
+                  submenu={[
+                    {
+                      id: 1,
+                      title: "Admin",
+                      pathname: "/dashboard/administrators",
+                    },
+                    {
+                      id: 2,
+                      title: "Students",
+                      pathname: "/dashboard/student-users",
+                    },
+                    {
+                      id: 3,
+                      title: "Instructors",
+                      pathname: "/dashboard/instructor-users",
+                    },
+                  ]}
+                />
                 <Li
                   handleClick={() => setSidebarOpen(!sidebarOpen)}
                   text="Category"
@@ -233,7 +237,7 @@ const Title = ({ text }) => {
   );
 };
 
-const DropDown = ({ menu, submenu, handleClick }) => {
+const DropDown = ({ menu, submenu, handleClick, icon }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="m-0 py-0 px-3 grid cursor-pointer">
@@ -243,13 +247,17 @@ const DropDown = ({ menu, submenu, handleClick }) => {
           setIsOpen(!isOpen);
         }}
       >
-        <svg
-          className="w-[14px] h-4 fill-custom-white-200 mx-2 group-hover:fill-white"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 448 512"
-        >
-          <path d="M96 0C43 0 0 43 0 96V416c0 53 43 96 96 96H384h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V384c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H384 96zm0 384H352v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16zm16 48H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16s7.2-16 16-16z" />
-        </svg>
+        {icon ? (
+          icon
+        ) : (
+          <svg
+            className="w-[14px] h-4 fill-custom-white-200 mx-2 group-hover:fill-white"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 448 512"
+          >
+            <path d="M96 0C43 0 0 43 0 96V416c0 53 43 96 96 96H384h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V384c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H384 96zm0 384H352v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16zm16 48H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16s7.2-16 16-16z" />
+          </svg>
+        )}
         <span className="whitespace-nowrap text-custom-white-200 relative text-[0.85rem] leading-none align-middle">
           {menu}
         </span>

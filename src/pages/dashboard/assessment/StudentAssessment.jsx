@@ -41,7 +41,9 @@ const StudentAssessment = () => {
       courseId: course_id,
     },
   });
-  const { remainingMinutes, remainingSeconds } = useCountdownTimer(20);
+  const { remainingMinutes, remainingSeconds } = useCountdownTimer(
+    data?.question?.length * 2 ?? 20
+  );
 
   const handleSubmit = async (e) => {
     e?.preventDefault();
@@ -56,6 +58,7 @@ const StudentAssessment = () => {
       await getScore({
         variables: {
           courseId: course_id,
+          userId: userId,
         },
         refetchQueries: [GETSTUDENTSCORE, "GET_STUDENT_SCORE"],
       });
@@ -91,6 +94,7 @@ const StudentAssessment = () => {
     }
   }, [remainingMinutes === 0, remainingSeconds === 0]);
 
+  useEffect(() => {}, [course_id]);
   return (
     <>
       {status.success && (

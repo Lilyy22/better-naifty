@@ -9,11 +9,13 @@ export const Table = ({
   path,
   data,
   noCrud,
-  currentPage,
+  setPage,
+  page,
+  itemPerPage,
   totalCount,
-  pageSize,
-  onPageChange,
 }) => {
+  const lastPage = Math.ceil(totalCount / itemPerPage) - 1;
+
   return (
     <>
       <div className="bg-white rounded-lg min-w-5xl xl:w-[80%] font-mont">
@@ -61,13 +63,68 @@ export const Table = ({
               <tbody>{children}</tbody>
             </table>
           </div>
-          <div className="l ml-auto">
-            {/* <Pagination
-            currentPage={currentPage}
-            totalCount={totalCount}
-            pageSize={pageSize}
-            onPageChange={onPageChange}
-            /> */}
+          <div className="ml-auto pt-4">
+            {/* pagination */}
+            {itemPerPage < totalCount && (
+              <div className="flex justify-between text-xs">
+                <button
+                  onClick={() => setPage((prev) => prev - 1)}
+                  className={`rounded px-3 py-1 flex items-center gap-2 border ${
+                    !page ? "bg-gray-200 text-gray-400" : "bg-purple-100"
+                  }`}
+                  disabled={!page}
+                >
+                  <span className="order-2">Prev</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="-mx-1 h-3 w-3 fill-current"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    role="graphics-symbol"
+                    aria-labelledby="title-35 desc-35"
+                  >
+                    <title id="title-35">Previous page</title>
+                    <desc id="desc-35">link to previous page</desc>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => setPage((prev) => prev + 1)}
+                  className={`rounded px-3 py-1 flex items-center gap-2 border ${
+                    page === lastPage
+                      ? "bg-gray-200 text-gray-400"
+                      : "bg-purple-100"
+                  }`}
+                  disabled={page === lastPage}
+                >
+                  <span>Next</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="-mx-1 h-3 w-3 fill-current"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    role="graphics-symbol"
+                    aria-labelledby="title-36 desc-36"
+                  >
+                    <title id="title-36">Next page</title>
+                    <desc id="desc-36">link to next page</desc>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

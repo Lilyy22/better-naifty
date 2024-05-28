@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { DashForm } from "../form/Form";
+import { PrimaryButton } from "../Button";
 
 export const FormModal = ({ children, loading, handleOpen, title }) => {
   return (
@@ -32,5 +33,83 @@ export const FormModal = ({ children, loading, handleOpen, title }) => {
         </DashForm>
       </div>
     </div>
+  );
+};
+
+export const RoleModal = ({ userId, isOpen, handleModal, handleRole }) => {
+  const [userRole, setUserRole] = useState({
+    isInstructor: false,
+    isSuperuser: false,
+  });
+  return (
+    <>
+      <FormModal title="Role" handleOpen={handleModal}>
+        <form className="p-4">
+          <div className="flex items-center mb-2">
+            <input
+              id="roleAdmin"
+              onChange={() => {
+                setUserRole({ isInstructor: false, isSuperuser: true });
+              }}
+              className="w-4 h-4 bg-gray-100 border-gray-300 focus:ring-purple-500"
+              type="radio"
+              name="role"
+            />
+            <label
+              htmlFor="roleAdmin"
+              className="ps-2 text-sm font-medium text-gray-900 cursor-pointer"
+            >
+              Admin
+            </label>
+          </div>
+          <div className="flex items-center mb-2">
+            <input
+              // {isInstructor ? checked : ""}
+              onChange={() => {
+                setUserRole({ isInstructor: true, isSuperuser: false });
+              }}
+              id="roleInstructor"
+              type="radio"
+              value=""
+              name="role"
+              className="w-4 h-4 bg-gray-100 border-gray-300 focus:ring-purple-500"
+            />
+            <label
+              htmlFor="roleInstructor"
+              className="pl-2 text-sm font-medium text-gray-900 cursor-pointer"
+            >
+              Instructor
+            </label>
+          </div>
+          <div className="flex items-center mb-4">
+            <input
+              // {isInstructor ? checked : ""}
+              onChange={() => {
+                setUserRole({ isInstructor: false, isSuperuser: false });
+              }}
+              id="roleStudent"
+              type="radio"
+              value=""
+              name="role"
+              className="w-4 h-4 bg-gray-100 border-gray-300 focus:ring-purple-500"
+            />
+            <label
+              htmlFor="roleStudent"
+              className="pl-2 text-sm font-medium text-gray-900 cursor-pointer"
+            >
+              Student
+            </label>
+          </div>
+          <PrimaryButton
+            type="button"
+            handleClick={() =>
+              handleRole(userId, userRole?.isInstructor, userRole?.isSuperuser)
+            }
+          >
+            Update
+          </PrimaryButton>
+        </form>
+      </FormModal>
+    </>
   );
 };

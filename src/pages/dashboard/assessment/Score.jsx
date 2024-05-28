@@ -1,38 +1,30 @@
-import React, { useState } from "react";
-import { GETASSESSMENTNOPAGINATION, GETSTUDENTSCORE } from "./data/query";
-import { useQuery } from "@apollo/client";
+import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PrimaryButton } from "../../../components/Button";
 import OptionalModal from "../../../components/modal/OptionalModal";
 import DataNotFound from "../../../components/DataNotFound";
+import useFetchScore from "../../../hooks/useFetchScore";
+import { AuthContext } from "../../../context/AuthContext";
 
 const Score = () => {
   const { course_id } = useParams();
-  const [openAssessment, setOpenAssessment] = useState(false);
+  const { userId } = useContext(AuthContext);
 
-  const { data, loading } = useQuery(GETSTUDENTSCORE, {
-    variables: {
-      courseId: course_id,
-    },
-  });
-  const { data: assessment, loading: assessmentLoading } = useQuery(
-    GETASSESSMENTNOPAGINATION,
-    {
-      variables: {
-        courseId: course_id,
-      },
-    }
+  const [openAssessment, setOpenAssessment] = useState(false);
+  const { score, assessment, tookAssessment, loading } = useFetchScore(
+    course_id,
+    userId
   );
 
   return (
     <>
-      {loading || assessmentLoading ? (
-        <span>••••••••</span>
-      ) : assessment?.question?.length === 0 ? (
+      {loading && <span>••••••••</span>}
+
+      {!loading && !assessment > 0 ? (
         <div>
           <DataNotFound text="No Assessments Yet." />
         </div>
-      ) : data?.assessment_score?.took_assessment ? (
+      ) : tookAssessment ? (
         <div className="bg-white rounded-lg p-4">
           <h1 className="font-semibold text-green-700 flex gap-1 mb-2 text-sm">
             <svg
@@ -44,9 +36,7 @@ const Score = () => {
             </svg>
             Course Assessment has been Taken!
           </h1>
-          <p className="font-medium my-auto">
-            Score : {data?.assessment_score?.score}
-          </p>
+          <p className="font-medium my-auto">Score : {score}</p>
         </div>
       ) : (
         <div className="bg-white rounded-lg p-4">

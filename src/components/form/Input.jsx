@@ -143,7 +143,7 @@ export const InputPassword = ({ label, password, setPassword, dark }) => {
       >
         {passwordToggle ? (
           <svg
-            className={`w-4 h-4 group-hover:fill-purple-300 ${
+            className={`w-4 h-4 hover:fill-purple-300 ${
               dark ? "fill-gray-500" : "fill-gray-200"
             }`}
             xmlns="http://www.w3.org/2000/svg"
@@ -153,7 +153,7 @@ export const InputPassword = ({ label, password, setPassword, dark }) => {
           </svg>
         ) : (
           <svg
-            className={`w-4 h-4 group-hover:fill-purple-300 ${
+            className={`w-4 h-4 hover:fill-purple-300 ${
               dark ? "fill-gray-500" : "fill-gray-200"
             }`}
             xmlns="http://www.w3.org/2000/svg"

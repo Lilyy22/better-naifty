@@ -31,10 +31,21 @@ export const UPDATEUSERSTATUS = gql`
 `;
 
 export const UPDATEUSERROLE = gql`
-  mutation UPDATEUSERROLE($userId: String!, $role: Boolean!) {
+  mutation UPDATEUSERROLE($userId: String!, $role: Boolean!, $admin: Boolean!) {
     update_users(
       where: { id: { exact: $userId } }
-      input: { is_instructor: $role }
+      input: { is_instructor: $role, is_superuser: $admin }
+    ) {
+      affected_rows
+    }
+  }
+`;
+
+export const UPDATEUSERTOADMIN = gql`
+  mutation UPDATEUSERTOADMIN($userId: String!, $admin: Boolean!) {
+    update_users(
+      where: { id: { exact: $userId } }
+      input: { is_instructor: false, is_superuser: $admin }
     ) {
       affected_rows
     }

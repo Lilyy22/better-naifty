@@ -27,7 +27,6 @@ import Dashboard from "./pages/dashboard/dashboard/Dashboard";
 import CreateCategory from "./pages/dashboard/courseCategory/CreateCategory";
 import CategoryTable from "./pages/dashboard/courseCategory/CategoryTable";
 import UpdateCategory from "./pages/dashboard/courseCategory/UpdateCategory";
-import UsersList from "./pages/dashboard/admin/UsersList";
 import CourseList from "./pages/dashboard/admin/CourseList";
 import AlreadyLogged from "./routes/AlreadyLogged";
 import { CourseDescription } from "./pages/dashboard/course/CourseDescription";
@@ -41,6 +40,9 @@ import StudentAssessment from "./pages/dashboard/assessment/StudentAssessment";
 import EnrolledMiddleware from "./routes/EnrolledMiddleware";
 import VerifyResetOtp from "./pages/dashboard/auth/VerifyResetOtp";
 import { ResetPassword } from "./pages/dashboard/auth/ResetPassword";
+import AdminList from "./pages/dashboard/admin/AdminList";
+import StudentList from "./pages/dashboard/admin/StudentList";
+import InstructorList from "./pages/dashboard/admin/InstructorList";
 
 function App() {
   const { isAInstructor, isAStudent, isAdmin } = useRole();
@@ -168,12 +170,12 @@ function App() {
                     path="approved-courses"
                     element={<CourseList approved={true} />}
                   />
+
                   {/* users */}
-                  <Route path="students" element={<UsersList />} />
-                  <Route
-                    path="instructors"
-                    element={<UsersList instructor={true} />}
-                  />
+                  <Route path="administrators" element={<AdminList />} />
+                  <Route path="student-users" element={<StudentList />} />
+                  <Route path="instructor-users" element={<InstructorList />} />
+
                   {/* category */}
                   <Route path="create-category" element={<CreateCategory />} />
                   <Route

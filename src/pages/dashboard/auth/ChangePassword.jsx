@@ -42,6 +42,9 @@ export const ChangePassword = ({ handleOpen }) => {
             success: true,
             successContent: "Password Changed Successfully!",
           });
+          setTimeout(() => {
+            handleOpen();
+          }, 1000);
         } else {
           setLoading(false);
           setClose(false);
@@ -49,8 +52,11 @@ export const ChangePassword = ({ handleOpen }) => {
             ...status,
             success: false,
             error: true,
-            errorContent: "Something went wrong!",
+            errorContent: "Wrong Password, please insert correct Password!",
           });
+          setTimeout(() => {
+            handleOpen();
+          }, 1000);
         }
       } catch (error) {
         setLoading(false);
@@ -61,10 +67,12 @@ export const ChangePassword = ({ handleOpen }) => {
           success: false,
           errorContent: error?.graphQLErrors?.[0]?.message,
         });
+        setTimeout(() => {
+          handleOpen();
+        }, 1000);
       }
     } else {
       setLoading(false);
-      setClose(false);
       setStatus({
         ...status,
         error: true,
@@ -98,7 +106,7 @@ export const ChangePassword = ({ handleOpen }) => {
         loading={loading}
         handleOpen={handleOpen}
       >
-        <form className="p-6 top-0" onSubmit={handleSubmit}>
+        <form className="p-6 top-0 text-sm" onSubmit={handleSubmit}>
           <InputPassword
             label="Old Password"
             password={oldPassword}

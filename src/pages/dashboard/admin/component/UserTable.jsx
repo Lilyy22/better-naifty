@@ -1,20 +1,38 @@
-import React, { useMemo, useState } from "react";
-import { TD, Table } from "../../../components/table/Table";
-import { TableLoader } from "../../../components/Loader";
-import { useMutation, useQuery } from "@apollo/client";
-import { GETUSERS } from "./data/query";
-import Pagination from "../../../components/Pagination";
-import { ToolTip } from "../../../components/ToolTip";
-import { DELETEUSER, UPDATEUSERROLE, UPDATEUSERSTATUS } from "./data/mutation";
-import { DeleteModal } from "../../../components/modal/Delete";
+import React, { useState } from "react";
+import { Toast } from "../../../../components/Toast";
+import { TableLoader } from "../../../../components/Loader";
+import { TD, Table } from "../../../../components/table/Table";
+import { ToolTip } from "../../../../components/ToolTip";
+import { DeleteModal } from "../../../../components/modal/Delete";
+import { RoleModal } from "../../../../components/modal/FormModal";
+import { useMutation } from "@apollo/client";
+import { DELETEUSER, UPDATEUSERROLE, UPDATEUSERSTATUS } from "../data/mutation";
 
 let PageSize = 10;
-const UsersList = ({ instructor }) => {
-  const [currentPage, setCurrentPage] = useState(1);
+const UserTable = ({
+  data,
+  loading,
+  GETUSERS,
+  setPage,
+  page,
+  itemPerPage,
+  totalCount,
+}) => {
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const [close, setClose] = useState(false);
+  const [status, setStatus] = useState({
+    success: false,
+    error: false,
+    errorContent: "",
+  });
 
   const [userId, setUserId] = useState("");
   const [userStatus, setUserStatus] = useState();
-  const [userRole, setUserRole] = useState();
+  const [userRole, setUserRole] = useState({
+    is_instructor: false,
+    is_superuser: false,
+  });
 
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openStatusModal, setOpenStatusModal] = useState(false);
@@ -23,13 +41,6 @@ const UsersList = ({ instructor }) => {
   const [delUser] = useMutation(DELETEUSER);
   const [statusUser] = useMutation(UPDATEUSERSTATUS);
   const [roleUser] = useMutation(UPDATEUSERROLE);
-
-  const { data, loading } = useQuery(GETUSERS, {
-    variables: {
-      role: instructor ? "True" : "False",
-    },
-    fetchPolicy: "network-only",
-  });
 
   const handleDeleteClick = (userId) => {
     setOpenDeleteModal(!openDeleteModal);
@@ -42,49 +53,96 @@ const UsersList = ({ instructor }) => {
     setUserId(userId);
   };
 
-  const handleRoleClick = (userId, is_instructor) => {
-    setOpenRoleModal(!openStatusModal);
-    setUserRole(!is_instructor);
+  const handleRoleClick = (userId, isInstructor, isSuperuser) => {
+    setOpenRoleModal(!openRoleModal);
+    setUserRole({ is_superuser: isSuperuser, is_instructor: isInstructor });
     setUserId(userId);
   };
 
   const handleDelete = async (userId) => {
-    const { data } = await delUser({
-      variables: {
-        userId: userId,
-      },
-      refetchQueries: [delUser, "DEL_USER"],
-    });
-    if (data) setOpenDeleteModal(false);
+    try {
+      const { data } = await delUser({
+        variables: {
+          userId: userId,
+        },
+        refetchQueries: [delUser, "DEL_USER"],
+      });
+      if (data) setOpenDeleteModal(false);
+
+      setClose(false);
+      setStatus({
+        ...status,
+        error: false,
+        success: true,
+        successContent: "You have Permanently Deleted a User.",
+      });
+    } catch (error) {
+      setClose(false);
+      setStatus({
+        ...status,
+        error: true,
+        success: false,
+        errorContent: error?.graphQLErrors?.[0]?.message,
+      });
+    }
   };
 
   const handleStatus = async (userId, status) => {
-    const { data } = await statusUser({
-      variables: {
-        userId: userId,
-        status: status,
-      },
-      refetchQueries: [statusUser, "STATUS_USER"],
-    });
-    if (data) setOpenStatusModal(false);
+    try {
+      const { data } = await statusUser({
+        variables: {
+          userId: userId,
+          status: status,
+        },
+        refetchQueries: [GETUSERS, "GET_USERS"],
+      });
+      if (data) setOpenStatusModal(false);
+      setClose(false);
+      setStatus({
+        ...status,
+        error: false,
+        success: true,
+        successContent: "You have Changed User Status.",
+      });
+    } catch (error) {
+      setClose(false);
+      setStatus({
+        ...status,
+        error: true,
+        success: false,
+        errorContent: error?.graphQLErrors?.[0]?.message,
+      });
+    }
   };
 
-  const handleRole = async (userId, is_instructor) => {
-    const { data } = await roleUser({
-      variables: {
-        userId: userId,
-        role: is_instructor,
-      },
-      refetchQueries: [roleUser, "STATUS_USER"],
-    });
-    if (data) setOpenRoleModal(false);
+  const handleRole = async (userId, isInstructor, isSuperuser) => {
+    try {
+      const { data } = await roleUser({
+        variables: {
+          userId: userId,
+          role: isInstructor,
+          admin: isSuperuser,
+        },
+        refetchQueries: [GETUSERS, "GET_USERS"],
+      });
+      if (data) setOpenRoleModal(false);
+      setClose(false);
+      setStatus({
+        ...status,
+        error: false,
+        success: true,
+        successContent: "You have Changed User Role.",
+      });
+    } catch (error) {
+      setClose(false);
+      setStatus({
+        ...status,
+        error: true,
+        success: false,
+        errorContent: error?.graphQLErrors?.[0]?.message,
+      });
+    }
   };
-
-  // const currentTableData = useMemo(() => {
-  //   const firstPageIndex = (currentPage - 1) * PageSize;
-  //   const lastPageIndex = firstPageIndex + PageSize;
-  //   return data?.users?.slice(firstPageIndex, lastPageIndex);
-  // }, [currentPage]);
 
   const thead = [
     { head: "Name" },
@@ -95,14 +153,46 @@ const UsersList = ({ instructor }) => {
   ];
   return (
     <>
+      {status.success && (
+        <Toast
+          text={status.successContent ?? "Successfull!"}
+          isSuccess={true}
+          close={close}
+          setClose={setClose}
+        />
+      )}
+      {status.error && (
+        <Toast
+          text={status.errorContent ?? "Something went wrong."}
+          isSuccess={false}
+          close={close}
+          setClose={setClose}
+        />
+      )}
+
       {loading ? (
         <TableLoader />
       ) : (
         <>
-          <Table title="Users" data={thead} noCrud={true}>
+          <Table
+            title="Users"
+            data={thead}
+            noCrud={true}
+            setPage={setPage}
+            page={page}
+            itemPerPage={itemPerPage}
+            totalCount={totalCount}
+          >
             {data?.users?.map(
               (
-                { id, email, is_active, is_instructor, studentprofile },
+                {
+                  id,
+                  email,
+                  is_active,
+                  is_instructor,
+                  is_superuser,
+                  studentprofile,
+                },
                 index
               ) => {
                 return (
@@ -145,11 +235,17 @@ const UsersList = ({ instructor }) => {
                           <button
                             type="button"
                             className="inline rounded relative group"
-                            onClick={() => handleRoleClick(id, is_instructor)}
+                            onClick={() =>
+                              handleRoleClick(id, is_instructor, is_superuser)
+                            }
                           >
                             <ToolTip text="Change Role" />
                             <span className="bg-purple-100/50 text-purple-800 text-xs px-2 py-1 rounded-xl">
-                              {is_instructor ? "Instructor" : "Student"}
+                              {is_superuser
+                                ? "Admin"
+                                : is_instructor && is_superuser === false
+                                ? "Instructor"
+                                : "Student"}
                             </span>
                           </button>
                         </td>
@@ -224,15 +320,12 @@ const UsersList = ({ instructor }) => {
                         />
                       )}
                       {openRoleModal && (
-                        <DeleteModal
-                          text={`Are You sure you want to change user Role to ${
-                            userRole ? "Instructor" : "Student"
-                          }?`}
+                        <RoleModal
                           isOpen={openRoleModal}
-                          courseId={userId}
-                          statusUser={userRole}
+                          userId={userId}
+                          // role={role}
                           handleModal={() => setOpenRoleModal(!openRoleModal)}
-                          handleDelete={handleRole}
+                          handleRole={handleRole}
                         />
                       )}
                       {/* <Action /> */}
@@ -248,4 +341,4 @@ const UsersList = ({ instructor }) => {
   );
 };
 
-export default UsersList;
+export default UserTable;

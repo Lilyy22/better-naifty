@@ -59,8 +59,8 @@ export const GETQUESTION = gql`
 `;
 
 export const GETSTUDENTSCORE = gql`
-  query GETSTUDENTSCORE($courseId: ID!) {
-    assessment_score(where: { course_id: $courseId }) {
+  query GETSTUDENTSCORE($courseId: ID!, $userId: ID!) {
+    assessment_score(where: { course_id: $courseId, user_id: $userId }) {
       score
       took_assessment
     }
