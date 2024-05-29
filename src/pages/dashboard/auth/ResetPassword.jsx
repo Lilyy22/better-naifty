@@ -50,7 +50,7 @@ export const ResetPassword = () => {
             ...status,
             error: true,
             success: false,
-            errorContent: "Invalid OTP",
+            errorContent: "Invalid Input",
           });
         }
       } catch (error) {

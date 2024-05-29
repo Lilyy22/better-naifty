@@ -63,7 +63,10 @@ const Home = () => {
         <div className="max-w-7xl px-4 m-auto">
           <div className="max-w-xl mx-auto text-center mb-12">
             <H2 text="Product and Service Offerings" />
-            <Subtitle text="Harnessing Innovation, Empowering Solutions, and Exceeding Every Customer Need with Unparalleled Commitment and Dedication." />
+            <Subtitle
+              text="Harnessing Innovation, Empowering Solutions, and Exceeding
+             Every Customer Need with Unparalleled Commitment and Dedication."
+            />
           </div>
           <div className="grid place-items-stretch md:grid-cols-2 lg:grid-cols-3">
             {productData.map(({ id, title, subtitle, icon }) => {
