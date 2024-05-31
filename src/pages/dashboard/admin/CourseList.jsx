@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { TD, Table } from "../../../components/table/Table";
 import { TableLoader } from "../../../components/Loader";
 import { useMutation, useQuery } from "@apollo/client";
-import { GETCOURSE } from "./data/query";
+import { GETCOURSE, GETCOURSECOUNT } from "./data/query";
 import { formattedDate } from "../../../utils/formattedDate";
 import { ApproveModal } from "../../../components/modal/Approve";
 import { APPROVECOURSE } from "./data/mutation";
@@ -14,6 +14,9 @@ import { trimText } from "../../../utils/trimText";
 import { Link } from "react-router-dom";
 
 const CourseList = ({ approved }) => {
+  const [page, setPage] = useState(0);
+  const [itemPerPage, setItemPerPage] = useState(5);
+
   const [openApproveModal, setOpenApproveModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [courseId, setCourseId] = useState(false);
@@ -28,9 +31,13 @@ const CourseList = ({ approved }) => {
 
   const [del] = useMutation(DELETECOURSE);
   const [approveCourse] = useMutation(APPROVECOURSE);
+  const { data: totalCount } = useQuery(GETCOURSECOUNT);
+
   const { data, loading, refetch } = useQuery(GETCOURSE, {
     variables: {
       status: approved ? "APPROVED" : undefined,
+      limit: itemPerPage,
+      offset: page * itemPerPage,
     },
   });
 
@@ -127,6 +134,10 @@ const CourseList = ({ approved }) => {
             title={approved ? "Approved Courses" : "Courses"}
             data={thead}
             noCrud={true}
+            setPage={setPage}
+            page={page}
+            itemPerPage={itemPerPage}
+            totalCount={totalCount?.course_aggregate?.count}
           >
             {data?.course?.map(
               (

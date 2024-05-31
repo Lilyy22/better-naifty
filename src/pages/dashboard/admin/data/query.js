@@ -94,6 +94,14 @@ export const GETADMINUSERSCOUNT = gql`
   }
 `;
 
+export const GETCOURSECOUNT = gql`
+  query GETCOURSECOUNT($status: String) {
+    course_aggregate(where: { status: { exact: $status } }) {
+      count
+    }
+  }
+`;
+
 export const GETCOURSE = gql`
   query GETCOURSE($offset: Int, $limit: Int, $status: String) {
     course(
